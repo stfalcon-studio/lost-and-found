@@ -19,8 +19,14 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new Fresh\DoctrineEnumBundle\FreshDoctrineEnumBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+<<<<<<< HEAD
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+=======
+            new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
+            new Sonata\AdminBundle\SonataAdminBundle(),
+            new Sonata\CoreBundle\SonataCoreBundle()
+>>>>>>> 09ce38d... Add sonataAdminBundle
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
