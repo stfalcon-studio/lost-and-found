@@ -9,11 +9,11 @@ class DefaultController extends Controller
 {
     /**
      * @Route("/app/example", name="homepage")
+     *
+     * @return array
      */
     public function indexAction()
     {
-        $a = 5;
-        echo $a;
         return $this->render('default/index.html.twig');
     }
 }
