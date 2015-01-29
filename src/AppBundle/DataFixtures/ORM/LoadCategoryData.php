@@ -29,12 +29,6 @@ class LoadCategoryData extends AbstractFixture
             ->setTitle("Предмет");
         $manager->persist($item);
 
-        for ($i = 0; $i < 100; $i++) {
-            $randomItem = (new Category())
-                ->setTitle("Random category №" . rand(0, 100));
-            $manager->persist($randomItem);
-        }
-
         $manager->flush();
     }
 }

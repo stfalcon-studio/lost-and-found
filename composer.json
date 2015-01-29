@@ -25,8 +25,13 @@
         "doctrine/doctrine-fixtures-bundle": "2.2.*"
 =======
         "sonata-project/doctrine-orm-admin-bundle": "2.2.6",
+<<<<<<< HEAD
         "sonata-project/core-bundle": "~2.2"
 >>>>>>> 09ce38d... Add sonataAdminBundle
+=======
+        "sonata-project/core-bundle": "~2.2",
+        "doctrine/doctrine-fixtures-bundle": "2.2.*"
+>>>>>>> 849d6f3... Fixed fail
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

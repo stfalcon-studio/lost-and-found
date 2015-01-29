@@ -39,19 +39,7 @@ class Category
     }
 
     /**
-     * @param int $id
-     *
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
+     * @return string
      */
     public function getTitle()
     {
@@ -59,7 +47,7 @@ class Category
     }
 
     /**
-     * @param mixed $title
+     * @param string $title
      *
      * @return $this
      */

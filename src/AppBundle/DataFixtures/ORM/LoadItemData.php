@@ -14,12 +14,12 @@ use AppBundle\DBAL\Types\ItemStatus;
 class LoadItemData extends AbstractFixture
 {
     /**
-     * {@inheritDoc}
+     * {@inheritDoc} Create and load item fixtures to database
      * @return void
      */
     public function load(ObjectManager $manager)
     {
-        $item = (new Item())
+        $phone = (new Item())
             ->setTitle("Телефон Google Nexus 5")
             ->setLatitude(49.437764)
             ->setLongitude(27.005755)
@@ -27,36 +27,28 @@ class LoadItemData extends AbstractFixture
             ->setDescription("Загубив телефон Google Nexus 5. Потрібна допомога за винагороду.")
             ->setStatus(ItemStatus::ACTIVE);
 
-        $manager->persist($item);
+        $manager->persist($phone);
 
-        for ($i = 0; $i < 100; $i++) {
-            $item = (new Item())
-                ->setTitle($this->generateRandomString(rand(10, 30)))
-                ->setLatitude(rand(0, 1000000) / 1000000 + $i)
-                ->setLongitude(rand(0, 1000000) / 1000000 + $i)
-                ->setType(ItemType::LOST)
-                ->setDescription($this->generateRandomString(rand(10, 300)))
-                ->setStatus(ItemStatus::ACTIVE);
+        $keys = (new Item())
+            ->setTitle("Ключі від квартири")
+            ->setLatitude(51.437764)
+            ->setLongitude(23.005755)
+            ->setType(ItemType::LOST)
+            ->setDescription("Втратив ключі від квартири.")
+            ->setStatus(ItemStatus::ACTIVE);
 
-            $manager->persist($item);
-        }
+        $manager->persist($keys);
+
+        $hat = (new Item())
+            ->setTitle("Шапка")
+            ->setLatitude(50.437764)
+            ->setLongitude(25.005755)
+            ->setType(ItemType::LOST)
+            ->setDescription("Загубив улюблену шапку червоного кольору.")
+            ->setStatus(ItemStatus::ACTIVE);
+
+        $manager->persist($hat);
 
         $manager->flush();
-    }
-
-    /**
-     * @param int $length String generated length
-     * @return string
-     */
-    private function generateRandomString($length = 100)
-    {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ';
-        $charactersLength = strlen($characters);
-        $randomString = '';
-        for ($i = 0; $i < $length; $i++) {
-            $randomString .= $characters[rand(0, $charactersLength - 1)];
-        }
-
-        return $randomString;
     }
 }
