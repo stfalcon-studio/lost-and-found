@@ -1,12 +1,13 @@
 {
-    "name": "stfalcon-studio/lost-and-found",
-    "description": "Service \"Lost and Found\". Announcement of lost or found items",
-    "keywords": ["lost", "found", "social", "help"],
-    "homepage": "https://github.com/stfalcon-studio/lost-and-found",
-    "type": "project",
+    "name": "symfony/framework-standard-edition",
     "license": "MIT",
+    "type": "project",
+    "description": "The \"Symfony Standard Edition\" distribution",
+    "autoload": {
+        "psr-0": { "": "src/", "SymfonyStandard": "app/" }
+    },
     "require": {
-        "php": ">=5.4.0",
+        "php": ">=5.3.3",
         "symfony/symfony": "2.6.*",
         "doctrine/orm": "~2.2,>=2.2.3",
         "doctrine/doctrine-bundle": "~1.2",
@@ -17,13 +18,11 @@
         "sensio/distribution-bundle": "~3.0.12",
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
-        "fresh/doctrine-enum-bundle": "v3.1"
+        "doctrine/migrations": "1.0.*@dev",
+        "doctrine/doctrine-migrations-bundle": "2.1.*@dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
-    },
-    "autoload": {
-        "psr-4": { "": "src/" }
     },
     "scripts": {
         "post-root-package-install": [
@@ -55,6 +54,9 @@
         "symfony-assets-install": "relative",
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
+        },
+        "branch-alias": {
+            "dev-master": "2.6-dev"
         }
     }
 }
