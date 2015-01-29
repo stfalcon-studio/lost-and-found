@@ -1,5 +1,5 @@
 <?php
-namespace Acme\AppBundle\DBAL\Types;
+namespace AppBundle\DBAL\Types;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
