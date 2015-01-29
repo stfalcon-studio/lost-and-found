@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use AppBundle\Entity\Category as Category;
 
 /**
  * Class Item
@@ -88,6 +89,12 @@ class Item
      * @ORM\Column(name="status", type="ItemStatus", nullable=false)
      */
     protected $status;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="items")
+     * @ORM\JoinColumn(name="category", referencedColumnName="id")
+     */
+    protected $category;
 
     /**
      * @return int
@@ -239,7 +246,7 @@ class Item
      * @param \AppBundle\Entity\Category $category
      * @return Item
      */
-    public function setCategory(\AppBundle\Entity\Category $category = null)
+    public function setCategory(Category $category = null)
     {
         $this->category = $category;
 
@@ -255,10 +262,4 @@ class Item
     {
         return $this->category;
     }
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="items")
-     * @ORM\JoinColumn(name="CategoryId", referencedColumnName="id")
-     */
-    protected $category;
 }
