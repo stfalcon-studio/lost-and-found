@@ -20,21 +20,13 @@
         "fresh/doctrine-enum-bundle": "v3.1",
         "doctrine/migrations": "1.0.*@dev",
         "doctrine/doctrine-migrations-bundle": "2.1.*@dev",
-<<<<<<< HEAD
         "stof/doctrine-extensions-bundle": "~1.1@dev",
-        "doctrine/doctrine-fixtures-bundle": "2.2.*"
-=======
         "sonata-project/doctrine-orm-admin-bundle": "2.2.6",
-<<<<<<< HEAD
         "sonata-project/core-bundle": "~2.2"
->>>>>>> 09ce38d... Add sonataAdminBundle
-=======
-        "sonata-project/core-bundle": "~2.2",
-        "doctrine/doctrine-fixtures-bundle": "2.2.*"
->>>>>>> 849d6f3... Fixed fail
     },
     "require-dev": {
-        "sensio/generator-bundle": "~2.3"
+        "sensio/generator-bundle": "~2.3",
+        "doctrine/doctrine-fixtures-bundle": "2.2.*"
     },
     "autoload": {
         "psr-4": { "": "src/" }
