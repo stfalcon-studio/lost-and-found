@@ -1,4 +1,5 @@
 <?php
+
 namespace AppBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
@@ -10,6 +11,7 @@ use Sonata\AdminBundle\Show\ShowMapper;
 /**
  * Category Entity Admin
  *
+ * @author Artem Genvald <genvaldartem@gmail.com>
  */
 class CategoryAdmin extends Admin
 {
@@ -30,9 +32,10 @@ class CategoryAdmin extends Admin
     {
         $formMapper
             ->with('Category')
-            ->add('title')
+                ->add('title')
             ->end();
     }
+
     /**
      * {@inheritdoc}
      */
@@ -49,15 +52,14 @@ class CategoryAdmin extends Admin
                     'delete' => []
                 ]
             ]);
-
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    protected function configureShowFields(ShowMapper $showMapper)
     {
-        $datagridMapper
+        $showMapper
             ->add('id')
             ->add('title')
             ->add('createdAt')
@@ -67,9 +69,9 @@ class CategoryAdmin extends Admin
     /**
      * {@inheritdoc}
      */
-    protected function configureShowFields(ShowMapper $showMapper)
+    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-        $showMapper
+        $datagridMapper
             ->add('id')
             ->add('title')
             ->add('createdAt')

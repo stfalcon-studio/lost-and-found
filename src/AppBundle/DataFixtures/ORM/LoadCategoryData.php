@@ -7,30 +7,32 @@ use Doctrine\Common\Persistence\ObjectManager;
 use AppBundle\Entity\Category;
 
 /**
- * Class LoadItemData
+ * Load Category fixtures
+ *
+ * @author Artem Genvald <genvaldartem@gmail.com>
  */
 class LoadCategoryData extends AbstractFixture
 {
     /**
-     * {@inheritDoc} Create and load category fixtures to database
-     * @return void
+     * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {
-        $keys = (new Category())
-            ->setTitle("Ключі");
+        $keys = (new Category())->setTitle('Ключі');
         $this->setReference('category-keys', $keys);
         $manager->persist($keys);
 
-        $toy = (new Category())
-            ->setTitle("Іграшка");
-        $this->setReference('category-toy', $toy);
-        $manager->persist($toy);
+        $phone = (new Category())->setTitle('Телефон');
+        $this->setReference('category-phone', $phone);
+        $manager->persist($phone);
 
-        $item = (new Category())
-            ->setTitle("Предмет");
-        $this->setReference('category-item', $item);
-        $manager->persist($item);
+        $documents = (new Category())->setTitle('Документи');
+        $this->setReference('category-documents', $documents);
+        $manager->persist($documents);
+
+        $clothes = (new Category())->setTitle('Одяг');
+        $this->setReference('category-clothes', $clothes);
+        $manager->persist($clothes);
 
         $manager->flush();
     }

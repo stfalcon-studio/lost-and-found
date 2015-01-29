@@ -1,4 +1,5 @@
 <?php
+
 namespace AppBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
@@ -8,8 +9,9 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
 /**
- * Class ItemAdmin
- * @package AppBundle\Admin
+ * Item Entity Admin
+ *
+ * @author Artem Genvald <genvaldartem@gmail.com>
  */
 class ItemAdmin extends Admin
 {
@@ -40,19 +42,16 @@ class ItemAdmin extends Admin
                 ->add('status')
             ->end();
     }
+
     /**
      * {@inheritdoc}
      */
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('category')
             ->addIdentifier('title')
-          //  ->add('latitude')
-          //  ->add('longitude')
+            ->add('category')
             ->add('type')
-           // ->add('description')
-//            ->add('area')
             ->add('status')
             ->add('createdAt')
             ->add('updatedAt')
@@ -63,25 +62,6 @@ class ItemAdmin extends Admin
                     'delete' => []
                 ]
             ]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
-    {
-        $datagridMapper
-            ->add('id')
-            ->add('category')
-            ->add('title')
-            ->add('latitude')
-            ->add('longitude')
-            ->add('type')
-            ->add('description')
-            ->add('area')
-            ->add('status')
-            ->add('createdAt')
-            ->add('updatedAt');
     }
 
     /**
@@ -98,6 +78,25 @@ class ItemAdmin extends Admin
             ->add('type')
             ->add('description')
 //            ->add('area')
+            ->add('status')
+            ->add('createdAt')
+            ->add('updatedAt');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    {
+        $datagridMapper
+            ->add('id')
+            ->add('category')
+            ->add('title')
+            ->add('latitude')
+            ->add('longitude')
+            ->add('type')
+            ->add('description')
+            ->add('area')
             ->add('status')
             ->add('createdAt')
             ->add('updatedAt');

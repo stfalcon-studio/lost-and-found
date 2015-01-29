@@ -2,16 +2,17 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\DBAL\Types as Types;
 use Doctrine\ORM\Mapping as ORM;
 use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
+
 /**
- * Class Item
+ * Item Entity
  *
  * @author Logans <Logansoleg@gmail.com>
+ * @author Artem Genvald <genvaldartem@gmail.com>
  *
  * @ORM\Entity
  * @ORM\Table(name="items")
@@ -21,75 +22,89 @@ class Item
     use TimestampableEntity;
 
     /**
-     * @var int $id
+     * @var int $id ID
      *
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    private $id;
 
     /**
+     * @var Category $category Category
+     *
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="items")
      * @ORM\JoinColumn(name="category", referencedColumnName="id")
      */
-    protected $category;
+    private $category;
 
     /**
-     * @var string $title
+     * @var string $title Title
      *
      * @ORM\Column(type="text")
      */
-    protected $title;
+    private $title;
 
     /**
-     * @var float $latitude
+     * @var float $latitude Latitude
      *
      * @ORM\Column(type="decimal", precision=9, scale=6)
      */
-    protected $latitude;
+    private $latitude;
 
     /**
-     * @var float $longitude
+     * @var float $longitude Longitude
      *
      * @ORM\Column(type="decimal", precision=9, scale=6)
      */
-    protected $longitude;
+    private $longitude;
 
     /**
-     * @var array $type
+     * @var array $type Type
      *
-     * @DoctrineAssert\Enum(entity="AppBundle\DBAL\Types\ItemType")
+     * @DoctrineAssert\Enum(entity="AppBundle\DBAL\Types\ItemTypeType")
      *
-     * @ORM\Column(name="type", type="ItemType", nullable=false)
+     * @ORM\Column(name="type", type="ItemTypeType", nullable=false)
      */
-    protected $type;
+    private $type;
 
     /**
-     * @var string $description
+     * @var string $description Description
      *
      * @ORM\Column(type="text")
      */
-    protected $description;
+    private $description;
 
     /**
-     * @var array $area
+     * @var array $area Area
      *
      * @ORM\Column(type="json_array", nullable=true)
      */
-    protected $area;
+    private $area;
 
     /**
-     * @var array $status
+     * @var array $status Status
      *
-     * @DoctrineAssert\Enum(entity="AppBundle\DBAL\Types\ItemStatus")
+     * @DoctrineAssert\Enum(entity="AppBundle\DBAL\Types\ItemStatusType")
      *
-     * @ORM\Column(name="status", type="ItemStatus", nullable=false)
+     * @ORM\Column(name="status", type="ItemStatusType", nullable=false)
      */
-    protected $status;
+    private $status;
 
     /**
-     * @return int
+     * __toString method
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getTitle() ?: 'New Item';
+    }
+
+    /**
+     * Get ID
+     *
+     * @return int ID
      */
     public function getId()
     {
@@ -97,7 +112,9 @@ class Item
     }
 
     /**
-     * @return string
+     * Get title
+     *
+     * @return string Title
      */
     public function getTitle()
     {
@@ -105,7 +122,9 @@ class Item
     }
 
     /**
-     * @param string $title
+     * Set title
+     *
+     * @param string $title Title
      *
      * @return $this
      */
@@ -117,7 +136,9 @@ class Item
     }
 
     /**
-     * @return float
+     * Get latitude
+     *
+     * @return float Latitude
      */
     public function getLatitude()
     {
@@ -125,7 +146,9 @@ class Item
     }
 
     /**
-     * @param float $latitude
+     * Set latitude
+     *
+     * @param float $latitude Latitude
      *
      * @return $this
      */
@@ -137,7 +160,9 @@ class Item
     }
 
     /**
-     * @return float
+     * Get longitude
+     *
+     * @return float Longitude
      */
     public function getLongitude()
     {
@@ -145,7 +170,9 @@ class Item
     }
 
     /**
-     * @param float $longitude
+     * Set longitude
+     *
+     * @param float $longitude Longitude
      *
      * @return $this
      */
@@ -157,7 +184,9 @@ class Item
     }
 
     /**
-     * @return array
+     * Get type
+     *
+     * @return array Type
      */
     public function getType()
     {
@@ -165,7 +194,9 @@ class Item
     }
 
     /**
-     * @param array $type
+     * Set type
+     *
+     * @param array $type Type
      *
      * @return $this
      */
@@ -177,7 +208,9 @@ class Item
     }
 
     /**
-     * @return string
+     * Get description
+     *
+     * @return string Description
      */
     public function getDescription()
     {
@@ -185,7 +218,9 @@ class Item
     }
 
     /**
-     * @param string $description
+     * Set description
+     *
+     * @param string $description Description
      *
      * @return $this
      */
@@ -197,7 +232,9 @@ class Item
     }
 
     /**
-     * @return array
+     * Get area
+     *
+     * @return array Area
      */
     public function getArea()
     {
@@ -205,7 +242,9 @@ class Item
     }
 
     /**
-     * @param array $area
+     * Set area
+     *
+     * @param array $area Area
      *
      * @return $this
      */
@@ -219,7 +258,7 @@ class Item
     /**
      * Get status
      *
-     * @return string
+     * @return string Status
      */
     public function getStatus()
     {
@@ -245,7 +284,7 @@ class Item
      *
      * @param Category $category Category
      *
-     * @return Item
+     * @return $this
      */
     public function setCategory(Category $category)
     {
@@ -262,13 +301,5 @@ class Item
     public function getCategory()
     {
         return $this->category;
-    }
-
-    /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->getTitle() ?: 'New item';
     }
 }

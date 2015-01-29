@@ -1,26 +1,25 @@
 <?php
+
 namespace AppBundle\DBAL\Types;
 
-use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 
 /**
- * Class ItemType
+ * Item type
  *
  * @author Logans <LogansOleg@gmail.com>
+ * @author Artem Genvald <genvaldartem@gmail.com>
  */
-class ItemType extends AbstractEnumType
+class ItemTypeType extends AbstractEnumType
 {
     const LOST  = 'lost';
     const FOUND = 'found';
 
     /**
-     * @var array
-     *
-     * {@inheritDoc} Contains ENUM values for item type
+     * {@inheritdoc}
      */
     protected static $choices = [
         self::LOST  => 'Lost Item',
-        self::FOUND => 'Found Item',
+        self::FOUND => 'Found Item'
     ];
 }

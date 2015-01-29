@@ -11,8 +11,8 @@ doctrine:
         mapping_types:
             enum: string
         types:
-            ItemType:   AppBundle\DBAL\Types\ItemType
-            ItemStatus: AppBundle\DBAL\Types\ItemStatus
+            ItemTypeType:   AppBundle\DBAL\Types\ItemTypeType
+            ItemStatusType: AppBundle\DBAL\Types\ItemStatusType
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true
