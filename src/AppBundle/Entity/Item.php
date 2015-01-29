@@ -7,15 +7,14 @@ use Doctrine\ORM\Mapping as ORM;
 use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
-use AppBundle\Entity\Category as Category;
 
 /**
  * Class Item
  *
  * @author Logans <Logansoleg@gmail.com>
  *
- * @ORM\Entity *
- * @ORM\Table(name="item")
+ * @ORM\Entity
+ * @ORM\Table(name="items")
  */
 class Item
 {
@@ -24,18 +23,17 @@ class Item
     /**
      * @var int $id
      *
-     * @ORM\Column(type="integer")     *
-     * @ORM\Id     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
     /**
-     * @var int $categoryId
-     *
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="items")
+     * @ORM\JoinColumn(name="category", referencedColumnName="id")
      */
-    protected $categoryId;
+    protected $category;
 
     /**
      * @var string $title
@@ -89,12 +87,6 @@ class Item
      * @ORM\Column(name="status", type="ItemStatus", nullable=false)
      */
     protected $status;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="items")
-     * @ORM\JoinColumn(name="category", referencedColumnName="id")
-     */
-    protected $category;
 
     /**
      * @return int
@@ -225,7 +217,9 @@ class Item
     }
 
     /**
-     * @return array
+     * Get status
+     *
+     * @return string
      */
     public function getStatus()
     {
@@ -233,7 +227,9 @@ class Item
     }
 
     /**
-     * @param array $status
+     * Set status
+     *
+     * @param string $status Status
      *
      * @return $this
      */
@@ -247,10 +243,11 @@ class Item
     /**
      * Set category
      *
-     * @param \AppBundle\Entity\Category $category
+     * @param Category $category Category
+     *
      * @return Item
      */
-    public function setCategory(Category $category = null)
+    public function setCategory(Category $category)
     {
         $this->category = $category;
 
@@ -260,7 +257,7 @@ class Item
     /**
      * Get category
      *
-     * @return \AppBundle\Entity\Category 
+     * @return Category
      */
     public function getCategory()
     {

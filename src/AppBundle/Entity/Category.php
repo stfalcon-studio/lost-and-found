@@ -2,16 +2,15 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\ArrayCollection;
-use AppBundle\Entity\Item as Item;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="Category")
+ * @ORM\Table(name="categories")
  */
 class Category
 {
@@ -27,13 +26,15 @@ class Category
     protected $id;
 
     /**
-     * @var string $title
+     * @var string $title Title
      *
-     * @ORM\Column(type="string",length=20)
+     * @ORM\Column(type="string", length=20)
      */
     protected $title;
 
     /**
+     * @var Collection|Item[] $items Items
+     *
      * @ORM\OneToMany(targetEntity="Item", mappedBy="category")
      */
     protected $items;
@@ -45,7 +46,7 @@ class Category
     {
         return $this->id;
     }
-    
+
     /**
      * @return string
      */
@@ -62,7 +63,7 @@ class Category
     public function setTitle($title)
     {
         $this->title = $title;
-        
+
         return $this;
     }
 
@@ -77,21 +78,35 @@ class Category
     /**
      * Add item
      *
-     * @param Item $items
+     * @param Item $item
      *
-     * @return Category
+     * @return $this
      */
-    public function addItems(Item $items)
+    public function addItem(Item $item)
     {
-        $this->items[] = $items;
+        $this->items[] = $item;
 
         return $this;
     }
 
     /**
-     * Get item
+     * Remove item
      *
-     * @return Collection
+     * @param Item $item Item
+     *
+     * @return $this
+     */
+    public function removeItem(Item $item)
+    {
+        $this->items->removeElement($item);
+
+        return $this;
+    }
+
+    /**
+     * Get items
+     *
+     * @return Item[]|Collection
      */
     public function getItems()
     {
@@ -99,15 +114,15 @@ class Category
     }
 
     /**
-     * Set item
+     * Set items
      *
-     * @param Item $item
+     * @param Item[]|Collection $items
      *
      * @return $this
      */
-    public function setItem($item)
+    public function setItems($items)
     {
-        $this->items = $item;
+        $this->items = $items;
 
         return $this;
     }
