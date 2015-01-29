@@ -2,7 +2,7 @@
 
 namespace AppBundle\Entity;
 
-use Acme\AppBundle\DBAL\Types as Types;
+use AppBundle\DBAL\Types as Types;
 use Doctrine\ORM\Mapping as ORM;
 use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 
