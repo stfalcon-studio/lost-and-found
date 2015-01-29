@@ -16,17 +16,28 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new AppBundle\AppBundle(),
+
             new Fresh\DoctrineEnumBundle\FreshDoctrineEnumBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
 <<<<<<< HEAD
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+<<<<<<< HEAD
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
 =======
+=======
+
+>>>>>>> 64f1249... Merge remote-tracking branch 'remotes/stfalcon/develop' into feature-add-sonata-admin-bundle
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
+            new Sonata\BlockBundle\SonataBlockBundle(),
             new Sonata\AdminBundle\SonataAdminBundle(),
+<<<<<<< HEAD
             new Sonata\CoreBundle\SonataCoreBundle()
 >>>>>>> 09ce38d... Add sonataAdminBundle
+=======
+            new Sonata\CoreBundle\SonataCoreBundle(),
+
+            new AppBundle\AppBundle(),
+>>>>>>> 64f1249... Merge remote-tracking branch 'remotes/stfalcon/develop' into feature-add-sonata-admin-bundle
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
