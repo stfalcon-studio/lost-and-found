@@ -39,14 +39,6 @@ class Category
     }
 
     /**
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    /**
      * @return string
      */
     public function getTitle()
@@ -56,10 +48,13 @@ class Category
 
     /**
      * @param string $title
+     *
+     * @return $this
      */
     public function setTitle($title)
     {
         $this->title = $title;
-    }
 
+        return $this;
+    }
 }

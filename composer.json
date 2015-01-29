@@ -25,7 +25,8 @@
         "sonata-project/core-bundle": "~2.2"
     },
     "require-dev": {
-        "sensio/generator-bundle": "~2.3"
+        "sensio/generator-bundle": "~2.3",
+        "doctrine/doctrine-fixtures-bundle": "2.2.*"
     },
     "autoload": {
         "psr-4": { "": "src/" }
