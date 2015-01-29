@@ -8,14 +8,17 @@ use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
  * Class ItemType
  *
  * @author Logans <LogansOleg@gmail.com>
- *
- * {@inheritDoc} Contains ENUM values for item type
  */
 class ItemType extends AbstractEnumType
 {
     const LOST  = 'lost';
     const FOUND = 'found';
 
+    /**
+     * @var array
+     *
+     * {@inheritDoc} Contains ENUM values for item type
+     */
     protected static $choices = [
         self::LOST  => 'Lost Item',
         self::FOUND => 'Found Item',
