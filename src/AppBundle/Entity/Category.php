@@ -27,8 +27,6 @@ class Category
      * @var string $title
      *
      * @ORM\Column(type="string",length=20)
-     *
-     * @Gedmo\Versioned
      */
     protected $title;
 

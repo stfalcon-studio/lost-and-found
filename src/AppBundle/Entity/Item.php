@@ -40,8 +40,6 @@ class Item
      * @var string $title
      *
      * @ORM\Column(type="text")
-     *
-     * @Gedmo\Versioned
      */
     protected $title;
 
@@ -49,8 +47,6 @@ class Item
      * @var float $latitude
      *
      * @ORM\Column(type="decimal", precision=9, scale=6)
-     *
-     * @Gedmo\Versioned
      */
     protected $latitude;
 
@@ -58,8 +54,6 @@ class Item
      * @var float $longitude
      *
      * @ORM\Column(type="decimal", precision=9, scale=6)
-     *
-     * @Gedmo\Versioned
      */
     protected $longitude;
 
@@ -69,8 +63,6 @@ class Item
      * @DoctrineAssert\Enum(entity="Types\ItemType")
      *
      * @ORM\Column(name="type", type="ItemType", nullable=false)
-     *
-     * @Gedmo\Versioned
      */
     protected $type;
 
@@ -78,8 +70,6 @@ class Item
      * @var string $description
      *
      * @ORM\Column(type="text")
-     *
-     * @Gedmo\Versioned
      */
     protected $description;
 
@@ -87,8 +77,6 @@ class Item
      * @var array $area
      *
      * @ORM\Column(type="json_array")
-     *
-     * @Gedmo\Versioned
      */
     protected $area;
 
@@ -98,8 +86,6 @@ class Item
      * @DoctrineAssert\Enum(entity="Types\ItemStatus")
      *
      * @ORM\Column(name="status", type="ItemStatus", nullable=false)
-     *
-     * @Gedmo\Versioned
      */
     protected $status;
 
