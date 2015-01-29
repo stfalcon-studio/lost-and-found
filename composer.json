@@ -1,13 +1,12 @@
 {
-    "name": "symfony/framework-standard-edition",
-    "license": "MIT",
+    "name": "stfalcon-studio/lost-and-found",
+    "description": "Service \"Lost and found\". Announcement of lost or found items",
+    "keywords": ["lost", "found", "social", "help"],
+    "homepage": "https://github.com/stfalcon-studio/lost-and-found",
     "type": "project",
-    "description": "The \"Symfony Standard Edition\" distribution",
-    "autoload": {
-        "psr-0": { "": "src/", "SymfonyStandard": "app/" }
-    },
+    "license": "MIT",
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.4.0",
         "symfony/symfony": "2.6.*",
         "doctrine/orm": "~2.2,>=2.2.3",
         "doctrine/doctrine-bundle": "~1.2",
@@ -21,6 +20,9 @@
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
+    },
+    "autoload": {
+        "psr-4": { "": "src/" }
     },
     "scripts": {
         "post-root-package-install": [
@@ -52,9 +54,6 @@
         "symfony-assets-install": "relative",
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
-        },
-        "branch-alias": {
-            "dev-master": "2.6-dev"
         }
     }
 }
