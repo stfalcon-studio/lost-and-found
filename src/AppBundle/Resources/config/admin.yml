@@ -1,0 +1,18 @@
+services:
+    admin.category:
+        class: AppBundle\Admin\CategoryAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Default", label: "Categories" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Category
+            - ~
+
+    admin.item:
+        class: AppBundle\Admin\ItemAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Default", label: "Items" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Item
+            - ~

@@ -31,6 +31,15 @@ class Category
     protected $title;
 
     /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getTitle() ?: 'New category';
+    }
+
+
+    /**
      * @return int
      */
     public function getId()
