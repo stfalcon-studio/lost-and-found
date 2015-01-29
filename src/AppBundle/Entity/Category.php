@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use AppBundle\Entity\Item as Item;
 
@@ -35,7 +36,7 @@ class Category
     /**
      * @ORM\OneToMany(targetEntity="Item", mappedBy="category")
      */
-    protected $item;
+    protected $items;
 
     /**
      * @return int
@@ -64,54 +65,49 @@ class Category
         
         return $this;
     }
-    
+
+    /**
+     * Constructor
+     */
     public function __construct()
     {
-        $this->item = new ArrayCollection();
+        $this->items = new ArrayCollection();
     }
 
     /**
      * Add item
      *
-     * @param \AppBundle\Entity\Item $item
+     * @param Item $items
+     *
      * @return Category
      */
-    public function addItem(Item $item)
+    public function addItems(Item $items)
     {
-        $this->item[] = $item;
+        $this->items[] = $items;
 
         return $this;
     }
 
     /**
-     * Remove item
-     *
-     * @param \AppBundle\Entity\Item $item
-     */
-    public function removeItem(Item $item)
-    {
-        $this->item->removeElement($item);
-    }
-
-    /**
      * Get item
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return Collection
      */
-    public function getItem()
+    public function getItems()
     {
-        return $this->item;
+        return $this->items;
     }
 
     /**
      * Set item
      *
      * @param Item $item
+     *
      * @return $this
      */
-    public function setItem(Item $item)
+    public function setItem($item)
     {
-        $this->item = $item;
+        $this->items = $item;
 
         return $this;
     }
