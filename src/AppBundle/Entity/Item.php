@@ -75,7 +75,7 @@ class Item
     /**
      * @var array $area
      *
-     * @ORM\Column(type="json_array")
+     * @ORM\Column(type="json_array", nullable=true)
      */
     protected $area;
 

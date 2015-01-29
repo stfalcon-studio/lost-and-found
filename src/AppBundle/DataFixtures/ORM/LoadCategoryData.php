@@ -19,14 +19,17 @@ class LoadCategoryData extends AbstractFixture
     {
         $keys = (new Category())
             ->setTitle("Ключі");
+        $this->setReference('category-keys', $keys);
         $manager->persist($keys);
 
         $toy = (new Category())
             ->setTitle("Іграшка");
+        $this->setReference('category-toy', $toy);
         $manager->persist($toy);
 
         $item = (new Category())
             ->setTitle("Предмет");
+        $this->setReference('category-item', $item);
         $manager->persist($item);
 
         $manager->flush();
