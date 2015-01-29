@@ -5,6 +5,8 @@ namespace AppBundle\Entity;
 use AppBundle\DBAL\Types as Types;
 use Doctrine\ORM\Mapping as ORM;
 use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
  * Class Item
@@ -16,6 +18,8 @@ use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
  */
 class Item
 {
+    use TimestampableEntity;
+
     /**
      * @var int $id
      *
