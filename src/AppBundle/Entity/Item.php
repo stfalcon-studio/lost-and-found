@@ -99,10 +99,14 @@ class Item
 
     /**
      * @param int $id
+     *
+     * @return $this
      */
     public function setId($id)
     {
         $this->id = $id;
+
+        return $this;
     }
 
     /**
@@ -115,10 +119,14 @@ class Item
 
     /**
      * @param int $categoryId
+     *
+     * @return $this
      */
     public function setCategoryId($categoryId)
     {
         $this->categoryId = $categoryId;
+
+        return $this;
     }
 
     /**
@@ -131,10 +139,14 @@ class Item
 
     /**
      * @param string $title
+     *
+     * @return $this
      */
     public function setTitle($title)
     {
         $this->title = $title;
+
+        return $this;
     }
 
     /**
@@ -147,10 +159,14 @@ class Item
 
     /**
      * @param float $latitude
+     *
+     * @return $this
      */
     public function setLatitude($latitude)
     {
         $this->latitude = $latitude;
+
+        return $this;
     }
 
     /**
@@ -163,10 +179,14 @@ class Item
 
     /**
      * @param float $longitude
+     *
+     * @return $this
      */
     public function setLongitude($longitude)
     {
         $this->longitude = $longitude;
+
+        return $this;
     }
 
     /**
@@ -179,10 +199,14 @@ class Item
 
     /**
      * @param array $type
+     *
+     * @return $this
      */
     public function setType($type)
     {
         $this->type = $type;
+
+        return $this;
     }
 
     /**
@@ -195,10 +219,14 @@ class Item
 
     /**
      * @param string $description
+     *
+     * @return $this
      */
     public function setDescription($description)
     {
         $this->description = $description;
+
+        return $this;
     }
 
     /**
@@ -211,10 +239,14 @@ class Item
 
     /**
      * @param array $area
+     *
+     * @return $this
      */
     public function setArea($area)
     {
         $this->area = $area;
+
+        return $this;
     }
 
     /**
@@ -227,9 +259,15 @@ class Item
 
     /**
      * @param array $status
+     *
+     * @return $this
      */
     public function setStatus($status)
     {
         $this->status = $status;
+
+        return $this;
     }
+
+
 }
