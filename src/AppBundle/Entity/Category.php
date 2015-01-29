@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
  * @ORM\Entity
@@ -10,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Category
 {
+    use TimestampableEntity;
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -23,6 +27,8 @@ class Category
      * @var string $title
      *
      * @ORM\Column(type="string",length=20)
+     *
+     * @Gedmo\Versioned
      */
     protected $title;
 
