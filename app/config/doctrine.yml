@@ -8,6 +8,11 @@ doctrine:
         user:     "%database_user%"
         password: "%database_password%"
         charset:  UTF8
+        mapping_types:
+            enum: string
+        types:
+            ItemType: Acme\AppBundle\DBAL\Types\ItemType
+            ItemStatus: Acme\AppBundle\DBAL\Types\ItemStatus
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true

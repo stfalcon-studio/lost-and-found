@@ -11,3 +11,5 @@
 /bin/
 /composer.phar
 *.*~
+.idea/*
+.idea/.name
