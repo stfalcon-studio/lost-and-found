@@ -51,8 +51,8 @@ class ItemAdmin extends Admin
         $listMapper
             ->addIdentifier('title')
             ->add('category')
-            ->add('type')
-            ->add('status')
+            ->add('type', 'string', ['template' => 'backend/item/list_type.html.twig'])
+            ->add('status', 'string', ['template' => 'backend/item/list_status.html.twig'])
             ->add('createdAt')
             ->add('updatedAt')
             ->add('_action', 'actions', [
