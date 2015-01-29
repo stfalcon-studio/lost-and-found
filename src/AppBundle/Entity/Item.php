@@ -13,8 +13,8 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
  *
  * @author Logans <Logansoleg@gmail.com>
  *
- * @ORM\Entity *
- * @ORM\Table(name="item")
+ * @ORM\Entity
+ * @ORM\Table(name="items")
  */
 class Item
 {
@@ -23,18 +23,17 @@ class Item
     /**
      * @var int $id
      *
-     * @ORM\Column(type="integer")     *
-     * @ORM\Id     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
     /**
-     * @var int $categoryId
-     *
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="items")
+     * @ORM\JoinColumn(name="category", referencedColumnName="id")
      */
-    protected $categoryId;
+    protected $category;
 
     /**
      * @var string $title
@@ -76,7 +75,7 @@ class Item
     /**
      * @var array $area
      *
-     * @ORM\Column(type="json_array")
+     * @ORM\Column(type="json_array", nullable=true)
      */
     protected $area;
 
@@ -218,7 +217,9 @@ class Item
     }
 
     /**
-     * @return array
+     * Get status
+     *
+     * @return string
      */
     public function getStatus()
     {
@@ -226,7 +227,9 @@ class Item
     }
 
     /**
-     * @param array $status
+     * Set status
+     *
+     * @param string $status Status
      *
      * @return $this
      */
@@ -237,5 +240,27 @@ class Item
         return $this;
     }
 
+    /**
+     * Set category
+     *
+     * @param Category $category Category
+     *
+     * @return Item
+     */
+    public function setCategory(Category $category)
+    {
+        $this->category = $category;
 
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
 }
