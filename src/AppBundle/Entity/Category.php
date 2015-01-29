@@ -44,15 +44,7 @@ class Category
     {
         return $this->id;
     }
-
-    /**
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
+    
     /**
      * @return string
      */
@@ -63,12 +55,16 @@ class Category
 
     /**
      * @param string $title
+     *
+     * @return $this
      */
     public function setTitle($title)
     {
         $this->title = $title;
+        
+        return $this;
     }
-
+    
     public function __construct()
     {
         $this->item = new ArrayCollection();
