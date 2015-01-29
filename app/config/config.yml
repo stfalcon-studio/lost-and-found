@@ -4,6 +4,9 @@ imports:
     - { resource: services.yml }
     - { resource: doctrine.yml }
     - { resource: assetic.yml }
+    - { resource: sonata/sonata-admin.yml }
+    - { resource: sonata/sonata-admin-orm.yml }
+    - { resource: sonata/sonata-block.yml }
 
 framework:
     #esi:             ~
