@@ -1,6 +1,6 @@
 {
     "name": "stfalcon-studio/lost-and-found",
-    "description": "Service \"Lost and found\". Announcement of lost or found items",
+    "description": "Service \"Lost and Found\". Announcement of lost or found items",
     "keywords": ["lost", "found", "social", "help"],
     "homepage": "https://github.com/stfalcon-studio/lost-and-found",
     "type": "project",
