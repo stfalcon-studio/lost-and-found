@@ -11,9 +11,18 @@ doctrine:
         mapping_types:
             enum: string
         types:
-            ItemType: AppBundle\DBAL\Types\ItemType
+            ItemType:   AppBundle\DBAL\Types\ItemType
             ItemStatus: AppBundle\DBAL\Types\ItemStatus
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true
         naming_strategy: doctrine.orm.naming_strategy.underscore
+
+# DoctrineExtensionsBundle
+stof_doctrine_extensions:
+    default_locale: %locale%
+    orm:
+        default:
+            timestampable: true
+#            tree:          true
+#            loggable:      true
