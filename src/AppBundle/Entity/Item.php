@@ -59,7 +59,7 @@ class Item
     /**
      * @var array $type
      *
-     * @DoctrineAssert\Enum(entity="Types\ItemType")
+     * @DoctrineAssert\Enum(entity="AppBundle\DBAL\Types\ItemType")
      *
      * @ORM\Column(name="type", type="ItemType", nullable=false)
      */
@@ -82,7 +82,7 @@ class Item
     /**
      * @var array $status
      *
-     * @DoctrineAssert\Enum(entity="Types\ItemStatus")
+     * @DoctrineAssert\Enum(entity="AppBundle\DBAL\Types\ItemStatus")
      *
      * @ORM\Column(name="status", type="ItemStatus", nullable=false)
      */
@@ -262,5 +262,13 @@ class Item
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getTitle() ?: 'New item';
     }
 }

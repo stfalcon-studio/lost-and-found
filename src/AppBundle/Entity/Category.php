@@ -33,6 +33,15 @@ class Category
     protected $title;
 
     /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getTitle() ?: 'New category';
+    }
+
+
+    /**
      * @var Collection|Item[] $items Items
      *
      * @ORM\OneToMany(targetEntity="Item", mappedBy="category")
