@@ -11,8 +11,7 @@ use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
  *
  * @author Logans <Logansoleg@gmail.com>
  *
- * @ORM\Entity
- *
+ * @ORM\Entity *
  * @ORM\Table(name="item")
  */
 class Item
@@ -20,10 +19,8 @@ class Item
     /**
      * @var int $id
      *
-     * @ORM\Column(type="integer")
-     *
-     * @ORM\Id
-     *
+     * @ORM\Column(type="integer")     *
+     * @ORM\Id     *
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
