@@ -48,12 +48,21 @@ class ItemAdmin extends Admin
         $listMapper
             ->add('category')
             ->addIdentifier('title')
-            ->add('latitude')
-            ->add('longitude')
+          //  ->add('latitude')
+          //  ->add('longitude')
             ->add('type')
-            ->add('description')
-            ->add('area')
-            ->add('status');
+           // ->add('description')
+//            ->add('area')
+            ->add('status')
+            ->add('createdAt')
+            ->add('updatedAt')
+            ->add('_action', 'actions', [
+                'actions' => [
+                    'show'   => [],
+                    'edit'   => [],
+                    'delete' => []
+                ]
+            ]);
     }
 
     /**
@@ -88,7 +97,7 @@ class ItemAdmin extends Admin
             ->add('longitude')
             ->add('type')
             ->add('description')
-            ->add('area')
+//            ->add('area')
             ->add('status')
             ->add('createdAt')
             ->add('updatedAt');
