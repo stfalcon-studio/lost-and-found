@@ -9,6 +9,8 @@ class DefaultController extends Controller
 {
     /**
      * @Route("/app/example", name="homepage")
+     *
+     * @return array
      */
     public function indexAction()
     {
