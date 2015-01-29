@@ -5,8 +5,11 @@ use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 
 /**
- * Class BasketballPositionType
- * @package Acme\AppBundle\DBAL\Types
+ * Class ItemType
+ *
+ * @author Logans <LogansOleg@gmail.com>
+ *
+ * {@inheritDoc} Contains ENUM values for item type
  */
 class ItemType extends AbstractEnumType
 {

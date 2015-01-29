@@ -3,9 +3,13 @@ namespace Acme\AppBundle\DBAL\Types;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
+
 /**
- * Class StatusType
- * @package Acme\AppBundle\DBAL\Types
+ * Class ItemStatus
+ *
+ * @author Logans <LogansOleg@gmail.com>
+ *
+ * {@inheritDoc} Contains ENUM values for item status
  */
 class ItemStatus extends AbstractEnumType
 {

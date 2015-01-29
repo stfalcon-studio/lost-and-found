@@ -8,60 +8,82 @@ use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 
 /**
  * Class Item
+ *
  * @author Logans <Logansoleg@gmail.com>
- * @version 1.0
- * @package AppBundle\Entity
+ *
  * @ORM\Entity
+ *
  * @ORM\Table(name="item")
  */
 class Item
 {
     /**
      * @var int $id
+     *
      * @ORM\Column(type="integer")
+     *
      * @ORM\Id
+     *
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
     /**
      * @var int $categoryId
+     *
      * @ORM\Column(type="integer")
      */
     protected $categoryId;
+
     /**
      * @var string $title
+     *
      * @ORM\Column(type="text")
      */
     protected $title;
+
     /**
      * @var float $latitude
+     *
      * @ORM\Column(type="decimal", precision=9, scale=6)
      */
     protected $latitude;
+
     /**
      * @var float $longitude
+     *
      * @ORM\Column(type="decimal", precision=9, scale=6)
      */
     protected $longitude;
+
     /**
      * @var array $type
+     *
      * @DoctrineAssert\Enum(entity="Types\ItemType")
+     *
      * @ORM\Column(name="type", type="ItemType", nullable=false)
      */
     protected $type;
+
     /**
      * @var string $description
+     *
      * @ORM\Column(type="text")
      */
     protected $description;
+
     /**
      * @var array $area
+     *
      * @ORM\Column(type="json_array")
      */
     protected $area;
+
     /**
      * @var array $status
+     *
      * @DoctrineAssert\Enum(entity="Types\ItemStatus")
+     *
      * @ORM\Column(name="status", type="ItemStatus", nullable=false)
      */
     protected $status;
