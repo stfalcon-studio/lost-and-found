@@ -15,7 +15,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
  * @author Logans <Logansoleg@gmail.com>
  * @author Artem Genvald <genvaldartem@gmail.com>
  *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ItemRepository")
  * @ORM\Table(name="items")
  */
 class Item
@@ -91,6 +91,13 @@ class Item
      * @ORM\Column(name="status", type="ItemStatusType", nullable=false)
      */
     private $status = ItemStatusType::ACTIVE;
+
+    /**
+     * @var \DateTime|null $date
+     *
+     * @ORM\Column(type="date")
+     */
+    private $date;
 
     /**
      * __toString method
@@ -302,5 +309,25 @@ class Item
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param \DateTime $date
+     *
+     * @return $this
+     */
+    public function setDate(\DateTime $date)
+    {
+        $this->date = $date;
+
+        return $this;
     }
 }

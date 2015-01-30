@@ -13,7 +13,6 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  *
- * @ORM\Entity
  * @ORM\Table(name="categories")
  */
 class Category

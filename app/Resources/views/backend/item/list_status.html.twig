@@ -2,8 +2,8 @@
 
 {% block field %}
     {% if value == 'active' %}
-        <span class="badge" style="background-color: #b94a48;">{{ value }}</span>
+        <span class="badge item-status-active">{{ value }}</span>
     {% elseif value == 'resolved' %}
-        <span class="badge" style="background-color: #468847;">{{ value }}</span>
+        <span class="badge item-status-resolved">{{ value }}</span>
     {% endif %}
 {% endblock %}

@@ -3,5 +3,18 @@
 {% block body %}
     <a href="{{ path('create_lost_item') }}">Lost item</a>
     <a href="{{ path('create_found_item') }}">Found item</a>
-{% endblock %}
+    
+    <p>Here is some last items</p><br>
+    <p>Someone found this items:</p>
+    <hr>
+    {% for item in found_items %}
+        <ol>{{ item.title }} </ol>
+    {% endfor %}
+    <br>
+    <p>Someone lost this items</p>
+    <hr>
+    {% for item in lost_items %}
+        <ol>{{ item.title }} </ol>
+    {% endfor %}
 
+{% endblock %}
