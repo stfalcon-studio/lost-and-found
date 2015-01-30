@@ -92,6 +92,13 @@ class Item
     private $status;
 
     /**
+     * @var \DateTime|null $date
+     *
+     * @ORM\Column(type="date")
+     */
+    private $date;
+
+    /**
      * __toString method
      *
      * @return string
@@ -301,5 +308,25 @@ class Item
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param \DateTime $date
+     *
+     * @return $this
+     */
+    public function setDate(\DateTime $date)
+    {
+        $this->date = $date;
+
+        return $this;
     }
 }

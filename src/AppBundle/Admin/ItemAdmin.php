@@ -40,6 +40,7 @@ class ItemAdmin extends Admin
                 ->add('description')
                 ->add('area')
                 ->add('status')
+                ->add('date')
             ->end();
     }
 
@@ -55,6 +56,7 @@ class ItemAdmin extends Admin
             ->add('status', 'string', ['template' => 'backend/item/list_status.html.twig'])
             ->add('createdAt')
             ->add('updatedAt')
+            ->add('date')
             ->add('_action', 'actions', [
                 'actions' => [
                     'show'   => [],
@@ -80,7 +82,8 @@ class ItemAdmin extends Admin
 //            ->add('area')
             ->add('status')
             ->add('createdAt')
-            ->add('updatedAt');
+            ->add('updatedAt')
+            ->add('date');
     }
 
     /**
@@ -99,6 +102,7 @@ class ItemAdmin extends Admin
             ->add('area')
             ->add('status')
             ->add('createdAt')
-            ->add('updatedAt');
+            ->add('updatedAt')
+            ->add('date');
     }
 }
