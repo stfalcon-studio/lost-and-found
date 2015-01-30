@@ -2,12 +2,16 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Lost-and-Found{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <title>{% block title %}Lost-and-Found{% endblock title %}</title>
+        {% block stylesheets %}
+            {% stylesheets 'css/style.css' filter='cssrewrite' %}
+                <link rel="stylesheet" href="{{ asset_url }}" />
+            {% endstylesheets %}
+        {% endblock stylesheets %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {% block body %}{% endblock body %}
         {% block javascripts %}{% endblock %}
     </body>
 </html>

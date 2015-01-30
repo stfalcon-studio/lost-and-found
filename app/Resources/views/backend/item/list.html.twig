@@ -1,0 +1,9 @@
+{% extends 'SonataAdminBundle:CRUD:list.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% stylesheets 'css/style.css' filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock stylesheets %}

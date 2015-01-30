@@ -64,6 +64,8 @@ class ItemAdmin extends Admin
                     'delete' => []
                 ]
             ]);
+
+        $this->setTemplate('list', 'backend\item\list.html.twig');
     }
 
     /**
