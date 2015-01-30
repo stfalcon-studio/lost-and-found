@@ -7,13 +7,13 @@ use Doctrine\DBAL\Schema\Schema;
 
 /**
  * Auto-generated Migration: Please modify to your needs!
+ * @author svatok13 <svatok13@gmail.com>
  */
 class Version20150130100439 extends AbstractMigration
 {
     /**
      * @param Schema $schema
      * @throws \Doctrine\DBAL\Migrations\AbortMigrationException
-     * @author svatok13
      */
     public function up(Schema $schema)
     {
@@ -28,7 +28,6 @@ class Version20150130100439 extends AbstractMigration
     /**
      * @param Schema $schema
      * @throws \Doctrine\DBAL\Migrations\AbortMigrationException
-     * @author svatok13
      */
     public function down(Schema $schema)
     {
