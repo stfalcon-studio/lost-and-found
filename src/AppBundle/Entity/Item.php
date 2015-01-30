@@ -14,7 +14,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
  * @author Logans <Logansoleg@gmail.com>
  * @author Artem Genvald <genvaldartem@gmail.com>
  *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ItemRepository")
  * @ORM\Table(name="items")
  */
 class Item

@@ -1,5 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    Homepage.
+    <p>Here is some last items</p><br>
+    <p>Someone found this items:</p>
+    <hr>
+    {% for item in found_items %}
+        <ol>{{ item.title }} </ol>
+    {% endfor %}
+    <br>
+    <p>Someone lost this items</p>
+    <hr>
+    {% for item in lost_items %}
+        <ol>{{ item.title }} </ol>
+    {% endfor %}
+
 {% endblock %}
