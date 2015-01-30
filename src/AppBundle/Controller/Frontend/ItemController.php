@@ -27,33 +27,7 @@ class ItemController extends Controller
     {
         $item = new Item();
 
-        $form = $this->createFormBuilder($item)
-            ->setMethod('post')
-                ->add('title', 'text', [
-                    'label' => 'Назва',
-                ])
-                ->add('category', 'entity', [
-                    'label'    => 'Категорія',
-                    'class'    => 'AppBundle\Entity\Category',
-                    'property' => 'title',
-                ])
-                ->add('type', 'hidden', [
-                    'label' => 'Тип',
-                    'data' => ItemTypeType::LOST,
-                ])
-                ->add('latitude', 'text', [
-                    'label' => 'Latitude',
-                ])
-                ->add('longitude', 'text', [
-                    'label' => 'Longitude'
-                ])
-                ->add('description', 'textarea', [
-                    'label' => 'Опис',
-                ])
-                ->add('save', 'submit', [
-                    'label' => 'Create',
-                ])
-            ->getForm();
+        $form = $this->createForm('lost', $item);
 
         $form->handleRequest($request);
 
@@ -83,33 +57,7 @@ class ItemController extends Controller
     {
         $item = new Item();
 
-        $form = $this->createFormBuilder($item)
-            ->setMethod('post')
-                ->add('title', 'text', [
-                    'label' => 'Назва',
-                ])
-                ->add('category', 'entity', [
-                    'label'    => 'Категорія',
-                    'class'    => 'AppBundle\Entity\Category',
-                    'property' => 'title',
-                ])
-                ->add('type', 'hidden', [
-                    'label' => 'Тип',
-                    'data' => ItemTypeType::FOUND,
-                ])
-                ->add('latitude', 'text', [
-                    'label' => 'Latitude',
-                ])
-                ->add('longitude', 'text', [
-                    'label' => 'Longitude'
-                ])
-                ->add('description', 'textarea', [
-                    'label' => 'Опис',
-                ])
-                ->add('save', 'submit', [
-                    'label' => 'Create',
-                ])
-            ->getForm();
+        $form = $this->createForm('found', $item);
 
         $form->handleRequest($request);
 

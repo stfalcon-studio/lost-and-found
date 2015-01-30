@@ -1,0 +1,10 @@
+services:
+    app.form.type.found:
+        class: AppBundle\Form\Type\FoundItemType
+        tags:
+            - { name: form.type, alias: found }
+
+    app.form.type.lost:
+        class: AppBundle\Form\Type\LostItemType
+        tags:
+            - { name: form.type, alias: lost }
