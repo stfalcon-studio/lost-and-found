@@ -18,14 +18,18 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
 {
     /**
      * {@inheritdoc}
+     *
+     * @return array
      */
-    function getDependencies()
+    public function getDependencies()
     {
         return ['AppBundle\DataFixtures\ORM\LoadCategoryData'];
     }
 
     /**
      * {@inheritdoc}
+     *
+     * @return void
      */
     public function load(ObjectManager $manager)
     {
@@ -47,7 +51,8 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
             ->setLongitude(27.005755)
             ->setType(ItemTypeType::LOST)
             ->setDescription('Загубив телефон Google Nexus 5. Потрібна допомога за винагороду.')
-            ->setStatus(ItemStatusType::ACTIVE);
+            ->setStatus(ItemStatusType::ACTIVE)
+            ->setDate(new \DateTime('10-11-2014'));
         $manager->persist($nexus);
 
         $nokia = (new Item())
@@ -57,7 +62,8 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
             ->setLongitude(26.063656)
             ->setType(ItemTypeType::LOST)
             ->setDescription('Загубив телефон Nokia 1100. Хто знайде - поверніть. Я фанат антикваріату :)')
-            ->setStatus(ItemStatusType::RESOLVED);
+            ->setStatus(ItemStatusType::RESOLVED)
+            ->setDate(new \DateTime('10-11-2014'));
         $manager->persist($nokia);
 
         $iPhone = (new Item())
@@ -67,7 +73,8 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
             ->setLongitude(25.475887)
             ->setType(ItemTypeType::FOUND)
             ->setDescription('Знайшов новенький-новісінький айфон. Віддам його власнику без винагороди, бо він мені не потрібен. Я фанат андроїда :)')
-            ->setStatus(ItemStatusType::ACTIVE);
+            ->setStatus(ItemStatusType::ACTIVE)
+            ->setDate(new \DateTime('10-11-2014'));
         $manager->persist($iPhone);
 
         $keys = (new Item())
@@ -77,7 +84,8 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
             ->setLongitude(23.005755)
             ->setType(ItemTypeType::LOST)
             ->setDescription('Загубив ключі від квартири.')
-            ->setStatus(ItemStatusType::ACTIVE);
+            ->setStatus(ItemStatusType::ACTIVE)
+            ->setDate(new \DateTime('10-11-2014'));
         $manager->persist($keys);
 
         $hat = (new Item())
@@ -87,7 +95,8 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
             ->setLongitude(25.005755)
             ->setType(ItemTypeType::LOST)
             ->setDescription('Загубив улюблену шапку червоного кольору.')
-            ->setStatus(ItemStatusType::ACTIVE);
+            ->setStatus(ItemStatusType::ACTIVE)
+            ->setDate(new \DateTime('10-11-2014'));
         $manager->persist($hat);
 
         $passport = (new Item())
@@ -97,7 +106,8 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
             ->setLongitude(25.679134)
             ->setType(ItemTypeType::FOUND)
             ->setDescription('Знайшов український національний паспорт на ім\'я Іванов Іван Іванович')
-            ->setStatus(ItemStatusType::ACTIVE);
+            ->setStatus(ItemStatusType::ACTIVE)
+            ->setDate(new \DateTime('10-11-2014'));
         $manager->persist($passport);
 
         $manager->flush();
