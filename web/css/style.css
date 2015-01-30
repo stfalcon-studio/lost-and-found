@@ -1,12 +1,16 @@
-.item-status-active{
+.item-status-active
+{
     background-color: #b94a48;
 }
-.item-status-resolved{
+.item-status-resolved
+{
     background-color: #468847;
 }
-.item-type-lost{
+.item-type-lost
+{
     background-color: #3a87ad;
 }
-.item-type-found{
+.item-type-found
+{
     background-color: #f89406;
 }

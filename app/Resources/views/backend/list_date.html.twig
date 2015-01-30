@@ -1,7 +1,5 @@
 {% extends 'SonataAdminBundle:CRUD:list_date.html.twig' %}
 
-
-{% block field%}
+{% block field %}
     {{ value|date('d.m.Y H:i:s') }}
 {% endblock %}
-
