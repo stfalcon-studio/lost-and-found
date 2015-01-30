@@ -22,13 +22,13 @@ class DefaultController extends Controller
      *
      * @return array
      */
-    public function showItemAction()
+    public function indexAction()
     {
         /** @var \AppBundle\Repository\ItemRepository $itemRepository */
         $itemRepository = $this->getDoctrine()
             ->getRepository('AppBundle:Item');
 
-        $foundItems =$itemRepository->getActiveFoundItem(0, 5);
+        $foundItems = $itemRepository->getActiveFoundItem(0, 5);
 
         $lostItems = $itemRepository->getActiveLostItem(0, 5);
 

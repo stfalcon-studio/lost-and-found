@@ -11,7 +11,8 @@ use Doctrine\ORM\QueryBuilder;
 
 /**
  * Class ItemRepository
- * @package AppBundle\Repository
+ *
+ * @author svatok13 <svatok13@gmail.com>
  */
 class ItemRepository extends EntityRepository
 {
@@ -27,15 +28,14 @@ class ItemRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('i');
 
-
-        $qb->andWhere('i.status = :status')
+        $qb->where('i.status = :status')
             ->andWhere('i.type = :type')
             ->setParameters([
                 'type' => ItemTypeType::LOST,
                 'status' => ItemStatusType::ACTIVE
             ])
-            ->setFirstResult($offset)
-            ->orderBy('i.createdAt', 'DESC');
+            ->orderBy('i.createdAt', 'DESC')
+            ->setFirstResult($offset);
 
         if ($limit !== null) {
             $qb->setMaxResults($limit);
@@ -57,14 +57,14 @@ class ItemRepository extends EntityRepository
         $qb = $this->createQueryBuilder('i');
 
 
-        $qb->andWhere('i.status = :status')
+        $qb->where('i.status = :status')
             ->andWhere('i.type = :type')
             ->setParameters([
                 'type' => ItemTypeType::FOUND,
                 'status' => ItemStatusType::ACTIVE
             ])
-            ->setFirstResult($offset)
-            ->orderBy('i.createdAt', 'DESC');
+            ->orderBy('i.createdAt', 'DESC')
+            ->setFirstResult($offset);
 
         if ($limit !== null) {
             $qb->setMaxResults($limit);
