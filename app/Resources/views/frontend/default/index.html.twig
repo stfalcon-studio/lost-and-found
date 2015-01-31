@@ -1,20 +1,20 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <a href="{{ path('create_lost_item') }}">Lost item</a>
-    <a href="{{ path('create_found_item') }}">Found item</a>
-    
-    <p>Here is some last items</p><br>
-    <p>Someone found this items:</p>
+    <a href="{{ path('create_lost_item') }}">Add lost item</a>
+    <a href="{{ path('create_found_item') }}">Add found item</a>
+
+    <p>Here are some last items</p><br>
+    <p>Someone found these items:</p>
     <hr>
     {% for item in found_items %}
         <ol>{{ item.title }} </ol>
     {% endfor %}
     <br>
-    <p>Someone lost this items</p>
+    <p>Someone lost these items</p>
     <hr>
     {% for item in lost_items %}
         <ol>{{ item.title }} </ol>
     {% endfor %}
 
-{% endblock %}
+{% endblock body %}
