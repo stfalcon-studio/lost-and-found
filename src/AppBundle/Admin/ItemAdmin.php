@@ -40,6 +40,7 @@ class ItemAdmin extends Admin
                 ->add('description')
                 ->add('area')
                 ->add('status')
+                ->add('moderated')
                 ->add('date')
             ->end();
     }
@@ -54,6 +55,7 @@ class ItemAdmin extends Admin
             ->add('category')
             ->add('type', 'string', ['template' => 'backend/item/list_type.html.twig'])
             ->add('status', 'string', ['template' => 'backend/item/list_status.html.twig'])
+            ->add('moderated', 'boolean')
             ->add('date', 'date', [
                 'format' => 'd.m.Y'
             ])
@@ -89,6 +91,7 @@ class ItemAdmin extends Admin
             ->add('description')
 //            ->add('area')
             ->add('status')
+            ->add('moderated', 'boolean')
             ->add('date', 'date', [
                 'format' => 'd.m.Y'
             ])
@@ -115,6 +118,7 @@ class ItemAdmin extends Admin
             ->add('description')
             ->add('area')
             ->add('status')
+            ->add('moderated')
             ->add('createdAt')
             ->add('updatedAt')
             ->add('date');
