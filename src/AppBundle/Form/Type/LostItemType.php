@@ -44,8 +44,7 @@ class LostItemType extends AbstractType
             ])
             ->add('save', 'submit', [
                 'label' => 'Create',
-            ])
-            ->getForm();
+            ]);
     }
 
     /**
