@@ -100,6 +100,13 @@ class Item
     private $date;
 
     /**
+     * @var boolean $moderated
+     *
+     * @ORM\Column(type="boolean")
+     */
+    private $moderated = false;
+
+    /**
      * __toString method
      *
      * @return string
@@ -334,4 +341,28 @@ class Item
 
         return $this;
     }
+
+    /**
+     * Is moderated
+     *
+     * @return boolean
+     */
+    public function isModerated()
+    {
+        return $this->moderated;
+    }
+
+    /**
+     * Set moderated
+     *
+     * @param boolean $moderated Moderated
+     *
+     * @return $this
+     */
+    public function setModerated($moderated)
+    {
+        $this->moderated = $moderated;
+        return $this;
+    }
+
 }

@@ -41,6 +41,7 @@ class ItemAdmin extends Admin
                 ->add('area')
                 ->add('status')
                 ->add('date')
+                ->add('moderated')
             ->end();
     }
 
@@ -63,6 +64,7 @@ class ItemAdmin extends Admin
             ->add('updatedAt', 'datetime', [
                 'format' => 'd.m.Y H:i:s'
             ])
+            ->add('moderated', 'boolean')
             ->add('_action', 'actions', [
                 'actions' => [
                     'show'   => [],
@@ -97,7 +99,8 @@ class ItemAdmin extends Admin
             ])
             ->add('updatedAt', 'datetime', [
                 'format' => 'd.m.Y H:i:s'
-            ]);
+            ])
+            ->add('moderated', 'boolean');
     }
 
     /**
@@ -117,6 +120,7 @@ class ItemAdmin extends Admin
             ->add('status')
             ->add('createdAt')
             ->add('updatedAt')
-            ->add('date');
+            ->add('date')
+            ->add('moderated');
     }
 }

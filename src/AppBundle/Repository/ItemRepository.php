@@ -27,13 +27,14 @@ class ItemRepository extends EntityRepository
         $qb = $this->createQueryBuilder('i');
 
         $qb->where($qb->expr()->eq('i.status', ':status'))
-           ->andWhere($qb->expr()->eq('i.type', ':type'))
-           ->setParameters([
-               'type'   => ItemTypeType::LOST,
-               'status' => ItemStatusType::ACTIVE
-           ])
-           ->orderBy('i.createdAt', 'DESC')
-           ->setFirstResult($offset);
+            ->andWhere($qb->expr()->eq('i.type', ':type'))
+            ->andWhere($qb->expr()->eq('i.moderated', true))
+            ->setParameters([
+                'type'   => ItemTypeType::LOST,
+                'status' => ItemStatusType::ACTIVE
+            ])
+            ->orderBy('i.createdAt', 'DESC')
+            ->setFirstResult($offset);
 
         if (null !== $limit) {
             $qb->setMaxResults($limit);
@@ -55,13 +56,14 @@ class ItemRepository extends EntityRepository
         $qb = $this->createQueryBuilder('i');
 
         $qb->where($qb->expr()->eq('i.status', ':status'))
-           ->andWhere($qb->expr()->eq('i.type', ':type'))
-           ->setParameters([
-               'type'   => ItemTypeType::FOUND,
-               'status' => ItemStatusType::ACTIVE
-           ])
-           ->orderBy('i.createdAt', 'DESC')
-           ->setFirstResult($offset);
+            ->andWhere($qb->expr()->eq('i.type', ':type'))
+            ->andWhere($qb->expr()->eq('i.moderated', true))
+            ->setParameters([
+                'type'   => ItemTypeType::FOUND,
+                'status' => ItemStatusType::ACTIVE
+            ])
+            ->orderBy('i.createdAt', 'DESC')
+            ->setFirstResult($offset);
 
         if (null !== $limit) {
             $qb->setMaxResults($limit);
