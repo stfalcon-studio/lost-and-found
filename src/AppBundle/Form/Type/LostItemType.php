@@ -14,24 +14,21 @@ class LostItemType extends AbstractType
 {
     /**
      * {@inheritdoc}
-     *
-     * @param FormBuilderInterface $builder
-     * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('category', 'entity', [
+                'class'    => 'AppBundle\Entity\Category',
+                'property' => 'title',
+                'label'    => 'Категорія',
+            ])
             ->add('title', 'text', [
                 'label' => 'Назва',
             ])
-            ->add('category', 'entity', [
-                'label'    => 'Категорія',
-                'class'    => 'AppBundle\Entity\Category',
-                'property' => 'title',
-            ])
             ->add('type', 'hidden', [
                 'label' => 'Тип',
-                'data' => ItemTypeType::LOST,
+                'data'  => ItemTypeType::LOST,
             ])
             ->add('latitude', 'text', [
                 'label' => 'Latitude',
@@ -53,11 +50,9 @@ class LostItemType extends AbstractType
 
     /**
      * {@inheritdoc}
-     *
-     * @return string
      */
     public function getName()
     {
-        return 'lost';
+        return 'lost_item';
     }
 }

@@ -18,8 +18,6 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
 {
     /**
      * {@inheritdoc}
-     *
-     * @return array
      */
     public function getDependencies()
     {
@@ -28,8 +26,6 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @return void
      */
     public function load(ObjectManager $manager)
     {
@@ -52,7 +48,7 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
             ->setType(ItemTypeType::LOST)
             ->setDescription('Загубив телефон Google Nexus 5. Потрібна допомога за винагороду.')
             ->setStatus(ItemStatusType::ACTIVE)
-            ->setDate(new \DateTime('10-11-2014'));
+            ->setDate(new \DateTime('10.11.2014'));
         $manager->persist($nexus);
 
         $nokia = (new Item())
@@ -63,7 +59,7 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
             ->setType(ItemTypeType::LOST)
             ->setDescription('Загубив телефон Nokia 1100. Хто знайде - поверніть. Я фанат антикваріату :)')
             ->setStatus(ItemStatusType::RESOLVED)
-            ->setDate(new \DateTime('10-11-2014'));
+            ->setDate(new \DateTime('10.11.2014'));
         $manager->persist($nokia);
 
         $iPhone = (new Item())
@@ -74,7 +70,7 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
             ->setType(ItemTypeType::FOUND)
             ->setDescription('Знайшов новенький-новісінький айфон. Віддам його власнику без винагороди, бо він мені не потрібен. Я фанат андроїда :)')
             ->setStatus(ItemStatusType::ACTIVE)
-            ->setDate(new \DateTime('10-11-2014'));
+            ->setDate(new \DateTime('10.11.2014'));
         $manager->persist($iPhone);
 
         $keys = (new Item())
@@ -85,7 +81,7 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
             ->setType(ItemTypeType::LOST)
             ->setDescription('Загубив ключі від квартири.')
             ->setStatus(ItemStatusType::ACTIVE)
-            ->setDate(new \DateTime('10-11-2014'));
+            ->setDate(new \DateTime('10.11.2014'));
         $manager->persist($keys);
 
         $hat = (new Item())
@@ -96,7 +92,7 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
             ->setType(ItemTypeType::LOST)
             ->setDescription('Загубив улюблену шапку червоного кольору.')
             ->setStatus(ItemStatusType::ACTIVE)
-            ->setDate(new \DateTime('10-11-2014'));
+            ->setDate(new \DateTime('10.11.2014'));
         $manager->persist($hat);
 
         $passport = (new Item())
@@ -107,7 +103,7 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
             ->setType(ItemTypeType::FOUND)
             ->setDescription('Знайшов український національний паспорт на ім\'я Іванов Іван Іванович')
             ->setStatus(ItemStatusType::ACTIVE)
-            ->setDate(new \DateTime('10-11-2014'));
+            ->setDate(new \DateTime('10.11.2014'));
         $manager->persist($passport);
 
         $manager->flush();

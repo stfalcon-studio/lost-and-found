@@ -16,8 +16,8 @@ use Symfony\Component\HttpFoundation\Response;
 class DefaultController extends Controller
 {
     /**
-     * List of active items
-     * 
+     * Homepage
+     *
      * @Route("/", name="homepage")
      *
      * @return array
@@ -25,16 +25,14 @@ class DefaultController extends Controller
     public function indexAction()
     {
         /** @var \AppBundle\Repository\ItemRepository $itemRepository */
-        $itemRepository = $this->getDoctrine()
-            ->getRepository('AppBundle:Item');
+        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
 
-        $foundItems = $itemRepository->getActiveFoundItem(0, 5);
-
-        $lostItems = $itemRepository->getActiveLostItem(0, 5);
+        $foundItems = $itemRepository->getActiveFoundItem();
+        $lostItems  = $itemRepository->getActiveLostItem();
 
         return $this->render('frontend/default/index.html.twig', [
             'found_items' => $foundItems,
-            'lost_items' => $lostItems
+            'lost_items'  => $lostItems
         ]);
     }
 }

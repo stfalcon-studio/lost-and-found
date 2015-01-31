@@ -5,9 +5,7 @@ namespace AppBundle\Repository;
 use AppBundle\Entity\Item;
 use AppBundle\DBAL\Types\ItemStatusType;
 use AppBundle\DBAL\Types\ItemTypeType;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\QueryBuilder;
 
 /**
  * Class ItemRepository
@@ -17,27 +15,27 @@ use Doctrine\ORM\QueryBuilder;
 class ItemRepository extends EntityRepository
 {
     /**
-     * Get active lost items array
+     * Get active lost items
      *
-     * @param integer $offset
-     * @param integer $limit
+     * @param integer $offset Offset
+     * @param integer $limit  Limit
      *
-     * @return array|Item[]
+     * @return Item[]
      */
     public function getActiveLostItem($offset = 0, $limit = null)
     {
         $qb = $this->createQueryBuilder('i');
 
-        $qb->where('i.status = :status')
-            ->andWhere('i.type = :type')
-            ->setParameters([
-                'type' => ItemTypeType::LOST,
-                'status' => ItemStatusType::ACTIVE
-            ])
-            ->orderBy('i.createdAt', 'DESC')
-            ->setFirstResult($offset);
+        $qb->where($qb->expr()->eq('i.status', ':status'))
+           ->andWhere($qb->expr()->eq('i.type', ':type'))
+           ->setParameters([
+               'type'   => ItemTypeType::LOST,
+               'status' => ItemStatusType::ACTIVE
+           ])
+           ->orderBy('i.createdAt', 'DESC')
+           ->setFirstResult($offset);
 
-        if ($limit !== null) {
+        if (null !== $limit) {
             $qb->setMaxResults($limit);
         }
 
@@ -45,28 +43,27 @@ class ItemRepository extends EntityRepository
     }
 
     /**
-     * Get active lost items array
+     * Get active lost items
      *
-     * @param integer $offset
-     * @param integer $limit
+     * @param integer $offset Offset
+     * @param integer $limit  Limit
      *
-     * @return array|Item[]
+     * @return Item[]
      */
     public function getActiveFoundItem($offset = 0, $limit = null)
     {
         $qb = $this->createQueryBuilder('i');
 
+        $qb->where($qb->expr()->eq('i.status', ':status'))
+           ->andWhere($qb->expr()->eq('i.type', ':type'))
+           ->setParameters([
+               'type'   => ItemTypeType::FOUND,
+               'status' => ItemStatusType::ACTIVE
+           ])
+           ->orderBy('i.createdAt', 'DESC')
+           ->setFirstResult($offset);
 
-        $qb->where('i.status = :status')
-            ->andWhere('i.type = :type')
-            ->setParameters([
-                'type' => ItemTypeType::FOUND,
-                'status' => ItemStatusType::ACTIVE
-            ])
-            ->orderBy('i.createdAt', 'DESC')
-            ->setFirstResult($offset);
-
-        if ($limit !== null) {
+        if (null !== $limit) {
             $qb->setMaxResults($limit);
         }
 

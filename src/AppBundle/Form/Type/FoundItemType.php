@@ -15,24 +15,21 @@ class FoundItemType extends AbstractType
 {
     /**
      * {@inheritdoc}
-     *
-     * @param FormBuilderInterface $builder
-     * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', 'text', [
-                'label' => 'Назва',
-            ])
             ->add('category', 'entity', [
                 'label'    => 'Категорія',
                 'class'    => 'AppBundle\Entity\Category',
                 'property' => 'title',
             ])
+            ->add('title', 'text', [
+                'label' => 'Назва',
+            ])
             ->add('type', 'hidden', [
                 'label' => 'Тип',
-                'data' => ItemTypeType::FOUND,
+                'data'  => ItemTypeType::FOUND,
             ])
             ->add('latitude', 'text', [
                 'label' => 'Latitude',
@@ -54,11 +51,9 @@ class FoundItemType extends AbstractType
 
     /**
      * {@inheritdoc}
-     *
-     * @return string
      */
     public function getName()
     {
-        return 'found';
+        return 'found_item';
     }
 }

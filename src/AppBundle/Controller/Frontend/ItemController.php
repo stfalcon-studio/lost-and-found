@@ -2,8 +2,6 @@
 
 namespace AppBundle\Controller\Frontend;
 
-use AppBundle\DBAL\Types\ItemStatusType;
-use AppBundle\DBAL\Types\ItemTypeType;
 use AppBundle\Entity\Item;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -11,68 +9,69 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class ItemController
+ * ItemController
  *
  * @author Logans <Logansoleg@gmail.com>
+ * @author Artem Genvald <genvaldartem@gmail.com>
  */
 class ItemController extends Controller
 {
     /**
-     * @Route("/create-lost-item", name="create_lost_item")
+     * Add lost item
      *
-     * @param Request $request
+     * @param Request $request Request
+     *
      * @return Response
+     *
+     * @Route("/add-lost-item", name="add_lost_item")
      */
-    public function createLostItemAction(Request $request)
+    public function addLostItemAction(Request $request)
     {
-        $item = new Item();
-
-        $form = $this->createForm('lost', $item);
+        $form = $this->createForm('lost_item', new Item());
 
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $item = $form->getData();
 
-            $em = $this->getDoctrine()
-                ->getManager();
+            $em = $this->getDoctrine()->getManager();
             $em->persist($item);
             $em->flush();
 
             return $this->redirect($this->generateUrl('homepage'));
         }
 
-        return $this->render('frontend/default/create_lost_item.html.twig', [
+        return $this->render('frontend/default/add_lost_item.html.twig', [
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/create-found-item", name="create_found_item")
+     * Add found item
      *
-     * @param Request $request
+     * @param Request $request Request
+     *
      * @return Response
+     *
+     * @Route("/add-found-item", name="add_found_item")
      */
-    public function createFoundItemAction(Request $request)
+    public function addFoundItemAction(Request $request)
     {
-        $item = new Item();
-
-        $form = $this->createForm('found', $item);
+        $form = $this->createForm('found_item', new Item());
 
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $item = $form->getData();
 
-            $em = $this->getDoctrine()
-                ->getManager();
+            $em = $this->getDoctrine()->getManager();
             $em->persist($item);
             $em->flush();
 
             return $this->redirect($this->generateUrl('homepage'));
         }
 
-        return $this->render('frontend/default/create_found_item.html.twig', [
+        return $this->render('frontend/default/add_found_item.html.twig', [
             'form' => $form->createView(),
         ]);
     }
