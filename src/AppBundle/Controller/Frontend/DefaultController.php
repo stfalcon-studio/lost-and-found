@@ -17,7 +17,7 @@ class DefaultController extends Controller
 {
     /**
      * List of active items
-     *
+     * 
      * @Route("/", name="homepage")
      *
      * @return array

@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\DBAL\Types\ItemStatusType;
 use Doctrine\ORM\Mapping as ORM;
 use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -89,7 +90,7 @@ class Item
      *
      * @ORM\Column(name="status", type="ItemStatusType", nullable=false)
      */
-    private $status;
+    private $status = ItemStatusType::ACTIVE;
 
     /**
      * @var \DateTime|null $date
