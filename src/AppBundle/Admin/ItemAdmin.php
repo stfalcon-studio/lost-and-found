@@ -100,6 +100,9 @@ class ItemAdmin extends Admin
             ])
             ->add('updatedAt', 'datetime', [
                 'format' => 'd.m.Y H:i:s'
+            ])
+            ->add('moderatedAt', 'datetime', [
+                'format' => 'd.m.Y H:i:s'
             ]);
     }
 
@@ -121,6 +124,7 @@ class ItemAdmin extends Admin
             ->add('moderated')
             ->add('createdAt')
             ->add('updatedAt')
+            ->add('moderatedAt')
             ->add('date');
     }
 }

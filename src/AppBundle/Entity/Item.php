@@ -8,7 +8,6 @@ use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
-
 /**
  * Item Entity
  *
@@ -17,6 +16,8 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
  *
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ItemRepository")
  * @ORM\Table(name="items")
+ *
+ * @ORM\HasLifecycleCallbacks
  */
 class Item
 {
@@ -105,6 +106,13 @@ class Item
      * @ORM\Column(type="boolean")
      */
     private $moderated = false;
+
+    /**
+     * @var \DateTime $moderatedAt
+     *
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $moderatedAt;
 
     /**
      * __toString method
@@ -366,4 +374,42 @@ class Item
         return $this;
     }
 
+    /**
+     * Get moderated at
+     *
+     * @return \DateTime
+     */
+    public function getModeratedAt()
+    {
+        return $this->moderatedAt;
+    }
+
+    /**
+     * Set moderated at
+     *
+     * @param \DateTime $moderatedAt
+     *
+     * @return $this
+     */
+    public function setModeratedAt($moderatedAt)
+    {
+        $this->moderatedAt = $moderatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     *
+     * @return $this
+     */
+    public function postModerate()
+    {
+        if (true == $this->moderated) {
+            $this->setModeratedAt(new \DateTime());
+        }
+
+        return $this;
+    }
 }
