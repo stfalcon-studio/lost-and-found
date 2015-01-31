@@ -54,9 +54,15 @@ class ItemAdmin extends Admin
             ->add('category')
             ->add('type', 'string', ['template' => 'backend/item/list_type.html.twig'])
             ->add('status', 'string', ['template' => 'backend/item/list_status.html.twig'])
-            ->add('createdAt')
-            ->add('updatedAt')
-            ->add('date')
+            ->add('date', 'date', [
+                'format' => 'd.m.Y'
+            ])
+            ->add('createdAt', 'datetime', [
+                'format' => 'd.m.Y H:i:s'
+            ])
+            ->add('updatedAt', 'datetime', [
+                'format' => 'd.m.Y H:i:s'
+            ])
             ->add('_action', 'actions', [
                 'actions' => [
                     'show'   => [],
@@ -83,9 +89,15 @@ class ItemAdmin extends Admin
             ->add('description')
 //            ->add('area')
             ->add('status')
-            ->add('createdAt')
-            ->add('updatedAt')
-            ->add('date');
+            ->add('date', 'date', [
+                'format' => 'd.m.Y'
+            ])
+            ->add('createdAt', 'datetime', [
+                'format' => 'd.m.Y H:i:s'
+            ])
+            ->add('updatedAt', 'datetime', [
+                'format' => 'd.m.Y H:i:s'
+            ]);
     }
 
     /**

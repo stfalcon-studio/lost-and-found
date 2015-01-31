@@ -43,8 +43,12 @@ class CategoryAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('title')
-            ->add('createdAt')
-            ->add('updatedAt')
+            ->add('createdAt', 'datetime', [
+                'format' => 'd.m.Y H:i:s'
+            ])
+            ->add('updatedAt', 'datetime', [
+                'format' => 'd.m.Y H:i:s'
+            ])
             ->add('_action', 'actions', [
                 'actions' => [
                     'show'   => [],
@@ -62,8 +66,12 @@ class CategoryAdmin extends Admin
         $showMapper
             ->add('id')
             ->add('title')
-            ->add('createdAt')
-            ->add('updatedAt');
+            ->add('createdAt', 'datetime', [
+                'format' => 'd.m.Y H:i:s'
+            ])
+            ->add('updatedAt', 'datetime', [
+                'format' => 'd.m.Y H:i:s'
+            ]);
     }
 
     /**
