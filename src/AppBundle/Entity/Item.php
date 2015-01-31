@@ -42,7 +42,7 @@ class Item
     /**
      * @var string $title Title
      *
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string", length=120)
      */
     private $title;
 
@@ -288,6 +288,16 @@ class Item
     }
 
     /**
+     * Get category
+     *
+     * @return Category Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
      * Set category
      *
      * @param Category $category Category
@@ -302,17 +312,9 @@ class Item
     }
 
     /**
-     * Get category
+     * Get date
      *
-     * @return Category
-     */
-    public function getCategory()
-    {
-        return $this->category;
-    }
-
-    /**
-     * @return \DateTime|null
+     * @return \DateTime Date
      */
     public function getDate()
     {
@@ -320,7 +322,9 @@ class Item
     }
 
     /**
-     * @param \DateTime $date
+     * Set date
+     *
+     * @param \DateTime $date Date
      *
      * @return $this
      */
