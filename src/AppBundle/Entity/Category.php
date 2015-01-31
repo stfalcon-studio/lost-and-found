@@ -32,7 +32,7 @@ class Category
     /**
      * @var string $title Title
      *
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="string", length=60)
      */
     private $title;
 
