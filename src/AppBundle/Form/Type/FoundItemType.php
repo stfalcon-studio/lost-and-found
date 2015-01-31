@@ -45,8 +45,7 @@ class FoundItemType extends AbstractType
             ])
             ->add('save', 'submit', [
                 'label' => 'Create',
-            ])
-            ->getForm();
+            ]);
     }
 
     /**
