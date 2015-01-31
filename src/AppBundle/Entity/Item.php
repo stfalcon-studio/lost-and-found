@@ -362,6 +362,7 @@ class Item
     public function setModerated($moderated)
     {
         $this->moderated = $moderated;
+
         return $this;
     }
 
