@@ -399,17 +399,15 @@ class Item
     }
 
     /**
+     * Doctrine hook to set moderatedAt when item is moderated
+     *
      * @ORM\PrePersist
      * @ORM\PreUpdate
-     *
-     * @return $this
      */
     public function postModerate()
     {
-        if (true == $this->moderated) {
+        if (true === $this->moderated) {
             $this->setModeratedAt(new \DateTime());
         }
-
-        return $this;
     }
 }
