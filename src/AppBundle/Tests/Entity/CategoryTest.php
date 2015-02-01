@@ -45,9 +45,9 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
     {
         $items = new ArrayCollection();
         $items->add(new Item());
-        $account = (new Category())->setItems($items);
-        $this->assertEquals(1, $account->getItems()->count());
-        $this->assertEquals($items, $account->getItems());
+        $country = (new Category())->setItems($items);
+        $this->assertEquals(1, $country->getItems()->count());
+        $this->assertEquals($items, $country->getItems());
     }
 
     /**
@@ -55,15 +55,15 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddRemoveItem()
     {
-        $account = new Category();
-        $this->assertEquals(0, $account->getItems()->count());
+        $country = new Category();
+        $this->assertEquals(0, $country->getItems()->count());
 
-        $account->addItem(new Item());
-        $this->assertEquals(1, $account->getItems()->count());
+        $country->addItem(new Item());
+        $this->assertEquals(1, $country->getItems()->count());
 
-        $team = $account->getItems()->first();
-        $account->removeItem($team);
-        $this->assertEquals(0, $account->getItems()->count());
+        $item = $country->getItems()->first();
+        $country->removeItem($item);
+        $this->assertEquals(0, $country->getItems()->count());
     }
 
     /**
