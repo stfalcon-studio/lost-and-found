@@ -14,7 +14,7 @@
     <p>Someone lost these items</p>
     <hr>
     {% for item in lost_items %}
-        <ol>{{ item.title }} <a href="{{ path('details', {'id': item.id}) }}">Деталі</a> </ol>
+        <ol><a href="{{ path('item_details', {'id': item.id}) }}">{{ item.title }}</a> </ol>
     {% endfor %}
 
 {% endblock body %}
