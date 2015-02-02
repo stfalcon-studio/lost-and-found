@@ -16,8 +16,9 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
  *
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ItemRepository")
  * @ORM\Table(name="items")
- *
  * @ORM\HasLifecycleCallbacks
+ *
+ * @Gedmo\Loggable
  */
 class Item
 {
@@ -37,6 +38,8 @@ class Item
      *
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="items")
      * @ORM\JoinColumn(name="category", referencedColumnName="id")
+     *
+     * @Gedmo\Versioned
      */
     private $category;
 
@@ -44,6 +47,8 @@ class Item
      * @var string $title Title
      *
      * @ORM\Column(type="string", length=120)
+     *
+     * @Gedmo\Versioned
      */
     private $title;
 
@@ -51,6 +56,8 @@ class Item
      * @var float $latitude Latitude
      *
      * @ORM\Column(type="decimal", precision=9, scale=6)
+     *
+     * @Gedmo\Versioned
      */
     private $latitude;
 
@@ -58,6 +65,8 @@ class Item
      * @var float $longitude Longitude
      *
      * @ORM\Column(type="decimal", precision=9, scale=6)
+     *
+     * @Gedmo\Versioned
      */
     private $longitude;
 
@@ -67,6 +76,8 @@ class Item
      * @DoctrineAssert\Enum(entity="AppBundle\DBAL\Types\ItemTypeType")
      *
      * @ORM\Column(name="type", type="ItemTypeType", nullable=false)
+     *
+     * @Gedmo\Versioned
      */
     private $type;
 
@@ -74,6 +85,8 @@ class Item
      * @var string $description Description
      *
      * @ORM\Column(type="text")
+     *
+     * @Gedmo\Versioned
      */
     private $description;
 
@@ -81,6 +94,8 @@ class Item
      * @var array $area Area
      *
      * @ORM\Column(type="json_array", nullable=true)
+     *
+     * @Gedmo\Versioned
      */
     private $area;
 
@@ -90,6 +105,8 @@ class Item
      * @DoctrineAssert\Enum(entity="AppBundle\DBAL\Types\ItemStatusType")
      *
      * @ORM\Column(name="status", type="ItemStatusType", nullable=false)
+     *
+     * @Gedmo\Versioned
      */
     private $status = ItemStatusType::ACTIVE;
 
@@ -97,6 +114,8 @@ class Item
      * @var \DateTime|null $date
      *
      * @ORM\Column(type="date")
+     *
+     * @Gedmo\Versioned
      */
     private $date;
 
@@ -104,6 +123,8 @@ class Item
      * @var boolean $moderated
      *
      * @ORM\Column(type="boolean")
+     *
+     * @Gedmo\Versioned
      */
     private $moderated = false;
 
