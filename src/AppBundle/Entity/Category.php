@@ -15,6 +15,8 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
  *
  * @ORM\Entity
  * @ORM\Table(name="categories")
+ *
+ * @Gedmo\Loggable
  */
 class Category
 {
@@ -33,6 +35,8 @@ class Category
      * @var string $title Title
      *
      * @ORM\Column(type="string", length=60)
+     *
+     * @Gedmo\Versioned
      */
     private $title;
 
