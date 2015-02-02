@@ -75,4 +75,31 @@ class ItemController extends Controller
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     *
+     *
+     * @param integer $id
+     *
+     * @return Response
+     *
+     * @Route("/item/{id}/details", name="item_details")
+     */
+    public function itemDetailsAction($id)
+    {
+        $item = $this->getDoctrine()
+            ->getRepository('AppBundle:Item')
+            ->findOneBy([
+                'id' => $id,
+                'moderated' => true,
+            ]);
+
+        if (!$item) {
+            throw $this->createNotFoundException('Item not found');
+        }
+
+        return $this->render(':frontend/default:item_details.html.twig', [
+            'item' => $item,
+        ]);
+    }
 }

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+        <table border="1">
+            <caption>Item details</caption>
+            <tr>
+                <td><b>Title</b></td>
+                <td>{{ item.title }}</td>
+            </tr>
+            <tr>
+                <td><b>Category</b></td>
+                <td>{{ item.category }}</td>
+            </tr>
+            <tr>
+                <td><b>Latitude</b></td>
+                <td>{{ item.latitude }}</td>
+            </tr>
+            <tr>
+                <td><b>Longitude</b></td>
+                <td>{{ item.longitude }}</td>
+            </tr>
+            <tr>
+                <td><b>Type</b></td>
+                <td>{{ item.type }}</td>
+            </tr>
+            <tr>
+                <td><b>Description</b></td>
+                <td>{{ item.description }}</td>
+            </tr>
+            <tr>
+                <td><b>Date</b></td>
+                <td>{{ item.date|date('d.m.Y H:i:s') }}</td>
+            </tr>
+        </table>
+
+        <a href="{{ path('homepage') }}">На головну</a>
+{% endblock body %}
