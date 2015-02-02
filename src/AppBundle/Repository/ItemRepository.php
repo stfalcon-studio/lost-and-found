@@ -71,4 +71,26 @@ class ItemRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    /**
+     * Get found points
+     *
+     * @param integer $offset Offset
+     * @param integer $limit  Limit
+     *
+     * @return Item[]
+     */
+    public function getFoundPoints($offset = 0, $limit = null)
+    {
+        $qb = $this->createQueryBuilder('i');
+
+        $qb->select('i.latitude', 'i.longitude')
+            ->setFirstResult($offset);
+
+        if (null !== $limit) {
+            $qb->setMaxResults($limit);
+        }
+
+        return $qb->getQuery()->getResult();
+    }
 }
