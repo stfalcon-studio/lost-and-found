@@ -77,7 +77,7 @@ class ItemController extends Controller
     }
 
     /**
-     *
+     * Item details
      *
      * @param integer $id
      *
@@ -98,7 +98,7 @@ class ItemController extends Controller
             throw $this->createNotFoundException('Item not found');
         }
 
-        return $this->render(':frontend/default:item_details.html.twig', [
+        return $this->render('frontend/default/item_details.html.twig', [
             'item' => $item,
         ]);
     }
