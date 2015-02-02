@@ -33,6 +33,7 @@ class CategoryAdmin extends Admin
         $formMapper
             ->with('Category')
                 ->add('title')
+                ->add('enabled')
             ->end();
     }
 
@@ -43,6 +44,9 @@ class CategoryAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('title')
+            ->add('enabled', 'boolean', [
+                'editable' => true,
+            ])
             ->add('createdAt', 'datetime', [
                 'format' => 'd.m.Y H:i:s'
             ])
@@ -66,6 +70,7 @@ class CategoryAdmin extends Admin
         $showMapper
             ->add('id')
             ->add('title')
+            ->add('enabled', 'boolean')
             ->add('createdAt', 'datetime', [
                 'format' => 'd.m.Y H:i:s'
             ])
@@ -82,6 +87,7 @@ class CategoryAdmin extends Admin
         $datagridMapper
             ->add('id')
             ->add('title')
+            ->add('enabled')
             ->add('createdAt')
             ->add('updatedAt');
     }

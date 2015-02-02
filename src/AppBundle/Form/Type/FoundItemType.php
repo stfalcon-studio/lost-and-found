@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form\Type;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\FormBuilderInterface;
 use AppBundle\DBAL\Types\ItemTypeType;
 use Symfony\Component\Form\AbstractType;
@@ -23,6 +24,11 @@ class FoundItemType extends AbstractType
                 'label'    => 'Категорія',
                 'class'    => 'AppBundle\Entity\Category',
                 'property' => 'title',
+                'query_builder' => function(EntityRepository $er) {
+                    $qb = $er->createQueryBuilder('c');
+
+                    return $qb->where($qb->expr()->eq('c.enabled', true));
+                },
             ])
             ->add('title', 'text', [
                 'label' => 'Назва',
