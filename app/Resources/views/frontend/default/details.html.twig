@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% for it in item %}
+        <table border="1">
+            <caption>Item details</caption>
+            <tr>
+                <td><b>Title</b></td>
+                <td>{{ it.title }}</td>
+            </tr>
+            <tr>
+                <td><b>Category</b></td>
+                <td>{{ it.category }}</td>
+            </tr>
+            <tr>
+                <td><b>Latitude</b></td>
+                <td>{{ it.latitude }}</td>
+            </tr>
+            <tr>
+                <td><b>Longitude</b></td>
+                <td>{{ it.longitude }}</td>
+            </tr>
+            <tr>
+                <td><b>Type</b></td>
+                <td>{{ it.type }}</td>
+            </tr>
+            <tr>
+                <td><b>Description</b></td>
+                <td>{{ it.description }}</td>
+            </tr>
+            <tr>
+                <td><b>Date</b></td>
+                <td>{{ it.date|date('d.m.Y H:i:s') }}</td>
+            </tr>
+        </table>
+
+        <a href="{{ path('homepage') }}">На головну</a>
+    {% endfor %}
+{% endblock body %}

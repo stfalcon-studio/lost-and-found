@@ -3,7 +3,6 @@
 namespace AppBundle\Controller\Frontend;
 
 use AppBundle\Entity\Item;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -74,5 +73,30 @@ class ItemController extends Controller
         return $this->render('frontend/default/add_found_item.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @param integer $id
+     *
+     * @return Response
+     *
+     * @Route("/item/{id}/details", name="details")
+     */
+    public function getItemAction($id)
+    {
+        $item = $this->getDoctrine()
+            ->getRepository('AppBundle:Item')
+            ->findBy([
+                'id' => $id,
+                'moderated' => true,
+            ]);
+
+        if ($item) {
+            return $this->render('frontend/default/details.html.twig', [
+                'item' => $item,
+            ]);
+        } else {
+            throw $this->createNotFoundException('Item not found');
+        }
     }
 }
