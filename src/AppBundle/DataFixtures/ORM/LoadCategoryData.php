@@ -18,19 +18,27 @@ class LoadCategoryData extends AbstractFixture
      */
     public function load(ObjectManager $manager)
     {
-        $keys = (new Category())->setTitle('Ключі');
+        $keys = (new Category())
+            ->setTitle('Ключі')
+            ->setEnabled(true);
         $this->setReference('category-keys', $keys);
         $manager->persist($keys);
 
-        $phone = (new Category())->setTitle('Телефон');
+        $phone = (new Category())
+            ->setTitle('Телефон')
+            ->setEnabled(true);
         $this->setReference('category-phone', $phone);
         $manager->persist($phone);
 
-        $documents = (new Category())->setTitle('Документи');
+        $documents = (new Category())
+            ->setTitle('Документи')
+            ->setEnabled(true);
         $this->setReference('category-documents', $documents);
         $manager->persist($documents);
 
-        $clothes = (new Category())->setTitle('Одяг');
+        $clothes = (new Category())
+            ->setTitle('Одяг')
+            ->setEnabled(true);
         $this->setReference('category-clothes', $clothes);
         $manager->persist($clothes);
 

@@ -49,6 +49,15 @@ class Category
     private $items;
 
     /**
+     * @var boolean $enabled Enabled
+     *
+     * @ORM\Column(type="boolean")
+     *
+     * @Gedmo\Versioned
+     */
+    private $enabled = false;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -152,6 +161,29 @@ class Category
     {
         $this->items->removeElement($item);
 
+        return $this;
+    }
+
+    /**
+     * Is enabled
+     *
+     * @return boolean
+     */
+    public function isEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * Set enabled
+     *
+     * @param boolean $enabled Enabled
+     *
+     * @return $this
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
         return $this;
     }
 }
