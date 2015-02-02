@@ -1,34 +1,52 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
+    {{ parent() }}
+
     {% stylesheets 'http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css' %}
         <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
     {% endstylesheets %}
 {% endblock stylesheets %}
 
 {% block body %}
-    <a href="{{ path('add_lost_item') }}">Add lost item</a>
-    <a href="{{ path('add_found_item') }}">Add found item</a>
+    <h1>Lost and Found</h1>
+    <div>
+        <a href="{{ path('add_lost_item') }}">Add lost item</a>
+        <a href="{{ path('add_found_item') }}">Add found item</a>
+    </div>
 
-    <p>Here are some last items</p><br>
-    <p>Someone found these items:</p>
-    <hr>
-    {% for item in found_items %}
-        <ol><a href="{{ path('item_details', {'id': item.id}) }}">{{ item.title }}</a></ol>
-    {% endfor %}
-    <br>
-    <p>Someone lost these items</p>
-    <hr>
-    {% for item in lost_items %}
-        <ol><a href="{{ path('item_details', {'id': item.id}) }}">{{ item.title }}</a> </ol>
-    {% endfor %}
+    <br />
 
-    <div id="map" style="height: 500px" data-items="{{ found_points|json_encode() }}"></div>
+    <div>
+        <div style="float: left;">
+            <div id="map" style="width: 1200px; height: 800px" data-items="{{ found_points|json_encode() }}"></div>
+        </div>
 
+        <div style="float: left;">
+            <h2>Someone found these items:</h2>
+            {% for item in found_items %}
+                <ul>
+                    <li>
+                        <a href="{{ path('item_details', {'id': item.id}) }}">{{ item.title }}</a>
+                    </li>
+                </ul>
+            {% endfor %}
+
+            <h2>Someone lost these items</h2>
+            {% for item in lost_items %}
+                <ul>
+                    <li>
+                        <a href="{{ path('item_details', {'id': item.id}) }}">{{ item.title }}</a>
+                    </li>
+                </ul>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock body %}
 
 {% block javascripts %}
-    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    {{ parent() }}
+
     <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
     <script src="{{ asset('js/main.js') }}"></script>
 {% endblock javascripts %}
