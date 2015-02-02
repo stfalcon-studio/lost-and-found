@@ -8,7 +8,7 @@
     <p>Someone found these items:</p>
     <hr>
     {% for item in found_items %}
-        <ol>{{ item.title }} </ol>
+        <ol><a href="{{ path('item_details', {'id': item.id}) }}">{{ item.title }}</a></ol>
     {% endfor %}
     <br>
     <p>Someone lost these items</p>
