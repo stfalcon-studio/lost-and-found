@@ -41,6 +41,8 @@ class Item
      * @ORM\JoinColumn(name="category", referencedColumnName="id")
      *
      * @Gedmo\Versioned
+     *
+     * @Assert\NotBlank()
      */
     private $category;
 
