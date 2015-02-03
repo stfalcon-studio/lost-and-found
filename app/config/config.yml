@@ -42,3 +42,30 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+#HWIOAuthBundle
+hwi_oauth:
+    firewall_name: secured_area
+    connect:
+        confirmation: true
+    resource_owners:
+        github:
+            type:                facebook
+            client_id:           %facebook_client_id%
+            client_secret:       %facebook_client_secret%
+            scope:               "user:email"
+    fosub:
+        # try 30 times to check if a username is available (foo, foo1, foo2 etc)
+        username_iterations: 30
+
+        # mapping between resource owners (see below) and properties
+        properties:
+            github: githubId
+
+fos_user:
+    db_driver: orm
+    firewall_name: secured_area
+    user_class: AppBundle\Entity\User
+    registration:
+        confirmation:
+            enabled:    false # change to true for required email confirmation
