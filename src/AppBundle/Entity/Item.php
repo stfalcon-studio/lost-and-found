@@ -99,7 +99,7 @@ class Item
      *
      * @Assert\NotBlank()
      * @Assert\Type(type="string")
-     * @Assert\Length(min="1", max="255")
+     * @Assert\Length(min="1", max="1000")
      */
     private $description;
 
