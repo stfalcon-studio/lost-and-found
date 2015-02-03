@@ -9,11 +9,18 @@ $(document).ready(function() {
         id: 'examples.map-i875mjb7'
     }).addTo(map);
 
-    var points = $("#map").data();
+    var marker = null;
 
-    for (var point in points.items) {
-        if(points.items.hasOwnProperty(point)) {
-            L.marker([points.items[point].latitude, points.items[point].longitude]).addTo(map);
+    function onMapClick(e) {
+        $("#lost_item_latitude").val(e.latlng.lat.toString());
+        $("#lost_item_longitude").val(e.latlng.lng.toString());
+
+        if (marker) {
+            map.removeLayer(marker);
         }
+
+        marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map);
     }
+
+    map.on('click', onMapClick);
 });
