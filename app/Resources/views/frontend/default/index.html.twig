@@ -9,6 +9,13 @@
 {% endblock stylesheets %}
 
 {% block body %}
+    {# Flash message#}
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="flash-message">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
     <h1>Lost and Found</h1>
     <div class="add-lost-found-item">
         <p><a href="{{ path('add_lost_item') }}">Add lost item</a></p>

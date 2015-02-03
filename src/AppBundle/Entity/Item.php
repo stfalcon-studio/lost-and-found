@@ -55,7 +55,7 @@ class Item
     /**
      * @var float $latitude Latitude
      *
-     * @ORM\Column(type="decimal", precision=9, scale=6)
+     * @ORM\Column(type="decimal", precision=18, scale=15)
      *
      * @Gedmo\Versioned
      */
@@ -64,7 +64,7 @@ class Item
     /**
      * @var float $longitude Longitude
      *
-     * @ORM\Column(type="decimal", precision=9, scale=6)
+     * @ORM\Column(type="decimal", precision=18, scale=15)
      *
      * @Gedmo\Versioned
      */

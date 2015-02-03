@@ -38,6 +38,8 @@ class ItemController extends Controller
             $em->persist($item);
             $em->flush();
 
+            $this->get('session')->getFlashBag()->add('notice', 'Your item was added!');
+
             return $this->redirect($this->generateUrl('homepage'));
         }
 
@@ -68,6 +70,8 @@ class ItemController extends Controller
             $em->persist($item);
             $em->flush();
 
+            $this->get('session')->getFlashBag()->add('notice', 'Your item was added!');
+
             return $this->redirect($this->generateUrl('homepage'));
         }
 
@@ -94,12 +98,15 @@ class ItemController extends Controller
                 'moderated' => true,
             ]);
 
+        $foundPoint = $this->getDoctrine()->getRepository('AppBundle:Item')->getFoundPoint($id);
+
         if (!$item) {
             throw $this->createNotFoundException('Item not found');
         }
 
         return $this->render('frontend/default/item_details.html.twig', [
             'item' => $item,
+            'found_point' => $foundPoint,
         ]);
     }
 }

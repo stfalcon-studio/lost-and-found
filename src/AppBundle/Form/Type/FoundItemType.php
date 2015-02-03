@@ -37,10 +37,10 @@ class FoundItemType extends AbstractType
                 'label' => 'Тип',
                 'data'  => ItemTypeType::FOUND,
             ])
-            ->add('latitude', 'text', [
+            ->add('latitude', 'hidden', [
                 'label' => 'Latitude',
             ])
-            ->add('longitude', 'text', [
+            ->add('longitude', 'hidden', [
                 'label' => 'Longitude'
             ])
             ->add('description', 'textarea', [
