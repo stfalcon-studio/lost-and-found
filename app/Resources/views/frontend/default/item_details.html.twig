@@ -32,6 +32,16 @@
                 <td>{{ item.date|date('d.m.Y H:i:s') }}</td>
             </tr>
         </table>
-
+   {# Map #}
+   {% stylesheets 'http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css' %}
+        <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
+    {% endstylesheets %}
+        <div id="map" style="width: 1200px; height: 800px" data-items="{{ found_point|json_encode() }}"></div>
+    {% block javascripts %}
+        {{ parent() }}
+        <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+        <script src="{{ asset('js/main.js') }}"></script>
+    {% endblock javascripts %}
+        <br>
         <a href="{{ path('homepage') }}">На головну</a>
 {% endblock body %}
