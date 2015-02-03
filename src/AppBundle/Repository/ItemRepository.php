@@ -44,7 +44,7 @@ class ItemRepository extends EntityRepository
     }
 
     /**
-     * Get active lost items
+     * Get active Found items
      *
      * @param integer $offset Offset
      * @param integer $limit  Limit
@@ -70,6 +70,32 @@ class ItemRepository extends EntityRepository
         }
 
         return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * Get lost points
+     *
+     * @param integer $offset Offset
+     * @param integer $limit  Limit
+     *
+     * @return array
+     */
+    public function getLostPoints($offset = 0, $limit = null)
+    {
+        $qb = $this->createQueryBuilder('i');
+
+        $qb->select('i.latitude')
+            ->addSelect('i.longitude')
+            ->where($qb->expr()->eq('i.moderated', true))
+            ->andWhere($qb->expr()->eq('i.type', ':type'))
+            ->setParameter('type', ItemTypeType::LOST)
+            ->setFirstResult($offset);
+
+        if (null !== $limit) {
+            $qb->setMaxResults($limit);
+        }
+
+        return $qb->getQuery()->getArrayResult();
     }
 
     /**
