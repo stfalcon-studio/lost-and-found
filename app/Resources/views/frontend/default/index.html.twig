@@ -10,19 +10,19 @@
 
 {% block body %}
     <h1>Lost and Found</h1>
-    <div>
-        <a href="{{ path('add_lost_item') }}">Add lost item</a>
-        <a href="{{ path('add_found_item') }}">Add found item</a>
+    <div class="add-lost-found-item">
+        <p><a href="{{ path('add_lost_item') }}">Add lost item</a></p>
+        <p><a href="{{ path('add_found_item') }}">Add found item</a></p>
     </div>
 
     <br />
 
     <div>
-        <div style="float: left;">
-            <div id="map" style="width: 1200px; height: 800px" data-items="{{ found_points|json_encode() }}"></div>
+        <div>
+            <div id="map" class="map" data-items="{{ found_points|json_encode() }}"></div>
         </div>
 
-        <div style="float: left;">
+        <div class="lost-and-found-items-div">
             <h2>Someone found these items:</h2>
             {% for item in found_items %}
                 <ul>
