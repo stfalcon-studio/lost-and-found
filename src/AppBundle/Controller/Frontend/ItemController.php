@@ -38,6 +38,8 @@ class ItemController extends Controller
             $em->persist($item);
             $em->flush();
 
+            $this->get('session')->getFlashBag()->add('notice', 'Your item was added!');
+
             return $this->redirect($this->generateUrl('homepage'));
         }
 
@@ -67,6 +69,8 @@ class ItemController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($item);
             $em->flush();
+
+            $this->get('session')->getFlashBag()->add('notice', 'Your item was added!');
 
             return $this->redirect($this->generateUrl('homepage'));
         }
