@@ -26,7 +26,10 @@
 
     <div>
         <div>
-            <div id="map" class="map" data-items="{{ found_points|json_encode() }}"></div>
+            <button id="show-found-items">Show found items</button>
+            <button id="show-lost-items">Show lost items</button>
+
+            <div id="map" class="map"></div>
         </div>
 
         <div class="lost-and-found-items-div">

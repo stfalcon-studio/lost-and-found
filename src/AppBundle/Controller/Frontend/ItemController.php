@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use AppBundle\DBAL\Types\ItemTypeType;
 
 /**
  * ItemController
@@ -98,7 +99,9 @@ class ItemController extends Controller
                 'moderated' => true,
             ]);
 
-        $foundPoint = $this->getDoctrine()->getRepository('AppBundle:Item')->getFoundPoint($id);
+        $foundPoint = $this->getDoctrine()
+            ->getRepository('AppBundle:Item')
+            ->getFoundPoint($id);
 
         if (!$item) {
             throw $this->createNotFoundException('Item not found');
@@ -108,5 +111,43 @@ class ItemController extends Controller
             'item' => $item,
             'found_point' => $foundPoint,
         ]);
+    }
+
+    /**
+     * Get found points
+     *
+     * @return Response
+     *
+     * @Route("/show/found-points", name="show_found_points")
+     */
+    public function getFoundPointsAction()
+    {
+        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+
+        $foundPoints = $itemRepository->getFoundPoints();
+
+        $response = new Response(json_encode($foundPoints));
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+    }
+
+    /**
+     * Get lost points
+     *
+     * @return Response
+     *
+     * @Route("/show/lost-points", name="show_lost_points")
+     */
+    public function getLostPointsAction()
+    {
+        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+
+        $lostPoints = $itemRepository->getLostPoints();
+
+        $response = new Response(json_encode($lostPoints));
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
     }
 }

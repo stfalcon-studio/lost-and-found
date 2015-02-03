@@ -30,12 +30,9 @@ class DefaultController extends Controller
         $foundItems = $itemRepository->getActiveFoundItem();
         $lostItems  = $itemRepository->getActiveLostItem();
 
-        $foundPoints = $itemRepository->getFoundPoints();
-
         return $this->render('frontend/default/index.html.twig', [
             'found_items'  => $foundItems,
             'lost_items'   => $lostItems,
-            'found_points' => $foundPoints,
         ]);
     }
 }
