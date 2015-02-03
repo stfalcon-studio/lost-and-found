@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Item Entity
@@ -40,6 +41,8 @@ class Item
      * @ORM\JoinColumn(name="category", referencedColumnName="id")
      *
      * @Gedmo\Versioned
+     *
+     * @Assert\NotBlank()
      */
     private $category;
 
@@ -49,6 +52,10 @@ class Item
      * @ORM\Column(type="string", length=120)
      *
      * @Gedmo\Versioned
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(min="1", max="50")
+     * @Assert\Type(type="string")
      */
     private $title;
 
@@ -58,6 +65,8 @@ class Item
      * @ORM\Column(type="decimal", precision=18, scale=15)
      *
      * @Gedmo\Versioned
+     *
+     * @Assert\NotBlank()
      */
     private $latitude;
 
@@ -67,6 +76,8 @@ class Item
      * @ORM\Column(type="decimal", precision=18, scale=15)
      *
      * @Gedmo\Versioned
+     *
+     * @Assert\NotBlank()
      */
     private $longitude;
 
@@ -87,6 +98,10 @@ class Item
      * @ORM\Column(type="text")
      *
      * @Gedmo\Versioned
+     *
+     * @Assert\NotBlank()
+     * @Assert\Type(type="string")
+     * @Assert\Length(min="1", max="1000")
      */
     private $description;
 
@@ -116,6 +131,8 @@ class Item
      * @ORM\Column(type="date")
      *
      * @Gedmo\Versioned
+     *
+     * @Assert\DateTime()
      */
     private $date;
 
