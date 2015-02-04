@@ -39,6 +39,7 @@ class ItemAdmin extends Admin
                 ->add('type')
                 ->add('description')
                 ->add('area')
+                ->add('areaType')
                 ->add('status')
                 ->add('moderated')
                 ->add('date', 'date')
@@ -92,6 +93,7 @@ class ItemAdmin extends Admin
             ->add('type')
             ->add('description')
             ->add('area')
+            ->add('areaType')
             ->add('status')
             ->add('moderated', 'boolean')
             ->add('date', 'date', [
@@ -122,6 +124,7 @@ class ItemAdmin extends Admin
             ->add('type')
             ->add('description')
             ->add('area')
+            ->add('areaType')
             ->add('status')
             ->add('moderated')
             ->add('createdAt')

@@ -11,11 +11,13 @@ $(document).ready(function() {
     var latitude = $('#lost_item_latitude');
     var longitude = $('#lost_item_longitude');
     var area = $('#lost_item_area');
+    var areaType = $('#lost_item_areaType');
 
     function clearFields() {
-        latitude.val('0');
-        longitude.val('0');
-        area.val('0');
+        latitude.val('');
+        longitude.val('');
+        area.val('');
+        areaType.val('');
     }
 
     function toolbarState(status) {
@@ -120,6 +122,8 @@ $(document).ready(function() {
             default:
                 console.log('wrong type');
         }
+        areaType.val(type);
+        console.log(areaType.val(type));
     });
 
     map.on('draw:deleted', function (e) {

@@ -2,6 +2,7 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
+use AppBundle\DBAL\Types\ItemAreaTypeType;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -47,6 +48,7 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
             ->setLongitude(27.005755)
             ->setType(ItemTypeType::LOST)
             ->setDescription('Загубив телефон Google Nexus 5. Потрібна допомога за винагороду.')
+            ->setAreaType(ItemAreaTypeType::MARKER)
             ->setStatus(ItemStatusType::ACTIVE)
             ->setModerated(true)
             ->setDate(new \DateTime('10.11.2014'));
@@ -59,6 +61,7 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
             ->setLongitude(26.063656)
             ->setType(ItemTypeType::LOST)
             ->setDescription('Загубив телефон Nokia 1100. Хто знайде - поверніть. Я фанат антикваріату :)')
+            ->setAreaType(ItemAreaTypeType::MARKER)
             ->setStatus(ItemStatusType::RESOLVED)
             ->setModerated(true)
             ->setDate(new \DateTime('10.11.2014'));
@@ -71,6 +74,7 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
             ->setLongitude(25.475887)
             ->setType(ItemTypeType::FOUND)
             ->setDescription('Знайшов новенький-новісінький айфон. Віддам його власнику без винагороди, бо він мені не потрібен. Я фанат андроїда :)')
+            ->setAreaType(ItemAreaTypeType::MARKER)
             ->setStatus(ItemStatusType::ACTIVE)
             ->setModerated(true)
             ->setDate(new \DateTime('10.11.2014'));
@@ -83,6 +87,7 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
             ->setLongitude(23.005755)
             ->setType(ItemTypeType::LOST)
             ->setDescription('Загубив ключі від квартири.')
+            ->setAreaType(ItemAreaTypeType::MARKER)
             ->setStatus(ItemStatusType::ACTIVE)
             ->setModerated(true)
             ->setDate(new \DateTime('10.11.2014'));
@@ -95,6 +100,7 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
             ->setLongitude(25.005755)
             ->setType(ItemTypeType::LOST)
             ->setDescription('Загубив улюблену шапку червоного кольору.')
+            ->setAreaType(ItemAreaTypeType::MARKER)
             ->setStatus(ItemStatusType::ACTIVE)
             ->setModerated(true)
             ->setDate(new \DateTime('10.11.2014'));
@@ -107,6 +113,7 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
             ->setLongitude(25.679134)
             ->setType(ItemTypeType::FOUND)
             ->setDescription('Знайшов український національний паспорт на ім\'я Іванов Іван Іванович')
+            ->setAreaType(ItemAreaTypeType::MARKER)
             ->setStatus(ItemStatusType::ACTIVE)
             ->setModerated(true)
             ->setDate(new \DateTime('10.11.2014'));
