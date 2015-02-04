@@ -132,4 +132,23 @@ class ItemAdmin extends Admin
             ->add('moderatedAt')
             ->add('date');
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBatchActions()
+    {
+        $actions = parent::getBatchActions();
+
+        $actions['mark_as_moderated'] = [
+            'label'            => 'Mark as moderated',
+            'ask_confirmation' => true
+        ];
+        $actions['unmark_as_moderated']    = [
+            'label'            => 'Unmark as moderated',
+            'ask_confirmation' => true
+        ];
+
+        return $actions;
+    }
 }
