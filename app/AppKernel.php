@@ -36,6 +36,9 @@ class AppKernel extends Kernel
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             // Application bundles
             new AppBundle\AppBundle(),
+            //
+            new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'])) {
