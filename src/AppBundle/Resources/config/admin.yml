@@ -15,4 +15,4 @@ services:
         arguments:
             - ~
             - AppBundle\Entity\Item
-            - ~
+            - AppBundle:Backend\ItemAdmin
