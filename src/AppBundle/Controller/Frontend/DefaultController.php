@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
  * DefaultController
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
- * @author svatok13
+ * @author svatok13 <svatok13@gmail.com>
  */
 class DefaultController extends Controller
 {

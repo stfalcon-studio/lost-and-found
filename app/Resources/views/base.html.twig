@@ -3,6 +3,8 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Lost-and-Found{% endblock title %}</title>
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
         {% block stylesheets %}
             {% stylesheets
                 'css/style.css'
@@ -11,11 +13,34 @@
                 <link rel="stylesheet" href="{{ asset_url }}" />
             {% endstylesheets %}
         {% endblock stylesheets %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-    <a href="{{ path('hwi_oauth_connect_service', {'service': 'facebook'}) }}">login</a>
-        {% block body %}{% endblock body %}
+        {% block body %}
+            <header>
+                {% block header %}
+
+                {% block user_login %}
+                    {% if is_granted('ROLE_USER') %}
+                        You are logged in as <strong>{{ app.user.fullName }}</strong> |
+                        <a href="{{ path('fos_user_security_logout') }}">Logout</a>
+                    {% else %}
+                        <a href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook'}) }}">Login via Facebook</a>
+                    {% endif %}
+                    <hr />
+                {% endblock user_login %}
+
+                {% endblock header %}
+            </header>
+            <main>
+                {% block content %}
+                {% endblock content %}
+            </main>
+            <footer>
+                {% block footer %}
+                {% endblock footer %}
+            </footer>
+        {% endblock body %}
+
         {% block javascripts %}
             <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
         {% endblock javascripts %}

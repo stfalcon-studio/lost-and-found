@@ -24,7 +24,7 @@ hwi_oauth_connect:
     resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
     prefix:   /auth/connect
 
-hwi_github_login:
+facebook_login:
     pattern: /auth/check-facebook
 
 #FOSUserBundle

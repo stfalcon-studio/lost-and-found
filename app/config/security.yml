@@ -6,28 +6,36 @@ security:
     encoders:
         FOS\UserBundle\Model\UserInterface: sha512
 
+    role_hierarchy:
+        ROLE_SONATA_ADMIN: ROLE_USER
+        ROLE_ADMIN:        [ROLE_USER, ROLE_SONATA_ADMIN]
+        ROLE_SUPER_ADMIN:  [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
         secured_area:
             pattern: ^/
             oauth:
+                login_path:   /auth/connect/facebook
                 failure_path: /auth/connect
-                login_path: /auth/connect/github
-                check_path: /auth/connect
-                provider: fos_userbundle
+                check_path:   /auth/connect
+                provider:     fos_userbundle
                 resource_owners:
-                    github: /auth/check-github
+                    facebook:      /auth/check-facebook
                 oauth_user_provider:
-                    service: application_user.user.provider
+                    service: app.user.provider
                 default_target_path: /
-
             anonymous: ~
             logout:
-                path: /logout
+                path:   /logout
+                target: /
 
     access_control:
         - { path: ^/auth/connect, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+#        - { path: ^/profile, roles: ROLE_USER }
+#        - { path: ^/admin/, role: ROLE_ADMIN }
 
 

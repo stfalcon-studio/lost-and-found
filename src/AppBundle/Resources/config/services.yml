@@ -1,7 +1,4 @@
-parameters:
-    application_user.user.provider.class: AppBundle\Security\Provider\AuthProvider
-
 services:
-    application_user.user.provider:
-        class: %application_user.user.provider.class%
-        arguments: [@fos_user.user_manager, {github: facebookId}]
+    app.user.provider:
+        class: AppBundle\Security\Provider\AuthProvider
+        arguments: [@fos_user.user_manager, {facebook: facebookId}]

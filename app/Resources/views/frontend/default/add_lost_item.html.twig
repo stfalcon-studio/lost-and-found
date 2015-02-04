@@ -1,4 +1,5 @@
 {% extends 'base.html.twig' %}
+
 {% block title %}
     Add lost item |
     {{ parent() }}
@@ -8,17 +9,9 @@
     {{ parent() }}
 
     {% stylesheets 'http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css' %}
-    <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
     {% endstylesheets %}
 {% endblock stylesheets %}
-
-{% block body %}
-    {{ form_start(form) }}
-    {{ form_errors(form) }}
-    {{ form_end(form) }}
-
-    <div id="map" style="width: 1200px; height: 800px"></div>>
-{% endblock body %}
 
 {% block javascripts %}
     {{ parent() }}
@@ -26,3 +19,16 @@
     <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
     <script src="{{ asset('js/map_lost.js') }}"></script>
 {% endblock javascripts %}
+
+{% block content %}
+    <a href="{{ path('homepage') }}">На головну</a>
+    <br />
+
+    <div>
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+        {{ form_end(form) }}
+    </div>
+
+    <div id="map" style="width: 1200px; height: 800px"></div>
+{% endblock content %}
