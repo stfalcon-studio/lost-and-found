@@ -1,26 +1,143 @@
 $(document).ready(function() {
     var map = L.map('map').setView([48.76375572, 31.62963867], 6);
 
-    L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
-        maxZoom: 18,
-        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-        '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-        'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-        id: 'examples.map-i875mjb7'
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    var marker = null;
+    var drawnItems = new L.FeatureGroup();
+    map.addControl(drawnItems);
 
-    function onMapClick(e) {
-        $("#lost_item_latitude").val(e.latlng.lat.toString());
-        $("#lost_item_longitude").val(e.latlng.lng.toString());
+    var latitude = $('#lost_item_latitude');
+    var longitude = $('#lost_item_longitude');
+    var area = $('#lost_item_area');
+    var areaType = $('#lost_item_areaType');
 
-        if (marker) {
-            map.removeLayer(marker);
-        }
-
-        marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map);
+    function clearFields() {
+        latitude.val('');
+        longitude.val('');
+        area.val('');
+        areaType.val('');
     }
 
-    map.on('click', onMapClick);
+    function toolbarState(status) {
+        var options;
+
+        switch (status) {
+            case 'hide':
+                clearFields();
+
+                options = new L.Control.Draw({
+                    draw: {
+                        polyline: false,
+                        polygon: false,
+                        rectangle: false,
+                        circle: false,
+                        marker: false
+                    },
+                    edit: {
+                        featureGroup: drawnItems
+                    }
+                });
+                break;
+            case 'show':
+                clearFields();
+
+                options = new L.Control.Draw({
+                    draw: {
+                        position: 'topleft',
+                        polygon: {
+                            shapeOptions: {
+                                color: '#000000'
+                            },
+                            showArea: true
+                        },
+                        rectangle: {
+                            shapeOptions: {
+                                color: '#000000'
+                            }
+                        },
+                        polyline: false,
+                        circle: {
+                            shapeOptions: {
+                                color: '#000000'
+                            }
+                        }
+                    },
+                    edit: {
+                        featureGroup: drawnItems
+                    }
+                });
+                break;
+            default:
+                console.log('Unknown option \'' + status + '\'');
+        }
+        return options;
+    }
+
+    var drawControl = toolbarState('show');
+    map.addControl(drawControl);
+
+    map.on('draw:created', function (e) {
+        var type = e.layerType,
+            layer = e.layer;
+
+        map.removeControl(drawControl);
+        drawControl = toolbarState('hide');
+        map.addControl(drawControl);
+
+        drawnItems.addLayer(layer);
+
+        function getLatLngs(input) {
+            var customArray = [];
+
+            for (var i = 0; i < layer._latlngs.length; i++) {
+                customArray.push({
+                    latitude: layer._latlngs[i].lat,
+                    longitude: layer._latlngs[i].lng
+                });
+            }
+            input.val(JSON.stringify(customArray));
+        }
+
+        switch (type) {
+            case "polygon":
+                getLatLngs(area);
+                break;
+            case 'rectangle':
+                getLatLngs(area);
+                break;
+            case 'circle':
+                var arr = [{
+                    latlng: layer._latlng,
+                    radius: layer._mRadius
+                }];
+
+                area.val(JSON.stringify(arr));
+                break;
+            case 'marker':
+                latitude.val(layer._latlng.lat);
+                longitude.val(layer._latlng.lng);
+                break;
+            default:
+                console.log('wrong type');
+        }
+        areaType.val(type);
+        console.log(areaType.val(type));
+    });
+
+    map.on('draw:deleted', function (e) {
+        var layers = e.layers._layers;
+
+        if (!jQuery.isEmptyObject(layers)) {
+            map.removeControl(drawControl);
+            drawControl = toolbarState('show');
+            map.addControl(drawControl)
+
+            drawnItems = new L.FeatureGroup();
+            map.addControl(drawnItems);
+        } else {
+            alert('You not delete');
+        }
+    });
 });

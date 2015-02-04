@@ -11,12 +11,15 @@
     {% stylesheets 'http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css' %}
         <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
     {% endstylesheets %}
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('lib/leaflet-draw/leaflet.draw.css') }}" />
 {% endblock stylesheets %}
 
 {% block javascripts %}
     {{ parent() }}
 
     <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <script src="{{ asset('lib/leaflet-draw/leaflet.draw.js') }}"></script>
     <script src="{{ asset('js/map_lost.js') }}"></script>
 {% endblock javascripts %}
 
