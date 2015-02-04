@@ -91,7 +91,7 @@ class ItemAdmin extends Admin
             ->add('longitude')
             ->add('type')
             ->add('description')
-//            ->add('area')
+            ->add('area')
             ->add('status')
             ->add('moderated', 'boolean')
             ->add('date', 'date', [
