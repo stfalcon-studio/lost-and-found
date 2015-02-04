@@ -86,6 +86,7 @@ class ItemRepository extends EntityRepository
 
         $qb->select('i.latitude')
             ->addSelect('i.longitude')
+            ->addSelect('i.category')
             ->where($qb->expr()->eq('i.moderated', true))
             ->andWhere($qb->expr()->eq('i.type', ':type'))
             ->setParameter('type', ItemTypeType::LOST)
@@ -112,6 +113,7 @@ class ItemRepository extends EntityRepository
 
         $qb->select('i.latitude')
            ->addSelect('i.longitude')
+           ->addSelect('IDENTITY(i.category) AS categoryId')
            ->where($qb->expr()->eq('i.moderated', true))
            ->andWhere($qb->expr()->eq('i.type', ':type'))
            ->setParameter('type', ItemTypeType::FOUND)

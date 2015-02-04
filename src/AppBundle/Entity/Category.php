@@ -8,13 +8,16 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Category Entity
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\CategoryRepository")
+ * @Vich\Uploadable
  * @ORM\Table(name="categories")
  *
  * @Gedmo\Loggable
@@ -61,6 +64,20 @@ class Category
      * @Gedmo\Versioned
      */
     private $enabled = false;
+
+    /**
+     * @Vich\UploadableField(mapping="category_image", fileNameProperty="imageName")
+     *
+     * @var File $imageFile
+     */
+    protected $imageFile;
+
+    /**
+     * @ORM\Column(type="string", length=255, name="image_name")
+     *
+     * @var string $imageName
+     */
+    protected $imageName;
 
     /**
      * Constructor
@@ -189,6 +206,50 @@ class Category
     public function setEnabled($enabled)
     {
         $this->enabled = $enabled;
+
+        return $this;
+    }
+
+    /**
+     * @return File
+     */
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param File $imageFile
+     *
+     * @return $this
+     */
+    public function setImageFile($imageFile)
+    {
+        $this->imageFile = $imageFile;
+        if ($imageFile) {
+            $this->updatedAt = new \DateTime('now');
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageName()
+    {
+        return $this->imageName;
+    }
+
+    /**
+     * @param string $imageName
+     *
+     * @return $this
+     */
+    public function setImageName($imageName)
+    {
+        $this->imageName = $imageName;
+
         return $this;
     }
 }

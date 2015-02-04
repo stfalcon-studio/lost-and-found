@@ -20,13 +20,28 @@ $(document).ready(function() {
     var markers = new L.FeatureGroup();
 
     function showPoints(type) {
+        var categories;
+        $.ajax({
+            url: 'http://lost-and-found.work/app_dev.php/get/categories',
+            type: 'get',
+            dataType: 'JSON',
+            success: function(data){
+                   categories=new Object(data);
+                console.log(categories);
+            }
+        });
         $.ajax({
             url: 'http://lost-and-found.work/app_dev.php/show/' + type + '-points',
             type: 'get',
             dataType: 'JSON',
             success: function(data) {
                 for (var i = 0; i < data.length; i++) {
-                    marker = L.marker([data[i].latitude, data[i].longitude]);
+                    var cat=categories[data[i].categoryId];
+                    var icon = L.icon({
+                        iconUrl: '../images/categories/'+cat['imageName'],
+                        iconSize:     [32, 32]
+                         });
+                    marker = L.marker([data[i].latitude, data[i].longitude], {icon: icon});
                     markers.addLayer(marker);
                 }
             }

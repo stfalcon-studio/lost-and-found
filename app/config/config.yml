@@ -42,3 +42,10 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+#Vichuploader
+vich_uploader:
+    db_driver: orm
+    mappings:
+        category_image:
+            uri_prefix:         /images/categories
+            upload_destination: %kernel.root_dir%/../web/images/categories
