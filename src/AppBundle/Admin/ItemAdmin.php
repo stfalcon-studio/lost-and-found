@@ -41,7 +41,7 @@ class ItemAdmin extends Admin
                 ->add('area')
                 ->add('status')
                 ->add('moderated')
-                ->add('date')
+                ->add('date', 'date')
             ->end();
     }
 
