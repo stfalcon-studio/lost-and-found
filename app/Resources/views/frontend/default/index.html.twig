@@ -24,17 +24,19 @@
     {% endfor %}
 
     <h1>Lost and Found</h1>
+{% if is_granted('ROLE_USER') %}
     <div class="add-lost-found-item">
         <p><a href="{{ path('add_lost_item') }}">Add lost item</a></p>
         <p><a href="{{ path('add_found_item') }}">Add found item</a></p>
     </div>
+{% endif %}
 
     <br />
 
     <div>
         <div>
-            <button id="show-found-items">Show found items</button>
-            <button id="show-lost-items">Show lost items</button>
+                <button id="show-found-items">Show found items</button>
+                <button id="show-lost-items">Show lost items</button>
 
             <div id="map" class="map"></div>
         </div>
