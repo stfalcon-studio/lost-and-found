@@ -3,8 +3,12 @@ services:
         class: AppBundle\Form\Type\FoundItemType
         tags:
             - { name: form.type, alias: found_item }
+        arguments:
+            - @security.token_storage
 
     app.form.type.lost_item:
         class: AppBundle\Form\Type\LostItemType
         tags:
             - { name: form.type, alias: lost_item }
+        arguments:
+            - @security.token_storage
