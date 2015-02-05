@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Entity\User as BaseUser;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -26,6 +28,14 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
+    /**
+     * @var Collection|Item[] $items Items
+     *
+     * @ORM\OneToMany(targetEntity="Item", mappedBy="category", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\JoinColumn(onDelete="CASCADE")
+     */
+    private $items;
 
     /**
      * @var string $fullName Full name
@@ -59,9 +69,35 @@ class User extends BaseUser
     }
 
     /**
-     * To string
+     * Get items
+     *
+     * @return Item[]|Collection Items
      */
-    function __toString()
+    public function getItems()
+    {
+        return $this->items;
+    }
+
+    /**
+     * Set items
+     *
+     * @param Item[]|Collection $items items
+     *
+     * @return $this
+     */
+    public function setItems($items)
+    {
+        $this->items = $items;
+
+        return $this;
+    }
+
+    /**
+     * To string
+     *
+     * @return string
+     */
+    public function __toString()
     {
         return $this->getFullName() ?: 'New User';
     }

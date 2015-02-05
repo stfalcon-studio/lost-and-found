@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use AppBundle\DBAL\Types\ItemAreaTypeType;
 use AppBundle\DBAL\Types\ItemStatusType;
+use AppBundle\Model\UserManageableInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -22,7 +23,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @Gedmo\Loggable
  */
-class Item
+class Item implements UserManageableInterface
 {
     use TimestampableEntity;
 
@@ -143,6 +144,18 @@ class Item
      * @Assert\DateTime()
      */
     private $date;
+
+    /**
+     * @var User $createdBy Created by
+     *
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="items")
+     * @ORM\JoinColumn(name="createdBy", referencedColumnName="id")
+     *
+     * @Gedmo\Versioned
+     *
+     * @Assert\NotBlank()
+     */
+    private $createdBy;
 
     /**
      * @var boolean $moderated
@@ -416,6 +429,30 @@ class Item
     public function setDate(\DateTime $date)
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get createdBy
+     *
+     * @return User CreatedBy
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
+    }
+
+    /**
+     * Set createdBy
+     *
+     * @param User $createdBy createdBy
+     *
+     * @return $this
+     */
+    public function setCreatedBy(User $createdBy)
+    {
+        $this->createdBy = $createdBy;
 
         return $this;
     }

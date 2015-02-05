@@ -15,6 +15,7 @@ $(document).ready(function() {
             map.removeLayer(marker);
         }
 
+        $("#found_item_areaType").val('marker');
         marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map);
     }
 

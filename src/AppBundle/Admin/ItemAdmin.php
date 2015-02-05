@@ -68,6 +68,7 @@ class ItemAdmin extends Admin
             ->add('updatedAt', 'datetime', [
                 'format' => 'd.m.Y H:i:s'
             ])
+            ->add('createdBy')
             ->add('_action', 'actions', [
                 'actions' => [
                     'show'   => [],
@@ -92,13 +93,14 @@ class ItemAdmin extends Admin
             ->add('longitude')
             ->add('type')
             ->add('description')
-            ->add('area')
+//            ->add('area') @todo Fix show template
             ->add('areaType')
             ->add('status')
             ->add('moderated', 'boolean')
             ->add('date', 'date', [
                 'format' => 'd.m.Y'
             ])
+            ->add('createdBy')
             ->add('createdAt', 'datetime', [
                 'format' => 'd.m.Y H:i:s'
             ])
