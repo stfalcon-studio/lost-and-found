@@ -8,8 +8,15 @@
     {% endstylesheets %}
 {% endblock stylesheets %}
 
-{% block body %}
-    {# Flash message#}
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
+{% endblock javascripts %}
+
+{% block content %}
+    {# Flash messages #}
     {% for flashMessage in app.session.flashbag.get('notice') %}
         <div class="flash-message">
             {{ flashMessage }}
@@ -52,11 +59,4 @@
             {% endfor %}
         </div>
     </div>
-{% endblock body %}
-
-{% block javascripts %}
-    {{ parent() }}
-
-    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-    <script src="{{ asset('js/main.js') }}"></script>
-{% endblock javascripts %}
+{% endblock content %}

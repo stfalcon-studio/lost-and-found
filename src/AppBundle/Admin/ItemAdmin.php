@@ -39,9 +39,10 @@ class ItemAdmin extends Admin
                 ->add('type')
                 ->add('description')
                 ->add('area')
+                ->add('areaType')
                 ->add('status')
                 ->add('moderated')
-                ->add('date')
+                ->add('date', 'date')
             ->end();
     }
 
@@ -91,7 +92,8 @@ class ItemAdmin extends Admin
             ->add('longitude')
             ->add('type')
             ->add('description')
-//            ->add('area')
+            ->add('area')
+            ->add('areaType')
             ->add('status')
             ->add('moderated', 'boolean')
             ->add('date', 'date', [
@@ -122,6 +124,7 @@ class ItemAdmin extends Admin
             ->add('type')
             ->add('description')
             ->add('area')
+            ->add('areaType')
             ->add('status')
             ->add('moderated')
             ->add('createdAt')

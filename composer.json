@@ -23,7 +23,8 @@
         "stof/doctrine-extensions-bundle": "~1.1@dev",
         "sonata-project/doctrine-orm-admin-bundle": "2.2.6",
         "sonata-project/core-bundle": "~2.2",
-        "vich/uploader-bundle": "0.14.*"
+        "hwi/oauth-bundle": "0.4.*@dev",
+        "friendsofsymfony/user-bundle": "~1.3"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

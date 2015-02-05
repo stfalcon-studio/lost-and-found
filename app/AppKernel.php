@@ -37,6 +37,9 @@ class AppKernel extends Kernel
             // Application bundles
             new AppBundle\AppBundle(),
             //
+            new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
+            //
             new Vich\UploaderBundle\VichUploaderBundle(),
         ];
 

@@ -13,6 +13,7 @@ doctrine:
         types:
             ItemTypeType:   AppBundle\DBAL\Types\ItemTypeType
             ItemStatusType: AppBundle\DBAL\Types\ItemStatusType
+            ItemAreaTypeType: AppBundle\DBAL\Types\ItemAreaTypeType
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true

@@ -36,12 +36,10 @@ class LostItemType extends AbstractType
                 'label' => 'Тип',
                 'data'  => ItemTypeType::LOST,
             ])
-            ->add('latitude', 'hidden', [
-                'label' => 'Latitude',
-            ])
-            ->add('longitude', 'hidden', [
-                'label' => 'Longitude'
-            ])
+            ->add('latitude', 'hidden')
+            ->add('longitude', 'hidden')
+            ->add('area', 'hidden')
+            ->add('areaType', 'hidden')
             ->add('description', 'textarea', [
                 'label' => 'Опис',
             ])

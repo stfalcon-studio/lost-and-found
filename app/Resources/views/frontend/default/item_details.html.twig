@@ -1,50 +1,59 @@
 {% extends 'base.html.twig' %}
+
 {% block title %}
     Details |
     {{ parent() }}
 {% endblock title %}
-{% block body %}
-        <table border="1">
-            <caption>Item details</caption>
-            <tr>
-                <td><b>Title</b></td>
-                <td>{{ item.title }}</td>
-            </tr>
-            <tr>
-                <td><b>Category</b></td>
-                <td>{{ item.category }}</td>
-            </tr>
-            <tr>
-                <td><b>Latitude</b></td>
-                <td>{{ item.latitude }}</td>
-            </tr>
-            <tr>
-                <td><b>Longitude</b></td>
-                <td>{{ item.longitude }}</td>
-            </tr>
-            <tr>
-                <td><b>Type</b></td>
-                <td>{{ item.type }}</td>
-            </tr>
-            <tr>
-                <td><b>Description</b></td>
-                <td>{{ item.description }}</td>
-            </tr>
-            <tr>
-                <td><b>Date</b></td>
-                <td>{{ item.date|date('d.m.Y H:i:s') }}</td>
-            </tr>
-        </table>
-   {# Map #}
-   {% stylesheets 'http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css' %}
+
+{% block stylesheets %}
+    {% stylesheets 'http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css' %}
         <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
     {% endstylesheets %}
-        <div id="map" style="width: 1200px; height: 800px" data-items="{{ found_point|json_encode() }}"></div>
-    {% block javascripts %}
-        {{ parent() }}
-        <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-        <script src="{{ asset('js/main.js') }}"></script>
-    {% endblock javascripts %}
-        <br>
-        <a href="{{ path('homepage') }}">На головну</a>
-{% endblock body %}
+{% endblock stylesheets %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
+{% endblock javascripts %}
+
+{% block content %}
+    <a href="{{ path('homepage') }}">На головну</a>
+    <br />
+
+    <table border="1">
+        <caption>Item details</caption>
+        <tr>
+            <td><b>Title</b></td>
+            <td>{{ item.title }}</td>
+        </tr>
+        <tr>
+            <td><b>Category</b></td>
+            <td>{{ item.category }}</td>
+        </tr>
+        <tr>
+            <td><b>Latitude</b></td>
+            <td>{{ item.latitude }}</td>
+        </tr>
+        <tr>
+            <td><b>Longitude</b></td>
+            <td>{{ item.longitude }}</td>
+        </tr>
+        <tr>
+            <td><b>Type</b></td>
+            <td>{{ item.type }}</td>
+        </tr>
+        <tr>
+            <td><b>Description</b></td>
+            <td>{{ item.description }}</td>
+        </tr>
+        <tr>
+            <td><b>Date</b></td>
+            <td>{{ item.date|date('d.m.Y H:i:s') }}</td>
+        </tr>
+    </table>
+    <br />
+
+    <div id="map" style="width: 1200px; height: 800px" data-items="{{ found_point|json_encode() }}"></div>
+{% endblock content %}

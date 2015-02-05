@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\DBAL\Types\ItemAreaTypeType;
 use AppBundle\DBAL\Types\ItemStatusType;
 use Doctrine\ORM\Mapping as ORM;
 use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
@@ -62,22 +63,18 @@ class Item
     /**
      * @var float $latitude Latitude
      *
-     * @ORM\Column(type="decimal", precision=18, scale=15)
+     * @ORM\Column(type="decimal", precision=18, scale=15, nullable=true)
      *
      * @Gedmo\Versioned
-     *
-     * @Assert\NotBlank()
      */
     private $latitude;
 
     /**
      * @var float $longitude Longitude
      *
-     * @ORM\Column(type="decimal", precision=18, scale=15)
+     * @ORM\Column(type="decimal", precision=18, scale=15, nullable=true)
      *
      * @Gedmo\Versioned
-     *
-     * @Assert\NotBlank()
      */
     private $longitude;
 
@@ -113,6 +110,17 @@ class Item
      * @Gedmo\Versioned
      */
     private $area;
+
+    /**
+     * @var array $areaType Area type
+     *
+     * @DoctrineAssert\Enum(entity="AppBundle\DBAL\Types\ItemAreaTypeType")
+     *
+     * @ORM\Column(name="areaType", type="ItemAreaTypeType", nullable=false)
+     *
+     * @Gedmo\Versioned
+     */
+    private $areaType;
 
     /**
      * @var array $status Status
@@ -312,6 +320,30 @@ class Item
     public function setArea($area)
     {
         $this->area = $area;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return string Status
+     */
+    public function getAreaType()
+    {
+        return $this->areaType;
+    }
+
+    /**
+     * Set area type
+     *
+     * @param string $areaType Area type
+     *
+     * @return $this
+     */
+    public function setAreaType($areaType)
+    {
+        $this->areaType = $areaType;
 
         return $this;
     }
