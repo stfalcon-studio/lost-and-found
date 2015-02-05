@@ -59,6 +59,24 @@ class User extends BaseUser
     private $facebookAccessToken;
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->items = new ArrayCollection();
+    }
+
+    /**
+     * To string
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getFullName() ?: 'New User';
+    }
+
+    /**
      * Get ID
      *
      * @return int ID
@@ -87,19 +105,40 @@ class User extends BaseUser
      */
     public function setItems($items)
     {
+        foreach ($items as $item) {
+            $item->setCreatedBy($this);
+        }
         $this->items = $items;
 
         return $this;
     }
 
     /**
-     * To string
+     * Add item
      *
-     * @return string
+     * @param Item $item Item
+     *
+     * @return $this
      */
-    public function __toString()
+    public function addItem(Item $item)
     {
-        return $this->getFullName() ?: 'New User';
+        $this->items->add($item->setCreatedBy($this));
+
+        return $this;
+    }
+
+    /**
+     * Remove item
+     *
+     * @param Item $item Item
+     *
+     * @return $this
+     */
+    public function removeItem(Item $item)
+    {
+        $this->items->removeElement($item);
+
+        return $this;
     }
 
     /**
