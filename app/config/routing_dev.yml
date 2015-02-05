@@ -16,5 +16,3 @@ _errors:
 
 _main:
     resource: routing.yml
-
-DemoBundle/Resources/config/routing.yml"
