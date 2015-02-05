@@ -43,8 +43,11 @@ class LostItemType extends AbstractType
             ->add('description', 'textarea', [
                 'label' => 'Опис',
             ])
-            ->add('date', 'date', [
+            ->add('date', 'sonata_type_date_picker', [
                 'label' => 'Дата',
+                'attr' => [
+                    'class' => 'sonata-medium-date form-control'
+                ]
             ])
             ->add('save', 'submit', [
                 'label' => 'Create',

@@ -13,6 +13,8 @@
             %}
                 <link rel="stylesheet" href="{{ asset_url }}" />
             {% endstylesheets %}
+                <link rel="stylesheet" href="/bundles/sonatacore/vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+                <link rel="stylesheet" href="/bundles/sonataadmin/vendor/bootstrap/dist/css/bootstrap.min.css" />
         {% endblock stylesheets %}
     </head>
     <body>
@@ -41,9 +43,11 @@
                 {% endblock footer %}
             </footer>
         {% endblock body %}
-
         {% block javascripts %}
             <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+            <script src="{{ asset('bundles/sonatacore/vendor/moment/min/moment.min.js') }}"></script>
+            <script src="{{ asset('bundles/sonataadmin/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('bundles/sonatacore/vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js') }}"></script>
         {% endblock javascripts %}
     </body>
 </html>
