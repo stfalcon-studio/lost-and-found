@@ -37,7 +37,7 @@ security:
     access_control:
         - { path: ^/auth/connect, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 #        - { path: ^/profile, roles: ROLE_USER }
-#        - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/admin/, role: ROLE_ADMIN }
         - { path: ^/add-lost-item, roles: ROLE_USER }
         - { path: ^/add-found-item, roles: ROLE_USER }
 
