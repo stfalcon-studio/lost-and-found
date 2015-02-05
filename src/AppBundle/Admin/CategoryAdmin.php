@@ -35,7 +35,9 @@ class CategoryAdmin extends Admin
             ->with('Category')
                 ->add('title')
                 ->add('enabled')
-                ->add('imageFile', 'file')
+                ->add('imageFile', 'file', [
+                    'required' => false,
+                ])
             ->end();
     }
 
@@ -50,7 +52,7 @@ class CategoryAdmin extends Admin
                 'editable' => true,
             ])
             ->add('Image', 'string', [
-                'template' => 'backend/category/list_marker.html.twig'
+                'template' => 'backend/category/list_marker.html.twig',
             ])
             ->add('createdAt', 'datetime', [
                 'format' => 'd.m.Y H:i:s'

@@ -73,7 +73,7 @@ class Category
     protected $imageFile;
 
     /**
-     * @ORM\Column(type="string", length=255, name="image_name")
+     * @ORM\Column(type="string", length=255, name="image_name", nullable=true)
      *
      * @var string $imageName
      */
@@ -81,6 +81,7 @@ class Category
 
     /**
      * Constructor
+     *
      */
     public function __construct()
     {

@@ -20,13 +20,15 @@ class LoadCategoryData extends AbstractFixture
     {
         $keys = (new Category())
             ->setTitle('Ключі')
-            ->setEnabled(true);
+            ->setEnabled(true)
+            ->setImageName("http://lost-and-found.work/images/categories/keys.png");
         $this->setReference('category-keys', $keys);
         $manager->persist($keys);
 
         $phone = (new Category())
             ->setTitle('Телефон')
-            ->setEnabled(true);
+            ->setEnabled(true)
+            ->setImageName("http://lost-and-found.work/images/categories/Phone-icon.png");
         $this->setReference('category-phone', $phone);
         $manager->persist($phone);
 

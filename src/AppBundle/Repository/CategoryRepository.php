@@ -21,26 +21,18 @@ use Doctrine\ORM\EntityRepository;
 class CategoryRepository extends EntityRepository
 {
     /**
-     * @return array
+     * @return Category[]
      */
-    public function getAllModerated()
+    public function getAllEnabled()
     {
-        $result = [];
-
         $qb = $this->createQueryBuilder('c');
+//
+//        return $qb->getQuery()->getResult();
 
-        $qb->select('c.id')
-            ->addSelect('c.title')
-            ->addSelect('c.imageName')
-            ->where($qb->expr()->eq('c.enabled', true));
+        $y =  $qb
+            ->where($qb->expr()->eq('c.enabled', true))
+            ->getQuery()->getResult();
 
-        $rawResult = $qb->getQuery()->getArrayResult();
-
-        foreach ($rawResult as $item) {
-            $result[$item['id']] = $item;
-        }
-
-
-        return $result;
+        return $y;
     }
 }

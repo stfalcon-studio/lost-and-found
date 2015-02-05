@@ -32,9 +32,27 @@ class CategoryController extends Controller
     {
         $categoryRepository = $this->getDoctrine()->getRepository('AppBundle:Category');
 
-        $categories = $categoryRepository->getAllModerated();
+        $categories = $categoryRepository->getAllEnabled();
 
-        $response = new Response(json_encode($categories));
+        $result = [];
+        $vichUploader = $this->get('vich_uploader.storage.file_system');
+
+        foreach ($categories as $category) {
+            $id                   = $category->getId();
+            $result[$id]['id']    = $category->getId();
+            $result[$id]['title'] = $category->getTitle();
+            if ($category->getImageName() !== null) {
+                $result[$id]['imageName'] = $this->get('service_container')->getParameter('host')
+                                            . $vichUploader->resolveUri($category, 'imageFile');
+            } else {
+                $result[$id]['imageName'] = null;
+            }
+        }
+
+
+
+
+        $response = new Response(json_encode($result));
         $response->headers->set('Content-Type', 'application/json');
 
         return $response;

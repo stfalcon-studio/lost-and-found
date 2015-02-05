@@ -23,23 +23,26 @@ $(document).ready(function() {
             dataType: 'JSON',
             success: function(data){
                    categories=new Object(data);
-                console.log(categories);
-            }
-        });
-        $.ajax({
-            url: 'http://lost-and-found.work/app_dev.php/show/' + type + '-points',
-            type: 'get',
-            dataType: 'JSON',
-            success: function(data) {
-                for (var i = 0; i < data.length; i++) {
-                    var cat=categories[data[i].categoryId];
-                    var icon = L.icon({
-                        iconUrl: '../images/categories/'+cat['imageName'],
-                        iconSize:     [32, 32]
-                         });
-                    marker = L.marker([data[i].latitude, data[i].longitude], {icon: icon});
-                    markers.addLayer(marker);
-                }
+                $.ajax({
+                    url: 'http://lost-and-found.work/app_dev.php/show/' + type + '-points',
+                    type: 'get',
+                    dataType: 'JSON',
+                    success: function(data) {
+                        for (var i = 0; i < data.length; i++) {
+                            var cat=categories[data[i].categoryId];
+                            if(cat['imageName']!==null) {
+                                var icon = L.icon({
+                                    iconUrl: cat['imageName'],
+                                    iconSize: [32, 32]
+                                });
+                                marker = L.marker([data[i].latitude, data[i].longitude], {icon: icon});
+                            } else {
+                                marker = L.marker([data[i].latitude, data[i].longitude]);
+                            }
+                            markers.addLayer(marker);
+                        }
+                    }
+                });
             }
         });
         map.addLayer(markers);

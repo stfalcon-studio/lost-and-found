@@ -15,7 +15,7 @@
     {{ parent() }}
 
     <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-    <script src="{{ asset('js/main.js') }}"></script>
+    <script src="{{ asset('js/item_details_map.js') }}"></script>
 {% endblock javascripts %}
 
 {% block content %}
@@ -30,15 +30,15 @@
         </tr>
         <tr>
             <td><b>Category</b></td>
-            <td>{{ item.category }}</td>
+            <td id="category">{{ item.category }}</td>
         </tr>
         <tr>
             <td><b>Latitude</b></td>
-            <td>{{ item.latitude }}</td>
+            <td id="latitude">{{ item.latitude }}</td>
         </tr>
         <tr>
             <td><b>Longitude</b></td>
-            <td>{{ item.longitude }}</td>
+            <td id="longitude">{{ item.longitude }}</td>
         </tr>
         <tr>
             <td><b>Type</b></td>
@@ -55,5 +55,5 @@
     </table>
     <br />
 
-    <div id="map" style="width: 1200px; height: 800px" data-items="{{ found_point|json_encode() }}"></div>
+    <div id="map" style="width: 1200px; height: 800px"></div>
 {% endblock content %}
