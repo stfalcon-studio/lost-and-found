@@ -17,7 +17,7 @@ class CategoryAdminController extends CRUDController
      *
      * @return RedirectResponse
      */
-    public function batchActionMarkAsEnabled()
+    public function batchActionEnable()
     {
         $categories = $this->getRequest()->get('idx', []);
 
@@ -34,7 +34,7 @@ class CategoryAdminController extends CRUDController
             $em->flush();
         }
 
-        $this->addFlash('sonata_flash_success', 'Enabled was marked successfully');
+        $this->addFlash('sonata_flash_success', 'Enabled successfully');
 
         return new RedirectResponse($this->admin->generateUrl('list'));
     }
@@ -44,7 +44,7 @@ class CategoryAdminController extends CRUDController
      *
      * @return RedirectResponse
      */
-    public function batchActionUnmarkAsEnabled()
+    public function batchActionDisable()
     {
         $categories = $this->getRequest()->get('idx', []);
 
@@ -61,7 +61,7 @@ class CategoryAdminController extends CRUDController
             $em->flush();
         }
 
-        $this->addFlash('sonata_flash_success', 'Enabled was unmarked successfully');
+        $this->addFlash('sonata_flash_success', 'Disabled successfully');
 
         return new RedirectResponse($this->admin->generateUrl('list'));
     }
