@@ -68,6 +68,7 @@ class FoundItemType extends AbstractType
             ])
             ->add('date', 'date', [
                 'label' => 'Дата',
+                'widget' => 'single_text'
             ])
             ->add('save', 'submit', [
                 'label' => 'Create',
