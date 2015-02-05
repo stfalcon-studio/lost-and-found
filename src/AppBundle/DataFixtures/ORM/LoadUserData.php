@@ -19,13 +19,14 @@ class LoadUserData extends AbstractFixture
     {
         //Random user 1
         $user1 = (new User())
-            ->setUsername('tewtret')
+            ->setUsername('Test User')
             ->setEnabled(true)
-            ->setEmail('sdfadfasd')
-            ->setPlainPassword('qweytrsfgjf')
-            ->setFacebookAccessToken('sdfsdfsdf')
+            ->setEmail('test@localhost')
+            ->setRoles(['ROLE_USER'])
+            ->setPlainPassword('qwerty')
             ->setFullName('Test')
-            ->getFacebookId('1');
+            ->setFacebookId('1')
+            ->setFacebookAccessToken('sdfsdfsdf');
         $this->setReference('rndUser1', $user1);
         $manager->persist($user1);
 
