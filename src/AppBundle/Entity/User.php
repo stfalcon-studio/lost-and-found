@@ -32,7 +32,7 @@ class User extends BaseUser
     /**
      * @var Collection|Item[] $items Items
      *
-     * @ORM\OneToMany(targetEntity="Item", mappedBy="category", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Item", mappedBy="createdBy", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $items;
