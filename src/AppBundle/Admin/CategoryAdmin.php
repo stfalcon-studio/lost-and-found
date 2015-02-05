@@ -101,4 +101,23 @@ class CategoryAdmin extends Admin
             ->add('createdAt')
             ->add('updatedAt');
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBatchActions()
+    {
+        $actions = parent::getBatchActions();
+
+        $actions['mark_as_enabled'] = [
+            'label'            => 'Enable',
+            'ask_confirmation' => true
+        ];
+        $actions['unmark_as_enabled']    = [
+            'label'            => 'Disable',
+            'ask_confirmation' => true
+        ];
+
+        return $actions;
+    }
 }

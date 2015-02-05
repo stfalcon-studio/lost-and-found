@@ -6,7 +6,7 @@ services:
         arguments:
             - ~
             - AppBundle\Entity\Category
-            - ~
+            - AppBundle:Backend\CategoryAdmin
 
     admin.item:
         class: AppBundle\Admin\ItemAdmin
