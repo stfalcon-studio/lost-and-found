@@ -42,7 +42,7 @@ class ItemAdmin extends Admin
                 ->add('areaType')
                 ->add('status')
                 ->add('moderated')
-                ->add('date', 'date')
+                ->add('date', 'sonata_type_date_picker')
             ->end();
     }
 
