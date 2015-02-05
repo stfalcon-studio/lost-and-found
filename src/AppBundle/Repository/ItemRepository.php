@@ -86,6 +86,7 @@ class ItemRepository extends EntityRepository
 
         $qb->select('i.latitude')
             ->addSelect('i.longitude')
+            ->addSelect('IDENTITY(i.category) AS categoryId')
             ->where($qb->expr()->eq('i.moderated', true))
             ->andWhere($qb->expr()->eq('i.type', ':type'))
             ->setParameter('type', ItemTypeType::LOST)
@@ -112,6 +113,7 @@ class ItemRepository extends EntityRepository
 
         $qb->select('i.latitude')
            ->addSelect('i.longitude')
+           ->addSelect('IDENTITY(i.category) AS categoryId')
            ->where($qb->expr()->eq('i.moderated', true))
            ->andWhere($qb->expr()->eq('i.type', ':type'))
            ->setParameter('type', ItemTypeType::FOUND)
@@ -122,27 +124,5 @@ class ItemRepository extends EntityRepository
         }
 
         return $qb->getQuery()->getArrayResult();
-    }
-
-    /**
-     * @param integer $id
-     *
-     * @return array
-     */
-    public function getFoundPoint($id)
-    {
-        $qb = $this->createQueryBuilder('i');
-
-        $qb->select('i.latitude')
-            ->addSelect('i.longitude')
-            ->where($qb->expr()->eq('i.moderated', true))
-            ->andWhere($qb->expr()->eq('i.type', ':type'))
-            ->andWhere($qb->expr()->eq('i.id', ':id'))
-            ->setParameters([
-                'type' => ItemTypeType::FOUND,
-                'id' => $id,
-            ]);
-
-        return $qb->getQuery()->getResult();
     }
 }

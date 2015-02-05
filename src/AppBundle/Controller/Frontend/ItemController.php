@@ -100,8 +100,7 @@ class ItemController extends Controller
             ]);
 
         $foundPoint = $this->getDoctrine()
-            ->getRepository('AppBundle:Item')
-            ->getFoundPoint($id);
+            ->getRepository('AppBundle:Item');
 
         if (!$item) {
             throw $this->createNotFoundException('Item not found');
@@ -109,7 +108,6 @@ class ItemController extends Controller
 
         return $this->render('frontend/default/item_details.html.twig', [
             'item' => $item,
-            'found_point' => $foundPoint,
         ]);
     }
 

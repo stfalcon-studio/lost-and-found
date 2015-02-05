@@ -12,6 +12,7 @@ use Sonata\AdminBundle\Show\ShowMapper;
  * Category Entity Admin
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author svatok13
  */
 class CategoryAdmin extends Admin
 {
@@ -34,6 +35,9 @@ class CategoryAdmin extends Admin
             ->with('Category')
                 ->add('title')
                 ->add('enabled')
+                ->add('imageFile', 'file', [
+                    'required' => false,
+                ])
             ->end();
     }
 
@@ -46,6 +50,9 @@ class CategoryAdmin extends Admin
             ->addIdentifier('title')
             ->add('enabled', 'boolean', [
                 'editable' => true,
+            ])
+            ->add('Image', 'string', [
+                'template' => 'backend/category/list_marker.html.twig',
             ])
             ->add('createdAt', 'datetime', [
                 'format' => 'd.m.Y H:i:s'
@@ -70,6 +77,9 @@ class CategoryAdmin extends Admin
         $showMapper
             ->add('id')
             ->add('title')
+            ->add('Image', 'string', [
+                'template' => 'backend/category/show_marker.html.twig'
+            ])
             ->add('enabled', 'boolean')
             ->add('createdAt', 'datetime', [
                 'format' => 'd.m.Y H:i:s'

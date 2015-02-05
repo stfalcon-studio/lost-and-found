@@ -19,5 +19,7 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
 
+    host: http://lost-and-found.work
+
     facebook_oauth_client_id:     FacebookClientId
     facebook_oauth_client_secret: FacebookClientSecret
