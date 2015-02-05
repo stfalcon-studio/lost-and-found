@@ -14,6 +14,7 @@ use AppBundle\DBAL\Types\ItemStatusType;
  * Load Item fixtures
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Andrew Prohorych <prohorovychua@gmail.com>
  */
 class LoadItemData extends AbstractFixture implements DependentFixtureInterface
 {
@@ -22,7 +23,10 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
      */
     public function getDependencies()
     {
-        return ['AppBundle\DataFixtures\ORM\LoadCategoryData'];
+        return [
+            'AppBundle\DataFixtures\ORM\LoadCategoryData',
+            'AppBundle\DataFixtures\ORM\LoadUserData'
+        ];
     }
 
     /**
@@ -35,11 +39,13 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
          * @var \AppBundle\Entity\Category $categoryKeys
          * @var \AppBundle\Entity\Category $categoryDocuments
          * @var \AppBundle\Entity\Category $categoryClothes
+         * @var \AppBundle\Entity\User $user1
          */
         $categoryPhone     = $this->getReference('category-phone');
         $categoryKeys      = $this->getReference('category-keys');
         $categoryDocuments = $this->getReference('category-documents');
         $categoryClothes   = $this->getReference('category-clothes');
+        $user1             = $this->getReference('rndUser1');
 
         $nexus = (new Item())
             ->setTitle('Телефон Google Nexus 5')
@@ -51,7 +57,8 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
             ->setAreaType(ItemAreaTypeType::MARKER)
             ->setStatus(ItemStatusType::ACTIVE)
             ->setModerated(true)
-            ->setDate(new \DateTime('10.11.2014'));
+            ->setDate(new \DateTime('10.11.2014'))
+            ->setCreatedBy($user1);
         $manager->persist($nexus);
 
         $nokia = (new Item())
@@ -64,7 +71,8 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
             ->setAreaType(ItemAreaTypeType::MARKER)
             ->setStatus(ItemStatusType::RESOLVED)
             ->setModerated(true)
-            ->setDate(new \DateTime('10.11.2014'));
+            ->setDate(new \DateTime('10.11.2014'))
+            ->setCreatedBy($user1);
         $manager->persist($nokia);
 
         $iPhone = (new Item())
@@ -77,7 +85,8 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
             ->setAreaType(ItemAreaTypeType::MARKER)
             ->setStatus(ItemStatusType::ACTIVE)
             ->setModerated(true)
-            ->setDate(new \DateTime('10.11.2014'));
+            ->setDate(new \DateTime('10.11.2014'))
+            ->setCreatedBy($user1);
         $manager->persist($iPhone);
 
         $keys = (new Item())
@@ -90,7 +99,8 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
             ->setAreaType(ItemAreaTypeType::MARKER)
             ->setStatus(ItemStatusType::ACTIVE)
             ->setModerated(true)
-            ->setDate(new \DateTime('10.11.2014'));
+            ->setDate(new \DateTime('10.11.2014'))
+            ->setCreatedBy($user1);
         $manager->persist($keys);
 
         $hat = (new Item())
@@ -103,7 +113,8 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
             ->setAreaType(ItemAreaTypeType::MARKER)
             ->setStatus(ItemStatusType::ACTIVE)
             ->setModerated(true)
-            ->setDate(new \DateTime('10.11.2014'));
+            ->setDate(new \DateTime('10.11.2014'))
+            ->setCreatedBy($user1);
         $manager->persist($hat);
 
         $passport = (new Item())
@@ -116,7 +127,8 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
             ->setAreaType(ItemAreaTypeType::MARKER)
             ->setStatus(ItemStatusType::ACTIVE)
             ->setModerated(true)
-            ->setDate(new \DateTime('10.11.2014'));
+            ->setDate(new \DateTime('10.11.2014'))
+            ->setCreatedBy($user1);
         $manager->persist($passport);
 
         $manager->flush();
