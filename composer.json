@@ -1,10 +1,37 @@
 {
     "name": "stfalcon-studio/lost-and-found",
-    "description": "Service \"Lost and Found\". Announcement of lost or found items",
-    "keywords": ["lost", "found", "social", "help"],
+    "description": "Web-service for announcements of lost and found items. Was created by students from Khmelnytskyi Polytechnic College during their practice at Studio Stfalcon.com",
+    "keywords": ["lost", "found", "social", "help", "announcements", "service"],
     "homepage": "https://github.com/stfalcon-studio/lost-and-found",
     "type": "project",
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Artem Genvald",
+            "email": "genvaldartem@gmail.com",
+            "role": "Developer, Team-lead, Curator of Practice"
+        },
+        {
+            "name": "Oleg Kachinsky",
+            "email": "Logans_oleg14@ukr.net",
+            "role": "Developer, Student trainee from Khmelnytskyi Polytechnic College"
+        },
+        {
+            "name": "Yuriy Svatok",
+            "email": "svatok13@gmail.com",
+            "role": "Developer, Student trainee from Khmelnytskyi Polytechnic College"
+        },
+        {
+            "name": "Andriy Prohorovych",
+            "email": "prohorovychua@gmail.com",
+            "role": "Developer, Student trainee from Khmelnytskyi Polytechnic College"
+        },
+        {
+            "name": "Community",
+            "homepage": "https://github.com/stfalcon-studio/lost-and-found/graphs/contributors",
+            "role": "Developers"
+        }
+    ],
     "require": {
         "php": ">=5.4.0",
         "symfony/symfony": "2.6.*",
@@ -32,7 +59,9 @@
         "doctrine/doctrine-fixtures-bundle": "2.2.*"
     },
     "autoload": {
-        "psr-4": { "": "src/" }
+        "psr-4": {
+            "": "src/"
+        }
     },
     "scripts": {
         "post-root-package-install": [
