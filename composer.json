@@ -66,6 +66,9 @@
         }
     },
     "scripts": {
+        "pre-install-cmd": [
+            "AppBundle\\Composer\\HerokuEnvironment::populateEnvironment"
+        ],
         "post-root-package-install": [
             "SymfonyStandard\\Composer::hookRootPackageInstall"
         ],
@@ -84,10 +87,8 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles"
-        ],
-        "pre-install-cmd" :[
-            "AppBundle\\Composer\\HerokuEnvironment::populateEnvironment"
         ]
+
     },
     "config": {
         "bin-dir": "bin"
@@ -102,7 +103,9 @@
                 "database_name": "SYMFONY__DATABASE_NAME",
                 "database_user": "SYMFONY__DATABASE_USER",
                 "database_host": "SYMFONY__DATABASE_HOST",
-                "database_password": "SYMFONY__DATABASE_PASSWORD"
+                "database_password": "SYMFONY__DATABASE_PASSWORD",
+                "facebook_oauth_client_id": "FACEBOOK_OAUTH_CLIENT_ID",
+                "facebook_oauth_client_secret": "FACEBOOK_OAUTH_CLIENT_SECRET"
             }
         },
         "heroku": {
