@@ -8,10 +8,12 @@ $(document).ready(function() {
     var drawnItems = new L.FeatureGroup();
     map.addControl(drawnItems);
 
-    var latitude = $('#latitude').data('latitude');
-    var longitude = $('#longitude').data('longitude');
-    var area = $('#area').data('area');
-    var areaType = $('#areaType').data('areaType');
+    var latitude = $("input[name*='[latitude]']").val();
+    var longitude = $("input[name*='[longitude]']").val();
+    var area = $("input[name*='[area]']").val();
+    var areaType = $("input[name*='[areaType]']").val();
+
+    console.log(areaType);
 
     var options = {color: "#000000", weight: 2};
 
@@ -20,8 +22,6 @@ $(document).ready(function() {
 
         switch (status) {
             case 'hide':
-                //clearFields();
-
                 options = new L.Control.Draw({
                     draw: {
                         polyline: false,
@@ -29,15 +29,10 @@ $(document).ready(function() {
                         rectangle: false,
                         circle: false,
                         marker: false
-                    },
-                    edit: {
-                        featureGroup: drawnItems
                     }
                 });
                 break;
             case 'show':
-                //clearFields();
-
                 options = new L.Control.Draw({
                     draw: {
                         position: 'topleft',
@@ -58,9 +53,6 @@ $(document).ready(function() {
                                 color: '#000000'
                             }
                         }
-                    },
-                    edit: {
-                        featureGroup: drawnItems
                     }
                 });
                 break;
@@ -70,7 +62,7 @@ $(document).ready(function() {
         return options;
     }
 
-    var drawControl = toolbarState('show');
+    var drawControl = toolbarState('hide');
     map.addControl(drawControl);
 
     var layer = null;
@@ -78,7 +70,7 @@ $(document).ready(function() {
 
     switch (areaType) {
         case 'polygon':
-            area = JSON.parse(JSON.parse(area));
+            area = JSON.parse(area);
 
             var polygon = [];
             var summLat = 0, summLng = 0;
@@ -94,9 +86,7 @@ $(document).ready(function() {
             map.setView(center, 6);
             break;
         case 'rectangle':
-            area = JSON.parse(JSON.parse(area));
-            console.log(area[0]);
-
+            area = JSON.parse(area);
             var bounds = [[area[0].latitude, area[0].longitude], [area[2].latitude, area[2].longitude]];
 
             layer = L.rectangle(bounds, options);
@@ -104,7 +94,7 @@ $(document).ready(function() {
             map.setView([area[0].latitude, area[0].longitude], 6);
             break;
         case 'circle':
-            area = JSON.parse(JSON.parse(area));
+            area = JSON.parse(area);
 
             layer = L.circle([area[0].latlng.lat, area[0].latlng.lng], area[0].radius, options);
             center = [area[0].latlng.lat, area[0].latlng.lng];
@@ -117,18 +107,101 @@ $(document).ready(function() {
             break;
     }
 
+    //area = JSON.parse(area);
+    //
+    //console.log(area);
+    //var polygon = [];
+    //var summLat = 0, summLng = 0;
+    //
+    //for (var i = 0; i < area.length; i++) {
+    //    polygon.push([area[i].latitude, area[i].longitude]);
+    //    summLat += parseInt(area[i].latitude);
+    //    summLng += parseInt(area[i].longitude);
+    //}
+    //
+    //layer = L.polygon(polygon, options)
+    //center = [summLat / area.length, summLng / area.length];
+    //map.setView(center, 6);
+
     var figureLayer = L.layerGroup().addLayer(layer).addTo(map);
 
-    map.on('click', function(e){
-        var popup = L.popup()
-            .setContent("Delete that item? <button id=\"yes\">Yes</button><button id=\"no\">No</button>")
-            .setLatLng(center)
-            .openOn(map);
+    function layerClick() {
+        layer.on('click', function(e){
+            var popup = L.popup()
+                .setContent("Delete that item? <button id=\"yes\">Yes</button><button id=\"no\">No</button>")
+                .setLatLng(e.latlng)
+                .openOn(map);
 
-        /* TODO: Close popup after delete layer */
+            /* TODO: Close popup after delete layer */
 
-        var yes = $('#yes').on('click', function() {
-            figureLayer.removeLayer(layer);
+            var yes = $('#yes').on('click', function() {
+                figureLayer.removeLayer(layer);
+
+                drawControl = toolbarState('show');
+                map.addControl(drawControl);
+            });
         });
+    }
+
+    function clearInputs() {
+        $("input[name*='[latitude]']").val('');
+        $("input[name*='[longitude]']").val('');
+        $("input[name*='[area]']").val('');
+        //$("input[name*='[areaType]'] option:selected").text();
+    }
+
+    layerClick();
+
+    map.on('draw:created', function (e) {
+        var type = e.layerType,
+            createdLayer = e.layer;
+
+        map.removeControl(drawControl);
+        drawControl = toolbarState('hide');
+        map.addControl(drawControl);
+        layer = createdLayer;
+        figureLayer.addLayer(layer);
+
+        layerClick();
+
+        function getLatLngs() {
+            var customArray = [];
+
+            for (var i = 0; i < createdLayer._latlngs.length; i++) {
+                customArray.push({
+                    latitude: createdLayer._latlngs[i].lat,
+                    longitude: createdLayer._latlngs[i].lng
+                });
+            }
+
+            $("input[name*='[area]']").val(JSON.stringify(customArray));
+        }
+
+        clearInputs();
+
+        switch (type) {
+            case 'polygon':
+                getLatLngs();
+                break;
+            case 'rectangle':
+                getLatLngs();
+                break;
+            case 'circle':
+                var arr = [{
+                    latlng: createdLayer._latlng,
+                    radius: createdLayer._mRadius
+                }];
+
+                $("input[name*='[area]']").val(JSON.stringify(arr));
+                break;
+            case 'marker':
+                $("input[name*='[latitude]']").val(createdLayer._latlng.lat);
+                $("input[name*='[longitude]']").val(createdLayer._latlng.lng);
+                break;
+            default:
+                console.log('wrong type');
+        }
+
+        $("input[name*='[areaType]']").val(type);
     });
 });

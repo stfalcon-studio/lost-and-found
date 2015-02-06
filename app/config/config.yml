@@ -39,6 +39,8 @@ twig:
     form:
         resources:
             - 'SonataCoreBundle:Form:datepicker.html.twig'
+    form_themes:
+        - ':backend/item:area_map.html.twig'
 
 
 # Swiftmailer Configuration

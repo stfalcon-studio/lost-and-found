@@ -1,14 +1,19 @@
 {% extends 'SonataAdminBundle:CRUD:edit.html.twig' %}
 
+{#{% form_theme form ':backend/item:area_map.html.twig' %}#}
+
 {% block stylesheets %}
     {{ parent() }}
 
-    {% stylesheets 'http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css' %}
-    <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
-    {% endstylesheets %}
-
+    <link rel="stylesheet" type="text/css" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
     <link rel="stylesheet" type="text/css" href="{{ asset('lib/leaflet-draw/leaflet.draw.css') }}" />
 {% endblock stylesheets %}
+
+{% block form %}
+    {{ parent() }}
+
+    <div id="latitude" data-latitude="{{ form_widget(form.latitude) }}"></div>
+{% endblock form %}
 
 {% block javascripts %}
     {{ parent() }}

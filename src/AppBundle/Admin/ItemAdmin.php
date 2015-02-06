@@ -38,10 +38,16 @@ class ItemAdmin extends Admin
                 ->add('longitude')
                 ->add('type')
                 ->add('description')
-                ->add('area')
-                ->add('areaType')
+                ->add('areaMap', 'area_map', [
+                    'mapped' => false,
+                ])
+                ->add('area', 'text', [
+                    'required' => false,
+                ])
+                ->add('areaType', 'text')
                 ->add('status')
                 ->add('moderated')
+                ->add('createdBy')
                 ->add('date', 'date')
             ->end();
     }
@@ -89,16 +95,14 @@ class ItemAdmin extends Admin
             ->add('id')
             ->add('category')
             ->add('title')
-            ->add('latitude', 'hidden')
-            ->add('longitude', 'hidden')
+            ->add('latitude')
+            ->add('longitude')
             ->add('type')
             ->add('description')
             ->add('area', 'text', [
                 'template' => 'backend/item/show_map.html.twig'
             ])
-            ->add('areaType', 'hidden', [
-                'required' => true,
-            ])
+            ->add('areaType')
             ->add('status')
             ->add('moderated', 'boolean')
             ->add('date', 'date', [
@@ -172,6 +176,7 @@ class ItemAdmin extends Admin
             case 'show':
                 return 'backend\item\show.html.twig';
                 break;
+
             case 'edit':
                 return 'backend\item\edit.html.twig';
                 break;
