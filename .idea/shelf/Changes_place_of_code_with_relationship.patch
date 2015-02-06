@@ -1,0 +1,105 @@
+Index: src/AppBundle/Entity/Item.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/AppBundle/Entity/Item.php	(date 1422529536000)
++++ src/AppBundle/Entity/Item.php	(revision )
+@@ -228,4 +228,33 @@
+     {
+         $this->status = $status;
+     }
++
++    /**
++     * Set category
++     *
++     * @param \AppBundle\Entity\Category $category
++     * @return Item
++     */
++    public function setCategory(\AppBundle\Entity\Category $category = null)
++    {
++        $this->category = $category;
++
++        return $this;
++    }
++
++    /**
++     * Get category
++     *
++     * @return \AppBundle\Entity\Category 
++     */
++    public function getCategory()
++    {
++        return $this->category;
++    }
++
++    /**
++     * @ORM\ManyToOne(targetEntity="Category", inversedBy="items")
++     * @ORM\JoinColumn(name="CategoryId", referencedColumnName="id")
++     */
++    protected $category;
+-}
+\ No newline at end of file
++}
+Index: src/AppBundle/Entity/Category.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/AppBundle/Entity/Category.php	(date 1422529536000)
++++ src/AppBundle/Entity/Category.php	(revision )
+@@ -3,6 +3,7 @@
+ namespace AppBundle\Entity;
+ 
+ use Doctrine\ORM\Mapping as ORM;
++use Doctrine\Common\Collections\ArrayCollection;
+ 
+ /**
+  * @ORM\Entity
+@@ -58,4 +59,46 @@
+         $this->title = $title;
+     }
+ 
++    /**
++     * @ORM\OneToMany(targetEntity="Item", mappedBy="category")
++     */
++    protected $items;
++
++    public function __construct()
++    {
++        $this->items = new ArrayCollection();
++    }
++
++    /**
++     * Add items
++     *
++     * @param \AppBundle\Entity\Item $items
++     * @return Category
++     */
++    public function addItem(\AppBundle\Entity\Item $items)
++    {
++        $this->items[] = $items;
++
++        return $this;
++    }
++
++    /**
++     * Remove items
++     *
++     * @param \AppBundle\Entity\Item $items
++     */
++    public function removeItem(\AppBundle\Entity\Item $items)
++    {
++        $this->items->removeElement($items);
++    }
++
++    /**
++     * Get items
++     *
++     * @return \Doctrine\Common\Collections\Collection 
++     */
++    public function getItems()
++    {
++        return $this->items;
++    }
+ }
