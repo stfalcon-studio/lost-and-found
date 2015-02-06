@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Profile |
+    {{ parent() }}
+{% endblock title %}
+
+
+{% block content %}
+    <a href="{{ path('homepage') }}">На головну</a>
+    <br/>
+    <a href="{{ path('user_lost_actual') }}">Lost items</a> | Found items
+    <br/>
+    <a href="{{ path('user_found_actual') }}">Actual</a> | Resolved
+    {% for item in ResolvedFoundItems %}
+        <li>
+            <a href="{{ path('item_details', {'id': item.id}) }}">{{ item.title }}</a>
+        </li>
+    {% endfor %}
+    <br />
+{% endblock content %}

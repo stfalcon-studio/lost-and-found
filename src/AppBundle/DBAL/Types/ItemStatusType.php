@@ -12,14 +12,14 @@ use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
  */
 class ItemStatusType extends AbstractEnumType
 {
-    const ACTIVE   = 'active';
+    const ACTUAL   = 'actual';
     const RESOLVED = 'resolved';
 
     /**
      * {@inheritdoc}
      */
     protected static $choices = [
-        self::ACTIVE   => 'Active',
+        self::ACTUAL   => 'Actual',
         self::RESOLVED => 'Resolved'
     ];
 }

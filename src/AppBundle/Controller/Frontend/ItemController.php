@@ -99,11 +99,8 @@ class ItemController extends Controller
                 'moderated' => true,
             ]);
 
-        $foundPoint = $this->getDoctrine()
-            ->getRepository('AppBundle:Item');
-
         if (!$item) {
-            throw $this->createNotFoundException('Item not found');
+            throw $this->createNotFoundException('Item not found.');
         }
 
         return $this->render('frontend/default/item_details.html.twig', [
