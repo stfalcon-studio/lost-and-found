@@ -83,11 +83,11 @@ class FoundItemType extends AbstractType
         $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) use ($tokenStorage) {
             $item = $event->getData();
 
-           /* if ($item instanceof UserManageableInterface) {
+            if ($item instanceof UserManageableInterface) {
                 $user = $tokenStorage->getToken()->getUser();
 
                 $item->setCreatedBy($user);
-            }*/
+            }
         });
     }
 

@@ -1,17 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: svatok
- * Date: 05.02.15
- * Time: 16:19
- */
 
 namespace AppBundle\Controller\Frontend;
 
 use AppBundle\Entity\User;
+use AppBundle\Entity\Item;
 use AppBundle\DBAL\Types\ItemStatusType;
 use AppBundle\DBAL\Types\ItemTypeType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -98,20 +94,16 @@ class UserController extends Controller
     /**
      * Item edit
      *
-     * @param integer $id
+     * @param Item    $item
      * @param Request $request
      *
      * @return Response
      *
      * @Route("/item/{id}/edit", name="item_edit")
+     * @ParamConverter("item", class="AppBundle\Entity\Item", options={"id" = "id"})
      */
-    public function itemEditAction($id, Request $request)
+    public function itemEditAction(Item $item, Request $request)
     {
-        $item = $this->getDoctrine()
-                     ->getRepository('AppBundle:Item')
-                     ->findOneBy([
-                         'id' => $id,
-                     ]);
         $form = $this->createForm('item_edit', $item);
 
         $form->handleRequest($request);
