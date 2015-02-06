@@ -1,0 +1,20 @@
+{
+  "name": "Loas and Found",
+  "description": "Web-application",
+  "keywords": ["things", "found", "lost"],
+  "website": "https://github.com/stfalcon-studio/lost-and-found",
+  "success_url": "/admin",
+  "repository": "https://github.com/stfalcon-studio/lost-and-found",
+  "logo": "http://icons.iconarchive.com/icons/treetog/i/96/Search-icon.png",
+  "addons": [
+    "cleardb"
+  ],
+  "env": {
+    "SYMFONY_ENV": {
+      "value": "prod"
+    }
+  },
+  "scripts": {
+    "postdeploy": "php app/console doctrine:migration:migrate"
+  }
+}
