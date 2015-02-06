@@ -12,11 +12,11 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
- * Class LostItemType
+ * Class EditItemType
  *
- * @author Logans <Logansoleg@gmail.com>
+ * @author svatok13 <svatok13@gmail.com>
  */
-class LostItemType extends AbstractType
+class EditItemType extends AbstractType
 {
     /**
      * @var TokenStorageInterface $tokenStorage Token storage
@@ -40,9 +40,9 @@ class LostItemType extends AbstractType
     {
         $builder
             ->add('category', 'entity', [
-                'class'         => 'AppBundle\Entity\Category',
-                'property'      => 'title',
-                'label'         => 'Категорія',
+                'label'    => 'Категорія',
+                'class'    => 'AppBundle\Entity\Category',
+                'property' => 'title',
                 'query_builder' => function(EntityRepository $er) {
                     $qb = $er->createQueryBuilder('c');
 
@@ -54,15 +54,16 @@ class LostItemType extends AbstractType
             ])
             ->add('type', 'hidden', [
                 'label' => 'Тип',
-                'data'  => ItemTypeType::LOST,
             ])
-            ->add('active', 'hidden', [
+            ->add('latitude', 'hidden', [
+                'label' => 'Latitude',
+            ])
+            ->add('longitude', 'hidden', [
+                'label' => 'Longitude'
+            ])
+            ->add('active', 'text', [
                 'label' => 'Активність',
-                'data'  => true,
             ])
-            ->add('latitude', 'hidden')
-            ->add('longitude', 'hidden')
-            ->add('area', 'hidden')
             ->add('areaType', 'hidden')
             ->add('description', 'textarea', [
                 'label' => 'Опис',
@@ -72,7 +73,7 @@ class LostItemType extends AbstractType
                 'widget' => 'single_text'
             ])
             ->add('save', 'submit', [
-                'label' => 'Create',
+                'label' => 'Update',
             ]);
 
         $tokenStorage = $this->tokenStorage;
@@ -93,6 +94,6 @@ class LostItemType extends AbstractType
      */
     public function getName()
     {
-        return 'lost_item';
+        return 'item_edit';
     }
 }

@@ -23,7 +23,8 @@
                 {% block user_login %}
                     {% if is_granted('ROLE_USER') %}
                         You are logged in as <strong>{{ app.user.fullName }}</strong> |
-                        <a href="{{ path('fos_user_security_logout') }}">Logout</a>
+                        <a href="{{ path('fos_user_security_logout') }}">Logout</a> |
+                        <a href="{{ path('user_lost_actual') }}">Profile</a> |
                     {% else %}
                         <a href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook'}) }}">Login via Facebook</a>
                     {% endif %}

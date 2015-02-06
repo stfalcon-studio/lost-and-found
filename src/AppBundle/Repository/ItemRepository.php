@@ -3,6 +3,7 @@
 namespace AppBundle\Repository;
 
 use AppBundle\Entity\Item;
+use AppBundle\Entity\User;
 use AppBundle\DBAL\Types\ItemStatusType;
 use AppBundle\DBAL\Types\ItemTypeType;
 use Doctrine\ORM\EntityRepository;
@@ -31,7 +32,7 @@ class ItemRepository extends EntityRepository
            ->andWhere($qb->expr()->eq('i.moderated', true))
            ->setParameters([
                'type'   => ItemTypeType::LOST,
-               'status' => ItemStatusType::ACTIVE
+               'status' => ItemStatusType::ACTUAL
            ])
            ->orderBy('i.createdAt', 'DESC')
            ->setFirstResult($offset);
@@ -60,7 +61,7 @@ class ItemRepository extends EntityRepository
            ->andWhere($qb->expr()->eq('i.moderated', true))
            ->setParameters([
                'type'   => ItemTypeType::FOUND,
-               'status' => ItemStatusType::ACTIVE
+               'status' => ItemStatusType::ACTUAL
            ])
            ->orderBy('i.createdAt', 'DESC')
            ->setFirstResult($offset);
@@ -124,5 +125,28 @@ class ItemRepository extends EntityRepository
         }
 
         return $qb->getQuery()->getArrayResult();
+    }
+
+    /**
+     * @param User   $user
+     * @param string $status
+     * @param string $type
+     *
+     * @return array
+     */
+    public function getUserItems(User $user, $status, $type)
+    {
+        $qb = $this->createQueryBuilder('i');
+
+        $qb->where($qb->expr()->eq('i.createdBy', ':user'))
+           ->andWhere($qb->expr()->eq('i.status', ':status'))
+           ->andWhere($qb->expr()->eq('i.type', ':type'))
+           ->setParameters([
+               'user' => $user,
+               'status' => $status,
+               'type' => $type,
+           ]);
+
+        return $qb->getQuery()->getResult();
     }
 }
