@@ -13,8 +13,6 @@ $(document).ready(function() {
     var area = $("input[name*='[area]']").val();
     var areaType = $("input[name*='[areaType]']").val();
 
-    console.log(areaType);
-
     var options = {color: "#000000", weight: 2};
 
     function toolbarState(status) {
@@ -107,22 +105,6 @@ $(document).ready(function() {
             break;
     }
 
-    //area = JSON.parse(area);
-    //
-    //console.log(area);
-    //var polygon = [];
-    //var summLat = 0, summLng = 0;
-    //
-    //for (var i = 0; i < area.length; i++) {
-    //    polygon.push([area[i].latitude, area[i].longitude]);
-    //    summLat += parseInt(area[i].latitude);
-    //    summLng += parseInt(area[i].longitude);
-    //}
-    //
-    //layer = L.polygon(polygon, options)
-    //center = [summLat / area.length, summLng / area.length];
-    //map.setView(center, 6);
-
     var figureLayer = L.layerGroup().addLayer(layer).addTo(map);
 
     function layerClick() {
@@ -132,13 +114,12 @@ $(document).ready(function() {
                 .setLatLng(e.latlng)
                 .openOn(map);
 
-            /* TODO: Close popup after delete layer */
-
             var yes = $('#yes').on('click', function() {
                 figureLayer.removeLayer(layer);
 
                 drawControl = toolbarState('show');
                 map.addControl(drawControl);
+                map.closePopup();
             });
         });
     }
@@ -147,7 +128,6 @@ $(document).ready(function() {
         $("input[name*='[latitude]']").val('');
         $("input[name*='[longitude]']").val('');
         $("input[name*='[area]']").val('');
-        //$("input[name*='[areaType]'] option:selected").text();
     }
 
     layerClick();
