@@ -55,7 +55,8 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
             ->setType(ItemTypeType::LOST)
             ->setDescription('Загубив телефон Google Nexus 5. Потрібна допомога за винагороду.')
             ->setAreaType(ItemAreaTypeType::MARKER)
-            ->setStatus(ItemStatusType::ACTIVE)
+            ->setStatus(ItemStatusType::ACTUAL)
+            ->setActive(true)
             ->setModerated(true)
             ->setDate(new \DateTime('10.11.2014'))
             ->setCreatedBy($user1);
@@ -71,6 +72,7 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
             ->setAreaType(ItemAreaTypeType::MARKER)
             ->setStatus(ItemStatusType::RESOLVED)
             ->setModerated(true)
+            ->setActive(true)
             ->setDate(new \DateTime('10.11.2014'))
             ->setCreatedBy($user1);
         $manager->persist($nokia);
@@ -83,8 +85,9 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
             ->setType(ItemTypeType::FOUND)
             ->setDescription('Знайшов новенький-новісінький айфон. Віддам його власнику без винагороди, бо він мені не потрібен. Я фанат андроїда :)')
             ->setAreaType(ItemAreaTypeType::MARKER)
-            ->setStatus(ItemStatusType::ACTIVE)
+            ->setStatus(ItemStatusType::ACTUAL)
             ->setModerated(true)
+            ->setActive(false)
             ->setDate(new \DateTime('10.11.2014'))
             ->setCreatedBy($user1);
         $manager->persist($iPhone);
@@ -97,8 +100,9 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
             ->setType(ItemTypeType::LOST)
             ->setDescription('Загубив ключі від квартири.')
             ->setAreaType(ItemAreaTypeType::MARKER)
-            ->setStatus(ItemStatusType::ACTIVE)
+            ->setStatus(ItemStatusType::ACTUAL)
             ->setModerated(true)
+            ->setActive(true)
             ->setDate(new \DateTime('10.11.2014'))
             ->setCreatedBy($user1);
         $manager->persist($keys);
@@ -111,8 +115,9 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
             ->setType(ItemTypeType::LOST)
             ->setDescription('Загубив улюблену шапку червоного кольору.')
             ->setAreaType(ItemAreaTypeType::MARKER)
-            ->setStatus(ItemStatusType::ACTIVE)
+            ->setStatus(ItemStatusType::ACTUAL)
             ->setModerated(true)
+            ->setActive(true)
             ->setDate(new \DateTime('10.11.2014'))
             ->setCreatedBy($user1);
         $manager->persist($hat);
@@ -125,8 +130,9 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
             ->setType(ItemTypeType::FOUND)
             ->setDescription('Знайшов український національний паспорт на ім\'я Іванов Іван Іванович')
             ->setAreaType(ItemAreaTypeType::MARKER)
-            ->setStatus(ItemStatusType::ACTIVE)
+            ->setStatus(ItemStatusType::ACTUAL)
             ->setModerated(true)
+            ->setActive(false)
             ->setDate(new \DateTime('10.11.2014'))
             ->setCreatedBy($user1);
         $manager->persist($passport);

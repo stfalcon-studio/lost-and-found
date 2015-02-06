@@ -57,3 +57,8 @@ vich_uploader:
         category_image:
             uri_prefix:         /images/categories
             upload_destination: %kernel.root_dir%/../web/images/categories
+#Sensio
+sensio_framework_extra:
+    request:
+        converters: true
+        auto_convert: false

@@ -132,7 +132,16 @@ class Item implements UserManageableInterface
      *
      * @Gedmo\Versioned
      */
-    private $status = ItemStatusType::ACTIVE;
+    private $status = ItemStatusType::ACTUAL;
+
+    /**
+     * @var boolean $active Active
+     *
+     * @ORM\Column(name="active", type="boolean")
+     *
+     * @Gedmo\Versioned
+     */
+    private $active = true;
 
     /**
      * @var \DateTime|null $date
@@ -285,6 +294,26 @@ class Item implements UserManageableInterface
     public function setType($type)
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isActive()
+    {
+        return $this->active;
+    }
+
+    /**
+     * @param boolean $active
+     *
+     * @return $this
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
 
         return $this;
     }

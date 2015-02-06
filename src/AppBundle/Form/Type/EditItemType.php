@@ -12,11 +12,11 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
- * Class FoundItemType
+ * Class EditItemType
  *
- * @author Logans <Logansoleg@gmail.com>
+ * @author svatok13 <svatok13@gmail.com>
  */
-class FoundItemType extends AbstractType
+class EditItemType extends AbstractType
 {
     /**
      * @var TokenStorageInterface $tokenStorage Token storage
@@ -54,17 +54,15 @@ class FoundItemType extends AbstractType
             ])
             ->add('type', 'hidden', [
                 'label' => 'Тип',
-                'data'  => ItemTypeType::FOUND,
             ])
             ->add('latitude', 'hidden', [
                 'label' => 'Latitude',
             ])
-            ->add('active', 'hidden', [
-                'label' => 'Активність',
-                'data'  => true,
-            ])
             ->add('longitude', 'hidden', [
                 'label' => 'Longitude'
+            ])
+            ->add('active', 'text', [
+                'label' => 'Активність',
             ])
             ->add('areaType', 'hidden')
             ->add('description', 'textarea', [
@@ -75,7 +73,7 @@ class FoundItemType extends AbstractType
                 'widget' => 'single_text'
             ])
             ->add('save', 'submit', [
-                'label' => 'Create',
+                'label' => 'Update',
             ]);
 
         $tokenStorage = $this->tokenStorage;
@@ -96,6 +94,6 @@ class FoundItemType extends AbstractType
      */
     public function getName()
     {
-        return 'found_item';
+        return 'item_edit';
     }
 }

@@ -19,3 +19,10 @@ services:
             - { name: form.type, alias: area_map }
         arguments:
             - @security.token_storage
+
+    app.form.type.item_edit:
+            class: AppBundle\Form\Type\EditItemType
+            tags:
+                - { name: form.type, alias: item_edit }
+            arguments:
+                - @security.token_storage
