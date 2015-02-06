@@ -52,7 +52,9 @@
         "sonata-project/core-bundle": "~2.2",
         "hwi/oauth-bundle": "0.4.*@dev",
         "friendsofsymfony/user-bundle": "~1.3",
-        "vich/uploader-bundle": "0.14.*"
+        "vich/uploader-bundle": "0.14.*",
+        "ext-intl": "*",
+        "ext-mbstring": "*"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
@@ -64,6 +66,9 @@
         }
     },
     "scripts": {
+        "pre-install-cmd": [
+            "AppBundle\\Composer\\HerokuEnvironment::populateEnvironment"
+        ],
         "post-root-package-install": [
             "SymfonyStandard\\Composer::hookRootPackageInstall"
         ],
@@ -83,6 +88,7 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles"
         ]
+
     },
     "config": {
         "bin-dir": "bin"
@@ -92,7 +98,24 @@
         "symfony-web-dir": "web",
         "symfony-assets-install": "relative",
         "incenteev-parameters": {
-            "file": "app/config/parameters.yml"
+            "file": "app/config/parameters.yml",
+            "env_map": {
+                "database_name": "SYMFONY__DATABASE_NAME",
+                "database_user": "SYMFONY__DATABASE_USER",
+                "database_host": "SYMFONY__DATABASE_HOST",
+                "database_password": "SYMFONY__DATABASE_PASSWORD",
+                "facebook_oauth_client_id": "FACEBOOK_OAUTH_CLIENT_ID",
+                "facebook_oauth_client_secret": "FACEBOOK_OAUTH_CLIENT_SECRET"
+            }
+        },
+        "heroku": {
+            "framework": "symfony2",
+            "document-root": "web",
+            "php-config": [
+                "date.timezone=Europe/Kiev",
+                "display_errors=off",
+                "short_open_tag=off"
+            ]
         }
     }
 }
