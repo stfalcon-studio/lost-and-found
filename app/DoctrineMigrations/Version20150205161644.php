@@ -23,6 +23,6 @@ class Version20150205161644 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE items CHANGE areaType areaType VARCHAR(255) NOT NULL COLLATE utf8_unicode_ci');
+        $this->addSql('ALTER TABLE items CHANGE areaType areaType ENUM(\'polygon\', \'found\', \'circle\', \'marker\') NOT NULL COMMENT \'(DC2Type:ItemAreaTypeType)\'');
     }
 }
