@@ -183,7 +183,7 @@ class Item implements UserManageableInterface
     private $moderatedAt;
 
     /**
-     * __toString method
+     * To string
      *
      * @return string
      */
@@ -299,6 +299,8 @@ class Item implements UserManageableInterface
     }
 
     /**
+     * Is active
+     *
      * @return boolean
      */
     public function isActive()
@@ -307,7 +309,9 @@ class Item implements UserManageableInterface
     }
 
     /**
-     * @param boolean $active
+     * Set active
+     *
+     * @param boolean $active Active
      *
      * @return $this
      */

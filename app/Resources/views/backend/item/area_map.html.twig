@@ -1,0 +1,14 @@
+{% form_theme form '@SonataAdmin/CRUD/base_edit.html.twig' %}
+
+{% block area_map_widget %}
+    <label for="map">Area</label>
+    <div id="map" style="width: inherit; height: 500px"></div>
+{% endblock %}
+
+{% block content %}
+    {#{{ form.longitude }}#}
+    {#<div id="latitude" data-latitude="{{ form.row(form.latitude) }}"></div>#}
+    {#<div id="longitude" data-longitude="{{ object.longitude }}"></div>#}
+    {#<div id="area" data-area="{{ object.area|json_encode }}"></div>#}
+    {#<div id="areaType" data-area-type="{{ object.areaType }}"></div>#}
+{% endblock %}

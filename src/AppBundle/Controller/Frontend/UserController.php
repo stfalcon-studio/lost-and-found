@@ -20,6 +20,8 @@ use Symfony\Component\HttpFoundation\Response;
 class UserController extends Controller
 {
     /**
+     * Show lost actual items
+     *
      * @return Response
      *
      * @Route("/lost-actual", name="user_lost_actual")
@@ -33,11 +35,13 @@ class UserController extends Controller
         $items = $itemRepository->getUserItems($user, ItemStatusType::ACTUAL, ItemTypeType::LOST);
 
         return $this->render(':frontend/profile:user_profile_lost_actual.html.twig', [
-            'ActualLostItems' => $items,
+            'items' => $items
         ]);
     }
 
     /**
+     * Show found actual items
+     *
      * @return Response
      *
      * @Route("/found-actual", name="user_found_actual")
@@ -51,11 +55,13 @@ class UserController extends Controller
         $items = $itemRepository->getUserItems($user, ItemStatusType::ACTUAL, ItemTypeType::FOUND);
 
         return $this->render(':frontend/profile:user_profile_found_actual.html.twig', [
-            'ActualFoundItems' => $items,
+            'items' => $items
         ]);
     }
 
     /**
+     * Show lost resolved items
+     *
      * @return Response
      *
      * @Route("/lost-resolved", name="user_lost_resolved")
@@ -69,11 +75,13 @@ class UserController extends Controller
         $items = $itemRepository->getUserItems($user, ItemStatusType::RESOLVED, ItemTypeType::LOST);
 
         return $this->render(':frontend/profile:user_profile_lost_resolved.html.twig', [
-            'ResolvedLostItems' => $items,
+            'items' => $items
         ]);
     }
 
     /**
+     * Show found resolved items
+     *
      * @return Response
      *
      * @Route("/found-resolved", name="user_found_resolved")
@@ -87,20 +95,20 @@ class UserController extends Controller
         $items = $itemRepository->getUserItems($user, ItemStatusType::RESOLVED, ItemTypeType::FOUND);
 
         return $this->render(':frontend/profile:user_profile_found_resolved.html.twig', [
-            'ResolvedFoundItems' => $items,
+            'items' => $items
         ]);
     }
 
     /**
      * Item edit
      *
-     * @param Item    $item
-     * @param Request $request
+     * @param Item    $item    Item
+     * @param Request $request Request
      *
      * @return Response
      *
      * @Route("/item/{id}/edit", name="item_edit")
-     * @ParamConverter("item", class="AppBundle\Entity\Item", options={"id" = "id"})
+     * @ParamConverter("item", class="AppBundle\Entity\Item")
      */
     public function itemEditAction(Item $item, Request $request)
     {
@@ -126,7 +134,7 @@ class UserController extends Controller
 
         return $this->render(':frontend/default:item_edit.html.twig', [
             'item' => $item,
-            'form' => $form->createView(),
+            'form' => $form->createView()
         ]);
     }
 }

@@ -2,12 +2,11 @@
 
 namespace AppBundle\Form\Type;
 
-use Doctrine\ORM\EntityRepository;
 use AppBundle\Model\UserManageableInterface;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use AppBundle\DBAL\Types\ItemTypeType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
@@ -40,7 +39,6 @@ class EditItemType extends AbstractType
     {
         $builder
             ->add('category', 'entity', [
-                'label'    => 'Категорія',
                 'class'    => 'AppBundle\Entity\Category',
                 'property' => 'title',
                 'query_builder' => function(EntityRepository $er) {
@@ -49,31 +47,18 @@ class EditItemType extends AbstractType
                     return $qb->where($qb->expr()->eq('c.enabled', true));
                 },
             ])
-            ->add('title', 'text', [
-                'label' => 'Назва',
-            ])
-            ->add('type', 'hidden', [
-                'label' => 'Тип',
-            ])
-            ->add('latitude', 'hidden', [
-                'label' => 'Latitude',
-            ])
-            ->add('longitude', 'hidden', [
-                'label' => 'Longitude'
-            ])
-            ->add('active', 'text', [
-                'label' => 'Активність',
-            ])
+            ->add('title', 'text')
+            ->add('type', 'hidden')
+            ->add('latitude', 'hidden')
+            ->add('longitude', 'hidden')
+            ->add('active', 'text')
             ->add('areaType', 'hidden')
-            ->add('description', 'textarea', [
-                'label' => 'Опис',
-            ])
+            ->add('description', 'textarea')
             ->add('date', 'date', [
-                'label' => 'Дата',
                 'widget' => 'single_text'
             ])
             ->add('save', 'submit', [
-                'label' => 'Update',
+                'label' => 'Update'
             ]);
 
         $tokenStorage = $this->tokenStorage;

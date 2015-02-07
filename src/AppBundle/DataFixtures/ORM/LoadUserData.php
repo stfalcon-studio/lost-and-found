@@ -17,18 +17,18 @@ class LoadUserData extends AbstractFixture
      */
     public function load(ObjectManager $manager)
     {
-        //Random user 1
-        $user1 = (new User())
-            ->setUsername('Test User')
+        // Simple user
+        $simpleUser = (new User())
+            ->setUsername('Simple User')
             ->setEnabled(true)
-            ->setEmail('test@localhost')
+            ->setEmail('simple_user@facebook')
             ->setRoles(['ROLE_USER'])
             ->setPlainPassword('qwerty')
-            ->setFullName('Test')
-            ->setFacebookId('1')
-            ->setFacebookAccessToken('sdfsdfsdf');
-        $this->setReference('rndUser1', $user1);
-        $manager->persist($user1);
+            ->setFullName('Simple User')
+            ->setFacebookId('FacebookClientId')
+            ->setFacebookAccessToken('FacebookClientSecret');
+        $this->setReference('user-simple', $simpleUser);
+        $manager->persist($simpleUser);
 
         $manager->flush();
     }

@@ -17,8 +17,9 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @author Artem Genvald <genvaldartem@gmail.com>
  *
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CategoryRepository")
- * @Vich\Uploadable
  * @ORM\Table(name="categories")
+ *
+ * @Vich\Uploadable
  *
  * @Gedmo\Loggable
  */
@@ -27,11 +28,11 @@ class Category
     use TimestampableEntity;
 
     /**
+     * @var int $id ID
+     *
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
-     *
-     * @var int $id ID
      */
     private $id;
 
@@ -66,22 +67,21 @@ class Category
     private $enabled = false;
 
     /**
-     * @Vich\UploadableField(mapping="category_image", fileNameProperty="imageName")
-     *
      * @var File $imageFile
+     *
+     * @Vich\UploadableField(mapping="category_image", fileNameProperty="imageName")
      */
-    protected $imageFile;
+    private $imageFile;
 
     /**
-     * @ORM\Column(type="string", length=255, name="image_name", nullable=true)
-     *
      * @var string $imageName
+     *
+     * @ORM\Column(type="string", length=255, name="image_name", nullable=true)
      */
-    protected $imageName;
+    private $imageName;
 
     /**
      * Constructor
-     *
      */
     public function __construct()
     {
@@ -89,7 +89,7 @@ class Category
     }
 
     /**
-     * __toString method
+     * To string
      *
      * @return string
      */
