@@ -1,0 +1,18 @@
+{% extends 'SonataAdminBundle:CRUD:base_show_field.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock stylesheets %}
+
+{% block field %}
+    <div id="map" style="width: inherit; height: 500px">
+        <div id="latitude" data-latitude="{{ object.latitude }}"></div>
+        <div id="longitude" data-longitude="{{ object.longitude }}"></div>
+        <div id="area" data-area="{{ object.area|json_encode }}"></div>
+        <div id="areaType" data-area-type="{{ object.areaType }}"></div>
+    </div>
+{% endblock field %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock javascripts %}

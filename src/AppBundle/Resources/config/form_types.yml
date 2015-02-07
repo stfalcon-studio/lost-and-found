@@ -13,6 +13,13 @@ services:
         arguments:
             - @security.token_storage
 
+    app.form.type.area_map:
+        class: AppBundle\Form\Type\AreaMapType
+        tags:
+            - { name: form.type, alias: area_map }
+        arguments:
+            - @security.token_storage
+
     app.form.type.item_edit:
             class: AppBundle\Form\Type\EditItemType
             tags:

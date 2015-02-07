@@ -13,7 +13,7 @@ use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 class ItemAreaTypeType extends AbstractEnumType
 {
     const POLYGON  = 'polygon';
-    const RECTANGLE = 'found';
+    const RECTANGLE = 'rectangle';
     const CIRCLE = 'circle';
     const MARKER = 'marker';
 
@@ -22,7 +22,7 @@ class ItemAreaTypeType extends AbstractEnumType
      */
     protected static $choices = [
         self::POLYGON   => 'Polygon',
-        self::RECTANGLE => 'Found',
+        self::RECTANGLE => 'Rectangle',
         self::CIRCLE    => 'Circle',
         self::MARKER    => 'Marker'
     ];
