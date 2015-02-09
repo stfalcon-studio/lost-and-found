@@ -57,6 +57,12 @@ class EditItemType extends AbstractType
             ->add('date', 'date', [
                 'widget' => 'single_text'
             ])
+            ->add('areaMap', 'area_map', [
+                'mapped' => false,
+            ])
+            ->add('area', 'hidden', [
+                'required' => false,
+            ])
             ->add('save', 'submit', [
                 'label' => 'Update'
             ]);
