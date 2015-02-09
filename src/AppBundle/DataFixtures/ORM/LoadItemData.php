@@ -62,7 +62,8 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
             ->setActive(true)
             ->setModerated(true)
             ->setDate(new \DateTime('10.11.2014'))
-            ->setCreatedBy($simpleUser);
+            ->setCreatedBy($simpleUser)
+            ->setDeleted(false);
         $manager->persist($nexus);
 
         $nokia = (new Item())
@@ -77,7 +78,8 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
             ->setModerated(true)
             ->setActive(true)
             ->setDate(new \DateTime('10.11.2014'))
-            ->setCreatedBy($simpleUser);
+            ->setCreatedBy($simpleUser)
+            ->setDeleted(false);
         $manager->persist($nokia);
 
         $iPhone = (new Item())
@@ -92,7 +94,8 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
             ->setModerated(true)
             ->setActive(false)
             ->setDate(new \DateTime('10.11.2014'))
-            ->setCreatedBy($simpleUser);
+            ->setCreatedBy($simpleUser)
+            ->setDeleted(false);
         $manager->persist($iPhone);
 
         $keys = (new Item())
@@ -107,7 +110,8 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
             ->setModerated(true)
             ->setActive(true)
             ->setDate(new \DateTime('10.11.2014'))
-            ->setCreatedBy($simpleUser);
+            ->setCreatedBy($simpleUser)
+            ->setDeleted(false);
         $manager->persist($keys);
 
         $hat = (new Item())
@@ -122,7 +126,8 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
             ->setModerated(true)
             ->setActive(true)
             ->setDate(new \DateTime('10.11.2014'))
-            ->setCreatedBy($simpleUser);
+            ->setCreatedBy($simpleUser)
+            ->setDeleted(false);
         $manager->persist($hat);
 
         $passport = (new Item())
@@ -137,7 +142,8 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
             ->setModerated(true)
             ->setActive(false)
             ->setDate(new \DateTime('10.11.2014'))
-            ->setCreatedBy($simpleUser);
+            ->setCreatedBy($simpleUser)
+            ->setDeleted(false);
         $manager->persist($passport);
 
         $manager->flush();
