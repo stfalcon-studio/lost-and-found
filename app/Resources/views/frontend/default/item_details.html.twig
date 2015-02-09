@@ -6,6 +6,8 @@
 {% endblock title %}
 
 {% block stylesheets %}
+    {{ parent() }}
+
     {% stylesheets 'http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css' %}
         <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
     {% endstylesheets %}

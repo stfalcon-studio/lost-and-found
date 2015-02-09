@@ -45,7 +45,7 @@ class ItemRepository extends EntityRepository
     }
 
     /**
-     * Get active Found items
+     * Get active found items
      *
      * @param integer $offset Offset
      * @param integer $limit  Limit
@@ -86,12 +86,12 @@ class ItemRepository extends EntityRepository
         $qb = $this->createQueryBuilder('i');
 
         $qb->select('i.latitude')
-            ->addSelect('i.longitude')
-            ->addSelect('IDENTITY(i.category) AS categoryId')
-            ->where($qb->expr()->eq('i.moderated', true))
-            ->andWhere($qb->expr()->eq('i.type', ':type'))
-            ->setParameter('type', ItemTypeType::LOST)
-            ->setFirstResult($offset);
+           ->addSelect('i.longitude')
+           ->addSelect('IDENTITY(i.category) AS categoryId')
+           ->where($qb->expr()->eq('i.moderated', true))
+           ->andWhere($qb->expr()->eq('i.type', ':type'))
+           ->setParameter('type', ItemTypeType::LOST)
+           ->setFirstResult($offset);
 
         if (null !== $limit) {
             $qb->setMaxResults($limit);
@@ -128,13 +128,15 @@ class ItemRepository extends EntityRepository
     }
 
     /**
-     * @param User   $user
-     * @param string $status
-     * @param string $type
+     * Get user items
+     *
+     * @param User   $user       User
+     * @param string $itemStatus Item status
+     * @param string $itemType   Item type
      *
      * @return array
      */
-    public function getUserItems(User $user, $status, $type)
+    public function getUserItems(User $user, $itemStatus, $itemType)
     {
         $qb = $this->createQueryBuilder('i');
 
@@ -142,9 +144,9 @@ class ItemRepository extends EntityRepository
            ->andWhere($qb->expr()->eq('i.status', ':status'))
            ->andWhere($qb->expr()->eq('i.type', ':type'))
            ->setParameters([
-               'user' => $user,
-               'status' => $status,
-               'type' => $type,
+               'user'   => $user,
+               'status' => $itemStatus,
+               'type'   => $itemType
            ]);
 
         return $qb->getQuery()->getResult();

@@ -5,7 +5,7 @@ namespace AppBundle\DBAL\Types;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 
 /**
- * Item status type
+ * ItemStatusType type
  *
  * @author Logans <LogansOleg@gmail.com>
  * @author Artem Genvald <genvaldartem@gmail.com>

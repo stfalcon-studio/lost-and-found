@@ -23,6 +23,8 @@ class User extends BaseUser
     use TimestampableEntity;
 
     /**
+     * @var int $id ID
+     *
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -105,7 +107,7 @@ class User extends BaseUser
      *
      * @return $this
      */
-    public function setItems($items)
+    public function setItems(Collection $items)
     {
         foreach ($items as $item) {
             $item->setCreatedBy($this);
@@ -170,7 +172,7 @@ class User extends BaseUser
     /**
      * Get Facebook ID
      *
-     * @return mixed Facebook ID
+     * @return string Facebook ID
      */
     public function getFacebookId()
     {
@@ -180,7 +182,7 @@ class User extends BaseUser
     /**
      * Set Facebook ID
      *
-     * @param mixed $facebookId Facebook ID
+     * @param string $facebookId Facebook ID
      *
      * @return $this
      */

@@ -5,7 +5,7 @@ namespace AppBundle\DBAL\Types;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 
 /**
- * Item type
+ * ItemTypeType type
  *
  * @author Logans <LogansOleg@gmail.com>
  * @author Artem Genvald <genvaldartem@gmail.com>
@@ -19,7 +19,7 @@ class ItemTypeType extends AbstractEnumType
      * {@inheritdoc}
      */
     protected static $choices = [
-        self::LOST  => 'Lost Item',
-        self::FOUND => 'Found Item'
+        self::LOST  => 'Lost item',
+        self::FOUND => 'Found item'
     ];
 }

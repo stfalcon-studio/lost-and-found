@@ -29,6 +29,25 @@ class CategoryAdmin extends Admin
     /**
      * {@inheritdoc}
      */
+    public function getBatchActions()
+    {
+        $actions = parent::getBatchActions();
+
+        $actions['enable'] = [
+            'label'            => 'Enable',
+            'ask_confirmation' => true
+        ];
+        $actions['disable']    = [
+            'label'            => 'Disable',
+            'ask_confirmation' => true
+        ];
+
+        return $actions;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
@@ -51,7 +70,7 @@ class CategoryAdmin extends Admin
             ->add('enabled', 'boolean', [
                 'editable' => true,
             ])
-            ->add('Image', 'string', [
+            ->add('image', 'string', [
                 'template' => 'backend/category/list_marker.html.twig',
             ])
             ->add('createdAt', 'datetime', [
@@ -77,7 +96,7 @@ class CategoryAdmin extends Admin
         $showMapper
             ->add('id')
             ->add('title')
-            ->add('Image', 'string', [
+            ->add('image', 'string', [
                 'template' => 'backend/category/show_marker.html.twig'
             ])
             ->add('enabled', 'boolean')
@@ -100,24 +119,5 @@ class CategoryAdmin extends Admin
             ->add('enabled')
             ->add('createdAt')
             ->add('updatedAt');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBatchActions()
-    {
-        $actions = parent::getBatchActions();
-
-        $actions['enable'] = [
-            'label'            => 'Enable',
-            'ask_confirmation' => true
-        ];
-        $actions['disable']    = [
-            'label'            => 'Disable',
-            'ask_confirmation' => true
-        ];
-
-        return $actions;
     }
 }
