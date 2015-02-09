@@ -27,7 +27,7 @@ $(document).ready(function() {
         if (month < 10) {
             month = "0" + month;
         }
-        var date = day + "/" + month + "/" + year;
+        var date = day + "." + month + "." + year;
 
         return date;
     }
@@ -59,8 +59,8 @@ $(document).ready(function() {
                             }
 
                             var popupText = "<div><h6 align='center' style='margin-bottom: 0'><b>" + data[i].title + "</b></h6></br>" +
-                                "<h3 style='margin: 0'><a href='" + data[i].link + "'>" + data[i].itemTitle + "</a></h3></br>" +
-                                "<p style='margin-top: 0' align='right'>" + formatDate(data[i].date.date) + "</p></div>";
+                                "<h3 style='margin: 0' align='center'><a href='" + data[i].link + "'>" + data[i].itemTitle + "</a></h3></br>" +
+                                "<p style='margin-top: 0' align='right'>Додано: " + formatDate(data[i].date.date) + "</p></div>";
 
                             marker.bindPopup(popupText);
 
