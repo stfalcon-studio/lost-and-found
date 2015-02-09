@@ -89,6 +89,9 @@ class ItemAdmin extends Admin
                 ->add('moderated')
                 ->add('createdBy')
                 ->add('date', 'date')
+                ->add('deleted')
+                ->add('deletedAt')
+                ->add('activatedAt')
             ->end();
     }
 
@@ -106,6 +109,7 @@ class ItemAdmin extends Admin
             ->add('status', 'string', [
                 'template' => 'backend/item/list_status.html.twig',
             ])
+            ->add('activatedAt')
             ->add('moderated')
             ->add('date', 'date', [
                 'format' => 'd.m.Y'
@@ -117,6 +121,7 @@ class ItemAdmin extends Admin
                 'format' => 'd.m.Y H:i:s'
             ])
             ->add('createdBy')
+            ->add('deleted')
             ->add('_action', 'actions', [
                 'actions' => [
                     'show'   => [],
@@ -144,6 +149,7 @@ class ItemAdmin extends Admin
             ])
             ->add('areaType')
             ->add('status')
+            ->add('activatedAt')
             ->add('moderated', 'boolean')
             ->add('date', 'date', [
                 'format' => 'd.m.Y'
@@ -157,7 +163,9 @@ class ItemAdmin extends Admin
             ])
             ->add('moderatedAt', 'datetime', [
                 'format' => 'd.m.Y H:i:s'
-            ]);
+            ])
+            ->add('delete')
+            ->add('deletedAt');
     }
 
     /**
@@ -176,10 +184,13 @@ class ItemAdmin extends Admin
             ->add('area')
             ->add('areaType')
             ->add('status')
+            ->add('activatedAt')
             ->add('moderated')
             ->add('createdAt')
             ->add('updatedAt')
             ->add('moderatedAt')
-            ->add('date');
+            ->add('date')
+            ->add('deleted')
+            ->add('deletedAt');
     }
 }

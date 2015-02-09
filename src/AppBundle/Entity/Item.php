@@ -201,7 +201,7 @@ class Item implements UserManageableInterface
      *
      * @ORM\Column(name="deleted", type="boolean")
      */
-    private $deleted;
+    private $deleted = false;
 
     /**
      * To string
