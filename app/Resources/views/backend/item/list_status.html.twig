@@ -1,7 +1,7 @@
 {% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
 
 {% block field %}
-    {% if value == 'active' %}
+    {% if value == 'actual' %}
         <span class="badge item-status-active">{{ value }}</span>
     {% elseif value == 'resolved' %}
         <span class="badge item-status-resolved">{{ value }}</span>

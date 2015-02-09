@@ -28,6 +28,46 @@ class ItemAdmin extends Admin
     /**
      * {@inheritdoc}
      */
+    public function getBatchActions()
+    {
+        $actions = parent::getBatchActions();
+
+        $actions['mark_as_moderated'] = [
+            'label'            => 'Mark as moderated',
+            'ask_confirmation' => true
+        ];
+        $actions['unmark_as_moderated']    = [
+            'label'            => 'Unmark as moderated',
+            'ask_confirmation' => true
+        ];
+
+        return $actions;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTemplate($name)
+    {
+        switch ($name) {
+            case 'list':
+                return 'backend\item\list.html.twig';
+                break;
+            case 'show':
+                return 'backend\item\show.html.twig';
+                break;
+            case 'edit':
+                return 'backend\item\edit.html.twig';
+                break;
+            default:
+                return parent::getTemplate($name);
+                break;
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
@@ -38,11 +78,17 @@ class ItemAdmin extends Admin
                 ->add('longitude')
                 ->add('type')
                 ->add('description')
-                ->add('area')
-                ->add('areaType')
+                ->add('areaMap', 'area_map', [
+                    'mapped' => false,
+                ])
+                ->add('area', 'text', [
+                    'required' => false,
+                ])
+                ->add('areaType', 'text')
                 ->add('status')
                 ->add('moderated')
-                ->add('date', 'sonata_type_date_picker')
+                ->add('createdBy')
+                ->add('date', 'date')
             ->end();
     }
 
@@ -54,11 +100,13 @@ class ItemAdmin extends Admin
         $listMapper
             ->addIdentifier('title')
             ->add('category')
-            ->add('type', 'string', ['template' => 'backend/item/list_type.html.twig'])
-            ->add('status', 'string', ['template' => 'backend/item/list_status.html.twig'])
-            ->add('moderated', 'boolean', [
-                'editable'=>true,
+            ->add('type', 'string', [
+                'template' => 'backend/item/list_type.html.twig',
             ])
+            ->add('status', 'string', [
+                'template' => 'backend/item/list_status.html.twig',
+            ])
+            ->add('moderated')
             ->add('date', 'date', [
                 'format' => 'd.m.Y'
             ])
@@ -76,8 +124,6 @@ class ItemAdmin extends Admin
                     'delete' => []
                 ]
             ]);
-
-        $this->setTemplate('list', 'backend\item\list.html.twig');
     }
 
     /**
@@ -93,7 +139,9 @@ class ItemAdmin extends Admin
             ->add('longitude')
             ->add('type')
             ->add('description')
-//            ->add('area') @todo Fix show template
+            ->add('area', 'text', [
+                'template' => 'backend/item/show_map.html.twig'
+            ])
             ->add('areaType')
             ->add('status')
             ->add('moderated', 'boolean')
@@ -133,24 +181,5 @@ class ItemAdmin extends Admin
             ->add('updatedAt')
             ->add('moderatedAt')
             ->add('date');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBatchActions()
-    {
-        $actions = parent::getBatchActions();
-
-        $actions['mark_as_moderated'] = [
-            'label'            => 'Mark as moderated',
-            'ask_confirmation' => true
-        ];
-        $actions['unmark_as_moderated']    = [
-            'label'            => 'Unmark as moderated',
-            'ask_confirmation' => true
-        ];
-
-        return $actions;
     }
 }

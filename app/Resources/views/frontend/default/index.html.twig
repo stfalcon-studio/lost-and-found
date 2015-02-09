@@ -24,41 +24,20 @@
     {% endfor %}
 
     <h1>Lost and Found</h1>
-{% if is_granted('ROLE_USER') %}
-    <div class="add-lost-found-item">
-        <p><a href="{{ path('add_lost_item') }}">Add lost item</a></p>
-        <p><a href="{{ path('add_found_item') }}">Add found item</a></p>
-    </div>
-{% endif %}
-
+    {% if is_granted('ROLE_USER') %}
+        <div>
+            <a href="{{ path('add_lost_item') }}" class="btn btn-danger" title="Add an item you've lost">I lost something :(</a>
+            &nbsp;
+            <a href="{{ path('add_found_item') }}" class="btn btn-success" title="Add an item you've found">I found something :)</a>
+        </div>
+    {% endif %}
     <br />
-
     <div>
         <div>
-                <button id="show-found-items">Show found items</button>
-                <button id="show-lost-items">Show lost items</button>
-
-            <div id="map" class="map"></div>
+            <button id="show-found-items" class="btn btn-default">Show found items</button>
+            &nbsp;
+            <button id="show-lost-items" class="btn btn-default">Show lost items</button>
         </div>
-
-        <div class="lost-and-found-items-div">
-            <h2>Someone found these items:</h2>
-            {% for item in found_items %}
-                <ul>
-                    <li>
-                        <a href="{{ path('item_details', {'id': item.id}) }}">{{ item.title }}</a>
-                    </li>
-                </ul>
-            {% endfor %}
-
-            <h2>Someone lost these items</h2>
-            {% for item in lost_items %}
-                <ul>
-                    <li>
-                        <a href="{{ path('item_details', {'id': item.id}) }}">{{ item.title }}</a>
-                    </li>
-                </ul>
-            {% endfor %}
-        </div>
+        <div id="map" class="map"></div>
     </div>
 {% endblock content %}

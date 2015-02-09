@@ -2,12 +2,12 @@
 
 namespace AppBundle\Form\Type;
 
-use Doctrine\ORM\EntityRepository;
+use AppBundle\DBAL\Types\ItemTypeType;
 use AppBundle\Model\UserManageableInterface;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use AppBundle\DBAL\Types\ItemTypeType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
@@ -40,7 +40,6 @@ class FoundItemType extends AbstractType
     {
         $builder
             ->add('category', 'entity', [
-                'label'    => 'Категорія',
                 'class'    => 'AppBundle\Entity\Category',
                 'property' => 'title',
                 'query_builder' => function(EntityRepository $er) {
@@ -49,25 +48,18 @@ class FoundItemType extends AbstractType
                     return $qb->where($qb->expr()->eq('c.enabled', true));
                 },
             ])
-            ->add('title', 'text', [
-                'label' => 'Назва',
-            ])
+            ->add('title', 'text')
             ->add('type', 'hidden', [
-                'label' => 'Тип',
                 'data'  => ItemTypeType::FOUND,
             ])
-            ->add('latitude', 'hidden', [
-                'label' => 'Latitude',
+            ->add('latitude', 'hidden')
+            ->add('active', 'hidden', [
+                'data'  => true,
             ])
-            ->add('longitude', 'hidden', [
-                'label' => 'Longitude'
-            ])
+            ->add('longitude', 'hidden')
             ->add('areaType', 'hidden')
-            ->add('description', 'textarea', [
-                'label' => 'Опис',
-            ])
+            ->add('description', 'textarea')
             ->add('date', 'date', [
-                'label' => 'Дата',
                 'widget' => 'single_text'
             ])
             ->add('save', 'submit', [

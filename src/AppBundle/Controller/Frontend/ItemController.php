@@ -7,7 +7,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use AppBundle\DBAL\Types\ItemTypeType;
 
 /**
  * ItemController
@@ -17,6 +16,44 @@ use AppBundle\DBAL\Types\ItemTypeType;
  */
 class ItemController extends Controller
 {
+    /**
+     * Lost items list
+     *
+     * @return Response
+     *
+     * @Route("/lost-items", name="lost_items_list")
+     */
+    public function lostItemsListAction()
+    {
+        /** @var \AppBundle\Repository\ItemRepository $itemRepository */
+        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+
+        $lostItems  = $itemRepository->getActiveLostItem();
+
+        return $this->render('frontend/item/lost_items.html.twig', [
+            'lost_items' => $lostItems
+        ]);
+    }
+
+    /**
+     * Found items list
+     *
+     * @return Response
+     *
+     * @Route("/found-items", name="found_items_list")
+     */
+    public function foundItemsListAction()
+    {
+        /** @var \AppBundle\Repository\ItemRepository $itemRepository */
+        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+
+        $foundItems = $itemRepository->getActiveFoundItem();
+
+        return $this->render('frontend/item/found_items.html.twig', [
+            'found_items' => $foundItems
+        ]);
+    }
+
     /**
      * Add lost item
      *
@@ -45,7 +82,7 @@ class ItemController extends Controller
         }
 
         return $this->render('frontend/default/add_lost_item.html.twig', [
-            'form' => $form->createView(),
+            'form' => $form->createView()
         ]);
     }
 
@@ -77,14 +114,14 @@ class ItemController extends Controller
         }
 
         return $this->render('frontend/default/add_found_item.html.twig', [
-            'form' => $form->createView(),
+            'form' => $form->createView()
         ]);
     }
 
     /**
      * Item details
      *
-     * @param integer $id
+     * @param int $id ID
      *
      * @return Response
      *
@@ -95,19 +132,16 @@ class ItemController extends Controller
         $item = $this->getDoctrine()
             ->getRepository('AppBundle:Item')
             ->findOneBy([
-                'id' => $id,
+                'id'        => $id,
                 'moderated' => true,
             ]);
 
-        $foundPoint = $this->getDoctrine()
-            ->getRepository('AppBundle:Item');
-
         if (!$item) {
-            throw $this->createNotFoundException('Item not found');
+            throw $this->createNotFoundException('Item not found.');
         }
 
         return $this->render('frontend/default/item_details.html.twig', [
-            'item' => $item,
+            'item' => $item
         ]);
     }
 
@@ -124,10 +158,9 @@ class ItemController extends Controller
 
         $foundPoints = $itemRepository->getFoundPoints();
 
-        $response = new Response(json_encode($foundPoints));
-        $response->headers->set('Content-Type', 'application/json');
-
-        return $response;
+        return new Response(json_encode($foundPoints), 200, [
+            'Content-Type' => 'application/json'
+        ]);
     }
 
     /**
@@ -143,9 +176,8 @@ class ItemController extends Controller
 
         $lostPoints = $itemRepository->getLostPoints();
 
-        $response = new Response(json_encode($lostPoints));
-        $response->headers->set('Content-Type', 'application/json');
-
-        return $response;
+        return new Response(json_encode($lostPoints), 200, [
+            'Content-Type' => 'application/json'
+        ]);
     }
 }

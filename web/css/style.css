@@ -13,14 +13,17 @@
 .item-type-found {
     background-color: #f89406;
 }
+
 .map {
-    float: left;
-    width: 1200px;
+    float:  left;
+    width:  1200px;
     height: 500px;
 }
+
 .lost-and-found-items-div {
     float: left;
 }
+
 .add-lost-found-item {
     margin: 15px;
 }
