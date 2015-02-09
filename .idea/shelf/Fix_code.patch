@@ -1,0 +1,90 @@
+Index: app/Resources/SonataAdminBundle/CRUD/list_date.html.twig
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/Resources/SonataAdminBundle/CRUD/list_date.html.twig	(revision )
++++ app/Resources/SonataAdminBundle/CRUD/list_date.html.twig	(revision )
+@@ -0,0 +1,22 @@
++{#
++
++This file is part of the Sonata package.
++
++(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
++
++For the full copyright and license information, please view the LICENSE
++file that was distributed with this source code.
++
++#}
++
++{% extends admin.getTemplate('base_list_field') %}
++
++{% block field%}
++    {%- if value is empty -%}
++        &nbsp;
++    {%- elseif field_description.options.format is defined -%}
++        {{ value|date(field_description.options.format) }}
++    {%- else -%}
++        {{ value|date('d.m.Y H:i:s') }}
++    {%- endif -%}
++{% endblock %}
+Index: src/AppBundle/Admin/ItemAdmin.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/AppBundle/Admin/ItemAdmin.php	(revision 398390cd08737875bc979d30b15ebbb68adeeab5)
++++ src/AppBundle/Admin/ItemAdmin.php	(revision )
+@@ -53,8 +53,8 @@
+             ->add('category')
+             ->add('type', 'string', ['template' => 'backend/item/list_type.html.twig'])
+             ->add('status', 'string', ['template' => 'backend/item/list_status.html.twig'])
+-            ->add('createdAt', 'date', ['template' => 'backend/list_date.html.twig'])
+-            ->add('updatedAt', 'date', ['template' => 'backend/list_date.html.twig'])
++            ->add('createdAt', 'datetime')
++            ->add('updatedAt', 'datetime')
+             ->add('_action', 'actions', [
+                 'actions' => [
+                     'show'   => [],
+Index: app/Resources/views/backend/list_date.html.twig
+===================================================================
+--- app/Resources/views/backend/list_date.html.twig	(revision 398390cd08737875bc979d30b15ebbb68adeeab5)
++++ app/Resources/views/backend/list_date.html.twig	(revision 398390cd08737875bc979d30b15ebbb68adeeab5)
+@@ -1,5 +0,0 @@
+-{% extends 'SonataAdminBundle:CRUD:list_date.html.twig' %}
+-
+-{% block field %}
+-    {{ value|date('d.m.Y H:i:s') }}
+-{% endblock %}
+Index: web/css/style.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- web/css/style.css	(revision 398390cd08737875bc979d30b15ebbb68adeeab5)
++++ web/css/style.css	(revision )
+@@ -1,16 +1,15 @@
+-.item-status-active
+-{
++.item-status-active {
+     background-color: #b94a48;
+ }
+-.item-status-resolved
+-{
++
++.item-status-resolved {
+     background-color: #468847;
+ }
+-.item-type-lost
+-{
++
++.item-type-lost {
+     background-color: #3a87ad;
+ }
+-.item-type-found
+-{
++
++.item-type-found {
+     background-color: #f89406;
+ }
+\ No newline at end of file

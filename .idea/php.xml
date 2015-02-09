@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Behat">
+    <behat_settings>
+      <BehatSettings behat_path="$PROJECT_DIR$" />
+    </behat_settings>
+  </component>
+  <component name="PhpUnit">
+    <phpunit_settings>
+      <PhpUnitSettings load_method="CUSTOM_LOADER" configuration_file_path="$PROJECT_DIR$/app/phpunit.xml.dist" custom_loader_path="/usr/local/bin/phpunit" phpunit_phar_path="/usr/local/bin/phpunit" use_configuration_file="true" />
+    </phpunit_settings>
+  </component>
+</project>
