@@ -19,7 +19,8 @@
     {{ parent() }}
 
     <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-    <script src="{{ asset('js/item_edit_map.js') }}"></script>
+    <script src="{{ asset('lib/leaflet-draw/leaflet.draw.js') }}"></script>
+    <script src="{{ asset('js/map_item_edit.js') }}"></script>
 {% endblock javascripts %}
 
 {% block content %}
@@ -31,7 +32,9 @@
         {{ form_errors(form) }}
         {{ form_end(form) }}
     </div>
+    <div id="latitude" data-latitude="{{ item.latitude }}"></div>
+    <div id="longitude" data-longitude="{{ item.longitude }}"></div>
+    <div id="area" data-area="{{ item.area|json_encode }}"></div>
+    <div id="areaType" data-area-type="{{ item.areaType }}"></div>
 
-
-    <div id="map" style="width: 1200px; height: 800px"></div>
 {% endblock content %}

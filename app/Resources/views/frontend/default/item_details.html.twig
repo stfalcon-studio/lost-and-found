@@ -17,7 +17,7 @@
     {{ parent() }}
 
     <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-    <script src="{{ asset('js/item_details_map.js') }}"></script>
+    <script src="{{ asset('js/map_item_details.js') }}"></script>
 {% endblock javascripts %}
 
 {% block content %}
@@ -35,14 +35,6 @@
             <td id="category">{{ item.category }}</td>
         </tr>
         <tr>
-            <td><b>Latitude</b></td>
-            <td id="latitude">{{ item.latitude }}</td>
-        </tr>
-        <tr>
-            <td><b>Longitude</b></td>
-            <td id="longitude">{{ item.longitude }}</td>
-        </tr>
-        <tr>
             <td><b>Type</b></td>
             <td>{{ item.type }}</td>
         </tr>
@@ -55,6 +47,10 @@
             <td>{{ item.date|date('d.m.Y H:i:s') }}</td>
         </tr>
     </table>
+    <div id="latitude" data-latitude="{{ item.latitude }}"></div>
+    <div id="longitude" data-longitude="{{ item.longitude }}"></div>
+    <div id="area" data-area="{{ item.area|json_encode }}"></div>
+    <div id="areaType" data-area-type="{{ item.areaType }}"></div>
     <br />
 
     <div id="map" style="width: 1200px; height: 800px"></div>
