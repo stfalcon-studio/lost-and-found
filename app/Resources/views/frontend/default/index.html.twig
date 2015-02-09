@@ -12,32 +12,28 @@
     {{ parent() }}
 
     <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-    <script src="{{ asset('js/main.js') }}"></script>
+    {#<script src="{{ asset('js/main.js') }}"></script>#}
 {% endblock javascripts %}
 
 {% block content %}
-    {# Flash messages #}
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="flash-message">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
     <h1>Lost and Found</h1>
-    {% if is_granted('ROLE_USER') %}
+    <div>
+
+        <div class="well">
+            Web-service for announcements of lost and found items. Was created by students from Khmelnytskyi Polytechnic College during their practice at Studio Stfalcon.com
+        </div>
+
         <div>
             <a href="{{ path('add_lost_item') }}" class="btn btn-danger" title="Add an item you've lost">I lost something :(</a>
             &nbsp;
             <a href="{{ path('add_found_item') }}" class="btn btn-success" title="Add an item you've found">I found something :)</a>
         </div>
-    {% endif %}
-    <br />
-    <div>
-        <div>
-            <button id="show-found-items" class="btn btn-default">Show found items</button>
-            &nbsp;
-            <button id="show-lost-items" class="btn btn-default">Show lost items</button>
-        </div>
-        <div id="map" class="map"></div>
+
+        {#<div>#}
+            {#<button id="show-found-items" class="btn btn-default">Show found items</button>#}
+            {#&nbsp;#}
+            {#<button id="show-lost-items" class="btn btn-default">Show lost items</button>#}
+        {#</div>#}
+        {#<div id="map" class="map"></div>#}
     </div>
 {% endblock content %}

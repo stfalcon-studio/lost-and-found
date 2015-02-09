@@ -106,7 +106,9 @@ class ItemAdmin extends Admin
             ->add('status', 'string', [
                 'template' => 'backend/item/list_status.html.twig',
             ])
-            ->add('moderated')
+            ->add('moderated', null, [
+                'editable' => true
+            ])
             ->add('date', 'date', [
                 'format' => 'd.m.Y'
             ])
