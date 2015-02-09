@@ -58,7 +58,8 @@
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
-        "doctrine/doctrine-fixtures-bundle": "2.2.*"
+        "doctrine/doctrine-fixtures-bundle": "2.2.*",
+        "phpunit/phpunit": "4.5.*"
     },
     "autoload": {
         "psr-4": {
