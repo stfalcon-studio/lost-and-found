@@ -57,6 +57,7 @@ class CategoryAdmin extends Admin
                 ->add('imageFile', 'file', [
                     'required' => false,
                 ])
+                ->add('parent')
             ->end();
     }
 
@@ -73,6 +74,7 @@ class CategoryAdmin extends Admin
             ->add('image', 'string', [
                 'template' => 'backend/category/list_marker.html.twig',
             ])
+            ->add('parent')
             ->add('createdAt', 'datetime', [
                 'format' => 'd.m.Y H:i:s'
             ])
@@ -100,6 +102,8 @@ class CategoryAdmin extends Admin
                 'template' => 'backend/category/show_marker.html.twig'
             ])
             ->add('enabled', 'boolean')
+            ->add('parent')
+            ->add('children')
             ->add('createdAt', 'datetime', [
                 'format' => 'd.m.Y H:i:s'
             ])
@@ -117,6 +121,7 @@ class CategoryAdmin extends Admin
             ->add('id')
             ->add('title')
             ->add('enabled')
+            ->add('parent')
             ->add('createdAt')
             ->add('updatedAt');
     }
