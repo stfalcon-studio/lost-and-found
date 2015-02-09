@@ -56,6 +56,26 @@ class LoadCategoryData extends AbstractFixture
         $this->setReference('category-miscellaneous', $miscellaneous);
         $manager->persist($miscellaneous);
 
+        $animals = (new Category())
+            ->setTitle('Animals')
+            ->setEnabled(true);
+        $this->setReference('category-animals', $animals);
+        $manager->persist($animals);
+
+        $dogs = (new Category())
+            ->setTitle('Dogs')
+            ->setEnabled(true)
+            ->setParent($animals);
+        $this->setReference('category-dogs', $dogs);
+        $manager->persist($dogs);
+
+        $cats = (new Category())
+            ->setTitle('Cats')
+            ->setEnabled(true)
+            ->setParent($animals);
+        $this->setReference('category-cats', $cats);
+        $manager->persist($cats);
+
         $manager->flush();
     }
 }

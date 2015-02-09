@@ -20,7 +20,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @ORM\Table(name="categories")
  *
  * @Vich\Uploadable
- *
+ * @Gedmo\Tree(type="materializedPath")
  * @Gedmo\Loggable
  */
 class Category
@@ -51,7 +51,7 @@ class Category
 
     /**
      * @var Collection|Item[] $items Items
-     *
+     * @Gedmo\TreePathSource
      * @ORM\OneToMany(targetEntity="Item", mappedBy="category", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
@@ -79,6 +79,32 @@ class Category
      * @ORM\Column(type="string", length=255, name="image_name", nullable=true)
      */
     private $imageName;
+
+    /**
+     * @Gedmo\TreePath
+     * @ORM\Column(name="path", type="string", length=3000, nullable=true)
+     */
+    private $path;
+
+    /**
+     * @Gedmo\TreeParent
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="children")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE")
+     * })
+     */
+    private $parent;
+
+    /**
+     * @Gedmo\TreeLevel
+     * @ORM\Column(name="lvl", type="integer", nullable=true)
+     */
+    private $level;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Category", mappedBy="parent")
+     */
+    private $children;
 
     /**
      * Constructor
@@ -250,6 +276,92 @@ class Category
     public function setImageName($imageName)
     {
         $this->imageName = $imageName;
+
+        return $this;
+    }
+
+    /**
+     * @param Category $parent
+     *
+     * @return $this
+     */
+    public function setParent(Category $parent = null)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * @param string $path
+     *
+     * @return $this
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    /**
+     * @return integer
+     */
+    public function getLevel()
+    {
+        return $this->level;
+    }
+
+    /**
+     * Set level
+     *
+     * @param integer $level level
+     *
+     * @return $this
+     */
+    public function setLevel($level)
+    {
+        $this->level = $level;
+
+        return $this;
+    }
+
+    /**
+     * Get children
+     *
+     * @return Category Children
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }
+
+    /**
+     * Set children
+     *
+     * @param Category $children children
+     *
+     * @return $this
+     */
+    public function setChildren($children)
+    {
+        $this->children = $children;
 
         return $this;
     }
