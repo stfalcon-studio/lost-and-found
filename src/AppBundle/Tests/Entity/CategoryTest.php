@@ -5,6 +5,7 @@ namespace AppBundle\Tests\Entity;
 use AppBundle\Entity\Category;
 use AppBundle\Entity\Item;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints\File;
 
 /**
  * Category Entity Test
@@ -84,5 +85,77 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
         $now = new \DateTime();
         $category = (new Category())->setUpdatedAt($now);
         $this->assertEquals($now, $category->getUpdatedAt());
+    }
+
+    /**
+     * Test setter and getter for enabled
+     */
+    public function testSetGetEnabled()
+    {
+        $enabled = false;
+        $category = (new Category())->setEnabled($enabled);
+        $this->assertEquals($enabled, $category->isEnabled());
+    }
+
+    /**
+     * Test setter and getter for imageName
+     */
+    public function testSetGetImageName()
+    {
+        $imageName = 'name';
+        $category = (new Category())->setImageName($imageName);
+        $this->assertEquals($imageName, $category->getImageName());
+    }
+
+    /**
+     * Test setter and getter for imageFile
+     */
+    public function testSetGetImageFile()
+    {
+        $now = new \DateTime();
+        $file = new File();
+        $category = (new Category())->setImageFile($file);
+        $this->assertEquals($now, $category->getUpdatedAt());
+        $this->assertEquals($file, $category->getImageFile());
+    }
+
+    /**
+     * Test setter and getter for parent
+     */
+    public function testSetGetParent()
+    {
+        $parent = (new Category())->setTitle('parent');
+        $category = (new Category())->setParent($parent);
+        $this->assertEquals($parent, $category->getParent());
+    }
+
+    /**
+     * Test setter and getter for path
+     */
+    public function testSetGetPath()
+    {
+        $path = 'path';
+        $category = (new Category())->setPath($path);
+        $this->assertEquals($path, $category->getPath());
+    }
+
+    /**
+     * Test setter and getter for level
+     */
+    public function testSetGetLevel()
+    {
+        $level = 1;
+        $category = (new Category())->setLevel($level);
+        $this->assertEquals($level, $category->getLevel());
+    }
+
+    /**
+     * Test setter and getter for level
+     */
+    public function testSetGetChildren()
+    {
+        $child =(new Category())->setTitle('child');
+        $category = (new Category())->setChildren($child);
+        $this->assertEquals($child, $category->getChildren());
     }
 }
