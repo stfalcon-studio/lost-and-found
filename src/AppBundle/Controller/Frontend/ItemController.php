@@ -158,6 +158,14 @@ class ItemController extends Controller
 
         $foundPoints = $itemRepository->getFoundPoints();
 
+        $router = $this->get('router');
+
+        foreach ($foundPoints as &$item) {
+            $item['link'] = $router->generate('item_details', [
+                'id' => $item['id']
+            ], $router::ABSOLUTE_URL);
+        }
+
         return new Response(json_encode($foundPoints), 200, [
             'Content-Type' => 'application/json'
         ]);
