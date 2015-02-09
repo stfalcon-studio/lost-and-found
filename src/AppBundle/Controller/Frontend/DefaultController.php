@@ -32,7 +32,7 @@ class DefaultController extends Controller
 
         return $this->render('frontend/default/index.html.twig', [
             'found_items'  => $foundItems,
-            'lost_items'   => $lostItems,
+            'lost_items'   => $lostItems
         ]);
     }
 }

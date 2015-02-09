@@ -16,3 +16,12 @@ services:
             - ~
             - AppBundle\Entity\Item
             - AppBundle:Backend\ItemAdmin
+
+    admin.user:
+        class: AppBundle\Admin\UserAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Default", label: "Users" }
+        arguments:
+            - ~
+            - AppBundle\Entity\User
+            - ~

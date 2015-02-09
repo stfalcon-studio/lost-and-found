@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: svatok
- * Date: 04.02.15
- * Time: 15:40
- */
 
 namespace AppBundle\Controller\Frontend;
 
@@ -22,7 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 class CategoryController extends Controller
 {
     /**
-     * Get found points
+     * Get all moderated categories
      *
      * @return Response
      *
@@ -49,12 +43,8 @@ class CategoryController extends Controller
             }
         }
 
-
-
-
-        $response = new Response(json_encode($result));
-        $response->headers->set('Content-Type', 'application/json');
-
-        return $response;
+        return new Response(json_encode($result), 200, [
+            'Content-Type' => 'application/json'
+        ]);
     }
 }

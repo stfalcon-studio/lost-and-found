@@ -1,4 +1,6 @@
 services:
     app.user.provider:
         class: AppBundle\Security\Provider\AuthProvider
-        arguments: [@fos_user.user_manager, {facebook: facebookId}]
+        arguments:
+            - @fos_user.user_manager
+            - @event_dispatcher

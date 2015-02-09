@@ -2,12 +2,12 @@
 
 namespace AppBundle\Form\Type;
 
-use Doctrine\ORM\EntityRepository;
+use AppBundle\DBAL\Types\ItemTypeType;
 use AppBundle\Model\UserManageableInterface;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use AppBundle\DBAL\Types\ItemTypeType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
@@ -42,37 +42,29 @@ class LostItemType extends AbstractType
             ->add('category', 'entity', [
                 'class'         => 'AppBundle\Entity\Category',
                 'property'      => 'title',
-                'label'         => 'Категорія',
                 'query_builder' => function(EntityRepository $er) {
                     $qb = $er->createQueryBuilder('c');
 
                     return $qb->where($qb->expr()->eq('c.enabled', true));
                 },
             ])
-            ->add('title', 'text', [
-                'label' => 'Назва',
-            ])
+            ->add('title', 'text')
             ->add('type', 'hidden', [
-                'label' => 'Тип',
                 'data'  => ItemTypeType::LOST,
             ])
             ->add('active', 'hidden', [
-                'label' => 'Активність',
                 'data'  => true,
             ])
             ->add('latitude', 'hidden')
             ->add('longitude', 'hidden')
             ->add('area', 'hidden')
             ->add('areaType', 'hidden')
-            ->add('description', 'textarea', [
-                'label' => 'Опис',
-            ])
+            ->add('description', 'textarea')
             ->add('date', 'date', [
-                'label' => 'Дата',
                 'widget' => 'single_text'
             ])
             ->add('save', 'submit', [
-                'label' => 'Create',
+                'label' => 'Create'
             ]);
 
         $tokenStorage = $this->tokenStorage;

@@ -19,49 +19,47 @@ class CategoryAdminController extends CRUDController
      */
     public function batchActionEnable()
     {
-        $categories = $this->getRequest()->get('idx', []);
-
-        $em = $this->getDoctrine()->getManager();
-
-        if (count($categories)) {
-            $categoryRepository = $em->getRepository($this->admin->getClass());
-
-            /** @var \AppBundle\Entity\Category $category */
-            foreach ($categoryRepository->findBy(['id' => $categories]) as $category) {
-                $category->setEnabled(true);
-            }
-
-            $em->flush();
-        }
-
-        $this->addFlash('sonata_flash_success', 'Enabled successfully');
-
-        return new RedirectResponse($this->admin->generateUrl('list'));
+        return $this->commonBatchWork(false, 'Enabled successfully');
     }
 
     /**
-     * Unmark categories as enabled
+     * Mark categories as disabled
      *
      * @return RedirectResponse
      */
     public function batchActionDisable()
     {
-        $categories = $this->getRequest()->get('idx', []);
+        return $this->commonBatchWork(false, 'Disabled successfully');
+    }
 
+    /**
+     * Common batch work
+     *
+     * @param boolean $enabled           Enabled
+     * @param string  $successfulMessage Successful message
+     *
+     * @return RedirectResponse
+     */
+    private function commonBatchWork($enabled, $successfulMessage)
+    {
         $em = $this->getDoctrine()->getManager();
 
-        if (count($categories)) {
+        $categoryIds = $this->getRequest()->get('idx', []);
+
+        if (count($categoryIds)) {
             $categoryRepository = $em->getRepository($this->admin->getClass());
 
-            /** @var \AppBundle\Entity\Category $category */
-            foreach ($categoryRepository->findBy(['id' => $categories]) as $category) {
-                $category->setEnabled(false);
+            /** @var \AppBundle\Entity\Category[] $categories */
+            $categories = $categoryRepository->findBy(['id' => $categoryIds]);
+
+            foreach ($categories as $category) {
+                $category->setEnabled($enabled);
             }
 
             $em->flush();
         }
 
-        $this->addFlash('sonata_flash_success', 'Disabled successfully');
+        $this->addFlash('sonata_flash_success', $successfulMessage);
 
         return new RedirectResponse($this->admin->generateUrl('list'));
     }
