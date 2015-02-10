@@ -80,7 +80,6 @@ class AuthProvider extends BaseProvider
              ->setFacebookAccessToken($response->getAccessToken());
 
         $this->eventDispatcher->dispatch(AppEvents::FACEBOOK_USER_CONNECTED, new FacebookUserConnectedEvent($user));
-        $this->eventDispatcher->dispatch(AppEvents::NEW_USER_REGISTERED, new NewUserRegisteredEvent($user));
 
         $this->userManager->updateUser($user);
 

@@ -3,6 +3,8 @@
 namespace AppBundle\EventListener;
 
 use AppBundle\Event\FacebookUserConnectedEvent;
+use FOS\UserBundle\Mailer\Mailer;
+use Swift_Mailer;
 
 /**
  * FacebookUserConnectedListener
@@ -10,6 +12,7 @@ use AppBundle\Event\FacebookUserConnectedEvent;
  * Add ROLE_ADMIN for some Facebook users
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Logans <Logansoleg@gmail.com>
  */
 class FacebookUserConnectedListener
 {
@@ -24,16 +27,38 @@ class FacebookUserConnectedListener
     ];
 
     /**
-     * Add admin role
+     * @var Swift_Mailer $mailer Mailer
+     */
+    private $mailer;
+
+    /**
+     * @param Swift_Mailer $mailer Mailer
+     */
+    public function __construct(Swift_Mailer $mailer)
+    {
+        $this->mailer = $mailer;
+    }
+
+    /**
+     * Event call's when user registered
      *
      * @param FacebookUserConnectedEvent $args Arguments
      */
-    public function addAdminRole(FacebookUserConnectedEvent $args)
+    public function onUserRegistered(FacebookUserConnectedEvent $args)
     {
         $user = $args->getUser();
 
         if (in_array($user->getUsername(), $this->adminFacebookIds)) {
             $user->addRole('ROLE_ADMIN');
         }
+
+        $message = $this->mailer
+            ->createMessage()
+            ->setSubject('You have Completed Registration!')
+            ->setFrom('Logansoleg@gmail.com')
+            ->setTo($user->getEmail())
+            ->setBody('Blabla');
+
+        $this->mailer->send($message);
     }
 }
