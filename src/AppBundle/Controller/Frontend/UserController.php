@@ -2,7 +2,6 @@
 
 namespace AppBundle\Controller\Frontend;
 
-use AppBundle\Entity\User;
 use AppBundle\Entity\Item;
 use AppBundle\DBAL\Types\ItemStatusType;
 use AppBundle\DBAL\Types\ItemTypeType;
@@ -45,14 +44,14 @@ class UserController extends Controller
 
             $this->get('session')->getFlashBag()->add('update', 'Your item was updated!');
 
-            return $this->redirect($this->generateUrl('user_found_actual'));
+            return $this->redirect($this->generateUrl('user_actual_found_items'));
         }
 
         if (!$item) {
             throw $this->createNotFoundException('Item not found.');
         }
 
-        return $this->render('frontend/default/item_edit.html.twig', [
+        return $this->render('frontend/item/item_edit.html.twig', [
             'form' => $form->createView(),
             'item' => $item
         ]);

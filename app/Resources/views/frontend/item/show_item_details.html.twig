@@ -21,37 +21,29 @@
 {% endblock javascripts %}
 
 {% block content %}
-    <a href="{{ path('homepage') }}">На головну</a>
+    <h1>
+        {%- if item.type == 'lost' -%}
+            Lost
+        {%- elseif item.type == 'found' -%}
+            Found
+        {%- endif -%}
+        :
+        {{ item.title }}
+    </h1>
+    <div>
+        <time datetime="{{ item.date|date('Y-m-d') }}">Date {{ item.date|date('d.m.Y') }}</time> |
+        Category: <span id="category">{{ item.category }}</span>
+    </div>
     <br />
 
-    <table border="1">
-        <caption>Item details</caption>
-        <tr>
-            <td><b>Title</b></td>
-            <td>{{ item.title }}</td>
-        </tr>
-        <tr>
-            <td><b>Category</b></td>
-            <td id="category">{{ item.category }}</td>
-        </tr>
-        <tr>
-            <td><b>Type</b></td>
-            <td>{{ item.type }}</td>
-        </tr>
-        <tr>
-            <td><b>Description</b></td>
-            <td>{{ item.description }}</td>
-        </tr>
-        <tr>
-            <td><b>Date</b></td>
-            <td>{{ item.date|date('d.m.Y H:i:s') }}</td>
-        </tr>
-    </table>
+    <div class="well">
+        {{ item.description }}
+    </div>
+
     <div id="latitude" data-latitude="{{ item.latitude }}"></div>
     <div id="longitude" data-longitude="{{ item.longitude }}"></div>
     <div id="area" data-area="{{ item.area|json_encode }}"></div>
     <div id="areaType" data-area-type="{{ item.areaType }}"></div>
-    <br />
 
-    <div id="map" style="width: 1200px; height: 800px"></div>
+    <div id="map" style="width: auto; height: 800px"></div>
 {% endblock content %}

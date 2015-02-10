@@ -81,7 +81,7 @@ class ItemController extends Controller
             return $this->redirect($this->generateUrl('homepage'));
         }
 
-        return $this->render('frontend/default/add_lost_item.html.twig', [
+        return $this->render('frontend/item/add_lost_item.html.twig', [
             'form' => $form->createView()
         ]);
     }
@@ -113,7 +113,7 @@ class ItemController extends Controller
             return $this->redirect($this->generateUrl('homepage'));
         }
 
-        return $this->render('frontend/default/add_found_item.html.twig', [
+        return $this->render('frontend/item/add_found_item.html.twig', [
             'form' => $form->createView()
         ]);
     }
@@ -140,7 +140,7 @@ class ItemController extends Controller
             throw $this->createNotFoundException('Item not found.');
         }
 
-        return $this->render('frontend/default/item_details.html.twig', [
+        return $this->render('frontend/item/show_item_details.html.twig', [
             'item' => $item
         ]);
     }

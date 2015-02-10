@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-    <h1>Lost items</h1>
+    <h1>Found items</h1>
 
     {% for item in found_items %}
         <ul>
@@ -11,9 +11,7 @@
         </ul>
     {% endfor %}
 
-    {% if is_granted('ROLE_USER') %}
-        <a href="{{ path('add_lost_item') }}" class="btn btn-success" title="Add an item you've lost">
-            I found something :)
-        </a>
-    {% endif %}
+    <a href="{{ path('add_lost_item') }}" class="btn btn-success" title="Add an item you've lost">
+        I found something :)
+    </a>
 {% endblock content %}
