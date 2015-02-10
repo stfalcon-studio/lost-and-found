@@ -204,4 +204,88 @@ class ItemController extends Controller
             'Content-Type' => 'application/json'
         ]);
     }
+
+    /**
+     * @param int $id id
+     *
+     * @return Response
+     *
+     * @Route("item/{id}/deactivate", name="item_deactivate")
+     */
+    public function itemDeactivatedAction($id)
+    {
+        $item = $this->getDoctrine()
+            ->getRepository('AppBundle:Item')
+            ->findOneBy([
+                'id'        => $id,
+            ]);
+        $item->setActive(false);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($item);
+        $em->flush();
+
+        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+        $items = $itemRepository->getDeactivatedItems($this->getUser(), false, false);
+
+        return $this->render(':frontend/user:show_deactivated_items.html.twig', [
+            'items' => $items
+        ]);
+    }
+
+    /**
+     * @param int $id id
+     *
+     * @return Response
+     *
+     * @Route("item/{id}/delete", name="item_delete")
+     */
+    public function itemDeleteAction($id)
+    {
+        $item = $this->getDoctrine()
+                     ->getRepository('AppBundle:Item')
+                     ->findOneBy([
+                         'id'        => $id,
+                     ]);
+        $item->setDeleted(true);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($item);
+        $em->flush();
+
+        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+        $items = $itemRepository->getDeactivatedItems($this->getUser(), false, false);
+
+        return $this->render(':frontend/user:show_deactivated_items.html.twig', [
+            'items' => $items
+        ]);
+    }
+
+    /**
+     * @param int $id id
+     *
+     * @return Response
+     *
+     * @Route("item/{id}/activate", name="item_activate")
+     */
+    public function itemActivatedAction($id)
+    {
+        $item = $this->getDoctrine()
+                     ->getRepository('AppBundle:Item')
+                     ->findOneBy([
+                         'id'        => $id,
+                     ]);
+        $item->setActive(true);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($item);
+        $em->flush();
+
+        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+        $items = $itemRepository->getDeactivatedItems($this->getUser(), false, false);
+
+        return $this->render(':frontend/user:show_deactivated_items.html.twig', [
+            'items' => $items
+        ]);
+    }
 }

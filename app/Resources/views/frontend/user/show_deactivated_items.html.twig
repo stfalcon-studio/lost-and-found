@@ -1,0 +1,18 @@
+{% extends 'frontend/user/profile.html.twig' %}
+
+{% import 'frontend/user/macro.html.twig' as user_macro %}
+
+{% block title %}
+    Actual found items |
+    {{ parent() }}
+{% endblock title %}
+
+{% block content %}
+    {{ user_macro.active_tab('deactivated_items') }}
+
+    {{ user_macro.active_pill('deactivated_items') }}
+    <br />
+    {% if items is defined and items is not empty %}
+        {{ user_macro.deactivated_items_list(items) }}
+    {% endif %}
+{% endblock content %}
