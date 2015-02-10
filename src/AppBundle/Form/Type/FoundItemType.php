@@ -64,6 +64,9 @@ class FoundItemType extends AbstractType
             ])
             ->add('save', 'submit', [
                 'label' => 'Create',
+                'attr'  => [
+                    'class' => 'btn-success'
+                ]
             ]);
 
         $tokenStorage = $this->tokenStorage;

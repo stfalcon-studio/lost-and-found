@@ -1,8 +1,5 @@
 {% extends 'base.html.twig' %}
-{% block title %}
-    Add found item |
-    {{ parent() }}
-{% endblock title %}
+{% block title %}I found something... | {{ parent() }}{% endblock title %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -20,8 +17,7 @@
 {% endblock javascripts %}
 
 {% block content %}
-    <a href="{{ path('homepage') }}">На головну</a>
-    <br />
+    <h1>I found something...</h1>
 
     <div>
         {{ form_start(form) }}
@@ -29,5 +25,5 @@
         {{ form_end(form) }}
     </div>
 
-    <div id="map" style="width: 1200px; height: 800px"></div>
+    <div id="map" style="width: auto; height: 800px"></div>
 {% endblock content %}
