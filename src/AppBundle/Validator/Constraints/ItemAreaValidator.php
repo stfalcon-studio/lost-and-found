@@ -34,7 +34,7 @@ class ItemAreaValidator extends ConstraintValidator
                     break;
             }
         } else {
-            $item->getAreaType('figure', $constraint);
+            $this->buildMessage('figure', $constraint);
         }
     }
 
