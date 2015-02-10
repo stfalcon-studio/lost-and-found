@@ -9,11 +9,36 @@
                     <td>
                         <a href="{{ path('item_edit', {'id': item.id}) }}">Edit</a>
                     </td>
+                    <td>
+                        <a href="{{ path('item_deactivate', {'id': item.id}) }}">Deactivate</a>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
 {% endmacro actual_items_list %}
+
+{% macro deactivated_items_list(items) %}
+    <table class="table table-bordered table-hover">
+        <tbody>
+            {% for item in items %}
+                <tr>
+                    <td>
+                        <a href="{{ path('item_details', {'id': item.id}) }}">{{ item.title }}</a>
+                    </td>
+                    <td>
+                        <a href="{{ path('item_delete', {'id': item.id}) }}">Delete</a>
+                    </td>
+
+                    <td>
+                        <a href="{{ path('item_activate', {'id': item.id}) }}">Activate</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endmacro deactivated_items_list %}
+
 
 {% macro resolved_items_list(items) %}
     <table class="table table-bordered table-hover">
@@ -34,6 +59,7 @@
 
 {% macro active_tab(active_tab) %}
     <ul class="nav nav-tabs">
+
         <li role="presentation" {% if active_tab == 'lost_items' %}class="active"{% endif %}>
             {% if active_tab == 'lost_items' %}
                 <a href="#">My lost items</a>
@@ -41,11 +67,20 @@
                 <a href="{{ path('user_actual_lost_items') }}">My lost items</a>
             {% endif %}
         </li>
+
         <li role="presentation" {% if active_tab == 'found_items' %}class="active"{% endif %}>
             {% if active_tab == 'found_items' %}
                 <a href="#">My found items</a>
             {% else %}
                 <a href="{{ path('user_actual_found_items') }}">My found items</a>
+            {% endif %}
+        </li>
+        {#        if       ////     #}
+        <li role="presentation" {% if active_tab == 'deactivated_items' %}class="active"{% endif %}>
+            {% if active_tab == 'deactivated_items' %}
+                <a href="#">My deactivated items</a>
+            {% else %}
+                <a href="{{ path('user_deactivated_items') }}">My deactivated items</a>
             {% endif %}
         </li>
     </ul>

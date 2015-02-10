@@ -151,23 +151,54 @@ class ItemRepository extends EntityRepository
     /**
      * Get user items
      *
-     * @param User   $user       User
-     * @param string $itemStatus Item status
-     * @param string $itemType   Item type
+     * @param User    $user         User
+     * @param string  $itemStatus   Item status
+     * @param string  $itemType     Item type
+     * @param boolean $activeStatus Active
+     * @param boolean $deleted      Deleted
      *
      * @return array
      */
-    public function getUserItems(User $user, $itemStatus, $itemType)
+    public function getUserItems(User $user, $itemStatus, $itemType, $activeStatus, $deleted)
     {
         $qb = $this->createQueryBuilder('i');
 
         $qb->where($qb->expr()->eq('i.createdBy', ':user'))
            ->andWhere($qb->expr()->eq('i.status', ':status'))
            ->andWhere($qb->expr()->eq('i.type', ':type'))
+           ->andWhere($qb->expr()->eq('i.active', ':active'))
+           ->andWhere($qb->expr()->eq('i.deleted', ':deleted'))
            ->setParameters([
                'user'   => $user,
                'status' => $itemStatus,
-               'type'   => $itemType
+               'type'   => $itemType,
+               'active' => $activeStatus,
+               'deleted'=> $deleted
+           ]);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * Get user items
+     *
+     * @param User    $user    User
+     * @param boolean $active  active
+     * @param boolean $deleted Deleted
+     *
+     * @return array
+     */
+    public function getDeactivatedItems(User $user, $active, $deleted)
+    {
+        $qb = $this->createQueryBuilder('i');
+
+        $qb->where($qb->expr()->eq('i.createdBy', ':user'))
+           ->andWhere($qb->expr()->eq('i.active', ':active'))
+           ->andWhere($qb->expr()->eq('i.deleted', ':deleted'))
+           ->setParameters([
+               'user'   => $user,
+               'active'   => $active,
+               'deleted'=> $deleted
            ]);
 
         return $qb->getQuery()->getResult();
