@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * ItemController
@@ -151,12 +152,19 @@ class ItemController extends Controller
     /**
      * Get found points
      *
+     * @param Request $request Request
+     * @throws AccessDeniedException
+     *
      * @return Response
      *
      * @Route("/show/found-points", name="show_found_points")
      */
-    public function getFoundPointsAction()
+    public function getFoundPointsAction(Request $request)
     {
+        if (!$request->isXmlHttpRequest()) {
+            throw new AccessDeniedException();
+        }
+
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
 
         $foundPoints = $itemRepository->getFoundPoints();
@@ -181,12 +189,19 @@ class ItemController extends Controller
     /**
      * Get lost points
      *
+     * @param Request $request Request
+     *
      * @return Response
+     * @throws AccessDeniedException
      *
      * @Route("/show/lost-points", name="show_lost_points")
      */
-    public function getLostPointsAction()
+    public function getLostPointsAction(Request $request)
     {
+        if (!$request->isXmlHttpRequest()) {
+            throw new AccessDeniedException();
+        }
+
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
 
         $lostPoints = $itemRepository->getLostPoints();
