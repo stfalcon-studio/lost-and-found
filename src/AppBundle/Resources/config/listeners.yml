@@ -1,0 +1,7 @@
+services:
+    app.facebook_user_connected.listener:
+        class: AppBundle\EventListener\FacebookUserConnectedListener
+        tags:
+            - { name: kernel.event_listener, event: app.facebook_user_connected, method: onUserRegistered }
+        arguments:
+            - @swiftmailer.mailer

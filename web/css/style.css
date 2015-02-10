@@ -1,0 +1,29 @@
+.item-status-active {
+    background-color: #b94a48;
+}
+
+.item-status-resolved {
+    background-color: #468847;
+}
+
+.item-type-lost {
+    background-color: #3a87ad;
+}
+
+.item-type-found {
+    background-color: #f89406;
+}
+
+.map {
+    float:  left;
+    width:  1200px;
+    height: 500px;
+}
+
+.lost-and-found-items-div {
+    float: left;
+}
+
+.add-lost-found-item {
+    margin: 15px;
+}

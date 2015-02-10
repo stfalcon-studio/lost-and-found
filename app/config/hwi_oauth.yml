@@ -1,0 +1,18 @@
+hwi_oauth:
+    firewall_name: secured_area
+    connect:
+        confirmation: false
+    resource_owners:
+        facebook:
+            type:          facebook
+            client_id:     %facebook_oauth_client_id%
+            client_secret: %facebook_oauth_client_secret%
+            scope:         email
+
+    fosub:
+        # try 30 times to check if a username is available (foo, foo1, foo2 etc)
+        username_iterations: 30
+        # mapping between resource owners (see below) and properties
+        properties:
+            facebook:      facebookId
+

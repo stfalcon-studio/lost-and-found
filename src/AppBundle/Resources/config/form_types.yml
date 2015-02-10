@@ -1,0 +1,28 @@
+services:
+    app.form.type.found_item:
+        class: AppBundle\Form\Type\FoundItemType
+        tags:
+            - { name: form.type, alias: found_item }
+        arguments:
+            - @security.token_storage
+
+    app.form.type.lost_item:
+        class: AppBundle\Form\Type\LostItemType
+        tags:
+            - { name: form.type, alias: lost_item }
+        arguments:
+            - @security.token_storage
+
+    app.form.type.area_map:
+        class: AppBundle\Form\Type\AreaMapType
+        tags:
+            - { name: form.type, alias: area_map }
+        arguments:
+            - @security.token_storage
+
+    app.form.type.item_edit:
+            class: AppBundle\Form\Type\EditItemType
+            tags:
+                - { name: form.type, alias: item_edit }
+            arguments:
+                - @security.token_storage

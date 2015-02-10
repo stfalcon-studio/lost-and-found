@@ -1,0 +1,9 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+    {% if value == 'lost' %}
+        <span class="badge item-type-lost">{{ value }}</span>
+    {% elseif value == 'found' %}
+        <span class="badge item-type-found">{{ value }}</span>
+    {% endif %}
+{% endblock %}

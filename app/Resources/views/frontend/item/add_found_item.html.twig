@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% block title %}I found something... | {{ parent() }}{% endblock title %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% stylesheets 'http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css' %}
+        <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock stylesheets %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <script src="{{ asset('js/map_found.js') }}"></script>
+{% endblock javascripts %}
+
+{% block content %}
+    <h1>I found something...</h1>
+
+    <div>
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+        {{ form_end(form) }}
+    </div>
+
+    <div id="map" style="width: auto; height: 800px"></div>
+{% endblock content %}
