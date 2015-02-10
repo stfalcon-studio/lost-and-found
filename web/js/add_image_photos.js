@@ -1,9 +1,9 @@
 var $collectionHolder;
 
-
+console.log('hello');
 // setup an "add a tag" link
 var $addPhotoLink = $('<a href="#" class="add_photo_link">Add a photo</a>');
-var $newLinkLi = $('<li></li>').append($addPhotoLink);
+var $newLinkLi = $('<p></p>').append($addPhotoLink);
 
 jQuery(document).ready(function() {
     // Get the ul that holds the collection of tags

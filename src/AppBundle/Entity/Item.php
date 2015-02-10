@@ -160,12 +160,11 @@ class Item implements UserManageableInterface
     private $date;
 
     /**
-     * @var Collection|ItemPhoto[] $items Items
+     * @var Collection|ItemPhoto[] $photos
      *
      * @Gedmo\TreePathSource
      *
-     * @ORM\OneToMany(targetEntity="ItemPhoto", mappedBy="photos", cascade={"persist", "remove"}, orphanRemoval=true)
-     *
+     * @ORM\OneToMany(targetEntity="ItemPhoto", mappedBy="item", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
 

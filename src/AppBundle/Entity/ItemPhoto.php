@@ -8,9 +8,10 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Class ItemPhoto
- * @package AppBundle\Entity
  * @ORM\Entity
  * @ORM\Table(name="item_photos")
+ *
+ * @Vich\Uploadable
  */
 
 class ItemPhoto
@@ -31,10 +32,10 @@ class ItemPhoto
     private $imageFile;
 
     /**
-     * @var string $fileName
+     * @var string $imageName
      * @ORM\Column(type="string", length=255, name="image_name", nullable=true)
      */
-    private $fileName;
+    private $imageName;
 
     /**
      * @var Item $item item
@@ -59,12 +60,13 @@ class ItemPhoto
     /**
      * Set fileName
      *
-     * @param string $fileName
-     * @return ItemPhoto
+     * @param string $imageName
+     *
+*@return ItemPhoto
      */
-    public function setFileName($fileName)
+    public function setImageName($imageName)
     {
-        $this->fileName = $fileName;
+        $this->imageName = $imageName;
 
         return $this;
     }
@@ -74,9 +76,9 @@ class ItemPhoto
      *
      * @return string
      */
-    public function getFileName()
+    public function getImageName()
     {
-        return $this->fileName;
+        return $this->imageName;
     }
 
     /**
