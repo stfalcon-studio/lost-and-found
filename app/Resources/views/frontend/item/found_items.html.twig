@@ -6,8 +6,12 @@
     <link rel="stylesheet" type="text/css" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
 {% endblock stylesheets %}
 
+{% set title = 'Found items' %}
+
+{% block title %}{{ title }} | {{ parent() }}{% endblock title %}
+
 {% block content %}
-    <h1>Found items</h1>
+    <h1>{{ title }}</h1>
 
     {% for item in found_items %}
         <ul>
