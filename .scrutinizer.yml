@@ -1,0 +1,37 @@
+filter:
+    excluded_paths: [vendor/*]
+
+before_commands:
+  - "composer install --prefer-source"
+
+tools:
+    php_code_sniffer:
+        extensions:
+            - php
+        command: phpcs
+        enabled: true
+        filter:
+            excluded_paths: ["vendor/*", "app/*", "bin/*", "web/*", "spec/*"]
+        config:
+            standard: PSR2
+    php_code_coverage:
+        test_command: phpunit -c app/
+    php_mess_detector:
+        enabled: true
+        filter:
+            excluded_paths: ["vendor/*", "app/*", "bin/*", "web/*", "spec/*"]
+    php_cpd:
+        command: phpcpd
+        min_lines: 5
+        min_tokens: 70
+        names:
+            - '*.php'
+        excluded_dirs: ["vendor/*", "app/*", "bin/*", "web/*", "spec/*"]
+        enabled: true
+    php_pdepend:
+        excluded_dirs: ["vendor/*", "app/*", "bin/*", "web/*", "spec/*"]
+    php_loc: true
+    php_analyzer: true
+    external_code_coverage:
+        timeout: 600
+    sensiolabs_security_checker: true
