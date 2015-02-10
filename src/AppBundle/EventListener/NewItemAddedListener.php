@@ -17,6 +17,8 @@ class NewItemAddedListener
      */
     private $adminEmail = [
         /* TODO: Fill with admin emails */
+        'genvaldartem@gmail.com', // Artem Genvald
+        'LogansOleg@gmail.com',   // Oleg Kachinsky
     ];
 
     /**
@@ -43,7 +45,7 @@ class NewItemAddedListener
             ->createMessage()
             ->setSubject('You have Completed Registration!')
             ->setFrom('Logansoleg@gmail.com')
-            ->setTo('Admin Email')
+            ->setTo($this->adminEmail)
             ->setBody('Blabla');
 
         $this->mailer->send($message);
