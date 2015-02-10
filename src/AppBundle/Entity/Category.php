@@ -14,8 +14,6 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * Category Entity
  *
- * @author Artem Genvald <genvaldartem@gmail.com>
- *
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CategoryRepository")
  * @ORM\Table(name="categories")
  *
@@ -90,7 +88,7 @@ class Category
      * @Gedmo\TreeParent
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="children")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE")
      * })
      */
     private $parent;

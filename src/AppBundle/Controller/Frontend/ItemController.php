@@ -4,11 +4,13 @@ namespace AppBundle\Controller\Frontend;
 
 use AppBundle\DBAL\Types\ItemTypeType;
 use AppBundle\Entity\Item;
+use AppBundle\Event\NewItemAddedEvent;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use AppBundle\Event\AppEvents;
 
 /**
  * ItemController
@@ -82,6 +84,8 @@ class ItemController extends Controller
 
             $this->get('session')->getFlashBag()->add('notice', 'Your item was added!');
 
+            $this->get('event_dispatcher')->dispatch(AppEvents::NEW_ITEM_ADDED, new NewItemAddedEvent($item));
+
             return $this->redirect($this->generateUrl('homepage'));
         }
 
@@ -113,6 +117,8 @@ class ItemController extends Controller
             $em->flush();
 
             $this->get('session')->getFlashBag()->add('notice', 'Your item was added!');
+
+            $this->get('event_dispatcher')->dispatch(AppEvents::NEW_ITEM_ADDED, new NewItemAddedEvent($item));
 
             return $this->redirect($this->generateUrl('homepage'));
         }

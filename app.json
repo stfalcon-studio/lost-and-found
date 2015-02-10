@@ -19,6 +19,12 @@
     "env": {
         "SYMFONY_ENV": {
             "value": "prod"
+        },
+        "FACEBOOK_OAUTH_CLIENT_ID": {
+            "value": "FacebookClientId"
+        },
+        "FACEBOOK_OAUTH_CLIENT_SECRET": {
+            "value": "FacebookClientSecret"
         }
     },
     "scripts": {

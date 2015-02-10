@@ -3,7 +3,6 @@
 namespace AppBundle\EventListener;
 
 use AppBundle\Event\FacebookUserConnectedEvent;
-use FOS\UserBundle\Mailer\Mailer;
 use Swift_Mailer;
 
 /**
