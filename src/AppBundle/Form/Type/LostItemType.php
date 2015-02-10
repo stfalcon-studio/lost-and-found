@@ -64,7 +64,10 @@ class LostItemType extends AbstractType
                 'widget' => 'single_text'
             ])
             ->add('save', 'submit', [
-                'label' => 'Create'
+                'label' => 'Create',
+                'attr'  => [
+                    'class' => 'btn-success'
+                ]
             ]);
 
         $tokenStorage = $this->tokenStorage;
