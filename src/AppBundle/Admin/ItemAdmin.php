@@ -88,10 +88,8 @@ class ItemAdmin extends Admin
                 ->add('status')
                 ->add('moderated')
                 ->add('createdBy')
-                ->add('date', 'date')
+                ->add('date', 'sonata_type_date_picker')
                 ->add('deleted')
-                ->add('deletedAt')
-                ->add('activatedAt')
             ->end();
     }
 
@@ -113,7 +111,6 @@ class ItemAdmin extends Admin
                 'editable' => true
             ])
             ->add('activatedAt')
-            ->add('moderated')
             ->add('date', 'date', [
                 'format' => 'd.m.Y'
             ])
