@@ -3,24 +3,25 @@
 namespace AppBundle\Validator\Constraints;
 
 use AppBundle\DBAL\Types\ItemAreaTypeType;
-use AppBundle\Entity\Item as Item;
+use AppBundle\Entity\Item;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
 /**
- * Class CheckItemValidator
+ * ItemAreaValidator
  */
-class CheckItemValidator extends ConstraintValidator
+class ItemAreaValidator extends ConstraintValidator
 {
     /**
-     * @param Item       $item
-     * @param Constraint $constraint
+     * Check if item area is valid
+     *
+     * @param Item       $item       Item
+     * @param Constraint $constraint Constraint
      */
     public function validate($item, Constraint $constraint)
     {
         if ($item->getAreaType()) {
-            switch ($item->getAreaType())
-            {
+            switch ($item->getAreaType()) {
                 case ItemAreaTypeType::MARKER:
                     if (!$item->getLatitude() || !$item->getLongitude()) {
                         $this->buildMessage(ItemAreaTypeType::MARKER, $constraint);
@@ -37,11 +38,16 @@ class CheckItemValidator extends ConstraintValidator
         }
     }
 
+    /**
+     * Build message
+     *
+     * @param string     $replacedMessage Replaced message
+     * @param Constraint $constraint      Constraint
+     */
     private function buildMessage($replacedMessage, Constraint $constraint)
     {
-        return $this->context
-            ->buildViolation($constraint->message)
-            ->setParameter('%areaType%', $replacedMessage)
-            ->addViolation();
+        return $this->context->buildViolation($constraint->message)
+                             ->setParameter('%areaType%', $replacedMessage)
+                             ->addViolation();
     }
 }

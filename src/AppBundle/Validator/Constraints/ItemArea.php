@@ -9,20 +9,20 @@ use Symfony\Component\Validator\Constraint;
  *
  * @Annotation
  */
-class CheckItem extends Constraint
+class ItemArea extends Constraint
 {
     public $message = 'Check the "%areaType%" on map';
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function validatedBy()
     {
-        return 'check_item';
+        return 'item_area';
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getTargets()
     {

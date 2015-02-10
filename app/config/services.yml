@@ -7,8 +7,3 @@ services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
-
-    validator.unique.item_validator:
-        class: AppBundle\Validator\Constraints\CheckItemValidator
-        tags:
-            - { name: validator.constraint_validator, alias: check_item }
