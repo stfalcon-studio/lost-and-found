@@ -13,17 +13,23 @@
 {% block content %}
     <h1>{{ title }}</h1>
 
-    {% for item in lost_items %}
-        <ul>
-            <li>
-                <a href="{{ path('item_details', {'id': item.id}) }}">{{ item.title }}</a>
-            </li>
-        </ul>
-    {% endfor %}
+    <div class="pull-left">
+        {% for item in lost_items %}
+            <ul>
+                <li>
+                    <a href="{{ path('item_details', {'id': item.id}) }}">{{ item.title }}</a>
+                </li>
+            </ul>
+        {% endfor %}
+    </div>
 
-    <a href="{{ path('add_lost_item') }}" class="btn btn-danger" title="Add an item you've lost">
-        I lost something :(
-    </a>
+    <div class="pull-right">
+        <a href="{{ path('add_lost_item') }}" class="btn btn-danger" title="Add an item you've lost">
+            I lost something :(
+        </a>
+    </div>
+
+    <div class="clearfix"></div>
 
     <div id="map" style="width: auto; height: 800px"></div>
 

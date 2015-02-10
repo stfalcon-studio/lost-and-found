@@ -65,7 +65,7 @@ $(document).ready(function () {
                                 + "'>"
                                 + data[i].itemTitle
                                 + "</a></h3></br>"
-                                + "<p style='margin-top: 0' align='right'>Додано: "
+                                + "<p style='margin-top: 0' align='right'>Added: "
                                 + formatDate(data[i].date.date)
                                 + "</p></div>";
 
