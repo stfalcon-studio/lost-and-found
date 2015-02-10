@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller\Frontend;
 
+use AppBundle\DBAL\Types\ItemTypeType;
 use AppBundle\Entity\Item;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -31,7 +32,8 @@ class ItemController extends Controller
         $lostItems  = $itemRepository->getActiveLostItem();
 
         return $this->render('frontend/item/lost_items.html.twig', [
-            'lost_items' => $lostItems
+            'lost_items' => $lostItems,
+            'page_type'  => ItemTypeType::LOST,
         ]);
     }
 
@@ -50,7 +52,8 @@ class ItemController extends Controller
         $foundItems = $itemRepository->getActiveFoundItem();
 
         return $this->render('frontend/item/found_items.html.twig', [
-            'found_items' => $foundItems
+            'found_items' => $foundItems,
+            'page_type'   => ItemTypeType::FOUND,
         ]);
     }
 

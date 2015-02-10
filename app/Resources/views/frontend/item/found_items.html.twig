@@ -1,5 +1,11 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" type="text/css" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+{% endblock stylesheets %}
+
 {% block content %}
     <h1>Found items</h1>
 
@@ -14,4 +20,15 @@
     <a href="{{ path('add_lost_item') }}" class="btn btn-success" title="Add an item you've lost">
         I found something :)
     </a>
+
+    <div id="map" style="width: auto; height: 800px"></div>
+
+    <div id="page-type" data-type="{{ page_type }}"></div>
 {% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <script src="{{ asset('js/map_list.js') }}"></script>
+{% endblock javascripts %}
