@@ -15,6 +15,7 @@ before_install:
 
 before_script:
   - composer install --dev
+  - mysql -e 'create database lost_and_found;'
 
 script:
   - phpunit --coverage-clover build/logs/clover.xml

@@ -52,12 +52,12 @@ class CategoryAdmin extends Admin
     {
         $formMapper
             ->with('Category')
+                ->add('parent')
                 ->add('title')
                 ->add('enabled')
                 ->add('imageFile', 'file', [
-                    'required' => false,
+                    'required' => false
                 ])
-                ->add('parent')
             ->end();
     }
 
@@ -68,13 +68,13 @@ class CategoryAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('title')
+            ->add('parent')
             ->add('enabled', 'boolean', [
                 'editable' => true,
             ])
             ->add('image', 'string', [
                 'template' => 'backend/category/list_marker.html.twig',
             ])
-            ->add('parent')
             ->add('createdAt', 'datetime', [
                 'format' => 'd.m.Y H:i:s'
             ])
@@ -98,11 +98,11 @@ class CategoryAdmin extends Admin
         $showMapper
             ->add('id')
             ->add('title')
+            ->add('parent')
             ->add('image', 'string', [
                 'template' => 'backend/category/show_marker.html.twig'
             ])
             ->add('enabled', 'boolean')
-            ->add('parent')
             ->add('children')
             ->add('createdAt', 'datetime', [
                 'format' => 'd.m.Y H:i:s'
@@ -120,8 +120,8 @@ class CategoryAdmin extends Admin
         $datagridMapper
             ->add('id')
             ->add('title')
-            ->add('enabled')
             ->add('parent')
+            ->add('enabled')
             ->add('createdAt')
             ->add('updatedAt');
     }
