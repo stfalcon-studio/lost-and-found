@@ -1,0 +1,79 @@
+{% macro actual_items_list(items) %}
+    <table class="table table-bordered table-hover">
+        <tbody>
+            {% for item in items %}
+                <tr>
+                    <td>
+                        <a href="{{ path('item_details', {'id': item.id}) }}">{{ item.title }}</a>
+                    </td>
+                    <td>
+                        <a href="{{ path('item_edit', {'id': item.id}) }}">Edit</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endmacro actual_items_list %}
+
+{% macro resolved_items_list(items) %}
+    <table class="table table-bordered table-hover">
+        <tbody>
+            {% for item in items %}
+                <tr>
+                    <td>
+                        <a href="{{ path('item_details', {'id': item.id}) }}">{{ item.title }}</a>
+                    </td>
+                    <td>
+                        ToDo
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endmacro resolved_items_list %}
+
+{% macro active_tab(active_tab) %}
+    <ul class="nav nav-tabs">
+        <li role="presentation" {% if active_tab == 'lost_items' %}class="active"{% endif %}>
+            {% if active_tab == 'lost_items' %}
+                <a href="#">My lost items</a>
+            {% else %}
+                <a href="{{ path('user_actual_lost_items') }}">My lost items</a>
+            {% endif %}
+        </li>
+        <li role="presentation" {% if active_tab == 'found_items' %}class="active"{% endif %}>
+            {% if active_tab == 'found_items' %}
+                <a href="#">My found items</a>
+            {% else %}
+                <a href="{{ path('user_actual_found_items') }}">My found items</a>
+            {% endif %}
+        </li>
+    </ul>
+{% endmacro active_tab %}
+
+{% macro active_pill(active_tab, active_pill) %}
+    <ul class="nav nav-pills">
+        <li role="presentation" {% if active_pill == 'actual' %}class="active"{% endif %}>
+            {% if active_pill == 'actual' %}
+                <a href="#">Actual</a>
+            {% else %}
+                {% if active_tab == 'found_items' %}
+                    <a href="{{ path('user_actual_found_items') }}">Actual</a>
+                {% elseif active_tab == 'lost_items' %}
+                    <a href="{{ path('user_actual_lost_items') }}">Actual</a>
+                {% endif %}
+            {% endif %}
+        </li>
+        <li role="presentation" {% if active_pill == 'resolved' %}class="active"{% endif %}>
+            {% if active_pill == 'resolved' %}
+                <a href="#">Resolved</a>
+            {% else %}
+                {% if active_tab == 'found_items' %}
+                    <a href="{{ path('user_resolved_found_items') }}">Resolved</a>
+                {% elseif active_tab == 'lost_items' %}
+                    <a href="{{ path('user_resolved_lost_items') }}">Resolved</a>
+                {% endif %}
+            {% endif %}
+        </li>
+    </ul>
+{% endmacro active_pill %}

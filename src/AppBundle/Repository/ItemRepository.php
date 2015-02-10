@@ -7,6 +7,7 @@ use AppBundle\Entity\User;
 use AppBundle\DBAL\Types\ItemStatusType;
 use AppBundle\DBAL\Types\ItemTypeType;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 
 /**
  * Class ItemRepository
@@ -85,13 +86,19 @@ class ItemRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('i');
 
-        $qb->select('i.latitude')
-           ->addSelect('i.longitude')
-           ->addSelect('IDENTITY(i.category) AS categoryId')
-           ->where($qb->expr()->eq('i.moderated', true))
-           ->andWhere($qb->expr()->eq('i.type', ':type'))
-           ->setParameter('type', ItemTypeType::LOST)
-           ->setFirstResult($offset);
+        $qb
+            ->select('i.latitude')
+            ->addSelect('i.longitude')
+            ->addSelect('i.id')
+            ->addSelect('i.title AS itemTitle')
+            ->addSelect('IDENTITY(i.category) AS categoryId')
+            ->addSelect('i.date')
+            ->addSelect('c.title')
+            ->join('i.category', 'c')
+            ->where($qb->expr()->eq('i.moderated', true))
+            ->andWhere($qb->expr()->eq('i.type', ':type'))
+            ->setParameter('type', ItemTypeType::LOST)
+            ->setFirstResult($offset);
 
         if (null !== $limit) {
             $qb->setMaxResults($limit);
@@ -112,13 +119,19 @@ class ItemRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('i');
 
-        $qb->select('i.latitude')
-           ->addSelect('i.longitude')
-           ->addSelect('IDENTITY(i.category) AS categoryId')
-           ->where($qb->expr()->eq('i.moderated', true))
-           ->andWhere($qb->expr()->eq('i.type', ':type'))
-           ->setParameter('type', ItemTypeType::FOUND)
-           ->setFirstResult($offset);
+        $qb
+            ->select('i.latitude')
+            ->addSelect('i.longitude')
+            ->addSelect('i.id')
+            ->addSelect('i.title AS itemTitle')
+            ->addSelect('IDENTITY(i.category) AS categoryId')
+            ->addSelect('i.date')
+            ->addSelect('c.title')
+            ->join('i.category', 'c')
+            ->where($qb->expr()->eq('i.moderated', true))
+            ->andWhere($qb->expr()->eq('i.type', ':type'))
+            ->setParameter('type', ItemTypeType::FOUND)
+            ->setFirstResult($offset);
 
         if (null !== $limit) {
             $qb->setMaxResults($limit);

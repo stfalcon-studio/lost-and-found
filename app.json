@@ -1,20 +1,27 @@
 {
-  "name": "Loas and Found",
-  "description": "Web-application",
-  "keywords": ["things", "found", "lost"],
-  "website": "https://github.com/stfalcon-studio/lost-and-found",
-  "success_url": "/admin",
-  "repository": "https://github.com/stfalcon-studio/lost-and-found",
-  "logo": "http://icons.iconarchive.com/icons/treetog/i/96/Search-icon.png",
-  "addons": [
-    "cleardb"
-  ],
-  "env": {
-    "SYMFONY_ENV": {
-      "value": "prod"
+    "name": "Lost and Found",
+    "description": "Web-service for announcements of lost and found items. Was created by students from Khmelnytskyi Polytechnic College during their practice at Studio Stfalcon.com",
+    "keywords": [
+        "lost",
+        "found",
+        "social",
+        "help",
+        "announcements",
+        "service"
+    ],
+    "website": "https://github.com/stfalcon-studio/lost-and-found",
+    "success_url": "/",
+    "repository": "https://github.com/stfalcon-studio/lost-and-found",
+    "logo": "http://icons.iconarchive.com/icons/icons-land/vista-map-markers/256/Map-Marker-Marker-Outside-Azure-icon.png",
+    "addons": [
+        "cleardb"
+    ],
+    "env": {
+        "SYMFONY_ENV": {
+            "value": "prod"
+        }
+    },
+    "scripts": {
+        "postdeploy": "php app/console doctrine:migration:migrate"
     }
-  },
-  "scripts": {
-    "postdeploy": "php app/console doctrine:migration:migrate"
-  }
 }
