@@ -10,6 +10,7 @@ use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use AppBundle\Validator\Constraints as AcmeAssert;
 
 /**
  * Item Entity
@@ -20,6 +21,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ItemRepository")
  * @ORM\Table(name="items")
  * @ORM\HasLifecycleCallbacks
+ *
+ * @AcmeAssert\CheckItem()
  *
  * @Gedmo\Loggable
  */
@@ -120,10 +123,6 @@ class Item implements UserManageableInterface
      * @ORM\Column(name="areaType", type="ItemAreaTypeType", nullable=false)
      *
      * @Gedmo\Versioned
-     *
-     * @Assert\NotBlank(message="Check area or place where you lost/found item")
-     * @Assert\Type(type="string")
-     * @Assert\Length(min="1", max="15")
      */
     private $areaType;
 
