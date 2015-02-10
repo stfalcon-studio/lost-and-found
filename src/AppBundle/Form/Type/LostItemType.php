@@ -67,6 +67,13 @@ class LostItemType extends AbstractType
                 'label' => 'Create'
             ]);
 
+        $builder
+            ->add('photos', 'collection', [
+                'type' => new ItemPhotoType(),
+                'allow_add'    => true,
+                'by_reference' => false,
+            ]);
+
         $tokenStorage = $this->tokenStorage;
 
         $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) use ($tokenStorage) {

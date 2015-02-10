@@ -30,6 +30,10 @@
     <div>
         {{ form_start(form) }}
         {{ form_errors(form) }}
+        <h3>Photos</h3>
+        <ul class="photos" data-prototype="{{ form_widget(form.photos.vars.prototype)|e }}">
+            <script src="{{ asset('js/add_image_photos.js') }}"></script>
+        </ul>
         {{ form_end(form) }}
     </div>
 

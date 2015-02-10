@@ -5,6 +5,8 @@ namespace AppBundle\Entity;
 use AppBundle\DBAL\Types\ItemAreaTypeType;
 use AppBundle\DBAL\Types\ItemStatusType;
 use AppBundle\Model\UserManageableInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -155,6 +157,18 @@ class Item implements UserManageableInterface
     private $date;
 
     /**
+     * @var Collection|ItemPhoto[] $items Items
+     *
+     * @Gedmo\TreePathSource
+     *
+     * @ORM\OneToMany(targetEntity="ItemPhoto", mappedBy="photos", cascade={"persist", "remove"}, orphanRemoval=true)
+     *
+     * @ORM\JoinColumn(onDelete="CASCADE")
+     */
+
+    private $photos;
+
+    /**
      * @var User $createdBy Created by
      *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="items")
@@ -190,6 +204,14 @@ class Item implements UserManageableInterface
     public function __toString()
     {
         return $this->getTitle() ?: 'New Item';
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->photos = new ArrayCollection();
     }
 
     /**
@@ -549,5 +571,60 @@ class Item implements UserManageableInterface
         if (true === $this->moderated) {
             $this->setModeratedAt(new \DateTime());
         }
+    }
+
+    /**
+     * Get items
+     *
+     * @return ItemPhoto[]|Collection ItemPhotos
+     */
+    public function getPhotos()
+    {
+        return $this->photos;
+    }
+
+    /**
+     * Set items
+     *
+     * @param ItemPhoto[]|Collection $itemPhotos ItemPhotos
+     *
+     * @return $this
+     */
+    public function setPhotos(Collection $itemPhotos)
+    {
+        foreach ($itemPhotos as $photo) {
+            $photo->setItem($this);
+        }
+        $this->photos = $itemPhotos;
+
+        return $this;
+    }
+
+    /**
+     * Add photo
+     *
+     * @param ItemPhoto $itemPhoto
+     *
+     * @return $this
+     */
+    public function addPhoto(ItemPhoto $itemPhoto)
+    {
+        $this->photos->add($itemPhoto->setItem($this));
+
+        return $this;
+    }
+
+    /**
+     * Remove photo
+     *
+     * @param ItemPhoto $itemPhoto
+     *
+     * @return $this
+     */
+    public function removePhoto(ItemPhoto $itemPhoto)
+    {
+        $this->photos->removeElement($itemPhoto);
+
+        return $this;
     }
 }
