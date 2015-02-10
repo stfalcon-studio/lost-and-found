@@ -2,11 +2,6 @@ services:
     app.facebook_user_connected.listener:
         class: AppBundle\EventListener\FacebookUserConnectedListener
         tags:
-            - { name: kernel.event_listener, event: app.facebook_user_connected, method: addAdminRole }
-
-    app.new_user_registered.listener:
-        class: AppBundle\EventListener\NewUserRegisteredListener
-        tags:
-            - { name: kernel.event_listener, event: app.new_user_registered, method: sendEmailNotification }
+            - { name: kernel.event_listener, event: app.facebook_user_connected, method: onUserRegistered }
         arguments:
             - @swiftmailer.mailer
