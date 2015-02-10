@@ -10,5 +10,5 @@ namespace AppBundle\Event;
 final class AppEvents
 {
     const FACEBOOK_USER_CONNECTED = 'app.facebook_user_connected';
-    const NEW_USER_REGISTERED = 'app.new_user_registered';
+    const NEW_ITEM_ADDED = 'app.new_item_added';
 }

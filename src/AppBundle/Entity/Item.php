@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use AppBundle\DBAL\Types\ItemAreaTypeType;
 use AppBundle\DBAL\Types\ItemStatusType;
 use AppBundle\Model\UserManageableInterface;
+use AppBundle\Validator\Constraints as AppAssert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -12,7 +13,6 @@ use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Validator\Constraints as Assert;
-use AppBundle\Validator\Constraints as AppAssert;
 
 /**
  * Item Entity
@@ -24,7 +24,7 @@ use AppBundle\Validator\Constraints as AppAssert;
  * @ORM\Table(name="items")
  * @ORM\HasLifecycleCallbacks
  *
- * @AppAssert\CheckItem()
+ * @AppAssert\ItemArea()
  *
  * @Gedmo\Loggable
  */
@@ -140,7 +140,7 @@ class Item implements UserManageableInterface
     private $status = ItemStatusType::ACTUAL;
 
     /**
-     * @var boolean $active Active
+     * @var boolean $active Is active?
      *
      * @ORM\Column(name="active", type="boolean")
      *
@@ -149,7 +149,7 @@ class Item implements UserManageableInterface
     private $active = true;
 
     /**
-     * @var \DateTime|null $date
+     * @var \DateTime|null $date Date
      *
      * @ORM\Column(type="date")
      *
@@ -174,7 +174,7 @@ class Item implements UserManageableInterface
      * @var User $createdBy Created by
      *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="items")
-     * @ORM\JoinColumn(name="createdBy", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="created_by", referencedColumnName="id", nullable=false)
      *
      * @Gedmo\Versioned
      *
@@ -183,7 +183,7 @@ class Item implements UserManageableInterface
     private $createdBy;
 
     /**
-     * @var boolean $moderated
+     * @var boolean $moderated Is moderated?
      *
      * @ORM\Column(type="boolean")
      *
@@ -192,7 +192,7 @@ class Item implements UserManageableInterface
     private $moderated = false;
 
     /**
-     * @var \DateTime $moderatedAt
+     * @var \DateTime $moderatedAt Moderated at
      *
      * @ORM\Column(type="datetime", nullable=true)
      */

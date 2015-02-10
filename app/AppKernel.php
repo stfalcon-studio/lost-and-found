@@ -34,13 +34,13 @@ class AppKernel extends Kernel
             new Sonata\AdminBundle\SonataAdminBundle(),
             new Sonata\CoreBundle\SonataCoreBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
-            // Application bundles
-            new AppBundle\AppBundle(),
-            //
+            // User related bundles
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new FOS\UserBundle\FOSUserBundle(),
-            //
+            // Media related bundles
             new Vich\UploaderBundle\VichUploaderBundle(),
+            // Application bundles
+            new AppBundle\AppBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'])) {

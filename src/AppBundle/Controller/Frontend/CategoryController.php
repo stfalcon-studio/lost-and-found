@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * CategoryController
@@ -18,12 +19,19 @@ class CategoryController extends Controller
     /**
      * Get all moderated categories
      *
+     * @param Request $request
+     *
      * @return Response
+     * @throws AccessDeniedException
      *
      * @Route("/get/categories", name="get_categories")
      */
-    public function getAllModeratedAction()
+    public function getAllModeratedAction(Request $request)
     {
+        if (!$request->isXmlHttpRequest()) {
+            throw new AccessDeniedException();
+        }
+
         $categoryRepository = $this->getDoctrine()->getRepository('AppBundle:Category');
 
         $categories = $categoryRepository->getAllEnabled();

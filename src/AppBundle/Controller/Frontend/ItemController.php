@@ -2,11 +2,15 @@
 
 namespace AppBundle\Controller\Frontend;
 
+use AppBundle\DBAL\Types\ItemTypeType;
 use AppBundle\Entity\Item;
+use AppBundle\Event\NewItemAddedEvent;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use AppBundle\Event\AppEvents;
 
 /**
  * ItemController
@@ -31,7 +35,8 @@ class ItemController extends Controller
         $lostItems  = $itemRepository->getActiveLostItem();
 
         return $this->render('frontend/item/lost_items.html.twig', [
-            'lost_items' => $lostItems
+            'lost_items' => $lostItems,
+            'page_type'  => ItemTypeType::LOST,
         ]);
     }
 
@@ -50,7 +55,8 @@ class ItemController extends Controller
         $foundItems = $itemRepository->getActiveFoundItem();
 
         return $this->render('frontend/item/found_items.html.twig', [
-            'found_items' => $foundItems
+            'found_items' => $foundItems,
+            'page_type'   => ItemTypeType::FOUND,
         ]);
     }
 
@@ -77,6 +83,8 @@ class ItemController extends Controller
             $em->flush();
 
             $this->get('session')->getFlashBag()->add('notice', 'Your item was added!');
+
+            $this->get('event_dispatcher')->dispatch(AppEvents::NEW_ITEM_ADDED, new NewItemAddedEvent($item));
 
             return $this->redirect($this->generateUrl('homepage'));
         }
@@ -109,6 +117,8 @@ class ItemController extends Controller
             $em->flush();
 
             $this->get('session')->getFlashBag()->add('notice', 'Your item was added!');
+
+            $this->get('event_dispatcher')->dispatch(AppEvents::NEW_ITEM_ADDED, new NewItemAddedEvent($item));
 
             return $this->redirect($this->generateUrl('homepage'));
         }
@@ -148,12 +158,19 @@ class ItemController extends Controller
     /**
      * Get found points
      *
+     * @param Request $request Request
+     * @throws AccessDeniedException
+     *
      * @return Response
      *
      * @Route("/show/found-points", name="show_found_points")
      */
-    public function getFoundPointsAction()
+    public function getFoundPointsAction(Request $request)
     {
+        if (!$request->isXmlHttpRequest()) {
+            throw new AccessDeniedException();
+        }
+
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
 
         $foundPoints = $itemRepository->getFoundPoints();
@@ -178,12 +195,19 @@ class ItemController extends Controller
     /**
      * Get lost points
      *
+     * @param Request $request Request
+     *
      * @return Response
+     * @throws AccessDeniedException
      *
      * @Route("/show/lost-points", name="show_lost_points")
      */
-    public function getLostPointsAction()
+    public function getLostPointsAction(Request $request)
     {
+        if (!$request->isXmlHttpRequest()) {
+            throw new AccessDeniedException();
+        }
+
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
 
         $lostPoints = $itemRepository->getLostPoints();
