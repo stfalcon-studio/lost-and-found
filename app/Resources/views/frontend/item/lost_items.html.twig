@@ -11,9 +11,7 @@
         </ul>
     {% endfor %}
 
-    {% if is_granted('ROLE_USER') %}
-        <a href="{{ path('add_lost_item') }}" class="btn btn-danger" title="Add an item you've lost">
-            I lost something :(
-        </a>
-    {% endif %}
+    <a href="{{ path('add_lost_item') }}" class="btn btn-danger" title="Add an item you've lost">
+        I lost something :(
+    </a>
 {% endblock content %}
