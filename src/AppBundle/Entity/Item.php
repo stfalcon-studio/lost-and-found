@@ -161,7 +161,7 @@ class Item implements UserManageableInterface
      * @var User $createdBy Created by
      *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="items")
-     * @ORM\JoinColumn(name="createdBy", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="created_by", referencedColumnName="id", nullable=false)
      *
      * @Gedmo\Versioned
      *
