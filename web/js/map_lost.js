@@ -126,10 +126,14 @@ $(document).ready(function() {
         console.log(areaType.val(type));
     });
 
+    /* TODO: Delete figures by click with popup */
+
     map.on('draw:deleted', function (e) {
         var layers = e.layers._layers;
 
         if (!jQuery.isEmptyObject(layers)) {
+            clearFields();
+
             map.removeControl(drawControl);
             drawControl = toolbarState('show');
             map.addControl(drawControl)
