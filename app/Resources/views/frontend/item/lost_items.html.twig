@@ -1,17 +1,44 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" type="text/css" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+{% endblock stylesheets %}
+
+{% set title = 'Lost items' %}
+
+{% block title %}{{ title }} | {{ parent() }}{% endblock title %}
+
 {% block content %}
-    <h1>Lost items</h1>
+    <h1>{{ title }}</h1>
 
-    {% for item in lost_items %}
-        <ul>
-            <li>
-                <a href="{{ path('item_details', {'id': item.id}) }}">{{ item.title }}</a>
-            </li>
-        </ul>
-    {% endfor %}
+    <div class="pull-left">
+        {% for item in lost_items %}
+            <ul>
+                <li>
+                    <a href="{{ path('item_details', {'id': item.id}) }}">{{ item.title }}</a>
+                </li>
+            </ul>
+        {% endfor %}
+    </div>
 
-    <a href="{{ path('add_lost_item') }}" class="btn btn-danger" title="Add an item you've lost">
-        I lost something :(
-    </a>
+    <div class="pull-right">
+        <a href="{{ path('add_lost_item') }}" class="btn btn-danger" title="Add an item you've lost">
+            I lost something :(
+        </a>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div id="map" style="width: auto; height: 800px"></div>
+
+    <div id="page-type" data-type="{{ page_type }}"></div>
 {% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <script src="{{ asset('js/map_list.js') }}"></script>
+{% endblock javascripts %}

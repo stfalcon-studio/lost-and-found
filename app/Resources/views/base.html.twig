@@ -75,6 +75,12 @@
                                                 <li>
                                                     <a href="{{ path('user_actual_lost_items') }}">Profile</a>
                                                 </li>
+                                                {% if is_granted('ROLE_ADMIN') %}
+                                                    <li class="divider"></li>
+                                                    <li>
+                                                        <a href="{{ path('sonata_admin_dashboard') }}">Admin Dashboard</a>
+                                                    </li>
+                                                {% endif %}
                                                 <li class="divider"></li>
                                                 <li>
                                                     <a href="{{ path('fos_user_security_logout') }}">Logout</a>

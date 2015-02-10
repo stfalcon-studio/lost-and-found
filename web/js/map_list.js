@@ -58,16 +58,16 @@ $(document).ready(function () {
                             }
 
                             var popupText = "<div><h6 align='center' style='margin-bottom: 0'><b>"
-                                            + data[i].title
-                                            + "</b></h6></br>"
-                                            + "<h3 style='margin: 0' align='center'><a href='"
-                                            + data[i].link
-                                            + "'>"
-                                            + data[i].itemTitle
-                                            + "</a></h3></br>"
-                                            + "<p style='margin-top: 0' align='right'>Added: "
-                                            + formatDate(data[i].date.date)
-                                            + "</p></div>";
+                                + data[i].title
+                                + "</b></h6></br>"
+                                + "<h3 style='margin: 0' align='center'><a href='"
+                                + data[i].link
+                                + "'>"
+                                + data[i].itemTitle
+                                + "</a></h3></br>"
+                                + "<p style='margin-top: 0' align='right'>Added: "
+                                + formatDate(data[i].date.date)
+                                + "</p></div>";
 
                             marker.bindPopup(popupText);
 
@@ -86,15 +86,5 @@ $(document).ready(function () {
         map.addLayer(markers);
     }
 
-    showPoints('found');
-
-    //$('#show-found-items').on('click', function () {
-    //    markers.clearLayers();
-    //    showPoints('found');
-    //});
-    //
-    //$('#show-lost-items').on('click', function () {
-    //    markers.clearLayers();
-    //    showPoints('lost');
-    //});
+    showPoints($('#page-type').data('type'));
 });

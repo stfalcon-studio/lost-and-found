@@ -1,9 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}
-    Details |
-    {{ parent() }}
-{% endblock title %}
+{%- if item.type == 'lost' -%}
+    {% set title = 'Lost item' ~ ': ' ~ item.title %}
+{%- elseif item.type == 'found' -%}
+    {% set title = 'Found item' ~ ': ' ~ item.title %}
+{%- endif -%}
+
+{% block title %}{{ title }} | {{ parent() }}{% endblock title %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -21,29 +24,34 @@
 {% endblock javascripts %}
 
 {% block content %}
-    <h1>
-        {%- if item.type == 'lost' -%}
-            Lost
-        {%- elseif item.type == 'found' -%}
-            Found
-        {%- endif -%}
-        :
-        {{ item.title }}
-    </h1>
-    <div>
-        <time datetime="{{ item.date|date('Y-m-d') }}">Date {{ item.date|date('d.m.Y') }}</time> |
-        Category: <span id="category">{{ item.category }}</span>
-    </div>
-    <br />
+    <article>
+        <header>
+            <h1>{{ title }}</h1>
+        </header>
 
-    <div class="well">
-        {{ item.description }}
-    </div>
+        <div>
+            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+            <time datetime="{{ item.date|date('Y-m-d') }}">{{ item.date|date('d.m.Y') }}</time>
+            &nbsp;
+            Category: <span id="category">{{ item.category }}</span>
+        </div>
+        <br />
 
-    <div id="latitude" data-latitude="{{ item.latitude }}"></div>
-    <div id="longitude" data-longitude="{{ item.longitude }}"></div>
-    <div id="area" data-area="{{ item.area|json_encode }}"></div>
-    <div id="areaType" data-area-type="{{ item.areaType }}"></div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                {{ item.description }}
+            </div>
+        </div>
 
-    <div id="map" style="width: auto; height: 800px"></div>
+        {#<blockquote>#}
+            {#<p>{{ item.description }}</p>#}
+        {#</blockquote>#}
+
+        <div id="latitude" data-latitude="{{ item.latitude }}"></div>
+        <div id="longitude" data-longitude="{{ item.longitude }}"></div>
+        <div id="area" data-area="{{ item.area|json_encode }}"></div>
+        <div id="areaType" data-area-type="{{ item.areaType }}"></div>
+
+        <div id="map" style="width: auto; height: 800px"></div>
+    </article>
 {% endblock content %}
