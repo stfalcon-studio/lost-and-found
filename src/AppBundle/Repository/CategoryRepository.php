@@ -3,14 +3,15 @@
 namespace AppBundle\Repository;
 
 use AppBundle\Entity\Category;
-use Doctrine\ORM\EntityRepository;
+use Gedmo\Tree\Entity\Repository\MaterializedPathRepository;
 
 /**
  * Class CategoryRepository
  *
  * @author svatok13
+ * @author Artem Genvald <genvaldartem@gmail.com>
  */
-class CategoryRepository extends EntityRepository
+class CategoryRepository extends MaterializedPathRepository
 {
     /**
      * Get all enabled categories

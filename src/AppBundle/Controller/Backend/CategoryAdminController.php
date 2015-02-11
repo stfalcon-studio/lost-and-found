@@ -17,7 +17,7 @@ class CategoryAdminController extends CRUDController
      *
      * @return RedirectResponse
      */
-    public function batchActionEnable()
+    public function batchEnableAction()
     {
         return $this->commonBatchWork(false, 'Enabled successfully');
     }
@@ -27,7 +27,7 @@ class CategoryAdminController extends CRUDController
      *
      * @return RedirectResponse
      */
-    public function batchActionDisable()
+    public function batchDisableAction()
     {
         return $this->commonBatchWork(false, 'Disabled successfully');
     }

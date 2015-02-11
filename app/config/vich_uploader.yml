@@ -1,0 +1,7 @@
+# VichUploader
+vich_uploader:
+    db_driver: orm
+    mappings:
+        category_image:
+            uri_prefix:         /images/categories
+            upload_destination: %kernel.root_dir%/../web/images/categories
