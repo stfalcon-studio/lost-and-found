@@ -89,6 +89,8 @@ class ItemRepository extends EntityRepository
         $qb
             ->select('i.latitude')
             ->addSelect('i.longitude')
+            ->addSelect('i.area')
+            ->addSelect('i.areaType')
             ->addSelect('i.id')
             ->addSelect('i.title AS itemTitle')
             ->addSelect('IDENTITY(i.category) AS categoryId')
