@@ -13,8 +13,6 @@ $(document).ready(function () {
         }
     }
 
-    var markers = new L.FeatureGroup();
-
     function formatDate(dateObject) {
         var d = new Date(dateObject);
         var day = d.getDate();
@@ -46,44 +44,94 @@ $(document).ready(function () {
                     type: 'get',
                     dataType: 'JSON',
                     success: function (data) {
+                        console.log(data);
                         for (var i = 0; i < data.length; i++) {
-                            var cat = categories[data[i].categoryId];
-                            if (cat['imageName'] !== null) {
-                                var icon = L.icon({
-                                    iconUrl: cat['imageName'], iconSize: [32, 32]
-                                });
-                                marker = L.marker([data[i].latitude, data[i].longitude], {icon: icon});
-                            } else {
-                                marker = L.marker([data[i].latitude, data[i].longitude]);
+                            var drawnItems = new L.FeatureGroup();
+                            map.addControl(drawnItems);
+
+                            var latitude = data[i].latitude;
+                            var longitude = data[i].longitude;
+                            var area = data[i].area;
+                            var areaType = data[i].areaType;
+                            console.log(area);
+                            console.log(areaType);
+                            var options = {color: "#000000", weight: 2};
+
+                            var layer = null;
+                            var center = null;
+
+                            switch (areaType) {
+                                case 'polygon':
+                                    area = JSON.parse(area);
+
+                                    var polygon = [];
+                                    var summLat = 0, summLng = 0;
+
+                                    for (var j = 0; j < area.length; j++) {
+                                        polygon.push([area[j].latitude, area[j].longitude]);
+                                        summLat += parseInt(area[j].latitude);
+                                        summLng += parseInt(area[j].longitude);
+                                    }
+
+                                    layer = L.polygon(polygon, options);
+                                    center = [summLat / area.length, summLng / area.length];
+                                    map.setView(center, 6);
+                                    break;
+                                case 'rectangle':
+                                    area = JSON.parse(area);
+                                    console.log(area[0]);
+
+                                    var bounds = [
+                                        [area[0].latitude, area[0].longitude], [area[2].latitude, area[2].longitude]
+                                    ];
+
+                                    layer = L.rectangle(bounds, options);
+                                    center = [area[0].latitude, area[0].longitude];
+                                    map.setView([area[0].latitude, area[0].longitude], 6);
+                                    break;
+                                case 'circle':
+                                    area = JSON.parse(area);
+                                    layer = L.circle([area[0].latlng.lat, area[0].latlng.lng], area[0].radius,
+                                        options);
+                                    center = [area[0].latlng.lat, area[0].latlng.lng];
+                                    map.setView([area[0].latlng.lat, area[0].latlng.lng], 6);
+                                    break;
+                                case 'marker':
+                                    var cat = categories[data[i].categoryId];
+                                    if (cat['imageName'] !== null) {
+                                        var icon = L.icon({
+                                            iconUrl: cat['imageName'], iconSize: [32, 32]
+                                        });
+                                        layer = L.marker([data[i].latitude, data[i].longitude], {icon: icon});
+                                    } else {
+                                        layer = L.marker([data[i].latitude, data[i].longitude]);
+                                    }
+                                    center = [latitude, longitude];
+                                    map.setView([latitude, longitude], 6);
+
+                                    break;
                             }
 
                             var popupText = "<div><h6 align='center' style='margin-bottom: 0'><b>"
-                                + data[i].title
-                                + "</b></h6></br>"
-                                + "<h3 style='margin: 0' align='center'><a href='"
-                                + data[i].link
-                                + "'>"
-                                + data[i].itemTitle
-                                + "</a></h3></br>"
-                                + "<p style='margin-top: 0' align='right'>Added: "
-                                + formatDate(data[i].date.date)
-                                + "</p></div>";
+                                            + data[i].title
+                                            + "</b></h6></br>"
+                                            + "<h3 style='margin: 0' align='center'><a href='"
+                                            + data[i].link
+                                            + "'>"
+                                            + data[i].itemTitle
+                                            + "</a></h3></br>"
+                                            + "<p style='margin-top: 0' align='right'>Added: "
+                                            + formatDate(data[i].date.date)
+                                            + "</p></div>";
 
-                            marker.bindPopup(popupText);
+                            layer.bindPopup(popupText);
 
-                            if (data[i].latitude === null) {
-                                continue;
-                            }
-                            /* TODO: Show figures with popups on map for lost items */
-
-                            markers.addLayer(marker);
+                            var figureLayer = L.layerGroup().addLayer(layer).addTo(map);
                         }
                     }
                 });
             }
         });
-
-        map.addLayer(markers);
     }
 
     showPoints($('#page-type').data('type'));
