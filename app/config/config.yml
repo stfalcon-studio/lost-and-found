@@ -6,6 +6,7 @@ imports:
     - { resource: assetic.yml }
     - { resource: hwi_oauth.yml }
     - { resource: fos_user.yml }
+    - { resource: vich_uploader.yml }
     - { resource: sonata/sonata-admin.yml }
     - { resource: sonata/sonata-admin-orm.yml }
     - { resource: sonata/sonata-block.yml }
@@ -43,7 +44,6 @@ twig:
     form_themes:
         - '/backend/item/area_map.html.twig'
 
-
 # Swiftmailer Configuration
 swiftmailer:
     transport: "%mailer_transport%"
@@ -51,26 +51,9 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
-#Vichuploader
-vich_uploader:
-    db_driver: orm
-    mappings:
-        category_image:
-            uri_prefix:         /images/categories
-            upload_destination: %kernel.root_dir%/../web/images/categories
-#Sensio
+
+# SensioFrameworkExtra
 sensio_framework_extra:
     request:
         converters: true
         auto_convert: false
-doctrine:
-    orm:
-        entity_managers:
-            default:
-                mappings:
-                    gedmo_tree:
-                        type: annotation
-                        prefix: Gedmo\Tree\Entity
-                        dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Tree/Entity"
-                        alias: GedmoTree # this one is optional and will default to the name set for the mapping
-                        is_bundle: false
