@@ -168,25 +168,28 @@ class ItemRepository extends EntityRepository
      * @param string  $itemType     Item type
      * @param boolean $activeStatus Active
      * @param boolean $deleted      Deleted
+     * @param boolean $moderated    Moderated
      *
      * @return array
      */
-    public function getUserItems(User $user, $itemStatus, $itemType, $activeStatus, $deleted)
+    public function getUserItems(User $user, $itemStatus, $itemType, $activeStatus, $deleted, $moderated)
     {
         $qb = $this->createQueryBuilder('i');
 
         $qb->where($qb->expr()->eq('i.createdBy', ':user'))
-           ->andWhere($qb->expr()->eq('i.status', ':status'))
-           ->andWhere($qb->expr()->eq('i.type', ':type'))
-           ->andWhere($qb->expr()->eq('i.active', ':active'))
-           ->andWhere($qb->expr()->eq('i.deleted', ':deleted'))
-           ->setParameters([
-               'user'   => $user,
-               'status' => $itemStatus,
-               'type'   => $itemType,
-               'active' => $activeStatus,
-               'deleted'=> $deleted
-           ]);
+            ->andWhere($qb->expr()->eq('i.status', ':status'))
+            ->andWhere($qb->expr()->eq('i.type', ':type'))
+            ->andWhere($qb->expr()->eq('i.active', ':active'))
+            ->andWhere($qb->expr()->eq('i.deleted', ':deleted'))
+            ->andWhere($qb->expr()->eq('i.moderated', ':moderated'))
+            ->setParameters([
+                'user'   => $user,
+                'status' => $itemStatus,
+                'type'   => $itemType,
+                'active' => $activeStatus,
+                'deleted' => $deleted,
+                'moderated' => $moderated,
+            ]);
 
         return $qb->getQuery()->getResult();
     }
@@ -212,6 +215,32 @@ class ItemRepository extends EntityRepository
                'active'   => $active,
                'deleted'=> $deleted
            ]);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * Get user items
+     *
+     * @param User    $user      User
+     * @param boolean $moderated moderated
+     *
+     * @return array
+     */
+    public function getNotModeratedItems(User $user, $moderated)
+    {
+        $qb = $this->createQueryBuilder('i');
+
+        $qb->where($qb->expr()->eq('i.createdBy', ':user'))
+            ->andWhere($qb->expr()->eq('i.active', ':active'))
+            ->andWhere($qb->expr()->eq('i.deleted', ':deleted'))
+            ->andWhere($qb->expr()->eq('i.moderated', ':moderated'))
+            ->setParameters([
+                'user'   => $user,
+                'active'   => true,
+                'deleted' => false,
+                'moderated' => $moderated,
+            ]);
 
         return $qb->getQuery()->getResult();
     }

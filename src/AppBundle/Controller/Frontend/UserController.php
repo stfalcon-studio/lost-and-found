@@ -69,7 +69,7 @@ class UserController extends Controller
         /** @var \AppBundle\Repository\ItemRepository $itemRepository */
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
 
-        $items = $itemRepository->getUserItems($this->getUser(), ItemStatusType::ACTUAL, ItemTypeType::LOST, true, false);
+        $items = $itemRepository->getUserItems($this->getUser(), ItemStatusType::ACTUAL, ItemTypeType::LOST, true, false, true);
 
 
         return $this->render('frontend/user/show_actual_lost_items.html.twig', [
@@ -89,7 +89,7 @@ class UserController extends Controller
         /** @var \AppBundle\Repository\ItemRepository $itemRepository */
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
 
-        $items = $itemRepository->getUserItems($this->getUser(), ItemStatusType::ACTUAL, ItemTypeType::FOUND, true, false);
+        $items = $itemRepository->getUserItems($this->getUser(), ItemStatusType::ACTUAL, ItemTypeType::FOUND, true, false, true);
 
         return $this->render('frontend/user/show_actual_found_items.html.twig', [
             'items' => $items
@@ -108,7 +108,7 @@ class UserController extends Controller
         /** @var \AppBundle\Repository\ItemRepository $itemRepository */
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
 
-        $items = $itemRepository->getUserItems($this->getUser(), ItemStatusType::RESOLVED, ItemTypeType::LOST, true, false);
+        $items = $itemRepository->getUserItems($this->getUser(), ItemStatusType::RESOLVED, ItemTypeType::LOST, true, false, true);
 
         return $this->render('frontend/user/show_resolved_lost_items.html.twig', [
             'items' => $items
@@ -126,7 +126,7 @@ class UserController extends Controller
     {
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
 
-        $items = $itemRepository->getUserItems($this->getUser(), ItemStatusType::RESOLVED, ItemTypeType::FOUND, true, false);
+        $items = $itemRepository->getUserItems($this->getUser(), ItemStatusType::RESOLVED, ItemTypeType::FOUND, true, false, true);
 
         return $this->render('frontend/user/show_resolved_found_items.html.twig', [
             'items' => $items
@@ -145,6 +145,22 @@ class UserController extends Controller
         $items = $itemRepository->getDeactivatedItems($this->getUser(), false, false);
 
         return $this->render('frontend/user/show_deactivated_items.html.twig', [
+            'items' => $items
+        ]);
+    }
+
+    /**
+     * @return Response
+     *
+     * @Route("/not-moderated-items", name="user_not_moderated_items")
+     */
+    public function showNotModeratedItemsAction()
+    {
+        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+
+        $items = $itemRepository->getNotModeratedItems($this->getUser(), false);
+
+        return $this->render('frontend/user/show_not_moderated_items.html.twig', [
             'items' => $items
         ]);
     }

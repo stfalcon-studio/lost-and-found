@@ -39,6 +39,25 @@
     </table>
 {% endmacro deactivated_items_list %}
 
+{% macro not_moderated_items_list(items) %}
+    <table class="table table-bordered table-hover">
+        <tbody>
+            {% for item in items %}
+                <tr>
+                    <td>
+                        <a href="{{ path('item_details', {'id': item.id}) }}">{{ item.title }}</a>
+                    </td>
+                    <td>
+                        <a href="{{ path('item_edit', {'id': item.id}) }}">Edit</a>
+                    </td>
+                    <td>
+                        <a href="{{ path('item_delete', {'id': item.id}) }}">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endmacro not_moderated_items_list %}
 
 {% macro resolved_items_list(items) %}
     <table class="table table-bordered table-hover">
@@ -81,6 +100,13 @@
                 <a href="#">My deactivated items</a>
             {% else %}
                 <a href="{{ path('user_deactivated_items') }}">My deactivated items</a>
+            {% endif %}
+        </li>
+        <li role="presentation" {% if active_tab == 'not_moderated_items' %}class="active"{% endif %}>
+            {% if active_tab == 'not_moderated_items' %}
+                <a href="#">My not moderated items</a>
+            {% else %}
+                <a href="{{ path('user_not_moderated_items') }}">My not moderated items</a>
             {% endif %}
         </li>
     </ul>
