@@ -14,8 +14,8 @@ before_install:
   - sudo pip install codecov
 
 before_script:
-  - composer install --dev
   - mysql -e 'create database lost_and_found;'
+  - composer install --dev
 
 script:
   - phpunit --coverage-clover build/logs/clover.xml
