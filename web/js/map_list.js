@@ -44,7 +44,6 @@ $(document).ready(function () {
                     type: 'get',
                     dataType: 'JSON',
                     success: function (data) {
-                        console.log(data);
                         for (var i = 0; i < data.length; i++) {
                             var drawnItems = new L.FeatureGroup();
                             map.addControl(drawnItems);
@@ -53,8 +52,6 @@ $(document).ready(function () {
                             var longitude = data[i].longitude;
                             var area = data[i].area;
                             var areaType = data[i].areaType;
-                            console.log(area);
-                            console.log(areaType);
                             var options = {color: "#000000", weight: 2};
 
                             var layer = null;
@@ -79,8 +76,6 @@ $(document).ready(function () {
                                     break;
                                 case 'rectangle':
                                     area = JSON.parse(area);
-                                    console.log(area[0]);
-
                                     var bounds = [
                                         [area[0].latitude, area[0].longitude], [area[2].latitude, area[2].longitude]
                                     ];
