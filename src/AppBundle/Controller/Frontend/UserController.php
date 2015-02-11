@@ -42,7 +42,7 @@ class UserController extends Controller
             $em->persist($item);
             $em->flush();
 
-            $this->get('session')->getFlashBag()->add('update', 'Item '.$item->getTitle().' was updated!');
+            $this->get('session')->getFlashBag()->add('update', 'Item ' . $item->getTitle() . ' was updated!');
 
             return $this->redirect($this->generateUrl('user_actual_lost_items'));
         }
