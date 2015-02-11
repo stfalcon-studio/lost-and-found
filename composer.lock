@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "631ba95e13afdf213ed3b979c2f0b3b2",
+    "hash": "77b3aba66e631689007b63e3bda2f073",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2164,16 +2164,16 @@
         },
         {
             "name": "sonata-project/doctrine-orm-admin-bundle",
-            "version": "dev-master",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle.git",
-                "reference": "a05f52d457eb4b8bb97163820651579a963e92ae"
+                "reference": "1ab6b728ef03d6565bdde6b0c2b65a9e7a2659b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/a05f52d457eb4b8bb97163820651579a963e92ae",
-                "reference": "a05f52d457eb4b8bb97163820651579a963e92ae",
+                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/1ab6b728ef03d6565bdde6b0c2b65a9e7a2659b9",
+                "reference": "1ab6b728ef03d6565bdde6b0c2b65a9e7a2659b9",
                 "shasum": ""
             },
             "require": {
@@ -2198,7 +2198,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4.x-dev"
+                    "dev-master": "2.3.x-dev"
                 }
             },
             "autoload": {
@@ -2230,7 +2230,7 @@
                 "generator",
                 "sonata"
             ],
-            "time": "2015-02-10 16:51:03"
+            "time": "2014-09-01 20:21:38"
         },
         {
             "name": "sonata-project/exporter",
@@ -3004,7 +3004,6 @@
         "doctrine/migrations": 20,
         "doctrine/doctrine-migrations-bundle": 20,
         "stof/doctrine-extensions-bundle": 20,
-        "sonata-project/doctrine-orm-admin-bundle": 20,
         "hwi/oauth-bundle": 20,
         "doctrine/data-fixtures": 20,
         "doctrine/doctrine-fixtures-bundle": 20

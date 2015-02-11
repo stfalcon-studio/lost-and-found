@@ -110,7 +110,8 @@ class ItemAdmin extends Admin
             ->add('moderated', null, [
                 'editable' => true
             ])
-            ->add('activatedAt')
+            ->add('active')
+            ->add('deleted')
             ->add('date', 'date', [
                 'format' => 'd.m.Y'
             ])
@@ -121,7 +122,6 @@ class ItemAdmin extends Admin
                 'format' => 'd.m.Y H:i:s'
             ])
             ->add('createdBy')
-            ->add('deleted')
             ->add('_action', 'actions', [
                 'actions' => [
                     'show'   => [],

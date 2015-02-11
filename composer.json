@@ -54,7 +54,7 @@
         "doctrine/doctrine-migrations-bundle": "dev-master",
         "stof/doctrine-extensions-bundle": "1.2.*@dev",
         "fresh/doctrine-enum-bundle": "v3.1",
-        "sonata-project/doctrine-orm-admin-bundle": "dev-master",
+        "sonata-project/doctrine-orm-admin-bundle": "2.3.0",
         "hwi/oauth-bundle": "0.4.*@dev",
         "friendsofsymfony/user-bundle": "~1.3",
         "vich/uploader-bundle": "0.14.*"

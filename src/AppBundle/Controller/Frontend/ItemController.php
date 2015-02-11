@@ -4,13 +4,14 @@ namespace AppBundle\Controller\Frontend;
 
 use AppBundle\DBAL\Types\ItemTypeType;
 use AppBundle\Entity\Item;
+use AppBundle\Event\AppEvents;
 use AppBundle\Event\NewItemAddedEvent;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use AppBundle\Event\AppEvents;
 
 /**
  * ItemController
@@ -32,7 +33,7 @@ class ItemController extends Controller
         /** @var \AppBundle\Repository\ItemRepository $itemRepository */
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
 
-        $lostItems  = $itemRepository->getActiveLostItem();
+        $lostItems = $itemRepository->getActiveLostItem();
 
         return $this->render('frontend/item/lost_items.html.twig', [
             'lost_items' => $lostItems,
@@ -140,11 +141,11 @@ class ItemController extends Controller
     public function itemDetailsAction($id)
     {
         $item = $this->getDoctrine()
-            ->getRepository('AppBundle:Item')
-            ->findOneBy([
-                'id'        => $id,
-                'moderated' => true,
-            ]);
+                     ->getRepository('AppBundle:Item')
+                     ->findOneBy([
+                         'id'        => $id,
+                         'moderated' => true,
+                     ]);
 
         if (!$item) {
             throw $this->createNotFoundException('Item not found.');
@@ -159,6 +160,7 @@ class ItemController extends Controller
      * Get found points
      *
      * @param Request $request Request
+     *
      * @throws AccessDeniedException
      *
      * @return Response
@@ -230,19 +232,15 @@ class ItemController extends Controller
     }
 
     /**
-     * @param int $id id
+     * @param Item $item Item
      *
      * @return Response
      *
      * @Route("item/{id}/deactivate", name="item_deactivate")
+     * @ParamConverter("item", class="AppBundle\Entity\Item")
      */
-    public function itemDeactivatedAction($id)
+    public function itemDeactivatedAction(Item $item)
     {
-        $item = $this->getDoctrine()
-            ->getRepository('AppBundle:Item')
-            ->findOneBy([
-                'id'        => $id,
-            ]);
         $item->setActive(false);
 
         $em = $this->getDoctrine()->getManager();
@@ -250,7 +248,7 @@ class ItemController extends Controller
         $em->flush();
 
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
-        $items = $itemRepository->getDeactivatedItems($this->getUser(), false, false);
+        $items          = $itemRepository->getDeactivatedItems($this->getUser(), false, false);
 
         return $this->render(':frontend/user:show_deactivated_items.html.twig', [
             'items' => $items
@@ -258,19 +256,15 @@ class ItemController extends Controller
     }
 
     /**
-     * @param int $id id
+     * @param Item $item Item
      *
      * @return Response
      *
      * @Route("item/{id}/delete", name="item_delete")
+     * @ParamConverter("item", class="AppBundle\Entity\Item")
      */
-    public function itemDeleteAction($id)
+    public function itemDeleteAction(Item $item)
     {
-        $item = $this->getDoctrine()
-                     ->getRepository('AppBundle:Item')
-                     ->findOneBy([
-                         'id'        => $id,
-                     ]);
         $item->setDeleted(true);
 
         $em = $this->getDoctrine()->getManager();
@@ -278,7 +272,7 @@ class ItemController extends Controller
         $em->flush();
 
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
-        $items = $itemRepository->getDeactivatedItems($this->getUser(), false, false);
+        $items          = $itemRepository->getDeactivatedItems($this->getUser(), false, false);
 
         return $this->render(':frontend/user:show_deactivated_items.html.twig', [
             'items' => $items
@@ -286,19 +280,15 @@ class ItemController extends Controller
     }
 
     /**
-     * @param int $id id
+     * @param Item $item Item
      *
      * @return Response
      *
      * @Route("item/{id}/activate", name="item_activate")
+     * @ParamConverter("item", class="AppBundle\Entity\Item")
      */
-    public function itemActivatedAction($id)
+    public function itemActivatedAction(Item $item)
     {
-        $item = $this->getDoctrine()
-                     ->getRepository('AppBundle:Item')
-                     ->findOneBy([
-                         'id'        => $id,
-                     ]);
         $item->setActive(true);
 
         $em = $this->getDoctrine()->getManager();
@@ -306,7 +296,7 @@ class ItemController extends Controller
         $em->flush();
 
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
-        $items = $itemRepository->getDeactivatedItems($this->getUser(), false, false);
+        $items          = $itemRepository->getDeactivatedItems($this->getUser(), false, false);
 
         return $this->render(':frontend/user:show_deactivated_items.html.twig', [
             'items' => $items

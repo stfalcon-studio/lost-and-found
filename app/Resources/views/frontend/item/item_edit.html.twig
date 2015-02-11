@@ -24,9 +24,6 @@
 {% endblock javascripts %}
 
 {% block content %}
-    <a href="{{ path('homepage') }}">На головну</a>
-    <br />
-
     <div>
         {{ form_start(form) }}
         {{ form_errors(form) }}
@@ -36,5 +33,4 @@
     <div id="longitude" data-longitude="{{ item.longitude }}"></div>
     <div id="area" data-area="{{ item.area|json_encode }}"></div>
     <div id="areaType" data-area-type="{{ item.areaType }}"></div>
-
 {% endblock content %}
