@@ -31,9 +31,11 @@ class ItemRepository extends EntityRepository
         $qb->where($qb->expr()->eq('i.status', ':status'))
             ->andWhere($qb->expr()->eq('i.type', ':type'))
             ->andWhere($qb->expr()->eq('i.moderated', true))
+            ->andWhere($qb->expr()->eq('i.deleted', ':deleted'))
             ->setParameters([
                 'type'   => ItemTypeType::LOST,
-                'status' => ItemStatusType::ACTUAL
+                'status' => ItemStatusType::ACTUAL,
+                'deleted'=> false,
             ])
             ->orderBy('i.createdAt', 'DESC')
             ->setFirstResult($offset);
@@ -60,9 +62,11 @@ class ItemRepository extends EntityRepository
         $qb->where($qb->expr()->eq('i.status', ':status'))
             ->andWhere($qb->expr()->eq('i.type', ':type'))
             ->andWhere($qb->expr()->eq('i.moderated', true))
+            ->andWhere($qb->expr()->eq('i.deleted', ':deleted'))
             ->setParameters([
                 'type'   => ItemTypeType::FOUND,
-                'status' => ItemStatusType::ACTUAL
+                'status' => ItemStatusType::ACTUAL,
+                'deleted'=> false,
             ])
             ->orderBy('i.createdAt', 'DESC')
             ->setFirstResult($offset);
@@ -100,9 +104,11 @@ class ItemRepository extends EntityRepository
             ->where($qb->expr()->eq('i.moderated', true))
             ->andWhere($qb->expr()->eq('i.type', ':type'))
             ->andWhere($qb->expr()->eq('i.status', ':status'))
+            ->andWhere($qb->expr()->eq('i.deleted', ':deleted'))
             ->setParameters([
                 'type'   => ItemTypeType::LOST,
                 'status' => ItemStatusType::ACTUAL,
+                'deleted'=> false,
             ])
             ->setFirstResult($offset);
 
@@ -128,6 +134,8 @@ class ItemRepository extends EntityRepository
         $qb
             ->select('i.latitude')
             ->addSelect('i.longitude')
+            ->addSelect('i.area')
+            ->addSelect('i.areaType')
             ->addSelect('i.id')
             ->addSelect('i.title AS itemTitle')
             ->addSelect('IDENTITY(i.category) AS categoryId')
@@ -137,9 +145,11 @@ class ItemRepository extends EntityRepository
             ->where($qb->expr()->eq('i.moderated', true))
             ->andWhere($qb->expr()->eq('i.type', ':type'))
             ->andWhere($qb->expr()->eq('i.status', ':status'))
+            ->andWhere($qb->expr()->eq('i.deleted', ':deleted'))
             ->setParameters([
                 'type'   => ItemTypeType::FOUND,
                 'status' => ItemStatusType::ACTUAL,
+                'deleted'=> false,
             ])
             ->setFirstResult($offset);
 
