@@ -32,11 +32,11 @@ class ItemAdmin extends Admin
     {
         $actions = parent::getBatchActions();
 
-        $actions['mark_as_moderated'] = [
+        $actions['mark_as_moderated_action']   = [
             'label'            => 'Mark as moderated',
             'ask_confirmation' => true
         ];
-        $actions['unmark_as_moderated']    = [
+        $actions['unmark_as_moderated_action'] = [
             'label'            => 'Unmark as moderated',
             'ask_confirmation' => true
         ];

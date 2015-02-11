@@ -33,11 +33,11 @@ class CategoryAdmin extends Admin
     {
         $actions = parent::getBatchActions();
 
-        $actions['enable'] = [
+        $actions['enable_action']  = [
             'label'            => 'Enable',
             'ask_confirmation' => true
         ];
-        $actions['disable']    = [
+        $actions['disable_action'] = [
             'label'            => 'Disable',
             'ask_confirmation' => true
         ];
