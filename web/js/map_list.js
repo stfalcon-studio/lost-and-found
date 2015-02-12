@@ -1,3 +1,5 @@
+var markers = new L.FeatureGroup();
+
 $(document).ready(function () {
     var map = L.map('map').setView([48.76375572, 31.62963867], 6);
 
@@ -12,8 +14,6 @@ $(document).ready(function () {
             L.marker([points.items[point].latitude, points.items[point].longitude]).addTo(map);
         }
     }
-
-    var markers = new L.FeatureGroup();
 
     function formatDate(dateObject) {
         var d = new Date(dateObject);
@@ -32,9 +32,17 @@ $(document).ready(function () {
         return date;
     }
 
+    /* Clear page from all items and markers on map */
+    function clearPage() {
+        markers.clearLayers();
+        $('#items').empty();
+    }
+
     function showPoints(type) {
         var categories;
+        var categoriesId = [];
         var popupTextArray = [];
+        var checkedCategory = false;
         $.ajax({
             url: 'http://lost-and-found.work/app_dev.php/get/categories',
             type: 'get',
@@ -46,45 +54,65 @@ $(document).ready(function () {
                     type: 'get',
                     dataType: 'JSON',
                     success: function (data) {
-                        for (var i = 0; i < data.length; i++) {
-                            var cat = categories[data[i].categoryId];
-                            if (cat['imageName'] !== null) {
-                                var icon = L.icon({
-                                    iconUrl: cat['imageName'], iconSize: [32, 32]
-                                });
-                                marker = L.marker([data[i].latitude, data[i].longitude], {icon: icon});
-                            } else {
-                                marker = L.marker([data[i].latitude, data[i].longitude]);
-                            }
 
-                            var popupText = "<div><h6 align='center' style='margin-bottom: 0'><b>"
-                                + data[i].title
-                                + "</b></h6></br>"
-                                + "<h3 style='margin: 0' align='center'><a href='"
-                                + data[i].link
-                                + "'>"
-                                + data[i].itemTitle
-                                + "</a></h3></br>"
-                                + "<p style='margin-top: 0' align='right'>Added: "
-                                + formatDate(data[i].date.date)
-                                + "</p></div>";
+                        $('#categories').on('change', function() {
+                            categoriesId = [];
+                            clearPage();
+                            checkedCategory = false;
+                            $('#categories li input:checked').each(function(id, li) {
+                                categoriesId.push($(li).data('categoryId'));
+                                clearPage();
+                                for (var i = 0; i < data.length; i++) {
+                                    if ((categoriesId.indexOf(data[i].categoryId)) >= 0) {
+                                        checkedCategory = true;
+                                        var cat = categories[data[i].categoryId];
+                                        if (cat['imageName'] !== null) {
+                                            var icon = L.icon({
+                                                iconUrl: cat['imageName'], iconSize: [32, 32]
+                                            });
+                                            marker = L.marker([data[i].latitude, data[i].longitude], {icon: icon});
+                                        } else {
+                                            marker = L.marker([data[i].latitude, data[i].longitude]);
+                                        }
+                                        $('#items').append('<li><a id="item_' + data[i].itemId + '" href="' + data[i].link +'" >' + data[i].title + '</a></li>');
 
-                            marker.bindPopup(popupText);
+                                        var popupText = "<div><h6 align='center' style='margin-bottom: 0'><b>"
+                                            + cat.title
+                                            + "</b></h6></br>"
+                                            + "<h3 style='margin: 0' align='center'><a href='"
+                                            + data[i].link
+                                            + "'>"
+                                            + data[i].title
+                                            + "</a></h3></br>"
+                                            + "<p style='margin-top: 0' align='right'>Added: "
+                                            + formatDate(data[i].date.date)
+                                            + "</p></div>";
 
-                            if (data[i].latitude === null) {
-                                continue;
-                            }
-                            /* TODO: Show figures with popups on map for lost items */
+                                        marker.bindPopup(popupText);
 
-                            markers.addLayer(marker);
-                        }
+                                        if (data[i].latitude === null) {
+                                            continue;
+                                        }
+                                        /* TODO: Show figures with popups on map for lost items */
+
+                                        markers.addLayer(marker);
+                                    }
+                                }
+                            });
+
+                        });
+
                     }
                 });
             }
         });
 
         map.addLayer(markers);
+        function showAll() {
+
+        }
     }
 
     showPoints($('#page-type').data('type'));
+
 });

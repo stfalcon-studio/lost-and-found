@@ -30,12 +30,27 @@ class ItemController extends Controller
     public function lostItemsListAction()
     {
         /** @var \AppBundle\Repository\ItemRepository $itemRepository */
-        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+        //$itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+        $categoryRepository = $this->getDoctrine()->getRepository('AppBundle:Category');
 
-        $lostItems  = $itemRepository->getActiveLostItem();
+        //$lostItems  = $itemRepository->getActiveLostItem();
+        $categories = $categoryRepository->getCategories();
+
+        $router = $this->get('router');
+
+//        foreach ($lostItems as &$item) {
+//            $item['link'] = $router->generate(
+//                'item_details',
+//                [
+//                    'id' => $item['id']
+//                ],
+//                $router::ABSOLUTE_URL
+//            );
+//        }
 
         return $this->render('frontend/item/lost_items.html.twig', [
-            'lost_items' => $lostItems,
+            //'lost_items' => $lostItems,
+            'categories' => $categories,
             'page_type'  => ItemTypeType::LOST,
         ]);
     }
@@ -50,12 +65,27 @@ class ItemController extends Controller
     public function foundItemsListAction()
     {
         /** @var \AppBundle\Repository\ItemRepository $itemRepository */
-        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+        //$itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+        $categoryRepository = $this->getDoctrine()->getRepository('AppBundle:Category');
 
-        $foundItems = $itemRepository->getActiveFoundItem();
+        //$foundItems = $itemRepository->getFoundItems();
+        $categories = $categoryRepository->getCategories();
+
+        $router = $this->get('router');
+
+//        foreach ($foundItems as &$item) {
+//            $item['link'] = $router->generate(
+//                'item_details',
+//                [
+//                    'id' => $item['id']
+//                ],
+//                $router::ABSOLUTE_URL
+//            );
+//        }
 
         return $this->render('frontend/item/found_items.html.twig', [
-            'found_items' => $foundItems,
+            //'found_items' => $foundItems,
+            'categories'  => $categories,
             'page_type'   => ItemTypeType::FOUND,
         ]);
     }
@@ -171,23 +201,23 @@ class ItemController extends Controller
             throw new AccessDeniedException();
         }
 
-        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+        $categoryRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
 
-        $foundPoints = $itemRepository->getFoundPoints();
+        $foundMarkers = $categoryRepository->getFoundMarkers();
 
         $router = $this->get('router');
 
-        foreach ($foundPoints as &$item) {
+        foreach ($foundMarkers as &$item) {
             $item['link'] = $router->generate(
                 'item_details',
                 [
-                    'id' => $item['id']
+                    'id' => $item['itemId']
                 ],
                 $router::ABSOLUTE_URL
             );
         }
 
-        return new Response(json_encode($foundPoints), 200, [
+        return new Response(json_encode($foundMarkers), 200, [
             'Content-Type' => 'application/json'
         ]);
     }
@@ -210,7 +240,7 @@ class ItemController extends Controller
 
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
 
-        $lostPoints = $itemRepository->getLostPoints();
+        $lostPoints = $itemRepository->getLostMarkers();
 
         $router = $this->get('router');
 
@@ -218,7 +248,7 @@ class ItemController extends Controller
             $item['link'] = $router->generate(
                 'item_details',
                 [
-                    'id' => $item['id']
+                    'id' => $item['itemId']
                 ],
                 $router::ABSOLUTE_URL
             );
