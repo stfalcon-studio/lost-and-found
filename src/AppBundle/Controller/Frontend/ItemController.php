@@ -9,6 +9,7 @@ use AppBundle\Event\NewItemAddedEvent;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -189,9 +190,7 @@ class ItemController extends Controller
             );
         }
 
-        return new Response(json_encode($foundPoints), 200, [
-            'Content-Type' => 'application/json'
-        ]);
+        return new JsonResponse($foundPoints, 200);
     }
 
     /**
@@ -226,9 +225,7 @@ class ItemController extends Controller
             );
         }
 
-        return new Response(json_encode($lostPoints), 200, [
-            'Content-Type' => 'application/json'
-        ]);
+        return new JsonResponse($lostPoints, 200);
     }
 
     /**
