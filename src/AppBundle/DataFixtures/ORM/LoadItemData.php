@@ -92,7 +92,7 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
             ->setAreaType(ItemAreaTypeType::MARKER)
             ->setStatus(ItemStatusType::ACTUAL)
             ->setModerated(true)
-            ->setActive(false)
+            ->setActive(true)
             ->setDate(new \DateTime('10.11.2014'))
             ->setCreatedBy($simpleUser)
             ->setDeleted(false);
@@ -140,7 +140,7 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
             ->setAreaType(ItemAreaTypeType::MARKER)
             ->setStatus(ItemStatusType::ACTUAL)
             ->setModerated(true)
-            ->setActive(false)
+            ->setActive(true)
             ->setDate(new \DateTime('10.11.2014'))
             ->setCreatedBy($simpleUser)
             ->setDeleted(false);

@@ -13,24 +13,6 @@
 {% block content %}
     <h1>{{ title }}</h1>
 
-    <div class="pull-left">
-        <ul id="items">
-        {#{% for item in found_items %}#}
-            {#<li>#}
-                {#<a id="item_{{ item.id }}" href="{{ item.link }}">{{ item.itemTitle }}</a>#}
-            {#</li>#}
-        {#{% endfor %}#}
-        </ul>
-    </div>
-
-    <div class="pull-right">
-        <a href="{{ path('add_lost_item') }}" class="btn btn-success" title="Add an item you've lost">
-            I found something :)
-        </a>
-    </div>
-
-    <div class="clearfix"></div>
-
     <div id="category-boxes">
         <ul id="categories" class="list-inline">
             {% for category in categories %}
@@ -42,14 +24,30 @@
         </ul>
     </div>
 
-    <div id="map" style="width: auto; height: 800px"></div>
+    <div class="pull-right">
+        <a href="{{ path('add_lost_item') }}" class="btn btn-success" title="Add an item you've lost">
+            I found something :)
+        </a>
+    </div>
 
-    <div id="page-type" data-type="{{ page_type }}"></div>
+    <div class="pull-left">
+        <ul id="items">
+        {#{% for item in found_items %}#}
+            {#<li>#}
+                {#<a id="item_{{ item.id }}" href="{{ item.link }}">{{ item.itemTitle }}</a>#}
+            {#</li>#}
+        {#{% endfor %}#}
+        </ul>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div id="map" style="width: auto; height: 800px"></div>
 {% endblock content %}
 
 {% block javascripts %}
     {{ parent() }}
 
     <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-    <script src="{{ asset('js/map_list.js') }}"></script>
+    <script src="{{ asset('js/found_list.js') }}"></script>
 {% endblock javascripts %}

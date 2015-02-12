@@ -106,15 +106,15 @@ class ItemRepository extends EntityRepository
             ->addSelect('i.date')
             ->addSelect('c.id AS categoryId')
             ->join('i.category', 'c')
-            //->where($qb->expr()->eq('i.status', ':actual'))
-            ->andWhere($qb->expr()->eq('i.type', ':found'))
+//            ->where($qb->expr()->eq('i.status', ':actual'))
+            ->andWhere($qb->expr()->eq('i.type', ':lost'))
             ->andWhere($qb->expr()->eq('i.moderated', true))
-            //->andWhere($qb->expr()->eq('i.active', true))
-            /*->setParameters([
-                'actual' => ItemStatusType::ACTUAL,
-                'found'  => ItemTypeType::FOUND,
-            ])*/
-            ->setParameter('found', ItemTypeType::FOUND)
+            ->andWhere($qb->expr()->eq('i.active', true))
+//            ->setParameters([
+//                'actual' => ItemStatusType::ACTUAL,
+//                'lost'  => ItemTypeType::FOUND,
+//            ])
+            ->setParameter('lost', ItemTypeType::LOST)
             ->setFirstResult($offset);
 
         if (null !== $limit) {
@@ -144,14 +144,14 @@ class ItemRepository extends EntityRepository
             ->addSelect('i.date')
             ->addSelect('c.id AS categoryId')
             ->join('i.category', 'c')
-            //->where($qb->expr()->eq('i.status', ':actual'))
+//            ->where($qb->expr()->eq('i.status', ':actual'))
             ->andWhere($qb->expr()->eq('i.type', ':found'))
             ->andWhere($qb->expr()->eq('i.moderated', true))
-            //->andWhere($qb->expr()->eq('i.active', true))
-            /*->setParameters([
-                'actual' => ItemStatusType::ACTUAL,
-                'found'  => ItemTypeType::FOUND,
-            ])*/
+            ->andWhere($qb->expr()->eq('i.active', true))
+//            ->setParameters([
+//                'actual' => ItemStatusType::ACTUAL,
+//                'found'  => ItemTypeType::FOUND,
+//            ])
             ->setParameter('found', ItemTypeType::FOUND)
             ->setFirstResult($offset);
 

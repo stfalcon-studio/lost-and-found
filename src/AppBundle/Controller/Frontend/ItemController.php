@@ -30,29 +30,13 @@ class ItemController extends Controller
      */
     public function lostItemsListAction()
     {
-        /** @var \AppBundle\Repository\ItemRepository $itemRepository */
-        //$itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+        /** @var \AppBundle\Repository\CategoryRepository $categoryRepository */
         $categoryRepository = $this->getDoctrine()->getRepository('AppBundle:Category');
 
-        //$lostItems  = $itemRepository->getActiveLostItem();
         $categories = $categoryRepository->getCategories();
 
-        $router = $this->get('router');
-
-//        foreach ($lostItems as &$item) {
-//            $item['link'] = $router->generate(
-//                'item_details',
-//                [
-//                    'id' => $item['id']
-//                ],
-//                $router::ABSOLUTE_URL
-//            );
-//        }
-
         return $this->render('frontend/item/lost_items.html.twig', [
-            //'lost_items' => $lostItems,
             'categories' => $categories,
-            'page_type'  => ItemTypeType::LOST,
         ]);
     }
 
@@ -65,29 +49,13 @@ class ItemController extends Controller
      */
     public function foundItemsListAction()
     {
-        /** @var \AppBundle\Repository\ItemRepository $itemRepository */
-        //$itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+        /** @var \AppBundle\Repository\CategoryRepository $categoryRepository */
         $categoryRepository = $this->getDoctrine()->getRepository('AppBundle:Category');
 
-        //$foundItems = $itemRepository->getFoundItems();
         $categories = $categoryRepository->getCategories();
 
-        $router = $this->get('router');
-
-//        foreach ($foundItems as &$item) {
-//            $item['link'] = $router->generate(
-//                'item_details',
-//                [
-//                    'id' => $item['id']
-//                ],
-//                $router::ABSOLUTE_URL
-//            );
-//        }
-
         return $this->render('frontend/item/found_items.html.twig', [
-            //'found_items' => $foundItems,
             'categories'  => $categories,
-            'page_type'   => ItemTypeType::FOUND,
         ]);
     }
 
