@@ -8,6 +8,7 @@ doctrine:
         user:     "%database_user%"
         password: "%database_password%"
         charset:  UTF8
+        server_version: 5.6
         mapping_types:
             enum: string
         types:
@@ -25,6 +26,12 @@ doctrine:
                 dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Loggable/Entity"
                 alias: GedmoLoggable # this one is optional and will default to the name set for the mapping
                 is_bundle: false
+            gedmo_tree:
+                type: annotation
+                prefix: Gedmo\Tree\Entity
+                dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Tree/Entity"
+                alias: GedmoTree # this one is optional and will default to the name set for the mapping
+                is_bundle: false
 
 # DoctrineExtensionsBundle
 stof_doctrine_extensions:
@@ -32,5 +39,5 @@ stof_doctrine_extensions:
     orm:
         default:
             timestampable: true
-#            tree:          true
+            tree:          true
             loggable:      true

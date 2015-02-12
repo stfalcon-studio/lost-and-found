@@ -7,6 +7,7 @@ use AppBundle\Entity\User;
 use AppBundle\DBAL\Types\ItemStatusType;
 use AppBundle\DBAL\Types\ItemTypeType;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 
 /**
  * Class ItemRepository
@@ -34,10 +35,12 @@ class ItemRepository extends EntityRepository
             ->where($qb->expr()->eq('i.status', ':status'))
             ->andWhere($qb->expr()->eq('i.type', ':type'))
             ->andWhere($qb->expr()->eq('i.moderated', true))
+            ->andWhere($qb->expr()->eq('i.deleted', ':deleted'))
             ->join('i.category', 'c')
             ->setParameters([
                 'type'   => ItemTypeType::LOST,
-                'status' => ItemStatusType::ACTUAL
+                'status' => ItemStatusType::ACTUAL,
+                'deleted'=> false,
             ])
             ->orderBy('i.createdAt', 'DESC')
             ->setFirstResult($offset);
@@ -65,9 +68,11 @@ class ItemRepository extends EntityRepository
             ->where($qb->expr()->eq('i.status', ':status'))
             ->andWhere($qb->expr()->eq('i.type', ':type'))
             ->andWhere($qb->expr()->eq('i.moderated', true))
+            ->andWhere($qb->expr()->eq('i.deleted', ':deleted'))
             ->setParameters([
                 'type'   => ItemTypeType::FOUND,
-                'status' => ItemStatusType::ACTUAL
+                'status' => ItemStatusType::ACTUAL,
+                'deleted'=> false,
             ])
             ->orderBy('i.createdAt', 'DESC')
             ->setFirstResult($offset);
@@ -165,25 +170,28 @@ class ItemRepository extends EntityRepository
      * @param string  $itemType     Item type
      * @param boolean $activeStatus Active
      * @param boolean $deleted      Deleted
+     * @param boolean $moderated    Moderated
      *
      * @return array
      */
-    public function getUserItems(User $user, $itemStatus, $itemType, $activeStatus, $deleted)
+    public function getUserItems(User $user, $itemStatus, $itemType, $activeStatus, $deleted, $moderated)
     {
         $qb = $this->createQueryBuilder('i');
 
         $qb->where($qb->expr()->eq('i.createdBy', ':user'))
-           ->andWhere($qb->expr()->eq('i.status', ':status'))
-           ->andWhere($qb->expr()->eq('i.type', ':type'))
-           ->andWhere($qb->expr()->eq('i.active', ':active'))
-           ->andWhere($qb->expr()->eq('i.deleted', ':deleted'))
-           ->setParameters([
-               'user'   => $user,
-               'status' => $itemStatus,
-               'type'   => $itemType,
-               'active' => $activeStatus,
-               'deleted'=> $deleted
-           ]);
+            ->andWhere($qb->expr()->eq('i.status', ':status'))
+            ->andWhere($qb->expr()->eq('i.type', ':type'))
+            ->andWhere($qb->expr()->eq('i.active', ':active'))
+            ->andWhere($qb->expr()->eq('i.deleted', ':deleted'))
+            ->andWhere($qb->expr()->eq('i.moderated', ':moderated'))
+            ->setParameters([
+                'user'   => $user,
+                'status' => $itemStatus,
+                'type'   => $itemType,
+                'active' => $activeStatus,
+                'deleted' => $deleted,
+                'moderated' => $moderated,
+            ]);
 
         return $qb->getQuery()->getResult();
     }
@@ -209,6 +217,32 @@ class ItemRepository extends EntityRepository
                'active' => $active,
                'deleted'=> $deleted
            ]);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * Get user items
+     *
+     * @param User    $user      User
+     * @param boolean $moderated moderated
+     *
+     * @return array
+     */
+    public function getNotModeratedItems(User $user, $moderated)
+    {
+        $qb = $this->createQueryBuilder('i');
+
+        $qb->where($qb->expr()->eq('i.createdBy', ':user'))
+            ->andWhere($qb->expr()->eq('i.active', ':active'))
+            ->andWhere($qb->expr()->eq('i.deleted', ':deleted'))
+            ->andWhere($qb->expr()->eq('i.moderated', ':moderated'))
+            ->setParameters([
+                'user'   => $user,
+                'active'   => true,
+                'deleted' => false,
+                'moderated' => $moderated,
+            ]);
 
         return $qb->getQuery()->getResult();
     }

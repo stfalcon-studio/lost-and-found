@@ -186,25 +186,27 @@ class Item implements UserManageableInterface
     private $moderatedAt;
 
     /**
-     * @var \DateTime $activatedAt
+     * @var \DateTime $activatedAt Activated at
      *
-     * @ORM\Column(name = "activatedAt", type = "datetime", nullable=true)
+     * @ORM\Column(type = "datetime", nullable=true)
      */
     private $activatedAt;
 
     /**
-     * @var \DateTime $deletedAt;
-     *
-     * @ORM\Column(name = "deletedAt", type = "datetime", nullable=true)
-     */
-    private $deletedAt;
-
-    /**
-     * @var boolean $deleted Deleted
+     * @var boolean $deleted Is deleted?
      *
      * @ORM\Column(name="deleted", type="boolean")
+     *
+     * @Gedmo\Versioned
      */
     private $deleted = false;
+
+    /**
+     * @var \DateTime $deletedAt Deleted at
+     *
+     * @ORM\Column(type = "datetime", nullable=true)
+     */
+    private $deletedAt;
 
     /**
      * To string
