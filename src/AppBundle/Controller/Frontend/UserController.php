@@ -173,18 +173,17 @@ class UserController extends Controller
      *
      * @Route("/deauthorize", name="user_deauthorize")
      */
-/*    public function facebookDeauthorizeAction()
-    {
-        $actionLog = new UserActionLog();
-        $actionLog->setActionType(UserActionType::DEAUTHORIZE);
-        $actionLog->setUser($this->getUser());
-        $actionLog->setCreatedAt(new \DateTime('now'));
-
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($actionLog);
-        $em->persist($this->getUser());
-        $em->flush();
-
-        return $this->redirect($this->generateUrl('homepage'));
-    } */
+//    public function facebookDeauthorizeAction()
+//    {
+//        $actionLog = new UserActionLog();
+//        $actionLog->setActionType(UserActionType::DEAUTHORIZE);
+//        $actionLog->setUser($this->getUser());
+//        $actionLog->setCreatedAt(new \DateTime('now'));
+//
+//        $em = $this->getDoctrine()->getManager();
+//        $em->persist($actionLog);
+//        $em->flush();
+//
+//        return $this->redirect($this->generateUrl('homepage'));
+//    }
 }

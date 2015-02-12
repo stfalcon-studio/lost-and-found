@@ -70,7 +70,6 @@ class FacebookUserConnectedListener
 
         $em = $this->entityManager;
         $em->persist($actionLog);
-        $em->persist($user);
         $em->flush();
 
         $message = $this->mailer

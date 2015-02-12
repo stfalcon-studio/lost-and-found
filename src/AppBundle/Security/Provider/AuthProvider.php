@@ -66,7 +66,6 @@ class AuthProvider extends BaseProvider
 
             $em = $this->entityManager;
             $em->persist($actionLog);
-            $em->persist($user);
             $em->flush();
 
             return $user;
