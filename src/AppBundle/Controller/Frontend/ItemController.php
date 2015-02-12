@@ -190,7 +190,7 @@ class ItemController extends Controller
             );
         }
 
-        return new JsonResponse($foundPoints, 200);
+        return new JsonResponse($foundPoints);
     }
 
     /**
@@ -225,7 +225,7 @@ class ItemController extends Controller
             );
         }
 
-        return new JsonResponse($lostPoints, 200);
+        return new JsonResponse($lostPoints);
     }
 
     /**

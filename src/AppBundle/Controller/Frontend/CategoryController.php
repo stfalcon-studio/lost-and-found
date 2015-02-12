@@ -53,6 +53,6 @@ class CategoryController extends Controller
             }
         }
 
-        return new JsonResponse($result, 200);
+        return new JsonResponse($result);
     }
 }
