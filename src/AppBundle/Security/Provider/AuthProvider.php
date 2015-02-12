@@ -3,8 +3,11 @@
 namespace AppBundle\Security\Provider;
 
 use AppBundle\Entity\User;
+use AppBundle\Entity\UserActionLog;
+use AppBundle\DBAL\Types\UserActionType;
 use AppBundle\Event\AppEvents;
 use AppBundle\Event\FacebookUserConnectedEvent;
+use Doctrine\ORM\EntityManager;
 use FOS\UserBundle\Model\UserManagerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider as BaseProvider;
@@ -28,15 +31,22 @@ class AuthProvider extends BaseProvider
     protected $eventDispatcher;
 
     /**
+     * @var EntityManager $entityManager
+     */
+    private $entityManager;
+
+    /**
      * Constructor
      *
      * @param UserManagerInterface     $userManager     User manager
      * @param EventDispatcherInterface $eventDispatcher Event dispatcher
+     * @param EntityManager            $em
      */
-    public function __construct(UserManagerInterface $userManager, EventDispatcherInterface $eventDispatcher)
+    public function __construct(UserManagerInterface $userManager, EventDispatcherInterface $eventDispatcher, EntityManager $em)
     {
         $this->userManager     = $userManager;
         $this->eventDispatcher = $eventDispatcher;
+        $this->entityManager = $em;
     }
 
     /**
@@ -49,6 +59,16 @@ class AuthProvider extends BaseProvider
         ]);
 
         if ($user instanceof User) {
+            $actionLog = new UserActionLog();
+            $actionLog->setActionType(UserActionType::LOGIN);
+            $actionLog->setUser($user);
+            $actionLog->setCreatedAt(new \DateTime('now'));
+
+            $em = $this->entityManager;
+            $em->persist($actionLog);
+            $em->persist($user);
+            $em->flush();
+
             return $user;
         }
 

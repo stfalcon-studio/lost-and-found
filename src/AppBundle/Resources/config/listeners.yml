@@ -5,3 +5,4 @@ services:
             - { name: kernel.event_listener, event: app.facebook_user_connected, method: onUserRegistered }
         arguments:
             - @swiftmailer.mailer
+            - @doctrine.orm.default_entity_manager

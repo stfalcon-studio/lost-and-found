@@ -2,9 +2,11 @@
 
 namespace AppBundle\Controller\Frontend;
 
-use AppBundle\Entity\Item;
 use AppBundle\DBAL\Types\ItemStatusType;
 use AppBundle\DBAL\Types\ItemTypeType;
+use AppBundle\DBAL\Types\UserActionType;
+use AppBundle\Entity\Item;
+use AppBundle\Entity\UserActionLog;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -18,6 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class UserController extends Controller
 {
+
     /**
      * Edit item
      *
@@ -163,5 +166,25 @@ class UserController extends Controller
         return $this->render('frontend/user/show_not_moderated_items.html.twig', [
             'items' => $items
         ]);
+    }
+
+    /**
+     * @return Response
+     *
+     * @Route("/deauthorize", name="user_deauthorize")
+     */
+    public function facebookDeauthorizeAction()
+    {
+        $actionLog = new UserActionLog();
+        $actionLog->setActionType(UserActionType::DEAUTHORIZE);
+        $actionLog->setUser($this->getUser());
+        $actionLog->setCreatedAt(new \DateTime('now'));
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($actionLog);
+        $em->persist($this->getUser());
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('homepage'));
     }
 }

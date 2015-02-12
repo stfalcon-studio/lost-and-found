@@ -40,6 +40,14 @@ class User extends BaseUser
     private $items;
 
     /**
+     * @var Collection|UserActionLog[] $items Items
+     *
+     * @ORM\OneToMany(targetEntity="UserActionLog", mappedBy="userId", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(onDelete="CASCADE")
+     */
+    private $actionLogs;
+
+    /**
      * @var string $fullName Full name
      *
      * @ORM\Column(name="full_name", type="string", length=255, nullable=false)
@@ -141,6 +149,62 @@ class User extends BaseUser
     public function removeItem(Item $item)
     {
         $this->items->removeElement($item);
+
+        return $this;
+    }
+
+
+    /**
+     * Get items
+     *
+     * @return UserActionLog[]|Collection action logs
+     */
+    public function getActionLogs()
+    {
+        return $this->actionLogs;
+    }
+
+    /**
+     * Set items
+     *
+     * @param UserActionLog[]|Collection $actionLogs actionLogs
+     *
+     * @return $this
+     */
+    public function setActionLogs(Collection $actionLogs)
+    {
+        foreach ($actionLogs as $actionLog) {
+            $actionLog->setUser($this);
+        }
+        $this->actionLogs = $actionLogs;
+
+        return $this;
+    }
+
+    /**
+     * Add actionLog
+     *
+     * @param UserActionLog $actionLog actionLog
+     *
+     * @return $this
+     */
+    public function addActionLog(UserActionLog $actionLog)
+    {
+        $this->items->add($actionLog->setUser($this));
+
+        return $this;
+    }
+
+    /**
+     * Remove actionLog
+     *
+     * @param UserActionLog $actionLog actionLog
+     *
+     * @return $this
+     */
+    public function removeActionLog(UserActionLog $actionLog)
+    {
+        $this->actionLogs->removeElement($actionLog);
 
         return $this;
     }

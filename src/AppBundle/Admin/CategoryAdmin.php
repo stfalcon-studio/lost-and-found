@@ -54,7 +54,9 @@ class CategoryAdmin extends Admin
             ->with('Category')
                 ->add('parent')
                 ->add('title')
-                ->add('enabled')
+                ->add('enabled', 'checkbox', [
+                    'required' => false,
+                ])
                 ->add('imageFile', 'file', [
                     'required' => false
                 ])
