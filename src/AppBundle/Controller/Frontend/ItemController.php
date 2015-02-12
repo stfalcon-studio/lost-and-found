@@ -9,6 +9,7 @@ use AppBundle\Event\NewItemAddedEvent;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -187,9 +188,7 @@ class ItemController extends Controller
             );
         }
 
-        return new Response(json_encode($foundMarkers), 200, [
-            'Content-Type' => 'application/json'
-        ]);
+        return new JsonResponse($foundMarkers);
     }
 
     /**
@@ -210,11 +209,11 @@ class ItemController extends Controller
 
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
 
-        $lostPoints = $itemRepository->getLostMarkers();
+        $lostMarkers = $itemRepository->getLostMarkers();
 
         $router = $this->get('router');
 
-        foreach ($lostPoints as &$item) {
+        foreach ($lostMarkers as &$item) {
             $item['link'] = $router->generate(
                 'item_details',
                 [
@@ -224,9 +223,7 @@ class ItemController extends Controller
             );
         }
 
-        return new Response(json_encode($lostPoints), 200, [
-            'Content-Type' => 'application/json'
-        ]);
+        return new JsonResponse($lostMarkers);
     }
 
     /**
