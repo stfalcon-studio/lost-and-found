@@ -40,7 +40,7 @@ class User extends BaseUser
     private $items;
 
     /**
-     * @var Collection|UserActionLog[] $items Items
+     * @var Collection|UserActionLog[] $actionLogs Actionlog
      *
      * @ORM\OneToMany(targetEntity="UserActionLog", mappedBy="userId", cascade={"persist", "remove"})
      * @ORM\JoinColumn(onDelete="CASCADE")
@@ -76,6 +76,7 @@ class User extends BaseUser
         parent::__construct();
 
         $this->items = new ArrayCollection();
+        $this->actionLogs = new ArrayCollection();
     }
 
     /**
@@ -155,7 +156,7 @@ class User extends BaseUser
 
 
     /**
-     * Get items
+     * Get ActionLogs
      *
      * @return UserActionLog[]|Collection action logs
      */
@@ -165,7 +166,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set items
+     * Set ActionLogs
      *
      * @param UserActionLog[]|Collection $actionLogs actionLogs
      *
@@ -190,7 +191,7 @@ class User extends BaseUser
      */
     public function addActionLog(UserActionLog $actionLog)
     {
-        $this->items->add($actionLog->setUser($this));
+        $this->actionLogs->add($actionLog->setUser($this));
 
         return $this;
     }
