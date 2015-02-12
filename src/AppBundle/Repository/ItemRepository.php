@@ -28,10 +28,15 @@ class ItemRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('i');
 
-        $qb->where($qb->expr()->eq('i.status', ':status'))
+        $qb
+            ->select('i.id')
+            ->addSelect('i.title')
+            ->addSelect('c.title as categoryTitle')
+            ->where($qb->expr()->eq('i.status', ':status'))
             ->andWhere($qb->expr()->eq('i.type', ':type'))
             ->andWhere($qb->expr()->eq('i.moderated', true))
             ->andWhere($qb->expr()->eq('i.deleted', ':deleted'))
+            ->join('i.category', 'c')
             ->setParameters([
                 'type'   => ItemTypeType::LOST,
                 'status' => ItemStatusType::ACTUAL,
@@ -59,7 +64,8 @@ class ItemRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('i');
 
-        $qb->where($qb->expr()->eq('i.status', ':status'))
+        $qb
+            ->where($qb->expr()->eq('i.status', ':status'))
             ->andWhere($qb->expr()->eq('i.type', ':type'))
             ->andWhere($qb->expr()->eq('i.moderated', true))
             ->andWhere($qb->expr()->eq('i.deleted', ':deleted'))
@@ -86,30 +92,29 @@ class ItemRepository extends EntityRepository
      *
      * @return array
      */
-    public function getLostPoints($offset = 0, $limit = null)
+    public function getLostMarkers($offset = 0, $limit = null)
     {
         $qb = $this->createQueryBuilder('i');
 
         $qb
-            ->select('i.latitude')
+            ->select('i.id AS itemId')
+            ->addSelect('i.latitude')
             ->addSelect('i.longitude')
             ->addSelect('i.area')
             ->addSelect('i.areaType')
-            ->addSelect('i.id')
-            ->addSelect('i.title AS itemTitle')
-            ->addSelect('IDENTITY(i.category) AS categoryId')
+            ->addSelect('i.title')
             ->addSelect('i.date')
-            ->addSelect('c.title')
+            ->addSelect('c.id AS categoryId')
             ->join('i.category', 'c')
-            ->where($qb->expr()->eq('i.moderated', true))
-            ->andWhere($qb->expr()->eq('i.type', ':type'))
-            ->andWhere($qb->expr()->eq('i.status', ':status'))
-            ->andWhere($qb->expr()->eq('i.deleted', ':deleted'))
-            ->setParameters([
-                'type'   => ItemTypeType::LOST,
-                'status' => ItemStatusType::ACTUAL,
-                'deleted'=> false,
-            ])
+//            ->where($qb->expr()->eq('i.status', ':actual'))
+            ->andWhere($qb->expr()->eq('i.type', ':lost'))
+            ->andWhere($qb->expr()->eq('i.moderated', true))
+            ->andWhere($qb->expr()->eq('i.active', true))
+//            ->setParameters([
+//                'actual' => ItemStatusType::ACTUAL,
+//                'lost'  => ItemTypeType::FOUND,
+//            ])
+            ->setParameter('lost', ItemTypeType::LOST)
             ->setFirstResult($offset);
 
         if (null !== $limit) {
@@ -127,30 +132,27 @@ class ItemRepository extends EntityRepository
      *
      * @return array
      */
-    public function getFoundPoints($offset = 0, $limit = null)
+    public function getFoundMarkers($offset = 0, $limit = null)
     {
         $qb = $this->createQueryBuilder('i');
 
         $qb
-            ->select('i.latitude')
+            ->select('i.id AS itemId')
+            ->addSelect('i.latitude')
             ->addSelect('i.longitude')
-            ->addSelect('i.area')
-            ->addSelect('i.areaType')
-            ->addSelect('i.id')
-            ->addSelect('i.title AS itemTitle')
-            ->addSelect('IDENTITY(i.category) AS categoryId')
+            ->addSelect('i.title')
             ->addSelect('i.date')
-            ->addSelect('c.title')
+            ->addSelect('c.id AS categoryId')
             ->join('i.category', 'c')
-            ->where($qb->expr()->eq('i.moderated', true))
-            ->andWhere($qb->expr()->eq('i.type', ':type'))
-            ->andWhere($qb->expr()->eq('i.status', ':status'))
-            ->andWhere($qb->expr()->eq('i.deleted', ':deleted'))
-            ->setParameters([
-                'type'   => ItemTypeType::FOUND,
-                'status' => ItemStatusType::ACTUAL,
-                'deleted'=> false,
-            ])
+//            ->where($qb->expr()->eq('i.status', ':actual'))
+            ->andWhere($qb->expr()->eq('i.type', ':found'))
+            ->andWhere($qb->expr()->eq('i.moderated', true))
+            ->andWhere($qb->expr()->eq('i.active', true))
+//            ->setParameters([
+//                'actual' => ItemStatusType::ACTUAL,
+//                'found'  => ItemTypeType::FOUND,
+//            ])
+            ->setParameter('found', ItemTypeType::FOUND)
             ->setFirstResult($offset);
 
         if (null !== $limit) {
@@ -212,7 +214,7 @@ class ItemRepository extends EntityRepository
            ->andWhere($qb->expr()->eq('i.deleted', ':deleted'))
            ->setParameters([
                'user'   => $user,
-               'active'   => $active,
+               'active' => $active,
                'deleted'=> $deleted
            ]);
 
@@ -243,5 +245,75 @@ class ItemRepository extends EntityRepository
             ]);
 
         return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * Get lost items
+     *
+     * @param int  $offset
+     * @param null $limit
+     *
+     * @return array
+     */
+    public function getLostItems($offset = 0, $limit = null)
+    {
+        $qb = $this->createQueryBuilder('i');
+
+        $qb
+            ->select('i.id')
+            ->addSelect('i.title AS itemTitle')
+            ->addSelect('c.title AS categoryTitle')
+            ->join('i.category', 'c')
+            //->where($qb->expr()->eq('i.status', ':actual'))
+            ->andWhere($qb->expr()->eq('i.type', ':found'))
+            ->andWhere($qb->expr()->eq('i.moderated', true))
+            //->andWhere($qb->expr()->eq('i.active', true))
+            /*->setParameters([
+                'actual' => ItemStatusType::ACTUAL,
+                'found'  => ItemTypeType::FOUND,
+            ])*/
+            ->setParameter('found', ItemTypeType::FOUND)
+            ->setFirstResult($offset);
+
+        if (null !== $limit) {
+            $qb->setMaxResults($limit);
+        }
+
+        return $qb->getQuery()->getArrayResult();
+    }
+
+    /**
+     * Get found items
+     *
+     * @param int  $offset
+     * @param null $limit
+     *
+     * @return array
+     */
+    public function getFoundItems($offset = 0, $limit = null)
+    {
+        $qb = $this->createQueryBuilder('i');
+
+        $qb
+            ->select('i.id')
+            ->addSelect('i.title AS itemTitle')
+            ->addSelect('c.title AS categoryTitle')
+            ->join('i.category', 'c')
+            //->where($qb->expr()->eq('i.status', ':actual'))
+            ->andWhere($qb->expr()->eq('i.type', ':found'))
+            ->andWhere($qb->expr()->eq('i.moderated', true))
+            //->andWhere($qb->expr()->eq('i.active', true))
+            /*->setParameters([
+                'actual' => ItemStatusType::ACTUAL,
+                'found'  => ItemTypeType::FOUND,
+            ])*/
+            ->setParameter('found', ItemTypeType::FOUND)
+            ->setFirstResult($offset);
+
+        if (null !== $limit) {
+            $qb->setMaxResults($limit);
+        }
+
+        return $qb->getQuery()->getArrayResult();
     }
 }

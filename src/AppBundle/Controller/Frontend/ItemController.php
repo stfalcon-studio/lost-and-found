@@ -31,14 +31,13 @@ class ItemController extends Controller
      */
     public function lostItemsListAction()
     {
-        /** @var \AppBundle\Repository\ItemRepository $itemRepository */
-        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+        /** @var \AppBundle\Repository\CategoryRepository $categoryRepository */
+        $categoryRepository = $this->getDoctrine()->getRepository('AppBundle:Category');
 
-        $lostItems = $itemRepository->getActiveLostItem();
+        $categories = $categoryRepository->getCategories();
 
         return $this->render('frontend/item/lost_items.html.twig', [
-            'lost_items' => $lostItems,
-            'page_type'  => ItemTypeType::LOST,
+            'categories' => $categories,
         ]);
     }
 
@@ -51,14 +50,13 @@ class ItemController extends Controller
      */
     public function foundItemsListAction()
     {
-        /** @var \AppBundle\Repository\ItemRepository $itemRepository */
-        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+        /** @var \AppBundle\Repository\CategoryRepository $categoryRepository */
+        $categoryRepository = $this->getDoctrine()->getRepository('AppBundle:Category');
 
-        $foundItems = $itemRepository->getActiveFoundItem();
+        $categories = $categoryRepository->getCategories();
 
         return $this->render('frontend/item/found_items.html.twig', [
-            'found_items' => $foundItems,
-            'page_type'   => ItemTypeType::FOUND,
+            'categories'  => $categories,
         ]);
     }
 
@@ -142,11 +140,11 @@ class ItemController extends Controller
     public function itemDetailsAction($id)
     {
         $item = $this->getDoctrine()
-                     ->getRepository('AppBundle:Item')
-                     ->findOneBy([
-                         'id'        => $id,
-                         'moderated' => true,
-                     ]);
+            ->getRepository('AppBundle:Item')
+            ->findOneBy([
+                'id'        => $id,
+                'moderated' => true,
+            ]);
 
         if (!$item) {
             throw $this->createNotFoundException('Item not found.');
@@ -176,21 +174,21 @@ class ItemController extends Controller
 
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
 
-        $foundPoints = $itemRepository->getFoundPoints();
+        $foundMarkers = $itemRepository->getFoundMarkers();
 
         $router = $this->get('router');
 
-        foreach ($foundPoints as &$item) {
+        foreach ($foundMarkers as &$item) {
             $item['link'] = $router->generate(
                 'item_details',
                 [
-                    'id' => $item['id']
+                    'id' => $item['itemId']
                 ],
                 $router::ABSOLUTE_URL
             );
         }
 
-        return new JsonResponse($foundPoints);
+        return new JsonResponse($foundMarkers);
     }
 
     /**
@@ -211,21 +209,21 @@ class ItemController extends Controller
 
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
 
-        $lostPoints = $itemRepository->getLostPoints();
+        $lostMarkers = $itemRepository->getLostMarkers();
 
         $router = $this->get('router');
 
-        foreach ($lostPoints as &$item) {
+        foreach ($lostMarkers as &$item) {
             $item['link'] = $router->generate(
                 'item_details',
                 [
-                    'id' => $item['id']
+                    'id' => $item['itemId']
                 ],
                 $router::ABSOLUTE_URL
             );
         }
 
-        return new JsonResponse($lostPoints);
+        return new JsonResponse($lostMarkers);
     }
 
     /**
