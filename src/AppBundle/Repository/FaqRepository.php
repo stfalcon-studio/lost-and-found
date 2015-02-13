@@ -5,9 +5,9 @@ namespace AppBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * Class FAQ Repository
+ * Class Faq Repository
  */
-class FAQRepository extends EntityRepository
+class FaqRepository extends EntityRepository
 {
     /**
      * @param int  $offset
@@ -15,7 +15,7 @@ class FAQRepository extends EntityRepository
      *
      * @return array
      */
-    public function getAllFAQ($offset = 0, $limit = null)
+    public function getAllFaq($offset = 0, $limit = null)
     {
         $qb = $this->createQueryBuilder('F');
 

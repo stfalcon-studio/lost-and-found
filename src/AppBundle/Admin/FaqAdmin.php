@@ -9,19 +9,19 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
 /**
- * Admin FAQ  Entity
+ * Admin faq  Entity
  */
-class FAQAdmin extends Admin
+class FaqAdmin extends Admin
 {
     /**
      * {@inheritdoc}
      */
-    protected $baseRoutePattern = 'FAQ';
+    protected $baseRoutePattern = 'faq';
 
     /**
      * {@inheritdoc}
      */
-    protected $baseRouteName = 'admin_FAQ';
+    protected $baseRouteName = 'admin_faq';
 
     /**
      * {@inheritdoc}
@@ -48,9 +48,10 @@ class FAQAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('FAQ')
+            ->with('faq')
                 ->add('question')
                 ->add('answer')
+                ->add('enabled')
                 ->end();
     }
 
@@ -63,6 +64,7 @@ class FAQAdmin extends Admin
             ->addIdentifier('id')
             ->add('question')
             ->add('answer')
+            ->add('enabled')
             ->add('_action', 'actions', [
                 'actions' => [
                     'show'   => [],
@@ -80,7 +82,8 @@ class FAQAdmin extends Admin
         $showMapper
             ->add('id')
             ->add('question')
-            ->add('answer');
+            ->add('answer')
+            ->add('enabled');
     }
 
     /**
@@ -91,6 +94,7 @@ class FAQAdmin extends Admin
         $datagridMapper
             ->add('id')
             ->add('question')
-            ->add('answer');
+            ->add('answer')
+            ->add('enabled');
     }
 }

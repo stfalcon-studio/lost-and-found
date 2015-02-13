@@ -12,27 +12,27 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
- * Class FAQ Controller
+ * Class Faq Controller
  *
  */
-class FAQController extends Controller
+class FaqController extends Controller
 {
     /**
-     * Show FAQ
+     * Show Faq
      *
      * @return Response
      *
-     * @Route("/FAQ", name="show_FAQ")
+     * @Route("/faq", name="show_faq")
      */
-    public function allFAQListAction()
+    public function allFaqListAction()
     {
-        $FAQRepository = $this->getDoctrine()->getRepository('AppBundle:FAQ');
+        $faqRepository = $this->getDoctrine()->getRepository('AppBundle:Faq');
 
-        $FAQ = $FAQRepository->getAllFAQ();
+        $faq = $faqRepository->getAllFaq();
 
 
-        return $this->render('frontend/default/FAQ.html.twig', [
-            'FAQ' => $FAQ,
+        return $this->render('frontend/default/faq.html.twig', [
+            'faq' => $faq,
         ]);
     }
 }
