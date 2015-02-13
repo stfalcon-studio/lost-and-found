@@ -316,4 +316,82 @@ class ItemRepository extends EntityRepository
 
         return $qb->getQuery()->getArrayResult();
     }
+
+    /**
+     * @param User   $user
+     * @param string $type
+     *
+     * @return integer
+     */
+    public function getUserItemsCountByType(User $user, $type)
+    {
+        $qb = $this->createQueryBuilder('i');
+
+        $qb
+            ->select('count(i)')
+            ->where($qb->expr()->eq('i.createdBy', ':user'))
+            ->andWhere($qb->expr()->eq('i.moderated', ':moderated'))
+            ->andWhere($qb->expr()->eq('i.deleted', ':deleted'))
+            ->andWhere($qb->expr()->eq('i.active', ':active'))
+            ->andWhere($qb->expr()->eq('i.type', ':type'))
+            ->setParameters([
+                'user' => $user,
+                'moderated' => true,
+                'deleted' => false,
+                'type' => $type,
+                'active' => true,
+            ]);
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * @param User    $user
+     * @param boolean $moderated
+     *
+     * @return integer
+     */
+    public function getUserItemsCountByModerate(User $user, $moderated)
+    {
+        $qb = $this->createQueryBuilder('i');
+
+        $qb
+            ->select('count(i)')
+            ->where($qb->expr()->eq('i.createdBy', ':user'))
+            ->andWhere($qb->expr()->eq('i.moderated', ':moderated'))
+            ->andWhere($qb->expr()->eq('i.deleted', ':deleted'))
+            ->setParameters([
+                'user' => $user,
+                'moderated' => $moderated,
+                'deleted' => false,
+            ]);
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * @param User    $user
+     * @param boolean $active
+     *
+     * @return integer
+     */
+    public function getUserItemsCountByActivate(User $user, $active)
+    {
+        $qb = $this->createQueryBuilder('i');
+
+        $qb
+            ->select('count(i)')
+            ->where($qb->expr()->eq('i.createdBy', ':user'))
+            ->andWhere($qb->expr()->eq('i.moderated', ':moderated'))
+            ->andWhere($qb->expr()->eq('i.deleted', ':deleted'))
+            ->andWhere($qb->expr()->eq('i.active', ':active'))
+            ->setParameters([
+                'user' => $user,
+                'moderated' => true,
+                'deleted' => false,
+                'active' => $active,
+            ]);
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
 }
