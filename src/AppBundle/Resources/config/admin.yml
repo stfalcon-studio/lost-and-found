@@ -27,10 +27,10 @@ services:
             - ~
 
     admin.FAQ:
-        class: AppBundle\Admin\FAQAdmin
+        class: AppBundle\Admin\FaqAdmin
         tags:
             - { name: sonata.admin, manager_type: orm, group: "Default", label: "FAQ" }
         arguments:
             - ~
-            - AppBundle\Entity\FAQ
-            - ~
+            - AppBundle\Entity\Faq
+            - AppBundle:Backend\FaqAdmin

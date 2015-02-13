@@ -1,16 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% set title = 'FAQ' %}
+{% set title = 'F.A.Q.' %}
 
 {% block title %}{{ title }} | {{ parent() }}{% endblock title %}
 
 {% block content %}
     <div>
         <dl>
-            {% for faq in FAQ %}
+            {% for OneFaq in faq %}
 
-                <dt>{{ faq.question }}</dt>
-                <dd>{{ faq.answer }}</dd><br>
+                <dt>{{ OneFaq.question }}</dt>
+                <dd>{{ OneFaq.answer }}</dd><br>
 
             {% endfor %}
         </dl>
