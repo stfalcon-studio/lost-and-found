@@ -80,33 +80,37 @@
     <ul class="nav nav-tabs">
 
         <li role="presentation" {% if active_tab == 'lost_items' %}class="active"{% endif %}>
+            {% set a = render(controller('AppBundle:Frontend/User:lostItemsCount'))  %}
             {% if active_tab == 'lost_items' %}
-                <a href="#">My lost items</a>
+                <a href="#">My lost items {% if a!=0 %}[{{ a }}]{% endif %}</a>
             {% else %}
-                <a href="{{ path('user_actual_lost_items') }}">My lost items</a>
+                <a href="{{ path('user_actual_lost_items') }}">My lost items {% if a!=0 %}[{{ a }}]{% endif %}</a>
             {% endif %}
         </li>
 
         <li role="presentation" {% if active_tab == 'found_items' %}class="active"{% endif %}>
+            {% set a = render(controller('AppBundle:Frontend/User:foundItemsCount'))  %}
             {% if active_tab == 'found_items' %}
-                <a href="#">My found items</a>
+                <a href="#">My found items {% if a!=0 %}[{{ a }}]{% endif %}</a>
             {% else %}
-                <a href="{{ path('user_actual_found_items') }}">My found items</a>
+                <a href="{{ path('user_actual_found_items') }}">My found items {% if a!=0 %}[{{ a }}]{% endif %}</a>
             {% endif %}
         </li>
         {#        if       ////     #}
         <li role="presentation" {% if active_tab == 'deactivated_items' %}class="active"{% endif %}>
+            {% set a = render(controller('AppBundle:Frontend/User:deactivatedItemsCount'))  %}
             {% if active_tab == 'deactivated_items' %}
-                <a href="#">My deactivated items</a>
+                <a href="#">My deactivated items {% if a!=0 %}[{{ a }}]{% endif %}</a>
             {% else %}
-                <a href="{{ path('user_deactivated_items') }}">My deactivated items</a>
+                <a href="{{ path('user_deactivated_items') }}">My deactivated items {% if a!=0 %}[{{ a }}]{% endif %}</a>
             {% endif %}
         </li>
         <li role="presentation" {% if active_tab == 'not_moderated_items' %}class="active"{% endif %}>
+            {% set a = render(controller('AppBundle:Frontend/User:notModeratedItemsCount'))  %}
             {% if active_tab == 'not_moderated_items' %}
-                <a href="#">My not moderated items</a>
+                <a href="#">My not moderated items {% if a!=0 %}[{{ a }}]{% endif %}</a>
             {% else %}
-                <a href="{{ path('user_not_moderated_items') }}">My not moderated items</a>
+                <a href="{{ path('user_not_moderated_items') }}">My not moderated items {% if a!=0 %}[{{ a }}]{% endif %}</a>
             {% endif %}
         </li>
     </ul>

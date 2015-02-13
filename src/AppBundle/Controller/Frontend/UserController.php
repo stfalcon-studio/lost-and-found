@@ -171,6 +171,83 @@ class UserController extends Controller
     /**
      * @return Response
      *
+     * @Route("/found-count", name="user_found_items_count")
+     */
+    public function foundItemsCountAction()
+    {
+        /** @var \AppBundle\Repository\ItemRepository $itemRepository */
+        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+
+        $items = $itemRepository->getUserItems($this->getUser(), ItemStatusType::ACTUAL, ItemTypeType::FOUND, true, false, true);
+
+        $count = count($items);
+
+        $items = $itemRepository->getUserItems($this->getUser(), ItemStatusType::RESOLVED, ItemTypeType::FOUND, true, false, true);
+
+        $count += count($items);
+
+        return new Response($count);
+    }
+
+    /**
+     * @return Response
+     *
+     * @Route("/not-moderated-count", name="user_not_moderated_items_count")
+     */
+    public function notModeratedItemsCountAction()
+    {
+        /** @var \AppBundle\Repository\ItemRepository $itemRepository */
+        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+
+        $items = $itemRepository->getNotModeratedItems($this->getUser(), false);
+
+        $count = count($items);
+
+        return new Response($count);
+    }
+
+    /**
+     * @return Response
+     *
+     * @Route("/lost-count", name="user_lost_items_count")
+     */
+    public function lostItemsCountAction()
+    {
+        /** @var \AppBundle\Repository\ItemRepository $itemRepository */
+        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+
+        $items = $itemRepository->getUserItems($this->getUser(), ItemStatusType::ACTUAL, ItemTypeType::LOST, true, false, true);
+
+        $count = count($items);
+
+        $items = $itemRepository->getUserItems($this->getUser(), ItemStatusType::RESOLVED, ItemTypeType::LOST, true, false, true);
+
+        $count += count($items);
+
+//        return $this->render(':frontend/user:macro.html.twig', [
+//            'count' => $count
+//        ]);
+        return new Response($count);
+    }
+
+    /**
+     * @return Response
+     *
+     * @Route("/deactivated-count", name="user_deactivated_count")
+     */
+    public function deactivatedItemsCountAction()
+    {
+        /** @var \AppBundle\Repository\ItemRepository $itemRepository */
+        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+
+        $items = $itemRepository->getDeactivatedItems($this->getUser(), false, false);
+        $count = count($items);
+
+        return new Response($count);
+    }
+    /**
+     * @return Response
+     *
      * @Route("/deauthorize", name="user_deauthorize")
      */
 //    public function facebookDeauthorizeAction()
