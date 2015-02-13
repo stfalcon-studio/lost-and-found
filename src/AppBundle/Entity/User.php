@@ -42,7 +42,7 @@ class User extends BaseUser
     /**
      * @var Collection|UserActionLog[] $actionLogs Actionlog
      *
-     * @ORM\OneToMany(targetEntity="UserActionLog", mappedBy="userId", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="UserActionLog", mappedBy="user", cascade={"persist", "remove"})
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $actionLogs;
