@@ -33,22 +33,26 @@ class Faq
     /**
      * @var string $question Question
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=200)
      *
      * @Assert\NotBlank()
      * @Assert\Length(min="1", max="200")
      * @Assert\Type(type="string")
+     *
+     * @Gedmo\Versioned
      */
     private $question;
 
     /**
      * @var string $answer Answer
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="text")
      *
      * @Assert\NotBlank()
      * @Assert\Length(min="1", max="1000")
      * @Assert\Type(type="string")
+     *
+     * @Gedmo\Versioned
      */
     private $answer;
 
@@ -139,6 +143,4 @@ class Faq
 
         return $this;
     }
-
-
 }
