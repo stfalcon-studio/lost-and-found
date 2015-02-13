@@ -10,3 +10,8 @@ services:
         class: AppBundle\Validator\Constraints\ItemAreaValidator
         tags:
             - { name: validator.constraint_validator, alias: item_area }
+
+    geo:
+        class: AppBundle\Service\GeoService
+        arguments:
+            - @doctrine.orm.default_entity_manager

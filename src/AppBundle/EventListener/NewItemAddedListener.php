@@ -43,7 +43,7 @@ class NewItemAddedListener
 
         $message = $this->mailer
             ->createMessage()
-            ->setSubject('You have Completed Registration!')
+            ->setSubject('Hey admin! Users added new item!')
             ->setFrom('Logansoleg@gmail.com')
             ->setTo($this->adminEmail)
             ->setBody('Blabla');

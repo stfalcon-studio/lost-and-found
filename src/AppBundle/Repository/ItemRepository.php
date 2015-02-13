@@ -263,6 +263,11 @@ class ItemRepository extends EntityRepository
             ->select('i.id')
             ->addSelect('i.title AS itemTitle')
             ->addSelect('c.title AS categoryTitle')
+            ->addSelect('c.id AS categoryId')
+            ->addSelect('i.latitude')
+            ->addSelect('i.longitude')
+            ->addSelect('i.area')
+            ->addSelect('i.areaType')
             ->join('i.category', 'c')
             //->where($qb->expr()->eq('i.status', ':actual'))
             ->andWhere($qb->expr()->eq('i.type', ':found'))
@@ -272,7 +277,7 @@ class ItemRepository extends EntityRepository
                 'actual' => ItemStatusType::ACTUAL,
                 'found'  => ItemTypeType::FOUND,
             ])*/
-            ->setParameter('found', ItemTypeType::FOUND)
+            ->setParameter('found', ItemTypeType::LOST)
             ->setFirstResult($offset);
 
         if (null !== $limit) {
@@ -298,6 +303,11 @@ class ItemRepository extends EntityRepository
             ->select('i.id')
             ->addSelect('i.title AS itemTitle')
             ->addSelect('c.title AS categoryTitle')
+            ->addSelect('c.id AS categoryId')
+            ->addSelect('i.latitude')
+            ->addSelect('i.longitude')
+            ->addSelect('i.area')
+            ->addSelect('i.areaType')
             ->join('i.category', 'c')
             //->where($qb->expr()->eq('i.status', ':actual'))
             ->andWhere($qb->expr()->eq('i.type', ':found'))
