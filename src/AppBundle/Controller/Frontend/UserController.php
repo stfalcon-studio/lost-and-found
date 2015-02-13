@@ -10,6 +10,7 @@ use AppBundle\Entity\UserActionLog;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -72,11 +73,15 @@ class UserController extends Controller
         /** @var \AppBundle\Repository\ItemRepository $itemRepository */
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
 
+        $count = $this->get('app.user_items_count');
+
+        $count = $count->getCount($this->getUser());
+
         $items = $itemRepository->getUserItems($this->getUser(), ItemStatusType::ACTUAL, ItemTypeType::LOST, true, false, true);
 
-
         return $this->render('frontend/user/show_actual_lost_items.html.twig', [
-            'items' => $items
+            'items' => $items,
+            'count' => $count,
         ]);
     }
 
@@ -92,10 +97,15 @@ class UserController extends Controller
         /** @var \AppBundle\Repository\ItemRepository $itemRepository */
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
 
+        $count = $this->get('app.user_items_count');
+
+        $count = $count->getCount($this->getUser());
+
         $items = $itemRepository->getUserItems($this->getUser(), ItemStatusType::ACTUAL, ItemTypeType::FOUND, true, false, true);
 
         return $this->render('frontend/user/show_actual_found_items.html.twig', [
-            'items' => $items
+            'items' => $items,
+            'count' => $count,
         ]);
     }
 
@@ -111,10 +121,15 @@ class UserController extends Controller
         /** @var \AppBundle\Repository\ItemRepository $itemRepository */
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
 
+        $count = $this->get('app.user_items_count');
+
+        $count = $count->getCount($this->getUser());
+
         $items = $itemRepository->getUserItems($this->getUser(), ItemStatusType::RESOLVED, ItemTypeType::LOST, true, false, true);
 
         return $this->render('frontend/user/show_resolved_lost_items.html.twig', [
-            'items' => $items
+            'items' => $items,
+            'count' => $count,
         ]);
     }
 
@@ -129,10 +144,15 @@ class UserController extends Controller
     {
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
 
+        $count = $this->get('app.user_items_count');
+
+        $count = $count->getCount($this->getUser());
+
         $items = $itemRepository->getUserItems($this->getUser(), ItemStatusType::RESOLVED, ItemTypeType::FOUND, true, false, true);
 
         return $this->render('frontend/user/show_resolved_found_items.html.twig', [
-            'items' => $items
+            'items' => $items,
+            'count' => $count,
         ]);
     }
 
@@ -145,10 +165,15 @@ class UserController extends Controller
     {
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
 
+        $count = $this->get('app.user_items_count');
+
+        $count = $count->getCount($this->getUser());
+
         $items = $itemRepository->getDeactivatedItems($this->getUser(), false, false);
 
         return $this->render('frontend/user/show_deactivated_items.html.twig', [
-            'items' => $items
+            'items' => $items,
+            'count' => $count,
         ]);
     }
 
@@ -161,10 +186,15 @@ class UserController extends Controller
     {
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
 
+        $count = $this->get('app.user_items_count');
+
+        $count = $count->getCount($this->getUser());
+
         $items = $itemRepository->getNotModeratedItems($this->getUser(), false);
 
         return $this->render('frontend/user/show_not_moderated_items.html.twig', [
-            'items' => $items
+            'items' => $items,
+            'count' => $count,
         ]);
     }
 

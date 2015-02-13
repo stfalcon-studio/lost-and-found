@@ -14,6 +14,7 @@
                     </td>
                 </tr>
             {% endfor %}
+            <b></b>
         </tbody>
     </table>
 {% endmacro actual_items_list %}
@@ -76,37 +77,35 @@
     </table>
 {% endmacro resolved_items_list %}
 
-{% macro active_tab(active_tab) %}
+{% macro active_tab(active_tab, count) %}
     <ul class="nav nav-tabs">
-
         <li role="presentation" {% if active_tab == 'lost_items' %}class="active"{% endif %}>
             {% if active_tab == 'lost_items' %}
-                <a href="#">My lost items</a>
+                <a href="#">My lost items {% if count.lost > 0 %}[{{count.lost}}]{% endif %}</a>
             {% else %}
-                <a href="{{ path('user_actual_lost_items') }}">My lost items</a>
+                <a href="{{ path('user_actual_lost_items') }}">My lost items {% if count.lost > 0 %}[{{count.lost}}]{% endif %}</a>
             {% endif %}
         </li>
 
         <li role="presentation" {% if active_tab == 'found_items' %}class="active"{% endif %}>
             {% if active_tab == 'found_items' %}
-                <a href="#">My found items</a>
+                <a href="#">My found items {% if count.found > 0 %}[{{count.found}}]{% endif %}</a>
             {% else %}
-                <a href="{{ path('user_actual_found_items') }}">My found items</a>
+                <a href="{{ path('user_actual_found_items') }}">My found items {% if count.found > 0 %}[{{count.found}}]{% endif %}</a>
             {% endif %}
         </li>
-        {#        if       ////     #}
         <li role="presentation" {% if active_tab == 'deactivated_items' %}class="active"{% endif %}>
             {% if active_tab == 'deactivated_items' %}
-                <a href="#">My deactivated items</a>
+                <a href="#">My deactivated items {% if count.notActive > 0 %}[{{count.notActive}}]{% endif %}</a>
             {% else %}
-                <a href="{{ path('user_deactivated_items') }}">My deactivated items</a>
+                <a href="{{ path('user_deactivated_items') }}">My deactivated items {% if count.notActive > 0 %}[{{count.notActive}}]{% endif %}</a>
             {% endif %}
         </li>
         <li role="presentation" {% if active_tab == 'not_moderated_items' %}class="active"{% endif %}>
             {% if active_tab == 'not_moderated_items' %}
-                <a href="#">My not moderated items</a>
+                <a href="#">My not moderated items {% if count.notModerated > 0 %}[{{count.notModerated}}]{% endif %}</a>
             {% else %}
-                <a href="{{ path('user_not_moderated_items') }}">My not moderated items</a>
+                <a href="{{ path('user_not_moderated_items') }}">My not moderated items {% if count.notModerated > 0 %}[{{count.notModerated}}]{% endif %}</a>
             {% endif %}
         </li>
     </ul>

@@ -15,3 +15,8 @@ services:
         class: AppBundle\Service\GeoService
         arguments:
             - @doctrine.orm.default_entity_manager
+
+    app.user_items_count:
+            class: AppBundle\Service\ItemsCountService
+            arguments:
+                - @doctrine.orm.default_entity_manager
