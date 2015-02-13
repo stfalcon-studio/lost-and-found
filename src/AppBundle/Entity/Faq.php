@@ -10,13 +10,14 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * FAQ Entity
+ * Faq Entity
  *
- * @ORM\Entity(repositoryClass="AppBundle\Repository\FAQRepository")
- * @ORM\Table(name="FAQ")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\FaqRepository")
+ * @ORM\Table(name="faq")
  *
+ * @Gedmo\Loggable
  */
-class FAQ
+class Faq
 {
     use TimestampableEntity;
 
@@ -51,6 +52,16 @@ class FAQ
      */
     private $answer;
 
+
+    /**
+     * @var boolean $enabled Enabled
+     *
+     * @ORM\Column(type="boolean")
+     *
+     * @Gedmo\Versioned
+     */
+    private $enabled = true;
+
     /**
      * To string
      *
@@ -58,7 +69,7 @@ class FAQ
      */
     public function __toString()
     {
-        return $this->getQuestion() ?: 'New FAQ';
+        return $this->getQuestion() ?: 'New Faq';
     }
 
     /**
@@ -108,4 +119,26 @@ class FAQ
 
         return $this;
     }
+
+    /**
+     * @return boolean
+     */
+    public function isEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * @param boolean $enabled
+     *
+     * @return $this
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
+
+        return $this;
+    }
+
+
 }
