@@ -242,13 +242,18 @@ class ItemController extends Controller
         $em->persist($item);
         $em->flush();
 
+        $count = $this->get('app.user_items_count');
+
+        $count = $count->getCount($this->getUser());
+
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
         $items          = $itemRepository->getDeactivatedItems($this->getUser(), false, false);
 
         $this->get('session')->getFlashBag()->add('notice', 'Item ' . $item->getTitle() . ' was deactivated!');
 
         return $this->render(':frontend/user:show_deactivated_items.html.twig', [
-            'items' => $items
+            'items' => $items,
+            'count' => $count,
         ]);
     }
 
@@ -268,13 +273,18 @@ class ItemController extends Controller
         $em->persist($item);
         $em->flush();
 
+        $count = $this->get('app.user_items_count');
+
+        $count = $count->getCount($this->getUser());
+
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
         $items          = $itemRepository->getDeactivatedItems($this->getUser(), false, false);
 
         $this->get('session')->getFlashBag()->add('notice', 'Item ' . $item->getTitle() . ' was deleted!');
 
         return $this->render(':frontend/user:show_deactivated_items.html.twig', [
-            'items' => $items
+            'items' => $items,
+            'count' => $count,
         ]);
     }
 
@@ -294,13 +304,18 @@ class ItemController extends Controller
         $em->persist($item);
         $em->flush();
 
+        $count = $this->get('app.user_items_count');
+
+        $count = $count->getCount($this->getUser());
+
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
         $items          = $itemRepository->getDeactivatedItems($this->getUser(), false, false);
 
         $this->get('session')->getFlashBag()->add('notice', 'Item ' . $item->getTitle() . ' was activated!');
 
         return $this->render(':frontend/user:show_deactivated_items.html.twig', [
-            'items' => $items
+            'items' => $items,
+            'count' => $count,
         ]);
     }
 }

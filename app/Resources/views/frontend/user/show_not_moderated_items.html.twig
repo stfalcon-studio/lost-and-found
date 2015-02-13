@@ -8,9 +8,8 @@
 {% endblock title %}
 
 {% block content %}
-    {{ user_macro.active_tab('not_moderated_items') }}
+    {{ user_macro.active_tab('not_moderated_items', count) }}
 
-{# {{ user_macro.active_pill('deactivated_items') }} #}
     <br />
     {% if items is defined and items is not empty %}
         {{ user_macro.not_moderated_items_list(items) }}
