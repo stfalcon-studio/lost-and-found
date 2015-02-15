@@ -2,12 +2,15 @@
 
 namespace AppBundle\Controller\Frontend;
 
-use AppBundle\Entity\Item;
 use AppBundle\DBAL\Types\ItemStatusType;
 use AppBundle\DBAL\Types\ItemTypeType;
+use AppBundle\DBAL\Types\UserActionType;
+use AppBundle\Entity\Item;
+use AppBundle\Entity\UserActionLog;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -18,6 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class UserController extends Controller
 {
+
     /**
      * Edit item
      *
@@ -42,9 +46,9 @@ class UserController extends Controller
             $em->persist($item);
             $em->flush();
 
-            $this->get('session')->getFlashBag()->add('update', 'Your item was updated!');
+            $this->get('session')->getFlashBag()->add('update', 'Item ' . $item->getTitle() . ' was updated!');
 
-            return $this->redirect($this->generateUrl('user_actual_found_items'));
+            return $this->redirect($this->generateUrl('user_actual_lost_items'));
         }
 
         if (!$item) {
@@ -69,10 +73,15 @@ class UserController extends Controller
         /** @var \AppBundle\Repository\ItemRepository $itemRepository */
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
 
-        $items = $itemRepository->getUserItems($this->getUser(), ItemStatusType::ACTUAL, ItemTypeType::LOST);
+        $count = $this->get('app.user_items_count');
 
-        return $this->render('frontend/user/show_actual_lost_found.twig', [
-            'items' => $items
+        $count = $count->getCount($this->getUser());
+
+        $items = $itemRepository->getUserItems($this->getUser(), ItemStatusType::ACTUAL, ItemTypeType::LOST, true, false, true);
+
+        return $this->render('frontend/user/show_actual_lost_items.html.twig', [
+            'items' => $items,
+            'count' => $count,
         ]);
     }
 
@@ -88,10 +97,15 @@ class UserController extends Controller
         /** @var \AppBundle\Repository\ItemRepository $itemRepository */
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
 
-        $items = $itemRepository->getUserItems($this->getUser(), ItemStatusType::ACTUAL, ItemTypeType::FOUND);
+        $count = $this->get('app.user_items_count');
+
+        $count = $count->getCount($this->getUser());
+
+        $items = $itemRepository->getUserItems($this->getUser(), ItemStatusType::ACTUAL, ItemTypeType::FOUND, true, false, true);
 
         return $this->render('frontend/user/show_actual_found_items.html.twig', [
-            'items' => $items
+            'items' => $items,
+            'count' => $count,
         ]);
     }
 
@@ -107,10 +121,15 @@ class UserController extends Controller
         /** @var \AppBundle\Repository\ItemRepository $itemRepository */
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
 
-        $items = $itemRepository->getUserItems($this->getUser(), ItemStatusType::RESOLVED, ItemTypeType::LOST);
+        $count = $this->get('app.user_items_count');
+
+        $count = $count->getCount($this->getUser());
+
+        $items = $itemRepository->getUserItems($this->getUser(), ItemStatusType::RESOLVED, ItemTypeType::LOST, true, false, true);
 
         return $this->render('frontend/user/show_resolved_lost_items.html.twig', [
-            'items' => $items
+            'items' => $items,
+            'count' => $count,
         ]);
     }
 
@@ -125,10 +144,76 @@ class UserController extends Controller
     {
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
 
-        $items = $itemRepository->getUserItems($this->getUser(), ItemStatusType::RESOLVED, ItemTypeType::FOUND);
+        $count = $this->get('app.user_items_count');
+
+        $count = $count->getCount($this->getUser());
+
+        $items = $itemRepository->getUserItems($this->getUser(), ItemStatusType::RESOLVED, ItemTypeType::FOUND, true, false, true);
 
         return $this->render('frontend/user/show_resolved_found_items.html.twig', [
-            'items' => $items
+            'items' => $items,
+            'count' => $count,
         ]);
     }
+
+    /**
+     * @return Response
+     *
+     * @Route("/deactivated-items", name="user_deactivated_items")
+     */
+    public function showDeactivatedItemsAction()
+    {
+        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+
+        $count = $this->get('app.user_items_count');
+
+        $count = $count->getCount($this->getUser());
+
+        $items = $itemRepository->getDeactivatedItems($this->getUser(), false, false);
+
+        return $this->render('frontend/user/show_deactivated_items.html.twig', [
+            'items' => $items,
+            'count' => $count,
+        ]);
+    }
+
+    /**
+     * @return Response
+     *
+     * @Route("/not-moderated-items", name="user_not_moderated_items")
+     */
+    public function showNotModeratedItemsAction()
+    {
+        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+
+        $count = $this->get('app.user_items_count');
+
+        $count = $count->getCount($this->getUser());
+
+        $items = $itemRepository->getNotModeratedItems($this->getUser(), false);
+
+        return $this->render('frontend/user/show_not_moderated_items.html.twig', [
+            'items' => $items,
+            'count' => $count,
+        ]);
+    }
+
+    /**
+     * @return Response
+     *
+     * @Route("/deauthorize", name="user_deauthorize")
+     */
+//    public function facebookDeauthorizeAction()
+//    {
+//        $actionLog = new UserActionLog();
+//        $actionLog->setActionType(UserActionType::DEAUTHORIZE);
+//        $actionLog->setUser($this->getUser());
+//        $actionLog->setCreatedAt(new \DateTime('now'));
+//
+//        $em = $this->getDoctrine()->getManager();
+//        $em->persist($actionLog);
+//        $em->flush();
+//
+//        return $this->redirect($this->generateUrl('homepage'));
+//    }
 }

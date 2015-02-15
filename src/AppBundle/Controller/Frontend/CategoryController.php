@@ -2,16 +2,17 @@
 
 namespace AppBundle\Controller\Frontend;
 
-use AppBundle\Entity\Category;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * CategoryController
  *
+ * @author Artem Genvald <genvaldartem@gmail.com>
  * @author svatok13
  */
 class CategoryController extends Controller
@@ -22,6 +23,7 @@ class CategoryController extends Controller
      * @param Request $request
      *
      * @return Response
+     *
      * @throws AccessDeniedException
      *
      * @Route("/get/categories", name="get_categories")
@@ -51,8 +53,6 @@ class CategoryController extends Controller
             }
         }
 
-        return new Response(json_encode($result), 200, [
-            'Content-Type' => 'application/json'
-        ]);
+        return new JsonResponse($result);
     }
 }

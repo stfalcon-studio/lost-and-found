@@ -4,8 +4,14 @@ services:
         arguments:
             - @fos_user.user_manager
             - @event_dispatcher
+            - @doctrine.orm.default_entity_manager
 
     app.validator.item_area:
         class: AppBundle\Validator\Constraints\ItemAreaValidator
         tags:
             - { name: validator.constraint_validator, alias: item_area }
+
+    app.user_items_count:
+            class: AppBundle\Service\ItemsCountService
+            arguments:
+                - @doctrine.orm.default_entity_manager

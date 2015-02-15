@@ -28,12 +28,19 @@ class ItemRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('i');
 
-        $qb->where($qb->expr()->eq('i.status', ':status'))
+        $qb
+            ->select('i.id')
+            ->addSelect('i.title')
+            ->addSelect('c.title as categoryTitle')
+            ->where($qb->expr()->eq('i.status', ':status'))
             ->andWhere($qb->expr()->eq('i.type', ':type'))
             ->andWhere($qb->expr()->eq('i.moderated', true))
+            ->andWhere($qb->expr()->eq('i.deleted', ':deleted'))
+            ->join('i.category', 'c')
             ->setParameters([
                 'type'   => ItemTypeType::LOST,
-                'status' => ItemStatusType::ACTUAL
+                'status' => ItemStatusType::ACTUAL,
+                'deleted'=> false,
             ])
             ->orderBy('i.createdAt', 'DESC')
             ->setFirstResult($offset);
@@ -57,12 +64,15 @@ class ItemRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('i');
 
-        $qb->where($qb->expr()->eq('i.status', ':status'))
+        $qb
+            ->where($qb->expr()->eq('i.status', ':status'))
             ->andWhere($qb->expr()->eq('i.type', ':type'))
             ->andWhere($qb->expr()->eq('i.moderated', true))
+            ->andWhere($qb->expr()->eq('i.deleted', ':deleted'))
             ->setParameters([
                 'type'   => ItemTypeType::FOUND,
-                'status' => ItemStatusType::ACTUAL
+                'status' => ItemStatusType::ACTUAL,
+                'deleted'=> false,
             ])
             ->orderBy('i.createdAt', 'DESC')
             ->setFirstResult($offset);
@@ -82,26 +92,29 @@ class ItemRepository extends EntityRepository
      *
      * @return array
      */
-    public function getLostPoints($offset = 0, $limit = null)
+    public function getLostMarkers($offset = 0, $limit = null)
     {
         $qb = $this->createQueryBuilder('i');
 
         $qb
-            ->select('i.latitude')
+            ->select('i.id AS itemId')
+            ->addSelect('i.latitude')
             ->addSelect('i.longitude')
-            ->addSelect('i.id')
-            ->addSelect('i.title AS itemTitle')
-            ->addSelect('IDENTITY(i.category) AS categoryId')
+            ->addSelect('i.area')
+            ->addSelect('i.areaType')
+            ->addSelect('i.title')
             ->addSelect('i.date')
-            ->addSelect('c.title')
+            ->addSelect('c.id AS categoryId')
             ->join('i.category', 'c')
-            ->where($qb->expr()->eq('i.moderated', true))
-            ->andWhere($qb->expr()->eq('i.type', ':type'))
-            ->andWhere($qb->expr()->eq('i.status', ':status'))
-            ->setParameters([
-                'type'   => ItemTypeType::LOST,
-                'status' => ItemStatusType::ACTUAL,
-            ])
+//            ->where($qb->expr()->eq('i.status', ':actual'))
+            ->andWhere($qb->expr()->eq('i.type', ':lost'))
+            ->andWhere($qb->expr()->eq('i.moderated', true))
+            ->andWhere($qb->expr()->eq('i.active', true))
+//            ->setParameters([
+//                'actual' => ItemStatusType::ACTUAL,
+//                'lost'  => ItemTypeType::FOUND,
+//            ])
+            ->setParameter('lost', ItemTypeType::LOST)
             ->setFirstResult($offset);
 
         if (null !== $limit) {
@@ -119,26 +132,27 @@ class ItemRepository extends EntityRepository
      *
      * @return array
      */
-    public function getFoundPoints($offset = 0, $limit = null)
+    public function getFoundMarkers($offset = 0, $limit = null)
     {
         $qb = $this->createQueryBuilder('i');
 
         $qb
-            ->select('i.latitude')
+            ->select('i.id AS itemId')
+            ->addSelect('i.latitude')
             ->addSelect('i.longitude')
-            ->addSelect('i.id')
-            ->addSelect('i.title AS itemTitle')
-            ->addSelect('IDENTITY(i.category) AS categoryId')
+            ->addSelect('i.title')
             ->addSelect('i.date')
-            ->addSelect('c.title')
+            ->addSelect('c.id AS categoryId')
             ->join('i.category', 'c')
-            ->where($qb->expr()->eq('i.moderated', true))
-            ->andWhere($qb->expr()->eq('i.type', ':type'))
-            ->andWhere($qb->expr()->eq('i.status', ':status'))
-            ->setParameters([
-                'type'   => ItemTypeType::FOUND,
-                'status' => ItemStatusType::ACTUAL,
-            ])
+//            ->where($qb->expr()->eq('i.status', ':actual'))
+            ->andWhere($qb->expr()->eq('i.type', ':found'))
+            ->andWhere($qb->expr()->eq('i.moderated', true))
+            ->andWhere($qb->expr()->eq('i.active', true))
+//            ->setParameters([
+//                'actual' => ItemStatusType::ACTUAL,
+//                'found'  => ItemTypeType::FOUND,
+//            ])
+            ->setParameter('found', ItemTypeType::FOUND)
             ->setFirstResult($offset);
 
         if (null !== $limit) {
@@ -151,25 +165,233 @@ class ItemRepository extends EntityRepository
     /**
      * Get user items
      *
-     * @param User   $user       User
-     * @param string $itemStatus Item status
-     * @param string $itemType   Item type
+     * @param User    $user         User
+     * @param string  $itemStatus   Item status
+     * @param string  $itemType     Item type
+     * @param boolean $activeStatus Active
+     * @param boolean $deleted      Deleted
+     * @param boolean $moderated    Moderated
      *
      * @return array
      */
-    public function getUserItems(User $user, $itemStatus, $itemType)
+    public function getUserItems(User $user, $itemStatus, $itemType, $activeStatus, $deleted, $moderated)
     {
         $qb = $this->createQueryBuilder('i');
 
         $qb->where($qb->expr()->eq('i.createdBy', ':user'))
-           ->andWhere($qb->expr()->eq('i.status', ':status'))
-           ->andWhere($qb->expr()->eq('i.type', ':type'))
+            ->andWhere($qb->expr()->eq('i.status', ':status'))
+            ->andWhere($qb->expr()->eq('i.type', ':type'))
+            ->andWhere($qb->expr()->eq('i.active', ':active'))
+            ->andWhere($qb->expr()->eq('i.deleted', ':deleted'))
+            ->andWhere($qb->expr()->eq('i.moderated', ':moderated'))
+            ->setParameters([
+                'user'   => $user,
+                'status' => $itemStatus,
+                'type'   => $itemType,
+                'active' => $activeStatus,
+                'deleted' => $deleted,
+                'moderated' => $moderated,
+            ]);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * Get user items
+     *
+     * @param User    $user    User
+     * @param boolean $active  active
+     * @param boolean $deleted Deleted
+     *
+     * @return array
+     */
+    public function getDeactivatedItems(User $user, $active, $deleted)
+    {
+        $qb = $this->createQueryBuilder('i');
+
+        $qb->where($qb->expr()->eq('i.createdBy', ':user'))
+           ->andWhere($qb->expr()->eq('i.active', ':active'))
+           ->andWhere($qb->expr()->eq('i.deleted', ':deleted'))
            ->setParameters([
                'user'   => $user,
-               'status' => $itemStatus,
-               'type'   => $itemType
+               'active' => $active,
+               'deleted'=> $deleted
            ]);
 
         return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * Get user items
+     *
+     * @param User    $user      User
+     * @param boolean $moderated moderated
+     *
+     * @return array
+     */
+    public function getNotModeratedItems(User $user, $moderated)
+    {
+        $qb = $this->createQueryBuilder('i');
+
+        $qb->where($qb->expr()->eq('i.createdBy', ':user'))
+            ->andWhere($qb->expr()->eq('i.active', ':active'))
+            ->andWhere($qb->expr()->eq('i.deleted', ':deleted'))
+            ->andWhere($qb->expr()->eq('i.moderated', ':moderated'))
+            ->setParameters([
+                'user'   => $user,
+                'active'   => true,
+                'deleted' => false,
+                'moderated' => $moderated,
+            ]);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * Get lost items
+     *
+     * @param int  $offset
+     * @param null $limit
+     *
+     * @return array
+     */
+    public function getLostItems($offset = 0, $limit = null)
+    {
+        $qb = $this->createQueryBuilder('i');
+
+        $qb
+            ->select('i.id')
+            ->addSelect('i.title AS itemTitle')
+            ->addSelect('c.title AS categoryTitle')
+            ->join('i.category', 'c')
+            //->where($qb->expr()->eq('i.status', ':actual'))
+            ->andWhere($qb->expr()->eq('i.type', ':found'))
+            ->andWhere($qb->expr()->eq('i.moderated', true))
+            //->andWhere($qb->expr()->eq('i.active', true))
+            /*->setParameters([
+                'actual' => ItemStatusType::ACTUAL,
+                'found'  => ItemTypeType::FOUND,
+            ])*/
+            ->setParameter('found', ItemTypeType::FOUND)
+            ->setFirstResult($offset);
+
+        if (null !== $limit) {
+            $qb->setMaxResults($limit);
+        }
+
+        return $qb->getQuery()->getArrayResult();
+    }
+
+    /**
+     * Get found items
+     *
+     * @param int  $offset
+     * @param null $limit
+     *
+     * @return array
+     */
+    public function getFoundItems($offset = 0, $limit = null)
+    {
+        $qb = $this->createQueryBuilder('i');
+
+        $qb
+            ->select('i.id')
+            ->addSelect('i.title AS itemTitle')
+            ->addSelect('c.title AS categoryTitle')
+            ->join('i.category', 'c')
+            //->where($qb->expr()->eq('i.status', ':actual'))
+            ->andWhere($qb->expr()->eq('i.type', ':found'))
+            ->andWhere($qb->expr()->eq('i.moderated', true))
+            //->andWhere($qb->expr()->eq('i.active', true))
+            /*->setParameters([
+                'actual' => ItemStatusType::ACTUAL,
+                'found'  => ItemTypeType::FOUND,
+            ])*/
+            ->setParameter('found', ItemTypeType::FOUND)
+            ->setFirstResult($offset);
+
+        if (null !== $limit) {
+            $qb->setMaxResults($limit);
+        }
+
+        return $qb->getQuery()->getArrayResult();
+    }
+
+    /**
+     * @param User   $user
+     * @param string $type
+     *
+     * @return integer
+     */
+    public function getUserItemsCountByType(User $user, $type)
+    {
+        $qb = $this->createQueryBuilder('i');
+
+        $qb
+            ->select('count(i)')
+            ->where($qb->expr()->eq('i.createdBy', ':user'))
+            ->andWhere($qb->expr()->eq('i.moderated', ':moderated'))
+            ->andWhere($qb->expr()->eq('i.deleted', ':deleted'))
+            ->andWhere($qb->expr()->eq('i.active', ':active'))
+            ->andWhere($qb->expr()->eq('i.type', ':type'))
+            ->setParameters([
+                'user' => $user,
+                'moderated' => true,
+                'deleted' => false,
+                'type' => $type,
+                'active' => true,
+            ]);
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * @param User    $user
+     * @param boolean $moderated
+     *
+     * @return integer
+     */
+    public function getUserItemsCountByModerate(User $user, $moderated)
+    {
+        $qb = $this->createQueryBuilder('i');
+
+        $qb
+            ->select('count(i)')
+            ->where($qb->expr()->eq('i.createdBy', ':user'))
+            ->andWhere($qb->expr()->eq('i.moderated', ':moderated'))
+            ->andWhere($qb->expr()->eq('i.deleted', ':deleted'))
+            ->setParameters([
+                'user' => $user,
+                'moderated' => $moderated,
+                'deleted' => false,
+            ]);
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * @param User    $user
+     * @param boolean $active
+     *
+     * @return integer
+     */
+    public function getUserItemsCountByActivate(User $user, $active)
+    {
+        $qb = $this->createQueryBuilder('i');
+
+        $qb
+            ->select('count(i)')
+            ->where($qb->expr()->eq('i.createdBy', ':user'))
+            ->andWhere($qb->expr()->eq('i.moderated', ':moderated'))
+            ->andWhere($qb->expr()->eq('i.deleted', ':deleted'))
+            ->andWhere($qb->expr()->eq('i.active', ':active'))
+            ->setParameters([
+                'user' => $user,
+                'moderated' => true,
+                'deleted' => false,
+                'active' => $active,
+            ]);
+
+        return $qb->getQuery()->getSingleScalarResult();
     }
 }

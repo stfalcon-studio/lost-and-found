@@ -6,9 +6,9 @@ use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
- * Migration 20150210151241
+ * Migration 20150210151241. First working functionality
  *
- * First working functionality
+ * @author Artem Genvald <genvaldartem@gmail.com>
  */
 class Version20150210151241 extends AbstractMigration
 {
@@ -39,11 +39,12 @@ class Version20150210151241 extends AbstractMigration
         $this->addSql('
             CREATE TABLE categories (
                 id INT AUTO_INCREMENT NOT NULL,
-                parent_id INT DEFAULT NULL,
-                lvl INT DEFAULT NULL,
-                path VARCHAR(3000) DEFAULT NULL,
                 title VARCHAR(60) NOT NULL,
                 enabled TINYINT(1) NOT NULL,
+                parent_id INT DEFAULT NULL,
+                `level` INT DEFAULT NULL,
+                path VARCHAR(3000) DEFAULT NULL,
+                path_source VARCHAR(3000) DEFAULT NULL,
                 image_name VARCHAR(255) DEFAULT NULL,
                 created_at DATETIME NOT NULL,
                 updated_at DATETIME NOT NULL,

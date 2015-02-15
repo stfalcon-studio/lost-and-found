@@ -32,11 +32,11 @@ class ItemAdmin extends Admin
     {
         $actions = parent::getBatchActions();
 
-        $actions['mark_as_moderated'] = [
+        $actions['mark_as_moderated_action']   = [
             'label'            => 'Mark as moderated',
             'ask_confirmation' => true
         ];
-        $actions['unmark_as_moderated']    = [
+        $actions['unmark_as_moderated_action'] = [
             'label'            => 'Unmark as moderated',
             'ask_confirmation' => true
         ];
@@ -88,7 +88,8 @@ class ItemAdmin extends Admin
                 ->add('status')
                 ->add('moderated')
                 ->add('createdBy')
-                ->add('date', 'date')
+                ->add('date', 'sonata_type_date_picker')
+                ->add('deleted')
             ->end();
     }
 
@@ -109,6 +110,8 @@ class ItemAdmin extends Admin
             ->add('moderated', null, [
                 'editable' => true
             ])
+            ->add('active')
+            ->add('deleted')
             ->add('date', 'date', [
                 'format' => 'd.m.Y'
             ])
@@ -146,6 +149,7 @@ class ItemAdmin extends Admin
             ])
             ->add('areaType')
             ->add('status')
+            ->add('activatedAt')
             ->add('moderated', 'boolean')
             ->add('date', 'date', [
                 'format' => 'd.m.Y'
@@ -159,7 +163,9 @@ class ItemAdmin extends Admin
             ])
             ->add('moderatedAt', 'datetime', [
                 'format' => 'd.m.Y H:i:s'
-            ]);
+            ])
+            ->add('delete')
+            ->add('deletedAt');
     }
 
     /**
@@ -178,10 +184,13 @@ class ItemAdmin extends Admin
             ->add('area')
             ->add('areaType')
             ->add('status')
+            ->add('activatedAt')
             ->add('moderated')
             ->add('createdAt')
             ->add('updatedAt')
             ->add('moderatedAt')
-            ->add('date');
+            ->add('date')
+            ->add('deleted')
+            ->add('deletedAt');
     }
 }

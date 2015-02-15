@@ -33,11 +33,11 @@ class CategoryAdmin extends Admin
     {
         $actions = parent::getBatchActions();
 
-        $actions['enable'] = [
+        $actions['enable_action']  = [
             'label'            => 'Enable',
             'ask_confirmation' => true
         ];
-        $actions['disable']    = [
+        $actions['disable_action'] = [
             'label'            => 'Disable',
             'ask_confirmation' => true
         ];
@@ -52,12 +52,14 @@ class CategoryAdmin extends Admin
     {
         $formMapper
             ->with('Category')
+                ->add('parent')
                 ->add('title')
-                ->add('enabled')
-                ->add('imageFile', 'file', [
+                ->add('enabled', 'checkbox', [
                     'required' => false,
                 ])
-                ->add('parent')
+                ->add('imageFile', 'file', [
+                    'required' => false
+                ])
             ->end();
     }
 
@@ -68,13 +70,13 @@ class CategoryAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('title')
+            ->add('parent')
             ->add('enabled', 'boolean', [
                 'editable' => true,
             ])
             ->add('image', 'string', [
                 'template' => 'backend/category/list_marker.html.twig',
             ])
-            ->add('parent')
             ->add('createdAt', 'datetime', [
                 'format' => 'd.m.Y H:i:s'
             ])
@@ -98,11 +100,11 @@ class CategoryAdmin extends Admin
         $showMapper
             ->add('id')
             ->add('title')
+            ->add('parent')
             ->add('image', 'string', [
                 'template' => 'backend/category/show_marker.html.twig'
             ])
             ->add('enabled', 'boolean')
-            ->add('parent')
             ->add('children')
             ->add('createdAt', 'datetime', [
                 'format' => 'd.m.Y H:i:s'
@@ -120,8 +122,8 @@ class CategoryAdmin extends Admin
         $datagridMapper
             ->add('id')
             ->add('title')
-            ->add('enabled')
             ->add('parent')
+            ->add('enabled')
             ->add('createdAt')
             ->add('updatedAt');
     }

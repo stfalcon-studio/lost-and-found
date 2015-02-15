@@ -199,6 +199,29 @@ class Item implements UserManageableInterface
     private $moderatedAt;
 
     /**
+     * @var \DateTime $activatedAt Activated at
+     *
+     * @ORM\Column(type = "datetime", nullable=true)
+     */
+    private $activatedAt;
+
+    /**
+     * @var boolean $deleted Is deleted?
+     *
+     * @ORM\Column(name="deleted", type="boolean")
+     *
+     * @Gedmo\Versioned
+     */
+    private $deleted = false;
+
+    /**
+     * @var \DateTime $deletedAt Deleted at
+     *
+     * @ORM\Column(type = "datetime", nullable=true)
+     */
+    private $deletedAt;
+
+    /**
      * To string
      *
      * @return string
@@ -341,6 +364,9 @@ class Item implements UserManageableInterface
      */
     public function setActive($active)
     {
+        if ($active) {
+           $this->setActivatedAt(new \DateTime());
+        }
         $this->active = $active;
 
         return $this;
@@ -573,6 +599,81 @@ class Item implements UserManageableInterface
         if (true === $this->moderated) {
             $this->setModeratedAt(new \DateTime());
         }
+    }
+
+    /**
+     * Get activated at
+     *
+     * @return \DateTime
+     */
+    public function getActivatedAt()
+    {
+        return $this->activatedAt;
+    }
+
+    /**
+     * Set activated at
+     *
+     * @param \DateTime $activatedAt
+     *
+     * @return $this
+     */
+    public function setActivatedAt($activatedAt)
+    {
+        $this->activatedAt = $activatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get deleted at
+     *
+     * @return \DateTime
+     */
+    public function getDeletedAt()
+    {
+        return $this->deletedAt;
+    }
+
+    /**
+     * Set deleted at
+     *
+     * @param \DateTime $deletedAt
+     *
+     * @return $this
+     */
+    public function setDeletedAt($deletedAt)
+    {
+        $this->deletedAt = $deletedAt;
+
+        return $this;
+    }
+
+    /**
+     * Is delete
+     *
+     * @return boolean
+     */
+    public function isDeleted()
+    {
+        return $this->deleted;
+    }
+
+    /**
+     * Set deleted at
+     *
+     * @param boolean $delete
+     *
+     * @return $this
+     */
+    public function setDeleted($delete)
+    {
+        if ($delete) {
+           $this->setDeletedAt(new \DateTime());
+        }
+        $this->deleted = $delete;
+
+        return $this;
     }
 
     /**

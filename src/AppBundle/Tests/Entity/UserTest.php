@@ -2,6 +2,7 @@
 namespace AppBundle\Tests\Entity;
 use AppBundle\Entity\User;
 use AppBundle\Entity\Item;
+use AppBundle\Entity\UserActionLog;
 use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Class UserTest
@@ -23,6 +24,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($user->getFacebookId());
         $this->assertEquals(0, $user->getItems()->count());
     }
+
     /**
      * Test setter and getter for Full Name
      *
@@ -31,9 +33,10 @@ class UserTest extends \PHPUnit_Framework_TestCase
     public function setGetFullName()
     {
         $fullName = 'Some Name';
-        $user = (new User())->setFullName($fullName);
+        $user     = (new User())->setFullName($fullName);
         $this->assertEquals($fullName, $user->getFullName());
     }
+
     /**
      * Test setter and getter for Item
      *
@@ -47,6 +50,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, $user->getItems()->count());
         $this->assertEquals($items, $user->getItems());
     }
+
     /**
      * Test setter and getter for facebook id
      *
@@ -55,9 +59,10 @@ class UserTest extends \PHPUnit_Framework_TestCase
     public function setGetFacebookId()
     {
         $faceId = '123321';
-        $user = (new User())->setFacebookId($faceId);
+        $user   = (new User())->setFacebookId($faceId);
         $this->assertEquals($faceId, $user->getFacebookId());
     }
+
     /**
      * Test setter and getter for facebook access token
      *
@@ -66,9 +71,10 @@ class UserTest extends \PHPUnit_Framework_TestCase
     public function setGetFacebookAccessToken()
     {
         $faceAccessToken = '123321';
-        $user = (new User())->setFacebookAccessToken($faceAccessToken);
+        $user            = (new User())->setFacebookAccessToken($faceAccessToken);
         $this->assertEquals($faceAccessToken, $user->getFacebookAccessToken());
     }
+
     /**
      * Test add and remove for item
      *
@@ -83,5 +89,37 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $item = $user->getItems()->first();
         $user->removeItem($item);
         $this->assertEquals(0, $user->getItems()->count());
+    }
+
+    /**
+     * Test Action log getter and setter
+     *
+     * @test
+     */
+    public function testSetGetActionLog()
+    {
+        $arr        = [
+            'log1' => new UserActionLog(),
+            'log2' => new UserActionLog()
+        ];
+        $collection = new ArrayCollection($arr);
+        $user       = ((new User())->setActionLogs($collection));
+        $this->assertEquals($collection, $user->getActionLogs());
+    }
+
+    /**
+     * Test add and remove for actionLog
+     *
+     * @test
+     */
+    public function addRemoveActionLog()
+    {
+        $user = new User();
+        $this->assertEquals(0, $user->getActionLogs()->count());
+        $user->addActionLog(new UserActionLog());
+        $this->assertEquals(1, $user->getActionLogs()->count());
+        $actionLog = $user->getActionLogs()->first();
+        $user->removeActionLog($actionLog);
+        $this->assertEquals(0, $user->getActionLogs()->count());
     }
 }

@@ -5,10 +5,4 @@ services:
             - { name: kernel.event_listener, event: app.facebook_user_connected, method: onUserRegistered }
         arguments:
             - @swiftmailer.mailer
-
-    app.new_item_added.listener:
-        class: AppBundle\EventListener\NewItemAddedListener
-        tags:
-            - { name: kernel.event_listener, event: app.new_item_added, method: onItemAdded }
-        arguments:
-            - @swiftmailer.mailer
+            - @doctrine.orm.default_entity_manager

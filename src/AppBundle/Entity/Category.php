@@ -14,12 +14,15 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * Category Entity
  *
+ * @author Artem Genvald <genvaldartem@gmail.com>
+ *
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CategoryRepository")
  * @ORM\Table(name="categories")
  *
- * @Vich\Uploadable
- * @Gedmo\Tree(type="materializedPath")
  * @Gedmo\Loggable
+ * @Gedmo\Tree(type="materializedPath")
+ *
+ * @Vich\Uploadable
  */
 class Category
 {
@@ -49,7 +52,9 @@ class Category
 
     /**
      * @var Collection|Item[] $items Items
-     * @Gedmo\TreePathSource
+     *
+     * @Assert\Type(type="object")
+     *
      * @ORM\OneToMany(targetEntity="Item", mappedBy="category", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
@@ -72,34 +77,65 @@ class Category
     private $imageFile;
 
     /**
-     * @var string $imageName
+     * @var string $imageName Image name
      *
      * @ORM\Column(type="string", length=255, name="image_name", nullable=true)
+     *
+     * @Gedmo\Versioned
      */
     private $imageName;
 
     /**
+     * @var string $path Path
+     *
+     * @ORM\Column(type="string", length=3000, nullable=true)
+     *
      * @Gedmo\TreePath
-     * @ORM\Column(name="path", type="string", length=3000, nullable=true)
+     *
+     * @Gedmo\Versioned
      */
     private $path;
 
     /**
-     * @Gedmo\TreeParent
+     * @var string $pathSource Path source
+     *
+     * @ORM\Column(type="string", length=3000, nullable=true)
+     *
+     * @Gedmo\TreePathSource
+     *
+     * @Gedmo\Versioned
+     */
+    private $pathSource;
+
+    /**
+     * @var Category $parent Parent category
+     *
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="children")
      * @ORM\JoinColumns({
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE")
      * })
+     * @ORM\JoinColumn(referencedColumnName="id", onDelete="CASCADE")
+     *
+     * @Gedmo\TreeParent
+     *
+     * @Gedmo\Versioned
      */
     private $parent;
 
     /**
+     * @var int $level Level
+     *
+     * @ORM\Column(type="integer", nullable=true)
+     *
      * @Gedmo\TreeLevel
-     * @ORM\Column(name="lvl", type="integer", nullable=true)
+     *
+     * @Gedmo\Versioned
      */
     private $level;
 
     /**
+     * @var Collection|Category[] $children Children categories
+     *
      * @ORM\OneToMany(targetEntity="Category", mappedBy="parent")
      */
     private $children;
@@ -316,6 +352,30 @@ class Category
     public function getPath()
     {
         return $this->path;
+    }
+
+    /**
+     * Get path source
+     *
+     * @return string Path source
+     */
+    public function getPathSource()
+    {
+        return $this->pathSource;
+    }
+
+    /**
+     * Set path source
+     *
+     * @param string $pathSource Path source
+     *
+     * @return $this
+     */
+    public function setPathSource($pathSource)
+    {
+        $this->pathSource = $pathSource;
+
+        return $this;
     }
 
     /**

@@ -158,4 +158,14 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
         $category = (new Category())->setChildren($child);
         $this->assertEquals($child, $category->getChildren());
     }
+
+    /**
+     * Test setter and getter for path source
+     */
+    public function testSetGetPathSource()
+    {
+        $pathSource = 'pathSource';
+        $category = (new Category())->setPathSource($pathSource);
+        $this->assertEquals($pathSource, $category->getPathSource());
+    }
 }

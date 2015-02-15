@@ -6,6 +6,7 @@ imports:
     - { resource: assetic.yml }
     - { resource: hwi_oauth.yml }
     - { resource: fos_user.yml }
+    - { resource: vich_uploader.yml }
     - { resource: sonata/sonata-admin.yml }
     - { resource: sonata/sonata-admin-orm.yml }
     - { resource: sonata/sonata-block.yml }
@@ -51,17 +52,8 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
-#Vichuploader
-vich_uploader:
-    db_driver: orm
-    mappings:
-        category_image:
-            uri_prefix:         /images/categories
-            upload_destination: %kernel.root_dir%/../web/images/categories
-        item_photos:
-            uri_prefix:         /images/item-photos
-            upload_destination: %kernel.root_dir%/../web/images/item-photos
-#Sensio
+
+# SensioFrameworkExtra
 sensio_framework_extra:
     request:
         converters: true

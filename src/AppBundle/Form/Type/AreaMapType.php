@@ -2,10 +2,7 @@
 
 namespace AppBundle\Form\Type;
 
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\AbstractType;
-use Sonata\AdminBundle\Form\FormMapper;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  * Class LostItemType

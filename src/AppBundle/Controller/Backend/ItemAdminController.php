@@ -17,7 +17,7 @@ class ItemAdminController extends CRUDController
      *
      * @return RedirectResponse
      */
-    public function batchActionMarkAsModerated()
+    public function batchActionMarkAsModeratedAction()
     {
         return $this->commonBatchWork(true, 'Moderation was marked successfully');
     }
@@ -27,7 +27,7 @@ class ItemAdminController extends CRUDController
      *
      * @return RedirectResponse
      */
-    public function batchActionUnmarkAsModerated()
+    public function batchActionUnmarkAsModeratedAction()
     {
         return $this->commonBatchWork(false, 'Moderation was unmarked successfully');
     }

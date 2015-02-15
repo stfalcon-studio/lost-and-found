@@ -51,7 +51,6 @@ class EditItemType extends AbstractType
             ->add('type', 'hidden')
             ->add('latitude', 'hidden')
             ->add('longitude', 'hidden')
-            ->add('active', 'text')
             ->add('areaType', 'hidden')
             ->add('description', 'textarea')
             ->add('date', 'date', [
@@ -63,8 +62,10 @@ class EditItemType extends AbstractType
             ->add('area', 'hidden', [
                 'required' => false,
             ])
-            ->add('save', 'submit', [
-                'label' => 'Update'
+            ->add('update', 'submit', [
+                'attr'  => [
+                    'class' => 'btn-success'
+                ]
             ]);
 
         $tokenStorage = $this->tokenStorage;

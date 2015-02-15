@@ -4,13 +4,15 @@ namespace AppBundle\Controller\Frontend;
 
 use AppBundle\DBAL\Types\ItemTypeType;
 use AppBundle\Entity\Item;
+use AppBundle\Event\AppEvents;
 use AppBundle\Event\NewItemAddedEvent;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use AppBundle\Event\AppEvents;
 
 /**
  * ItemController
@@ -29,14 +31,13 @@ class ItemController extends Controller
      */
     public function lostItemsListAction()
     {
-        /** @var \AppBundle\Repository\ItemRepository $itemRepository */
-        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+        /** @var \AppBundle\Repository\CategoryRepository $categoryRepository */
+        $categoryRepository = $this->getDoctrine()->getRepository('AppBundle:Category');
 
-        $lostItems  = $itemRepository->getActiveLostItem();
+        $categories = $categoryRepository->getCategories();
 
         return $this->render('frontend/item/lost_items.html.twig', [
-            'lost_items' => $lostItems,
-            'page_type'  => ItemTypeType::LOST,
+            'categories' => $categories,
         ]);
     }
 
@@ -49,14 +50,13 @@ class ItemController extends Controller
      */
     public function foundItemsListAction()
     {
-        /** @var \AppBundle\Repository\ItemRepository $itemRepository */
-        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+        /** @var \AppBundle\Repository\CategoryRepository $categoryRepository */
+        $categoryRepository = $this->getDoctrine()->getRepository('AppBundle:Category');
 
-        $foundItems = $itemRepository->getActiveFoundItem();
+        $categories = $categoryRepository->getCategories();
 
         return $this->render('frontend/item/found_items.html.twig', [
-            'found_items' => $foundItems,
-            'page_type'   => ItemTypeType::FOUND,
+            'categories'  => $categories,
         ]);
     }
 
@@ -159,6 +159,7 @@ class ItemController extends Controller
      * Get found points
      *
      * @param Request $request Request
+     *
      * @throws AccessDeniedException
      *
      * @return Response
@@ -173,23 +174,21 @@ class ItemController extends Controller
 
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
 
-        $foundPoints = $itemRepository->getFoundPoints();
+        $foundMarkers = $itemRepository->getFoundMarkers();
 
         $router = $this->get('router');
 
-        foreach ($foundPoints as &$item) {
+        foreach ($foundMarkers as &$item) {
             $item['link'] = $router->generate(
                 'item_details',
                 [
-                    'id' => $item['id']
+                    'id' => $item['itemId']
                 ],
                 $router::ABSOLUTE_URL
             );
         }
 
-        return new Response(json_encode($foundPoints), 200, [
-            'Content-Type' => 'application/json'
-        ]);
+        return new JsonResponse($foundMarkers);
     }
 
     /**
@@ -210,22 +209,113 @@ class ItemController extends Controller
 
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
 
-        $lostPoints = $itemRepository->getLostPoints();
+        $lostMarkers = $itemRepository->getLostMarkers();
 
         $router = $this->get('router');
 
-        foreach ($lostPoints as &$item) {
+        foreach ($lostMarkers as &$item) {
             $item['link'] = $router->generate(
                 'item_details',
                 [
-                    'id' => $item['id']
+                    'id' => $item['itemId']
                 ],
                 $router::ABSOLUTE_URL
             );
         }
 
-        return new Response(json_encode($lostPoints), 200, [
-            'Content-Type' => 'application/json'
+        return new JsonResponse($lostMarkers);
+    }
+
+    /**
+     * @param Item $item Item
+     *
+     * @return Response
+     *
+     * @Route("item/{id}/deactivate", name="item_deactivate")
+     * @ParamConverter("item", class="AppBundle\Entity\Item")
+     */
+    public function itemDeactivatedAction(Item $item)
+    {
+        $item->setActive(false);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($item);
+        $em->flush();
+
+        $count = $this->get('app.user_items_count');
+
+        $count = $count->getCount($this->getUser());
+
+        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+        $items          = $itemRepository->getDeactivatedItems($this->getUser(), false, false);
+
+        $this->get('session')->getFlashBag()->add('notice', 'Item ' . $item->getTitle() . ' was deactivated!');
+
+        return $this->render(':frontend/user:show_deactivated_items.html.twig', [
+            'items' => $items,
+            'count' => $count,
+        ]);
+    }
+
+    /**
+     * @param Item $item Item
+     *
+     * @return Response
+     *
+     * @Route("item/{id}/delete", name="item_delete")
+     * @ParamConverter("item", class="AppBundle\Entity\Item")
+     */
+    public function itemDeleteAction(Item $item)
+    {
+        $item->setDeleted(true);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($item);
+        $em->flush();
+
+        $count = $this->get('app.user_items_count');
+
+        $count = $count->getCount($this->getUser());
+
+        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+        $items          = $itemRepository->getDeactivatedItems($this->getUser(), false, false);
+
+        $this->get('session')->getFlashBag()->add('notice', 'Item ' . $item->getTitle() . ' was deleted!');
+
+        return $this->render(':frontend/user:show_deactivated_items.html.twig', [
+            'items' => $items,
+            'count' => $count,
+        ]);
+    }
+
+    /**
+     * @param Item $item Item
+     *
+     * @return Response
+     *
+     * @Route("item/{id}/activate", name="item_activate")
+     * @ParamConverter("item", class="AppBundle\Entity\Item")
+     */
+    public function itemActivatedAction(Item $item)
+    {
+        $item->setActive(true);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($item);
+        $em->flush();
+
+        $count = $this->get('app.user_items_count');
+
+        $count = $count->getCount($this->getUser());
+
+        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+        $items          = $itemRepository->getDeactivatedItems($this->getUser(), false, false);
+
+        $this->get('session')->getFlashBag()->add('notice', 'Item ' . $item->getTitle() . ' was activated!');
+
+        return $this->render(':frontend/user:show_deactivated_items.html.twig', [
+            'items' => $items,
+            'count' => $count,
         ]);
     }
 }
