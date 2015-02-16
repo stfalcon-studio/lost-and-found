@@ -6,3 +6,11 @@ services:
         arguments:
             - @swiftmailer.mailer
             - @doctrine.orm.default_entity_manager
+
+    app.add_user_edit.listener:
+        class: AppBundle\EventListener\AddUserEditListener
+        tags:
+            - { name: kernel.event_listener, event: form.bind, method: onItemEdit }
+        arguments:
+            - @doctrine.orm.default_entity_manager
+

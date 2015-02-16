@@ -5,6 +5,7 @@ services:
             - { name: form.type, alias: found_item }
         arguments:
             - @security.token_storage
+            - @event_dispatcher
 
     app.form.type.lost_item:
         class: AppBundle\Form\Type\LostItemType
@@ -12,6 +13,7 @@ services:
             - { name: form.type, alias: lost_item }
         arguments:
             - @security.token_storage
+            - @event_dispatcher
 
     app.form.type.area_map:
         class: AppBundle\Form\Type\AreaMapType
@@ -26,3 +28,4 @@ services:
                 - { name: form.type, alias: item_edit }
             arguments:
                 - @security.token_storage
+                - @event_dispatcher
