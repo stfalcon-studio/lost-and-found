@@ -19,12 +19,14 @@ class FeedbackType extends AbstractType
     {
         $builder
             ->add('email', 'email', [
-                'label' => 'E-mail',
+                'label' => 'Your E-mail',
                 'attr' => [
                     'placeholder' => 'So we can get back to you.',
                 ],
             ])
-            ->add('message', 'textarea')
+            ->add('message', 'textarea', [
+                'label' => 'What do you want to tell us?'
+            ])
             ->add('save', 'submit', [
                 'label' => 'Send',
                 'attr'  => [

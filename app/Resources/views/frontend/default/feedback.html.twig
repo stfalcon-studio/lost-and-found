@@ -5,10 +5,9 @@
 {% block title %}{{ title }} | {{ parent() }}{% endblock title %}
 
 {% block content %}
+    <h1>Feedback</h1>
+
     <div>
-        {#{{ form_start(form) }}#}
-        {#{{ form_errors(form) }}#}
-        {#{{ form_end(form) }}#}
         {{ form(form) }}
     </div>
 {% endblock content %}

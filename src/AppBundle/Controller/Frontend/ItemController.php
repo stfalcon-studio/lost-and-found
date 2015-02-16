@@ -2,10 +2,9 @@
 
 namespace AppBundle\Controller\Frontend;
 
-use AppBundle\DBAL\Types\ItemTypeType;
 use AppBundle\Entity\Item;
 use AppBundle\Event\AppEvents;
-use AppBundle\Entity\UserItemRequest;
+use AppBundle\Entity\ItemRequest;
 use AppBundle\Event\NewItemAddedEvent;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -314,28 +313,25 @@ class ItemController extends Controller
 
         $this->get('session')->getFlashBag()->add('notice', 'Item ' . $item->getTitle() . ' was activated!');
 
-        return $this->render(':frontend/user:show_deactivated_items.html.twig', [
+        return $this->render('/frontend/user/show_deactivated_items.html.twig', [
             'items' => $items,
-            'count' => $count,
+            'count' => $count
         ]);
     }
 
     /**
-     * @param int $id
+     * @param Item $item Item
      *
      * @return Response
      *
-     * @Route("item/{id}/getUserFacebook", name="item_user_get_facebook")
+     * @Route("item/{id}/request-user", name="item_user_get_facebook")
+     * @ParamConverter("item", class="AppBundle\Entity\Item")
      */
-    public function getUserFacebook($id)
+    public function requestUserAction(Item $item)
     {
-        $item = $this->getDoctrine()
-            ->getRepository('AppBundle:Item')
-            ->find($id);
-
         $user = $item->getCreatedBy();
 
-        $userItemRequest = new UserItemRequest();
+        $userItemRequest = new ItemRequest();
         $userItemRequest->setItem($item)
             ->setUser($this->getUser());
 

@@ -5,13 +5,13 @@
 {% block title %}{{ title }} | {{ parent() }}{% endblock title %}
 
 {% block content %}
+    <h1>F.A.Q.</h1>
+
     <div>
         <dl>
-            {% for one_faq in faq %}
-
-                <dt>{{ one_faq.question }}</dt>
-                <dd>{{ one_faq.answer }}</dd><br>
-
+            {% for item in faq %}
+                <dt>{{ item.question }}</dt>
+                <dd>{{ item.answer }}</dd>
             {% endfor %}
         </dl>
     </div>
