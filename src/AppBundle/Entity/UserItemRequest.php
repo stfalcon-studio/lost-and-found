@@ -4,17 +4,16 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use AppBundle\DBAL\Types\UserActionType;
 use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Class LoginUserActionLog
- * @ORM\Table(name="user_log_actions")
+ * @ORM\Table(name="user_item_requests")
  * @ORM\Entity
  */
-class UserActionLog
+class UserItemRequest
 {
     /**
      * @var int $id ID
@@ -26,24 +25,24 @@ class UserActionLog
     private $id;
 
     /**
-     * @var array $actionType
-     *
-     * @DoctrineAssert\Enum(entity="AppBundle\DBAL\Types\UserActionType")
-     *
-     * @ORM\Column(name="action", type="UserActionType", nullable=false)
-     *
-     */
-    private $actionType;
-
-    /**
      * @var User $user User
      *
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="actionLogs", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="itemRequests", cascade={"persist"})
      * @ORM\JoinColumn(referencedColumnName="id", nullable=false)
      *
      * @Assert\NotNull()
      */
     private $user;
+
+    /**
+     * @var Item $item Item
+     *
+     * @ORM\ManyToOne(targetEntity="Item", inversedBy="userRequests", cascade={"persist"})
+     * @ORM\JoinColumn(referencedColumnName="id", nullable=false)
+     *
+     * @Assert\NotNull()
+     */
+    private $item;
 
     /**
      * @var \DateTime
@@ -62,29 +61,6 @@ class UserActionLog
         return $this->id;
     }
 
-    /**
-     * Get actionType
-     *
-     * @return array ActionType
-     */
-    public function getActionType()
-    {
-        return $this->actionType;
-    }
-
-    /**
-     * Set actionType
-     *
-     * @param array $actionType actionType
-     *
-     * @return $this
-     */
-    public function setActionType($actionType)
-    {
-        $this->actionType = $actionType;
-
-        return $this;
-    }
 
     /**
      * Get user
@@ -106,6 +82,30 @@ class UserActionLog
     public function setUser(User $user)
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get item
+     *
+     * @return Item item
+     */
+    public function getItem()
+    {
+        return $this->item;
+    }
+
+    /**
+     * Set item
+     *
+     * @param Item $item item
+     *
+     * @return $this
+     */
+    public function setItem(Item $item)
+    {
+        $this->item = $item;
 
         return $this;
     }

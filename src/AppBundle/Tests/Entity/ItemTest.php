@@ -8,6 +8,8 @@ use AppBundle\DBAL\Types\ItemTypeType;
 use AppBundle\Entity\Category;
 use AppBundle\Entity\Item;
 use AppBundle\Entity\User;
+use AppBundle\Entity\UserItemRequest;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Class ItemTest
@@ -240,5 +242,37 @@ class ItemTest extends \PHPUnit_Framework_TestCase
         $deleted = true;
         $item = (new Item())->setDeleted($deleted);
         $this->assertEquals($deleted, $item->isDeleted());
+    }
+
+    /**
+     * Test setter and getter itemRequests
+     */
+    public function testSetGetItemRequests()
+    {
+        $arr        = [
+            'log1' => new UserItemRequest(),
+            'log2' => new UserItemRequest()
+        ];
+        $user = new User();
+        $collection = new ArrayCollection($arr);
+        $item       = ((new Item())->setCreatedBy($user)->setUserRequests($collection));
+        $this->assertEquals($collection, $item->getUserRequests());
+    }
+
+    /**
+     * Test add and remove for userRequests
+     *
+     * @test
+     */
+    public function addRemoveActionLog()
+    {
+        $item = new Item();
+        $user = new User();
+        $this->assertEquals(0, $item->getUserRequests()->count());
+        $item->setCreatedBy($user)->addUserRequest(new UserItemRequest());
+        $this->assertEquals(1, $item->getUserRequests()->count());
+        $userRequest = $item->getUserRequests()->first();
+        $item->removeUserRequest($userRequest);
+        $this->assertEquals(0, $item->getUserRequests()->count());
     }
 }

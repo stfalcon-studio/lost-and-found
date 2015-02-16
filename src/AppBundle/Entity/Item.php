@@ -6,6 +6,8 @@ use AppBundle\DBAL\Types\ItemAreaTypeType;
 use AppBundle\DBAL\Types\ItemStatusType;
 use AppBundle\Model\UserManageableInterface;
 use AppBundle\Validator\Constraints as AppAssert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -158,6 +160,14 @@ class Item implements UserManageableInterface
     private $date;
 
     /**
+     * @var Collection|UserItemRequest[] $userRequests userRequest
+     *
+     * @ORM\OneToMany(targetEntity="UserItemRequest", mappedBy="item", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(onDelete="CASCADE")
+     */
+    private $userRequests;
+
+    /**
      * @var User $createdBy Created by
      *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="items")
@@ -208,6 +218,13 @@ class Item implements UserManageableInterface
      */
     private $deletedAt;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->userRequests = new ArrayCollection();
+    }
     /**
      * To string
      *
@@ -654,4 +671,60 @@ class Item implements UserManageableInterface
 
         return $this;
     }
+
+    /**
+     * Get userRequest
+     *
+     * @return UserItemRequest[]|Collection UserItemRequest
+     */
+    public function getUserRequests()
+    {
+        return $this->userRequests;
+    }
+
+    /**
+     * Set userRequests
+     *
+     * @param UserItemRequest[]|Collection $userRequests
+     *
+     * @return $this
+     */
+    public function setUserRequests(Collection $userRequests)
+    {
+        foreach ($userRequests as $userRequest) {
+            $userRequest->setItem($this);
+        }
+        $this->userRequests = $userRequests;
+
+        return $this;
+    }
+
+    /**
+     * Add userRequest
+     *
+     * @param UserItemRequest $userRequest
+     *
+     * @return $this
+     */
+    public function addUserRequest(UserItemRequest $userRequest)
+    {
+        $this->userRequests->add($userRequest->setItem($this));
+
+        return $this;
+    }
+
+    /**
+     * Remove userRequest
+     *
+     * @param UserItemRequest $userRequest
+     *
+     * @return $this
+     */
+    public function removeUserRequest(UserItemRequest $userRequest)
+    {
+        $this->userRequests->removeElement($userRequest);
+
+        return $this;
+    }
+
 }
