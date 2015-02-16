@@ -207,9 +207,7 @@ class UserController extends Controller
     {
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
 
-        $item = $itemRepository->find([
-            'id' => $id
-        ]);
+        $item = $itemRepository->find($id);
 
         $requests = $itemRepository->getUserRequests($id);
 
