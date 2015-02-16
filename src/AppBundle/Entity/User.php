@@ -48,6 +48,14 @@ class User extends BaseUser
     private $actionLogs;
 
     /**
+     * @var Collection|UserItemRequest[] $itemRequests itemRequest
+     *
+     * @ORM\OneToMany(targetEntity="UserItemRequest", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(onDelete="CASCADE")
+     */
+    private $itemRequests;
+
+    /**
      * @var string $fullName Full name
      *
      * @ORM\Column(name="full_name", type="string", length=255, nullable=false)
@@ -77,6 +85,7 @@ class User extends BaseUser
 
         $this->items = new ArrayCollection();
         $this->actionLogs = new ArrayCollection();
+        $this->itemRequests = new ArrayCollection();
     }
 
     /**
@@ -278,6 +287,61 @@ class User extends BaseUser
     public function setFacebookAccessToken($facebookAccessToken)
     {
         $this->facebookAccessToken = $facebookAccessToken;
+
+        return $this;
+    }
+
+    /**
+     * Get itemRequests
+     *
+     * @return UserItemRequest[]|Collection UserItemRequest
+     */
+    public function getItemRequests()
+    {
+        return $this->itemRequests;
+    }
+
+    /**
+     * Set itemRequests
+     *
+     * @param UserItemRequest[]|Collection $itemRequests
+     *
+     * @return $this
+     */
+    public function setUserRequests(Collection $itemRequests)
+    {
+        foreach ($itemRequests as $itemRequest) {
+            $itemRequest->setUser($this);
+        }
+        $this->itemRequests = $itemRequests;
+
+        return $this;
+    }
+
+    /**
+     * Add itemRequest
+     *
+     * @param UserItemRequest $itemRequest
+     *
+     * @return $this
+     */
+    public function addUserRequest(UserItemRequest $itemRequest)
+    {
+        $this->itemRequests->add($itemRequest->setUser($this));
+
+        return $this;
+    }
+
+    /**
+     * Remove itemRequest
+     *
+     * @param UserItemRequest $itemRequest
+     *
+     * @return $this
+     */
+    public function removeUserRequest(UserItemRequest $itemRequest)
+    {
+        $this->itemRequests->removeElement($itemRequest);
 
         return $this;
     }
