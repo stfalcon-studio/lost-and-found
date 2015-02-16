@@ -12,6 +12,9 @@
                     <td>
                         <a href="{{ path('item_deactivate', {'id': item.id}) }}">Deactivate</a>
                     </td>
+                    <td>
+                        <a href="{{ path('user_item_requests', {'id':item.id}) }}">Requests</a>
+                    </td>
                 </tr>
             {% endfor %}
             <b></b>

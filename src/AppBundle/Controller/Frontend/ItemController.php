@@ -331,9 +331,7 @@ class ItemController extends Controller
     {
         $item = $this->getDoctrine()
             ->getRepository('AppBundle:Item')
-            ->findOneBy([
-                'id' => $id,
-            ]);
+            ->find($id);
 
         $user = $item->getCreatedBy();
 
