@@ -111,6 +111,9 @@ class Category
      * @var Category $parent Parent category
      *
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="children")
+     * @ORM\JoinColumns({
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE")
+     * })
      * @ORM\JoinColumn(referencedColumnName="id", onDelete="CASCADE")
      *
      * @Gedmo\TreeParent

@@ -44,6 +44,7 @@ twig:
     form_themes:
         - '/backend/item/area_map.html.twig'
 
+
 # Swiftmailer Configuration
 swiftmailer:
     transport: "%mailer_transport%"

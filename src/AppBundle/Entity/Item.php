@@ -168,6 +168,17 @@ class Item implements UserManageableInterface
     private $userRequests;
 
     /**
+     * @var Collection|ItemPhoto[] $photos
+     *
+     * @Gedmo\TreePathSource
+     *
+     * @ORM\OneToMany(targetEntity="ItemPhoto", mappedBy="item", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\JoinColumn(onDelete="CASCADE")
+     */
+
+    private $photos;
+
+    /**
      * @var User $createdBy Created by
      *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="items")
@@ -224,6 +235,7 @@ class Item implements UserManageableInterface
     public function __construct()
     {
         $this->userRequests = new ArrayCollection();
+        $this->photos = new ArrayCollection();
     }
     /**
      * To string
@@ -668,6 +680,61 @@ class Item implements UserManageableInterface
            $this->setDeletedAt(new \DateTime());
         }
         $this->deleted = $delete;
+
+        return $this;
+    }
+
+    /**
+     * Get items
+     *
+     * @return ItemPhoto[]|Collection ItemPhotos
+     */
+    public function getPhotos()
+    {
+        return $this->photos;
+    }
+
+    /**
+     * Set items
+     *
+     * @param ItemPhoto[]|Collection $itemPhotos ItemPhotos
+     *
+     * @return $this
+     */
+    public function setPhotos(Collection $itemPhotos)
+    {
+        foreach ($itemPhotos as $photo) {
+            $photo->setItem($this);
+        }
+        $this->photos = $itemPhotos;
+
+        return $this;
+    }
+
+    /**
+     * Add photo
+     *
+     * @param ItemPhoto $itemPhoto
+     *
+     * @return $this
+     */
+    public function addPhoto(ItemPhoto $itemPhoto)
+    {
+        $this->photos->add($itemPhoto->setItem($this));
+
+        return $this;
+    }
+
+    /**
+     * Remove photo
+     *
+     * @param ItemPhoto $itemPhoto
+     *
+     * @return $this
+     */
+    public function removePhoto(ItemPhoto $itemPhoto)
+    {
+        $this->photos->removeElement($itemPhoto);
 
         return $this;
     }

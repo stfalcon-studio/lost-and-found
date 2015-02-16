@@ -66,6 +66,11 @@ class LostItemType extends AbstractType
             ->add('date', 'date', [
                 'widget' => 'single_text'
             ])
+            ->add('photos', 'collection', [
+                'type' => new ItemPhotoType(),
+                'allow_add'    => true,
+                'by_reference' => false,
+            ])
             ->add('save', 'submit', [
                 'label' => 'Create',
                 'attr'  => [

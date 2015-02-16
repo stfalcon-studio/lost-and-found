@@ -3,22 +3,21 @@
 
 namespace AppBundle\Tests\Entity;
 
-use AppBundle\Entity\UserItemRequest;
+use AppBundle\Entity\ItemRequest;
 use AppBundle\Entity\User;
 use AppBundle\Entity\Item;
 
 /**
- * Class UserItemRequestTest
- *
+ * UserActionLog Entity Test
  */
-class UserItemRequestTest extends \PHPUnit_Framework_TestCase
+class ItemRequestTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Test empty UserItemRequest
      */
     public function testEmptyUserItemRequest()
     {
-        $userItemRequest = new UserItemRequest();
+        $userItemRequest = new ItemRequest();
         $this->assertNull($userItemRequest->getId());
         $this->assertNull($userItemRequest->getUser());
         $this->assertNull($userItemRequest->getCreatedAt());
@@ -31,7 +30,7 @@ class UserItemRequestTest extends \PHPUnit_Framework_TestCase
     public function testSetGetUser()
     {
         $user = new User();
-        $userItemRequest = ((new UserItemRequest())->setUser($user));
+        $userItemRequest = ((new ItemRequest())->setUser($user));
         $this->assertEquals($user, $userItemRequest->getUser());
     }
 
@@ -41,7 +40,7 @@ class UserItemRequestTest extends \PHPUnit_Framework_TestCase
     public function testSetGetItem()
     {
         $item = new Item();
-        $userItemRequest = ((new UserItemRequest())->setItem($item));
+        $userItemRequest = ((new ItemRequest())->setItem($item));
         $this->assertEquals($item, $userItemRequest->getItem());
     }
 
@@ -51,7 +50,7 @@ class UserItemRequestTest extends \PHPUnit_Framework_TestCase
     public function testSetGetCreatedAt()
     {
         $date = new \DateTime('now');
-        $userItemRequest = ((new UserItemRequest())->setCreatedAt($date));
+        $userItemRequest = ((new ItemRequest())->setCreatedAt($date));
         $this->assertEquals($date, $userItemRequest->getCreatedAt());
     }
 }
