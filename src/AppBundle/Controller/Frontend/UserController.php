@@ -207,7 +207,7 @@ class UserController extends Controller
     {
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
 
-        $item = $itemRepository->findOneBy([
+        $item = $itemRepository->find([
             'id' => $id
         ]);
 
