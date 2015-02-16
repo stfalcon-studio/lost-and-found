@@ -8,8 +8,6 @@ use AppBundle\Entity\UserActionLog;
 use AppBundle\DBAL\Types\UserActionType;
 use Doctrine\ORM\EntityManager;
 
-
-
 /**
  * FacebookUserConnectedListener
  *

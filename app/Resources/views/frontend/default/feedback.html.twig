@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% set title = 'Feedback' %}
+
+{% block title %}{{ title }} | {{ parent() }}{% endblock title %}
+
+{% block content %}
+    <div>
+        {#{{ form_start(form) }}#}
+        {#{{ form_errors(form) }}#}
+        {#{{ form_end(form) }}#}
+        {{ form(form) }}
+    </div>
+{% endblock content %}
