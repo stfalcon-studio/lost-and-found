@@ -22,7 +22,6 @@ class UserItemRequestTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($userItemRequest->getId());
         $this->assertNull($userItemRequest->getUser());
         $this->assertNull($userItemRequest->getCreatedAt());
-        $this->assertNull($userItemRequest->getUpdatedAt());
         $this->assertNull($userItemRequest->getItem());
     }
 
@@ -54,15 +53,5 @@ class UserItemRequestTest extends \PHPUnit_Framework_TestCase
         $date = new \DateTime('now');
         $userItemRequest = ((new UserItemRequest())->setCreatedAt($date));
         $this->assertEquals($date, $userItemRequest->getCreatedAt());
-    }
-
-    /**
-     *  Test UpdatedAt getter and setter
-     */
-    public function testSetGetUpdatedAt()
-    {
-        $date = new \DateTime('now');
-        $userItemRequest = ((new UserItemRequest())->setUpdatedAt($date));
-        $this->assertEquals($date, $userItemRequest->getUpdatedAt());
     }
 }
