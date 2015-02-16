@@ -21,7 +21,7 @@ class ItemRequestAdmin extends Admin
     /**
      * {@inheritdoc}
      */
-    protected $baseRoutePattern = 'user_item_request';
+    protected $baseRoutePattern = 'item-request';
 
     /**
      * {@inheritdoc}
@@ -90,6 +90,7 @@ class ItemRequestAdmin extends Admin
      */
     protected function configureRoutes(RouteCollection $collection)
     {
+        $collection->remove('create');
         $collection->remove('show');
         $collection->remove('edit');
         $collection->remove('export');

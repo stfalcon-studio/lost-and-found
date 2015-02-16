@@ -3,10 +3,9 @@
 namespace AppBundle\Tests\Entity;
 
 use AppBundle\Entity\Faq;
-use Symfony\Component\Validator\Constraints\File;
 
 /**
- * Test for FAQ Entity
+ * FAQ Entity Test
  */
 class FAQTest extends \PHPUnit_Framework_TestCase
 {

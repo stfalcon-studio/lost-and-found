@@ -8,7 +8,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Class ItemPhotoType
- *
  */
 class ItemPhotoType extends AbstractType
 {
@@ -24,17 +23,17 @@ class ItemPhotoType extends AbstractType
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * {@inheritdoc}
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'AppBundle\Entity\ItemPhoto',
+            'data_class' => 'AppBundle\Entity\ItemPhoto'
         ]);
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getName()
     {

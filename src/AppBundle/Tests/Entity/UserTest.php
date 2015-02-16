@@ -7,16 +7,14 @@ use AppBundle\Entity\UserActionLog;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Class UserTest
- *
- * @author Prohorovych Andrew <prohorovychua@gmail.com>
+ * User Entity Test
  */
 class UserTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @test
+     * Test an empty User entity
      */
-    public function emptyUser()
+    public function testEmptyUser()
     {
         $user = new User();
         $this->assertEquals('New User', $user->__toString());
@@ -29,10 +27,8 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test setter and getter for Full Name
-     *
-     * @test
      */
-    public function setGetFullName()
+    public function testSetGetFullName()
     {
         $fullName = 'Some Name';
         $user     = (new User())->setFullName($fullName);
@@ -41,10 +37,8 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test setter and getter for Item
-     *
-     * @test
      */
-    public function setGetItem()
+    public function testSetGetItem()
     {
         $items = new ArrayCollection();
         $items->add(new Item());
@@ -55,10 +49,8 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test setter and getter for facebook id
-     *
-     * @test
      */
-    public function setGetFacebookId()
+    public function testSetGetFacebookId()
     {
         $faceId = '123321';
         $user   = (new User())->setFacebookId($faceId);
@@ -67,10 +59,8 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test setter and getter for facebook access token
-     *
-     * @test
      */
-    public function setGetFacebookAccessToken()
+    public function testSetGetFacebookAccessToken()
     {
         $faceAccessToken = '123321';
         $user            = (new User())->setFacebookAccessToken($faceAccessToken);
@@ -79,10 +69,8 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test add and remove for item
-     *
-     * @test
      */
-    public function addRemoveItem()
+    public function testAddRemoveItem()
     {
         $user = new User();
         $this->assertEquals(0, $user->getItems()->count());
@@ -95,8 +83,6 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test Action log getter and setter
-     *
-     * @test
      */
     public function testSetGetActionLog()
     {
@@ -111,10 +97,8 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test add and remove for actionLog
-     *
-     * @test
      */
-    public function addRemoveActionLog()
+    public function testAddRemoveActionLog()
     {
         $user = new User();
         $this->assertEquals(0, $user->getActionLogs()->count());

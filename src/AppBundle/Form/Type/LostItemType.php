@@ -49,7 +49,7 @@ class LostItemType extends AbstractType
                     $qb = $er->createQueryBuilder('c');
 
                     return $qb->where($qb->expr()->eq('c.enabled', true));
-                },
+                }
             ])
             ->add('title', 'text')
             ->add('type', 'hidden', [
@@ -67,9 +67,9 @@ class LostItemType extends AbstractType
                 'widget' => 'single_text'
             ])
             ->add('photos', 'collection', [
-                'type' => new ItemPhotoType(),
+                'type'         => 'photo',
                 'allow_add'    => true,
-                'by_reference' => false,
+                'by_reference' => false
             ])
             ->add('save', 'submit', [
                 'label' => 'Create',
@@ -79,6 +79,7 @@ class LostItemType extends AbstractType
             ]);
 
         $tokenStorage = $this->tokenStorage;
+
         $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) use ($tokenStorage) {
             $item = $event->getData();
             $this->eventDispatcher->dispatch(FormEvents::SUBMIT, new AddUserEditEvent($tokenStorage, $item));

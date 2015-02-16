@@ -70,7 +70,7 @@ class Category
     private $enabled = false;
 
     /**
-     * @var File $imageFile
+     * @var File $imageFile Image file
      *
      * @Vich\UploadableField(mapping="category_image", fileNameProperty="imageName")
      */
@@ -111,9 +111,6 @@ class Category
      * @var Category $parent Parent category
      *
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="children")
-     * @ORM\JoinColumns({
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE")
-     * })
      * @ORM\JoinColumn(referencedColumnName="id", onDelete="CASCADE")
      *
      * @Gedmo\TreeParent
@@ -287,6 +284,7 @@ class Category
     public function setImageFile($imageFile)
     {
         $this->imageFile = $imageFile;
+
         if ($imageFile) {
             $this->updatedAt = new \DateTime('now');
         }

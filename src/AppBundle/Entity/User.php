@@ -48,9 +48,9 @@ class User extends BaseUser
     private $actionLogs;
 
     /**
-     * @var Collection|UserItemRequest[] $itemRequests itemRequest
+     * @var Collection|ItemRequest[] $itemRequests Item request
      *
-     * @ORM\OneToMany(targetEntity="UserItemRequest", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="ItemRequest", mappedBy="user", cascade={"persist", "remove"})
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $itemRequests;
@@ -325,7 +325,7 @@ class User extends BaseUser
      *
      * @return $this
      */
-    public function addUserRequest(UserItemRequest $itemRequest)
+    public function addUserRequest(ItemRequest $itemRequest)
     {
         $this->itemRequests->add($itemRequest->setUser($this));
 
@@ -339,7 +339,7 @@ class User extends BaseUser
      *
      * @return $this
      */
-    public function removeUserRequest(UserItemRequest $itemRequest)
+    public function removeUserRequest(ItemRequest $itemRequest)
     {
         $this->itemRequests->removeElement($itemRequest);
 

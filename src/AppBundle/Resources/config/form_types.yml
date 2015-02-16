@@ -1,4 +1,9 @@
 services:
+    app.form.type.photo:
+        class: AppBundle\Form\Type\ItemPhotoType
+        tags:
+            - { name: form.type, alias: photo }
+
     app.form.type.found_item:
         class: AppBundle\Form\Type\FoundItemType
         tags:

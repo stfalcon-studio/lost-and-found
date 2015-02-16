@@ -4,8 +4,6 @@ namespace AppBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * FeedbackType
@@ -30,7 +28,7 @@ class FeedbackType extends AbstractType
             ->add('save', 'submit', [
                 'label' => 'Send',
                 'attr'  => [
-                    'class' => 'btn-success',
+                    'class' => 'btn-success'
                 ],
             ]);
     }

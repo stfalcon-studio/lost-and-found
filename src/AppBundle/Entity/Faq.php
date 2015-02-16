@@ -77,7 +77,9 @@ class Faq
     }
 
     /**
-     * @return int
+     * Get ID
+     *
+     * @return int ID
      */
     public function getId()
     {

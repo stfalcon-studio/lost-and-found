@@ -3,82 +3,63 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Uploadable\Fixture\Entity\File;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
- * Class ItemPhoto
+ * ItemPhoto Entity
+ *
  * @ORM\Entity
  * @ORM\Table(name="item_photos")
  *
  * @Vich\Uploadable
  */
-
 class ItemPhoto
 {
+    use TimestampableEntity;
+
     /**
+     * @var int $id ID
+     *
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @var integer $id
      */
     private $id;
 
     /**
-     * @var File $imageFile
+     * @var Item $item Item
      *
-     * @Vich\UploadableField(mapping="item_photos", fileNameProperty="fileName")
+     * @ORM\ManyToOne(targetEntity="Item", inversedBy="photos")
+     *
+     * @ORM\JoinColumn(name="item", referencedColumnName="id")
+     */
+    private $item;
+
+    /**
+     * @var File $imageFile Image file
+     *
+     * @Vich\UploadableField(mapping="item_photos", fileNameProperty="imageName")
      */
     private $imageFile;
 
     /**
-     * @var string $imageName
+     * @var string $imageName Image name
+     *
      * @ORM\Column(type="string", length=255, name="image_name", nullable=true)
      */
     private $imageName;
 
     /**
-     * @var Item $item item
+     * Get ID
      *
-     * @ORM\ManyToOne(targetEntity="Item", inversedBy="photos")
-     *
-     * @ORM\JoinColumn(name="item", referencedColumnName="id")
-     *
-     */
-    private $item;
-
-    /**
-     * Get id
-     *
-     * @return integer
+     * @return int ID
      */
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set fileName
-     *
-     * @param string $imageName
-     *
-*@return ItemPhoto
-     */
-    public function setImageName($imageName)
-    {
-        $this->imageName = $imageName;
-
-        return $this;
-    }
-
-    /**
-     * Get fileName
-     *
-     * @return string
-     */
-    public function getImageName()
-    {
-        return $this->imageName;
     }
 
     /**
@@ -94,11 +75,11 @@ class ItemPhoto
     /**
      * Set item
      *
-     * @param Item $item item
+     * @param Item $item Item
      *
      * @return $this
      */
-    public function setItem($item)
+    public function setItem(Item $item)
     {
         $this->item = $item;
 
@@ -121,6 +102,30 @@ class ItemPhoto
     public function setImageFile($imageFile)
     {
         $this->imageFile = $imageFile;
+
+        if ($imageFile) {
+            $this->updatedAt = new \DateTime('now');
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageName()
+    {
+        return $this->imageName;
+    }
+
+    /**
+     * @param string $imageName
+     *
+     * @return $this
+     */
+    public function setImageName($imageName)
+    {
+        $this->imageName = $imageName;
 
         return $this;
     }

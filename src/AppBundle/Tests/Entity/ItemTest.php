@@ -8,11 +8,11 @@ use AppBundle\DBAL\Types\ItemTypeType;
 use AppBundle\Entity\Category;
 use AppBundle\Entity\Item;
 use AppBundle\Entity\User;
-use AppBundle\Entity\UserItemRequest;
+use AppBundle\Entity\ItemRequest;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Class ItemTest
+ * Item Entity Test
  */
 class ItemTest extends \PHPUnit_Framework_TestCase
 {
@@ -250,8 +250,8 @@ class ItemTest extends \PHPUnit_Framework_TestCase
     public function testSetGetItemRequests()
     {
         $arr        = [
-            'log1' => new UserItemRequest(),
-            'log2' => new UserItemRequest()
+            'log1' => new ItemRequest(),
+            'log2' => new ItemRequest()
         ];
         $user = new User();
         $collection = new ArrayCollection($arr);
@@ -261,15 +261,13 @@ class ItemTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test add and remove for userRequests
-     *
-     * @test
      */
-    public function addRemoveActionLog()
+    public function testAddRemoveActionLog()
     {
         $item = new Item();
         $user = new User();
         $this->assertEquals(0, $item->getUserRequests()->count());
-        $item->setCreatedBy($user)->addUserRequest(new UserItemRequest());
+        $item->setCreatedBy($user)->addUserRequest(new ItemRequest());
         $this->assertEquals(1, $item->getUserRequests()->count());
         $userRequest = $item->getUserRequests()->first();
         $item->removeUserRequest($userRequest);

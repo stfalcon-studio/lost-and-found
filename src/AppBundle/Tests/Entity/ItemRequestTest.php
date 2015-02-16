@@ -25,7 +25,7 @@ class ItemRequestTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     *  Test User getter and setter
+     * Test User getter and setter
      */
     public function testSetGetUser()
     {
@@ -35,7 +35,7 @@ class ItemRequestTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     *  Test Item getter and setter
+     * Test Item getter and setter
      */
     public function testSetGetItem()
     {
@@ -45,7 +45,7 @@ class ItemRequestTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     *  Test CreatedAt getter and setter
+     * Test CreatedAt getter and setter
      */
     public function testSetGetCreatedAt()
     {
