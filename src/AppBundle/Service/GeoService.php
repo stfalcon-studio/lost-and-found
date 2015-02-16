@@ -42,19 +42,72 @@ class GeoService
         $numbersFound = [];
 
         for ($i = 0; $i < count($foundItems); $i++) {
-            for ($j = 0; $j < count($lostItems); $j++) {
-                if ($foundItems[$i]['categoryId'] == $lostItems[$j]['categoryId']) {
-                    if ($this->calculateDistanceBetweenMarkers(
-                        $foundItems[$i]['latitude'],
-                        $foundItems[$i]['longitude'],
-                        $lostItems[$j]['latitude'],
-                        $lostItems[$j]['longitude']
-                    ) < 1
-                    ) {
-                        $numbersFound[$j] = $lostItems[$j]['id'];;
+            switch ($foundItems[$i]['areaType']) {
+                case 'polygon':
+                case 'rectangle':
+                    $area = json_decode($foundItems[$i]['area'], true);
+
+                    $latitudeArray = [];
+                    $longitudeArray = [];
+
+                    for ($j = 0; $j < count($area); $j++) {
+                        $latitudeArray[$j] = $area[$j]['latitude'];
+                        $longitudeArray[$j] = $area[$j]['longitude'];
                     }
-                }
+
+                    for ($j = 0; $j < count($lostItems); $j++) {
+                        if ($foundItems[$i]['categoryId'] == $lostItems[$j]['categoryId']) {
+                            if (
+                            $this->isInPolygon(
+                                count($area),
+                                $latitudeArray,
+                                $longitudeArray,
+                                $lostItems[$j]['latitude'],
+                                $lostItems[$j]['longitude']
+                            )
+                            ) {
+                                $numbersFound[count($numbersFound)] = $lostItems[$j]['id'];
+                            }
+                        }
+                    }
+                    break;
+                case 'circle':
+                    $area = json_decode($foundItems[$i]['area'], true);
+                    $area = $area[0];
+
+                    for ($j = 0; $j < count($lostItems); $j++) {
+                        if ($foundItems[$i]['categoryId'] == $lostItems[$j]['categoryId']) {
+                            if (
+                                $this->calculateDistanceBetweenMarkers(
+                                    $area['latlng']['lat'],
+                                    $area['latlng']['lng'],
+                                    $lostItems[$j]['latitude'],
+                                    $lostItems[$j]['longitude']
+                                ) < $area['radius']
+                            ) {
+                                $numbersFound[count($numbersFound)] = $lostItems[$j]['id'];
+                            }
+                        }
+                    }
+                    break;
+                case 'marker':
+                    for ($j = 0; $j < count($lostItems); $j++) {
+                        if ($foundItems[$i]['categoryId'] == $lostItems[$j]['categoryId']) {
+                            if (
+                                $this->calculateDistanceBetweenMarkers(
+                                    $foundItems[$i]['latitude'],
+                                    $foundItems[$i]['longitude'],
+                                    $lostItems[$j]['latitude'],
+                                    $lostItems[$j]['longitude']
+                                ) < 1
+                            ) {
+                                $numbersFound[count($numbersFound)] = $lostItems[$j]['id'];
+                            }
+                        }
+                    }
+                    break;
             }
+
             $foundMatches[$i] = $numbersFound;
             $numbersFound = [];
         }
@@ -78,24 +131,116 @@ class GeoService
         $numbersLost = [];
 
         for ($i = 0; $i < count($lostItems); $i++) {
-            for ($j = 0; $j < count($foundItems); $j++) {
-                if ($lostItems[$i]['categoryId'] == $foundItems[$j]['categoryId']) {
-                    if ($this->calculateDistanceBetweenMarkers(
-                        $lostItems[$i]['latitude'],
-                        $lostItems[$i]['longitude'],
-                        $foundItems[$j]['latitude'],
-                        $foundItems[$j]['longitude']
-                    ) < 1
-                    ) {
-                        $numbersLost[$j] = $foundItems[$j]['id'];
+            switch ($lostItems[$i]['areaType']) {
+                case 'polygon':
+                case 'rectangle':
+                    $area = json_decode($lostItems[$i]['area'], true);
+
+                    $latitudeArray = [];
+                    $longitudeArray = [];
+
+                    for ($j = 0; $j < count($area); $j++) {
+                        $latitudeArray[$j] = $area[$j]['latitude'];
+                        $longitudeArray[$j] = $area[$j]['longitude'];
                     }
-                }
+
+                    for ($j = 0; $j < count($foundItems); $j++) {
+                        if ($lostItems[$i]['categoryId'] == $foundItems[$j]['categoryId']) {
+                            if (
+                                $this->isInPolygon(
+                                    count($area),
+                                    $latitudeArray,
+                                    $longitudeArray,
+                                    $foundItems[$j]['latitude'],
+                                    $foundItems[$j]['longitude']
+                                )
+                            ) {
+                                $numbersLost[count($numbersLost)] = $foundItems[$j]['id'];
+                            }
+                        }
+                    }
+                    break;
+                case 'circle':
+                    $area = json_decode($lostItems[$i]['area'], true);
+                    $area = $area[0];
+
+                    for ($j = 0; $j < count($foundItems); $j++) {
+                        if ($lostItems[$i]['categoryId'] == $foundItems[$j]['categoryId']) {
+                            if (
+                                $this->calculateDistanceBetweenMarkers(
+                                    $area['latlng']['lat'],
+                                    $area['latlng']['lng'],
+                                    $foundItems[$j]['latitude'],
+                                    $foundItems[$j]['longitude']
+                                ) < $area['radius']
+                            ) {
+                                $numbersLost[count($numbersLost)] = $foundItems[$j]['id'];
+                            }
+                        }
+                    }
+                    break;
+                case 'marker':
+                    for ($j = 0; $j < count($foundItems); $j++) {
+                        if ($lostItems[$i]['categoryId'] == $foundItems[$j]['categoryId']) {
+                            if (
+                                $this->calculateDistanceBetweenMarkers(
+                                    $lostItems[$i]['latitude'],
+                                    $lostItems[$i]['longitude'],
+                                    $foundItems[$j]['latitude'],
+                                    $foundItems[$j]['longitude']
+                                ) < 1
+                            ) {
+                                $numbersLost[count($numbersLost)] = $foundItems[$j]['id'];
+                            }
+                        }
+                    }
+                    break;
             }
             $lostMatches[$i] = $numbersLost;
             $numbersLost = [];
         }
 
         return $lostMatches;
+    }
+
+    /**
+     * PNPOLY algorithm - Point Inclusion in Polygon Test.
+     * W. Randolph Franklin (WRF)
+     *
+     * @param int   $countTop
+     * @param array $latitudeArray
+     * @param array $longitudeArray
+     * @param float $latitudeMarker
+     * @param float $longitudeMarker
+     *
+     * @return bool
+     */
+    private function isInPolygon($countTop, $latitudeArray, $longitudeArray, $latitudeMarker, $longitudeMarker)
+    {
+        $c = false;
+        for ($i = 0, $j = $countTop - 1; $i < $countTop; $j = $i++) {
+            if (
+                (
+                    (
+                        $longitudeArray[$i] > $longitudeMarker
+                    ) != (
+                        $longitudeArray[$j] > $longitudeMarker
+                    )
+                ) && (
+                    $latitudeMarker < (
+                        $latitudeArray[$j] - $latitudeArray[$i]
+                    ) * (
+                        $longitudeMarker - $longitudeArray[$i]
+                    ) / (
+                        $longitudeArray[$j] - $longitudeArray[$i]
+                    ) + $latitudeArray[$i]
+                )
+            ) {
+                $c = !$c;
+            }
+        }
+
+        return $c;
     }
 
     /**

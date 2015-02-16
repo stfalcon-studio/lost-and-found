@@ -19,11 +19,7 @@ class GeoCommand extends ContainerAwareCommand
     {
         $this
             ->setName('items:compare')
-            ->setDescription('Greet someone')
-            ->addArgument('latitude-first')
-            ->addArgument('longitude-first')
-            ->addArgument('latitude-second')
-            ->addArgument('longitude-second');
+            ->setDescription('Compare lost and found list of items.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
