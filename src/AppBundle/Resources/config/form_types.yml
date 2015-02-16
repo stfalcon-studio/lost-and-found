@@ -23,9 +23,14 @@ services:
             - @security.token_storage
 
     app.form.type.item_edit:
-            class: AppBundle\Form\Type\EditItemType
-            tags:
-                - { name: form.type, alias: item_edit }
-            arguments:
-                - @security.token_storage
-                - @event_dispatcher
+        class: AppBundle\Form\Type\EditItemType
+        tags:
+            - { name: form.type, alias: item_edit }
+        arguments:
+            - @security.token_storage
+            - @event_dispatcher
+
+    app.form.type.feedback:
+        class: AppBundle\Form\Type\FeedbackType
+        tags:
+            - { name: form.type, alias: feedback }

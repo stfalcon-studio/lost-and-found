@@ -4,7 +4,6 @@ namespace AppBundle\Form\Type;
 
 use AppBundle\DBAL\Types\ItemTypeType;
 use AppBundle\Event\AddUserEditEvent;
-use AppBundle\Model\UserManageableInterface;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;

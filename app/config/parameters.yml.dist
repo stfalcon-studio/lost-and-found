@@ -23,3 +23,7 @@ parameters:
 
     facebook_oauth_client_id:     FacebookClientId
     facebook_oauth_client_secret: FacebookClientSecret
+
+    admin_emails:
+        - 'genvaldartem@gmail.com' # Artem Genvald
+        - 'Logansoleg@gmail.com'   # Oleg Kachinsky
