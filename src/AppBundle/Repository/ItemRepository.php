@@ -415,7 +415,8 @@ class ItemRepository extends EntityRepository
         $qb
             ->select('i.title')
             ->addSelect('ir.createdAt as createdAt')
-            ->addSelect('us.fullName as user')
+            ->addSelect('us.fullName as userName')
+            ->addSelect('us.facebookId')
             ->innerJoin('i.userRequests', 'ir')
             ->innerJoin('ir.user', 'us')
             ->where($qb->expr()->eq('i.id', ':id'))

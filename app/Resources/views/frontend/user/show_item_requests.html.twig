@@ -14,7 +14,7 @@
             {% for request in requests %}
                 <tr>
                     <td>
-                        {{ request.user }}
+                        <a href="https://www.facebook.com/"+{{ request.facebookId }} target="_blank">{{ request.userName }}</a>
                     </td>
                     <td>
                         {{ request.createdAt|date('d.m.Y H:i:s') }}
