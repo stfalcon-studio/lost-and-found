@@ -3,6 +3,8 @@
 namespace AppBundle\Form\Type;
 
 use AppBundle\DBAL\Types\ItemTypeType;
+use AppBundle\Event\AddUserEditEvent;
+use AppBundle\Event\AppEvents;
 use AppBundle\Model\UserManageableInterface;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -10,6 +12,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Class FoundItemType
@@ -26,10 +29,12 @@ class FoundItemType extends AbstractType
     /**
      * Constructor
      *
-     * @param TokenStorageInterface $tokenStorage
+     * @param TokenStorageInterface    $tokenStorage
+     * @param EventDispatcherInterface $eventDispatcher
      */
-    public function __construct(TokenStorageInterface $tokenStorage)
+    public function __construct(TokenStorageInterface $tokenStorage, EventDispatcherInterface $eventDispatcher)
     {
+        $this->eventDispatcher = $eventDispatcher;
         $this->tokenStorage = $tokenStorage;
     }
 
@@ -68,17 +73,10 @@ class FoundItemType extends AbstractType
                     'class' => 'btn-success'
                 ]
             ]);
-
         $tokenStorage = $this->tokenStorage;
-
         $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) use ($tokenStorage) {
             $item = $event->getData();
-
-            if ($item instanceof UserManageableInterface) {
-                $user = $tokenStorage->getToken()->getUser();
-
-                $item->setCreatedBy($user);
-            }
+            $this->eventDispatcher->dispatch(FormEvents::SUBMIT, new AddUserEditEvent($tokenStorage, $item));
         });
     }
 
