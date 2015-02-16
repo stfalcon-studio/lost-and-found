@@ -5,6 +5,7 @@ namespace AppBundle\Controller\Frontend;
 use AppBundle\DBAL\Types\ItemTypeType;
 use AppBundle\Entity\Item;
 use AppBundle\Event\AppEvents;
+use AppBundle\Entity\UserItemRequest;
 use AppBundle\Event\NewItemAddedEvent;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -151,7 +152,7 @@ class ItemController extends Controller
         }
 
         return $this->render('frontend/item/show_item_details.html.twig', [
-            'item' => $item
+            'item' => $item,
         ]);
     }
 
@@ -317,5 +318,31 @@ class ItemController extends Controller
             'items' => $items,
             'count' => $count,
         ]);
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return Response
+     *
+     * @Route("item/{id}/getUserFacebook", name="item_user_get_facebook")
+     */
+    public function getUserFacebook($id)
+    {
+        $item = $this->getDoctrine()
+            ->getRepository('AppBundle:Item')
+            ->find($id);
+
+        $user = $item->getCreatedBy();
+
+        $userItemRequest = new UserItemRequest();
+        $userItemRequest->setItem($item)
+            ->setUser($this->getUser());
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($userItemRequest);
+        $em->flush();
+
+        return new JsonResponse($user->getFacebookId());
     }
 }

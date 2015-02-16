@@ -60,4 +60,22 @@ $(document).ready(function() {
     }
 
     var figureLayer = L.layerGroup().addLayer(layer).addTo(map);
+
+
 });
+
+
+$('#contact-with-author').on('click', function(e) {
+    e.preventDefault();
+    $.ajax({
+        url: 'http://lost-and-found.work/app_dev.php/item/' + $('#itemId').data('item-id') + '/getUserFacebook',
+        type: 'get',
+        dataType: 'JSON',
+        success: function (data) {
+            $('#contact-with-author').hide();
+            document.getElementById('facebook-profile').href = 'https://www.facebook.com/' + data;
+            $("#facebook-profile").toggle();
+        }
+    });
+});
+

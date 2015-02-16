@@ -43,6 +43,12 @@
             </div>
         </div>
 
+        <div>
+            <a id="contact-with-author" href="" class="btn btn-success" title="Contact with author">
+               Contact with author
+            </a>
+        </div>
+
         {#<blockquote>#}
             {#<p>{{ item.description }}</p>#}
         {#</blockquote>#}
@@ -51,7 +57,12 @@
         <div id="longitude" data-longitude="{{ item.longitude }}"></div>
         <div id="area" data-area="{{ item.area|json_encode }}"></div>
         <div id="areaType" data-area-type="{{ item.areaType }}"></div>
+        <div id="itemId" data-item-id="{{ item.id }}"></div>
+        <a id="facebook-profile" href="" class="btn btn-primary" style="display:none;" target="_blank">
+            Author Facebook profile</a>
 
         <div id="map" style="width: auto; height: 800px"></div>
+
+
     </article>
 {% endblock content %}

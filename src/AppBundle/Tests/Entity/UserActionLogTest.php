@@ -24,7 +24,6 @@ class UserActionLogTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($userActionLog->getActionType());
         $this->assertNull($userActionLog->getUser());
         $this->assertNull($userActionLog->getCreatedAt());
-        $this->assertNull($userActionLog->getUpdatedAt());
     }
 
     /**
@@ -57,13 +56,4 @@ class UserActionLogTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($date, $userActionLog->getCreatedAt());
     }
 
-    /**
-     *  Test UpdatedAt getter and setter
-     */
-    public function testSetGetUpdatedAt()
-    {
-        $date = new \DateTime('now');
-        $userActionLog = ((new UserActionLog())->setUpdatedAt($date));
-        $this->assertEquals($date, $userActionLog->getUpdatedAt());
-    }
 }

@@ -404,4 +404,24 @@ class ItemRepository extends EntityRepository
 
         return $qb->getQuery()->getSingleScalarResult();
     }
+    /**
+     * @param int $id
+     *
+     * @return array
+     */
+    public function getUserRequests($id)
+    {
+        $qb = $this->createQueryBuilder('i');
+        $qb
+            ->select('i.title')
+            ->addSelect('ir.createdAt as createdAt')
+            ->addSelect('us.fullName as userName')
+            ->addSelect('us.facebookId')
+            ->innerJoin('i.userRequests', 'ir')
+            ->innerJoin('ir.user', 'us')
+            ->where($qb->expr()->eq('i.id', ':id'))
+            ->setParameter('id', $id);
+
+        return $qb->getQuery()->getArrayResult();
+    }
 }

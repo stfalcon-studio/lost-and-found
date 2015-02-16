@@ -200,6 +200,25 @@ class UserController extends Controller
 
     /**
      * @return Response
+     * @param int $id
+     * @Route("/item/{id}/requests", name="user_item_requests")
+     */
+    public function showItemRequests($id)
+    {
+        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+
+        $item = $itemRepository->find($id);
+
+        $requests = $itemRepository->getUserRequests($id);
+
+        return $this->render(':frontend/user:show_item_requests.html.twig', [
+            'requests' => $requests,
+            'title' => $item->getTitle(),
+        ]);
+    }
+
+    /**
+     * @return Response
      *
      * @Route("/deauthorize", name="user_deauthorize")
      */

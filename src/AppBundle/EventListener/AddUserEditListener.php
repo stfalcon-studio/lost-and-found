@@ -45,5 +45,6 @@ class AddUserEditListener
 
             $item->setCreatedBy($user);
         }
+        $item->setModerated(false);
     }
 }

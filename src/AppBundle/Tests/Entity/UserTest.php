@@ -1,9 +1,11 @@
 <?php
 namespace AppBundle\Tests\Entity;
+
 use AppBundle\Entity\User;
 use AppBundle\Entity\Item;
 use AppBundle\Entity\UserActionLog;
 use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Class UserTest
  *
