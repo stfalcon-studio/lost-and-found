@@ -54,12 +54,12 @@ $(document).ready(function () {
                 dataType: 'JSON',
                 success: function (data) {
 
-                    $('#categories').on('change', function() {
+                    $('.btn-group').on('change', function() {
                         categoriesId = [];
                         clearPage();
                         checkedCategory = false;
-                        $('#categories li input:checked').each(function(id, li) {
-                            categoriesId.push($(li).data('categoryId'));
+                        $('.btn-group input:checked').each(function(id, label) {
+                            categoriesId.push($(label).data('categoryId'));
                             clearPage();
                             for (var i = 0; i < data.length; i++) {
                                 if ((categoriesId.indexOf(data[i].categoryId)) >= 0) {
