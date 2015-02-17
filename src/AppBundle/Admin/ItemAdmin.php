@@ -148,6 +148,9 @@ class ItemAdmin extends Admin
             ->add('longitude')
             ->add('type')
             ->add('description')
+            ->add('photos', 'string', [
+                'template' => 'backend/item/photos_list.html.twig'
+            ])
             ->add('area', 'text', [
                 'template' => 'backend/item/show_map.html.twig'
             ])
