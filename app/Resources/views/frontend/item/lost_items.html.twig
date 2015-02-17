@@ -13,16 +13,14 @@
 {% block content %}
     <h1>{{ 'lost-items.header' | trans({}, 'main-page')}}</h1>
 
-    <div id="category-boxes">
-        <ul id="categories" class="list-inline">
+    <div class="btn-group" data-toggle="buttons">
             {% for category in categories %}
-                <li>
-                    <label class="category-label" for="category_{{ category.title }}">{{ category.title }}</label>
-                    <input id="category_{{ category.title }}" data-category-id="{{ category.id }}" type="checkbox" />
-                </li>
+                <label class="btn btn-primary">
+                    <input id="category_{{ category.title }}" data-category-id="{{ category.id }}" type="checkbox" autocomplete="off" />{{ category.title }}
+                </label>
             {% endfor %}
-        </ul>
     </div>
+    <br>
 
     <div class="pull-right">
         <a href="{{ path('add_lost_item') }}" class="btn btn-danger" title="Add an item you've lost">

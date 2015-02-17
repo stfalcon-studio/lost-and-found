@@ -20,4 +20,3 @@ services:
             - { name: kernel.event_listener, event: form.bind, method: onItemEdit }
         arguments:
             - @doctrine.orm.default_entity_manager
-

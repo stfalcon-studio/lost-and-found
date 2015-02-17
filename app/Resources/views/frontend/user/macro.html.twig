@@ -12,6 +12,9 @@
                     <td>
                         <a href="{{ path('item_deactivate', {'id': item.id}) }}">{{ 'profile.deactivate' | trans({}, 'main-page')}}</a>
                     </td>
+                    <td>
+                        <a href="{{ path('user_item_requests', {'id':item.id}) }}">Requests</a>
+                    </td>
                 </tr>
             {% endfor %}
             <b></b>

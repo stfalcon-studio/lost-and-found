@@ -8,19 +8,20 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 
 /**
- * Class UserItemRequestAdmin
+ * Class ItemRequestAdmin
  *
  * @author svatok13 <svatok13@gmail.com>
  */
-class UserItemRequestAdmin extends Admin
+class ItemRequestAdmin extends Admin
 {
     /**
      * {@inheritdoc}
      */
-    protected $baseRoutePattern = 'user_item_request';
+    protected $baseRoutePattern = 'item-request';
 
     /**
      * {@inheritdoc}
@@ -34,8 +35,8 @@ class UserItemRequestAdmin extends Admin
     {
         $formMapper
             ->with('user_item_request')
-            ->add('user')
-            ->add('item')
+                ->add('user')
+                ->add('item')
             ->end();
     }
 
@@ -53,8 +54,6 @@ class UserItemRequestAdmin extends Admin
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-                    'show'   => [],
-                    'edit'   => [],
                     'delete' => []
                 ]
             ]);
@@ -85,5 +84,16 @@ class UserItemRequestAdmin extends Admin
             ->add('item')
             ->add('createdAt');
     }
-}
 
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->remove('create');
+        $collection->remove('show');
+        $collection->remove('edit');
+        $collection->remove('export');
+        $collection->remove('batch');
+    }
+}

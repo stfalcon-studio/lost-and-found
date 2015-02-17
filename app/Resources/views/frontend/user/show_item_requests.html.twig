@@ -1,0 +1,26 @@
+{% extends 'frontend/user/profile.html.twig' %}
+
+{% block title %}
+    Item requests |
+    {{ parent() }}
+{% endblock title %}
+
+{% block content %}
+    <header>
+        <h1>{{ title }}</h1>
+    </header>
+    <table class="table table-bordered table-hover">
+        <tbody>
+            {% for request in requests %}
+                <tr>
+                    <td>
+                        <a href="https://www.facebook.com/"+{{ request.facebookId }} target="_blank">{{ request.userName }}</a>
+                    </td>
+                    <td>
+                        {{ request.createdAt|date('d.m.Y H:i:s') }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}

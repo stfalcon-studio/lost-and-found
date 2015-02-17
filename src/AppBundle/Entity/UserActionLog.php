@@ -4,13 +4,13 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use AppBundle\DBAL\Types\UserActionType;
 use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
-use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class LoginUserActionLog
+ * UserActionLog Entity
+ *
  * @ORM\Table(name="user_log_actions")
  * @ORM\Entity
  */
@@ -26,7 +26,7 @@ class UserActionLog
     private $id;
 
     /**
-     * @var array $actionType
+     * @var array $actionType Action type
      *
      * @DoctrineAssert\Enum(entity="AppBundle\DBAL\Types\UserActionType")
      *
@@ -46,16 +46,18 @@ class UserActionLog
     private $user;
 
     /**
-     * @var \DateTime
+     * @var \DateTime $createdAt Created at
+     *
+     * @ORM\Column(type="datetime", nullable=false)
+     *
      * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(type="datetime")
      */
-    protected $createdAt;
+    private $createdAt;
 
     /**
-     * Get id
+     * Get ID
      *
-     * @return int Id
+     * @return int ID
      */
     public function getId()
     {
@@ -63,9 +65,9 @@ class UserActionLog
     }
 
     /**
-     * Get actionType
+     * Get action type
      *
-     * @return array ActionType
+     * @return array Action type
      */
     public function getActionType()
     {
@@ -73,9 +75,9 @@ class UserActionLog
     }
 
     /**
-     * Set actionType
+     * Set action type
      *
-     * @param array $actionType actionType
+     * @param array $actionType Action type
      *
      * @return $this
      */
@@ -99,7 +101,7 @@ class UserActionLog
     /**
      * Set user
      *
-     * @param User $user user
+     * @param User $user User
      *
      * @return $this
      */
@@ -111,9 +113,20 @@ class UserActionLog
     }
 
     /**
-     * Sets createdAt.
+     * Get created at
      *
-     * @param  \DateTime $createdAt
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set created at
+     *
+     * @param \DateTime $createdAt Created at
+     *
      * @return $this
      */
     public function setCreatedAt(\DateTime $createdAt)
@@ -121,15 +134,5 @@ class UserActionLog
         $this->createdAt = $createdAt;
 
         return $this;
-    }
-
-    /**
-     * Returns createdAt.
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
     }
 }

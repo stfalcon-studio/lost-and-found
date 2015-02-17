@@ -70,7 +70,7 @@ class Category
     private $enabled = false;
 
     /**
-     * @var File $imageFile
+     * @var File $imageFile Image file
      *
      * @Vich\UploadableField(mapping="category_image", fileNameProperty="imageName")
      */
@@ -284,6 +284,7 @@ class Category
     public function setImageFile($imageFile)
     {
         $this->imageFile = $imageFile;
+
         if ($imageFile) {
             $this->updatedAt = new \DateTime('now');
         }

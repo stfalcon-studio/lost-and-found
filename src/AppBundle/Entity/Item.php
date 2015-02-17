@@ -2,7 +2,6 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\DBAL\Types\ItemAreaTypeType;
 use AppBundle\DBAL\Types\ItemStatusType;
 use AppBundle\Model\UserManageableInterface;
 use AppBundle\Validator\Constraints as AppAssert;
@@ -160,12 +159,20 @@ class Item implements UserManageableInterface
     private $date;
 
     /**
-     * @var Collection|UserItemRequest[] $userRequests userRequest
+     * @var Collection|ItemRequest[] $userRequests userRequest
      *
-     * @ORM\OneToMany(targetEntity="UserItemRequest", mappedBy="item", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="ItemRequest", mappedBy="item", cascade={"persist", "remove"})
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $userRequests;
+
+    /**
+     * @var Collection|ItemPhoto[] $photos Photos
+     *
+     * @ORM\OneToMany(targetEntity="ItemPhoto", mappedBy="item", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\JoinColumn(onDelete="CASCADE")
+     */
+    private $photos;
 
     /**
      * @var User $createdBy Created by
@@ -214,7 +221,7 @@ class Item implements UserManageableInterface
     /**
      * @var \DateTime $deletedAt Deleted at
      *
-     * @ORM\Column(type = "datetime", nullable=true)
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $deletedAt;
 
@@ -224,6 +231,7 @@ class Item implements UserManageableInterface
     public function __construct()
     {
         $this->userRequests = new ArrayCollection();
+        $this->photos       = new ArrayCollection();
     }
     /**
      * To string
@@ -563,7 +571,7 @@ class Item implements UserManageableInterface
     /**
      * Get moderated at
      *
-     * @return \DateTime
+     * @return \DateTime Moderated at
      */
     public function getModeratedAt()
     {
@@ -573,7 +581,7 @@ class Item implements UserManageableInterface
     /**
      * Set moderated at
      *
-     * @param \DateTime $moderatedAt
+     * @param \DateTime $moderatedAt Moderated at
      *
      * @return $this
      */
@@ -600,7 +608,7 @@ class Item implements UserManageableInterface
     /**
      * Get activated at
      *
-     * @return \DateTime
+     * @return \DateTime Activated at
      */
     public function getActivatedAt()
     {
@@ -610,7 +618,7 @@ class Item implements UserManageableInterface
     /**
      * Set activated at
      *
-     * @param \DateTime $activatedAt
+     * @param \DateTime $activatedAt Activated at
      *
      * @return $this
      */
@@ -624,7 +632,7 @@ class Item implements UserManageableInterface
     /**
      * Get deleted at
      *
-     * @return \DateTime
+     * @return \DateTime Deleted at
      */
     public function getDeletedAt()
     {
@@ -673,9 +681,64 @@ class Item implements UserManageableInterface
     }
 
     /**
+     * Get photos
+     *
+     * @return ItemPhoto[]|Collection Photos
+     */
+    public function getPhotos()
+    {
+        return $this->photos;
+    }
+
+    /**
+     * Set photos
+     *
+     * @param ItemPhoto[]|Collection $photos Photos
+     *
+     * @return $this
+     */
+    public function setPhotos(Collection $photos)
+    {
+        foreach ($photos as $photo) {
+            $photo->setItem($this);
+        }
+        $this->photos = $photos;
+
+        return $this;
+    }
+
+    /**
+     * Add photo
+     *
+     * @param ItemPhoto $photo Photo
+     *
+     * @return $this
+     */
+    public function addPhoto(ItemPhoto $photo)
+    {
+        $this->photos->add($photo->setItem($this));
+
+        return $this;
+    }
+
+    /**
+     * Remove photo
+     *
+     * @param ItemPhoto $photo Photo
+     *
+     * @return $this
+     */
+    public function removePhoto(ItemPhoto $photo)
+    {
+        $this->photos->removeElement($photo);
+
+        return $this;
+    }
+
+    /**
      * Get userRequest
      *
-     * @return UserItemRequest[]|Collection UserItemRequest
+     * @return ItemRequest[]|Collection UserItemRequest
      */
     public function getUserRequests()
     {
@@ -685,7 +748,7 @@ class Item implements UserManageableInterface
     /**
      * Set userRequests
      *
-     * @param UserItemRequest[]|Collection $userRequests
+     * @param ItemRequest[]|Collection $userRequests
      *
      * @return $this
      */
@@ -702,11 +765,11 @@ class Item implements UserManageableInterface
     /**
      * Add userRequest
      *
-     * @param UserItemRequest $userRequest
+     * @param ItemRequest $userRequest
      *
      * @return $this
      */
-    public function addUserRequest(UserItemRequest $userRequest)
+    public function addUserRequest(ItemRequest $userRequest)
     {
         $this->userRequests->add($userRequest->setItem($this));
 
@@ -716,11 +779,11 @@ class Item implements UserManageableInterface
     /**
      * Remove userRequest
      *
-     * @param UserItemRequest $userRequest
+     * @param ItemRequest $userRequest
      *
      * @return $this
      */
-    public function removeUserRequest(UserItemRequest $userRequest)
+    public function removeUserRequest(ItemRequest $userRequest)
     {
         $this->userRequests->removeElement($userRequest);
 

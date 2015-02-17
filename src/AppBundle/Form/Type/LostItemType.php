@@ -4,7 +4,6 @@ namespace AppBundle\Form\Type;
 
 use AppBundle\DBAL\Types\ItemTypeType;
 use AppBundle\Event\AddUserEditEvent;
-use AppBundle\Model\UserManageableInterface;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -50,7 +49,7 @@ class LostItemType extends AbstractType
                     $qb = $er->createQueryBuilder('c');
 
                     return $qb->where($qb->expr()->eq('c.enabled', true));
-                },
+                }
             ])
             ->add('title', 'text')
             ->add('type', 'hidden', [
@@ -67,6 +66,11 @@ class LostItemType extends AbstractType
             ->add('date', 'date', [
                 'widget' => 'single_text'
             ])
+            ->add('photos', 'collection', [
+                'type'         => 'photo',
+                'allow_add'    => true,
+                'by_reference' => false
+            ])
             ->add('save', 'submit', [
                 'label' => 'Create',
                 'attr'  => [
@@ -75,6 +79,7 @@ class LostItemType extends AbstractType
             ]);
 
         $tokenStorage = $this->tokenStorage;
+
         $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) use ($tokenStorage) {
             $item = $event->getData();
             $this->eventDispatcher->dispatch(FormEvents::SUBMIT, new AddUserEditEvent($tokenStorage, $item));

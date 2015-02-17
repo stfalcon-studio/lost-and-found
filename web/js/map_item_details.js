@@ -60,15 +60,12 @@ $(document).ready(function() {
     }
 
     var figureLayer = L.layerGroup().addLayer(layer).addTo(map);
-
-
 });
-
 
 $('#contact-with-author').on('click', function(e) {
     e.preventDefault();
     $.ajax({
-        url: 'http://lost-and-found.work/app_dev.php/item/' + $('#itemId').data('item-id') + '/getUserFacebook',
+        url: 'http://lost-and-found.work/app_dev.php/item/' + $('#itemId').data('item-id') + '/request-user',
         type: 'get',
         dataType: 'JSON',
         success: function (data) {

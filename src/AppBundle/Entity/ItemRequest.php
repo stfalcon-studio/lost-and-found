@@ -9,11 +9,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Class LoginUserActionLog
- * @ORM\Table(name="user_item_requests")
+ * UserItemRequest entity
+ *
+ * @ORM\Table(name="item_requests")
  * @ORM\Entity
  */
-class UserItemRequest
+class ItemRequest
 {
     /**
      * @var int $id ID
@@ -45,22 +46,23 @@ class UserItemRequest
     private $item;
 
     /**
-     * @var \DateTime
+     * @var \DateTime $createdAt Created at
+     *
+     * @ORM\Column(type="datetime", nullable=false)
+     *
      * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(type="datetime")
      */
-    protected $createdAt;
+    private $createdAt;
 
     /**
-     * Get id
+     * Get ID
      *
-     * @return int Id
+     * @return int ID
      */
     public function getId()
     {
         return $this->id;
     }
-
 
     /**
      * Get user
@@ -111,9 +113,20 @@ class UserItemRequest
     }
 
     /**
-     * Sets createdAt.
+     * Get created at
      *
-     * @param  \DateTime $createdAt
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set created at
+     *
+     * @param \DateTime $createdAt Created at
+     *
      * @return $this
      */
     public function setCreatedAt(\DateTime $createdAt)
@@ -121,15 +134,5 @@ class UserItemRequest
         $this->createdAt = $createdAt;
 
         return $this;
-    }
-
-    /**
-     * Returns createdAt.
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
     }
 }

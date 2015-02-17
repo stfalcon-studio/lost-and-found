@@ -21,7 +21,6 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class UserController extends Controller
 {
-
     /**
      * Edit item
      *
@@ -66,7 +65,7 @@ class UserController extends Controller
      *
      * @return Response
      *
-     * @Route("/actual-lost-items", name="user_actual_lost_items")
+     * @Route("/lost-items/actual", name="user_actual_lost_items")
      */
     public function showActualLostItemsAction()
     {
@@ -90,7 +89,7 @@ class UserController extends Controller
      *
      * @return Response
      *
-     * @Route("/actual-found-items", name="user_actual_found_items")
+     * @Route("/found-items/actual", name="user_actual_found_items")
      */
     public function showActualFoundItemsAction()
     {
@@ -114,7 +113,7 @@ class UserController extends Controller
      *
      * @return Response
      *
-     * @Route("/resolved-lost-items", name="user_resolved_lost_items")
+     * @Route("/lost-items/resolved", name="user_resolved_lost_items")
      */
     public function showResolvedLostItemsAction()
     {
@@ -138,7 +137,7 @@ class UserController extends Controller
      *
      * @return Response
      *
-     * @Route("/resolved-found-items", name="user_resolved_found_items")
+     * @Route("/found-items/resolved", name="user_resolved_found_items")
      */
     public function showResolvedFoundItemsAction()
     {
@@ -195,6 +194,26 @@ class UserController extends Controller
         return $this->render('frontend/user/show_not_moderated_items.html.twig', [
             'items' => $items,
             'count' => $count,
+        ]);
+    }
+
+    /**
+     * @param Item $item Item
+     *
+     * @return Response
+     *
+     * @Route("/item/{id}/requests", name="user_item_requests")
+     * @ParamConverter("item", class="AppBundle\Entity\Item")
+     */
+    public function showItemRequests(Item $item)
+    {
+        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+
+        $requests = $itemRepository->getUserRequests($item);
+
+        return $this->render('frontend/user/show_item_requests.html.twig', [
+            'requests' => $requests,
+            'title'    => $item->getTitle()
         ]);
     }
 

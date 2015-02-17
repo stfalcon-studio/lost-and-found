@@ -13,16 +13,14 @@
 {% block content %}
     <h1>{{ 'found-items.header' | trans({}, 'main-page')}}</h1>
 
-    <div id="category-boxes">
-        <ul id="categories" class="list-inline">
-            {% for category in categories %}
-                <li>
-                    <label class="category-label" for="category_{{ category.title }}">{{ category.title }}</label>
-                    <input id="category_{{ category.title }}" data-category-id="{{ category.id }}" type="checkbox" />
-                </li>
-            {% endfor %}
-        </ul>
+    <div class="btn-group" data-toggle="buttons">
+        {% for category in categories %}
+            <label class="btn btn-primary">
+                <input id="category_{{ category.title }}" data-category-id="{{ category.id }}" type="checkbox" autocomplete="off" />{{ category.title }}
+            </label>
+        {% endfor %}
     </div>
+    <br>
 
     <div class="pull-right">
         <a href="{{ path('add_found_item') }}" class="btn btn-success" title="Add an item you've found">
