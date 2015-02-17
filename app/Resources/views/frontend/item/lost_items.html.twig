@@ -11,7 +11,7 @@
 {% block title %}{{ title }} | {{ parent() }}{% endblock title %}
 
 {% block content %}
-    <h1>{{ title }}</h1>
+    <h1>{{ 'lost-items.header' | trans({}, 'main-page')}}</h1>
 
     <div id="category-boxes">
         <ul id="categories" class="list-inline">
@@ -26,7 +26,7 @@
 
     <div class="pull-right">
         <a href="{{ path('add_lost_item') }}" class="btn btn-danger" title="Add an item you've lost">
-            I lost something :(
+            {{ 'lost-items.lost-button' | trans({}, 'main-page')}}
         </a>
     </div>
 

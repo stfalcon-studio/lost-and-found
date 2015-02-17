@@ -16,17 +16,17 @@
 {% endblock javascripts %}
 
 {% block content %}
-    <h1>Lost and Found</h1>
+    <h1>{{ 'index.header' | trans({}, 'main-page')}}</h1>
     <div>
 
         <div class="well">
-            Web-service for announcements of lost and found items. Was created by students from Khmelnytskyi Polytechnic College during their practice at Studio Stfalcon.com
+            {{ 'index.description' | trans({}, 'main-page')}}
         </div>
 
         <div>
-            <a href="{{ path('add_lost_item') }}" class="btn btn-danger" title="Add an item you've lost">I lost something :(</a>
+            <a href="{{ path('add_lost_item') }}" class="btn btn-danger" title="Add an item you've lost">{{ 'index.lost-button' | trans({}, 'main-page')}}</a>
             &nbsp;
-            <a href="{{ path('add_found_item') }}" class="btn btn-success" title="Add an item you've found">I found something :)</a>
+            <a href="{{ path('add_found_item') }}" class="btn btn-success" title="Add an item you've found">{{ 'index.found-button' | trans({}, 'main-page')}}</a>
         </div>
 
         {#<div>#}

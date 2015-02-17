@@ -1,0 +1,45 @@
+index:
+    header: "Втрачене та знайдене"
+    description: "Веб-сервіс для оголошень про втрачені та знайдені речі. Був розроблений студентами Хмельницького Політехнічного коледжу на протязі їхньої практики на студії Stfalcon.com"
+    lost-button: "Я дещо загубив :("
+    found-button: "Я дещо знайшов :)"
+    lost-items: "Загублені речі"
+    found-items: "Знайдені речі"
+    login: "Ввійти за допомогою Facebook"
+    profile: "Профіль"
+    admin: "Адмінка"
+    logout: "Вийти"
+
+form:
+    category: "Категорія"
+    title: "Заголовок"
+    description: "Опис"
+    date: "Дата"
+    create-button: "Створити"
+
+lost-items:
+    header: "Загублені речі"
+    header2: "Я дещо загубив..."
+    lost-button: "Я дещо загубив :("
+    title: "Я дещо загубив :("
+
+found-items:
+    header: "Знайдені речі"
+    header2: "Я дещо знайшов..."
+    found-button: "Я дещо знайшов :)"
+    title: "Я дещо знайшов :)"
+
+profile:
+    my-lost-items: "Мої загублені речі"
+    my-found-items: "Мої знайдені речі"
+    my-deactivated-items: "Мої не активовані речі"
+    my-not-moderated-items: "Мої не промодеровані речі"
+    actual: "Актуальні"
+    resolved: "Вирішені"
+    edit: "Редагувати"
+    delete: "Видалити"
+    deactivate: "Деактивувати"
+    activate: "Активувати"
+
+faq:
+
