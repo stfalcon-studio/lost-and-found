@@ -151,10 +151,12 @@ class ItemController extends Controller
         $vichUploader = $this->get('vich_uploader.storage.file_system');
         foreach ($item->getPhotos() as $photo) {
             if ($photo->getImageName() !== null) {
-                $photo->setImageName($this
-                                         ->get('service_container')
-                                         ->getParameter('host') . $vichUploader
-                                         ->resolveUri($photo, 'imageFile'));
+                $photo->setImageName(
+                    $this
+                        ->get('service_container')
+                        ->getParameter('host') . $vichUploader
+                        ->resolveUri($photo, 'imageFile')
+                );
             } else {
                 $photo->setImageName(null);
             }

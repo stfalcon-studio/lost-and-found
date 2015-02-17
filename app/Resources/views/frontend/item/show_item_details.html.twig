@@ -46,9 +46,10 @@
 
         <h3>Photos</h3>
         <ul class="photos">
-            {# iterate over each existing tag and render its only field: name #}
             {% for photo in item.photos %}
-                <li style="list-style-type: none; display: inline; padding: 10px;"><img src="{{ photo.imageName }}" width="50" height="50"></li>
+                <li style="list-style-type: none; display: inline; padding: 10px;">
+                    <img src="{{ photo.imageName }}" width="50" height="50">
+                </li>
             {% endfor %}
         </ul>
 

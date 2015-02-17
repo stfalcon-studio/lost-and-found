@@ -33,8 +33,8 @@ function addPhotoForm($collectionHolder, $newLinkLi) {
     var prototype = $collectionHolder.data('prototype');
 
     // get the new index
-     var index = $collectionHolder.data('index');
-     if (index == 0)
+    var index = $collectionHolder.data('index');
+    if (index == 0)
         index = 1;
     // Replace '__name__' in the prototype's HTML to
     // instead be a number based on how many items we have
