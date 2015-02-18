@@ -90,7 +90,8 @@ class ItemController extends Controller
         }
 
         return $this->render('frontend/item/add_lost_item.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'pageType' => 'lost',
         ]);
     }
 
@@ -124,7 +125,8 @@ class ItemController extends Controller
         }
 
         return $this->render('frontend/item/add_found_item.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'pageType' => 'found',
         ]);
     }
 
@@ -145,6 +147,20 @@ class ItemController extends Controller
                 'id'        => $id,
                 'moderated' => true,
             ]);
+
+        $vichUploader = $this->get('vich_uploader.storage.file_system');
+        foreach ($item->getPhotos() as $photo) {
+            if ($photo->getImageName() !== null) {
+                $photo->setImageName(
+                    $this
+                        ->get('service_container')
+                        ->getParameter('host') . $vichUploader
+                        ->resolveUri($photo, 'imageFile')
+                );
+            } else {
+                $photo->setImageName(null);
+            }
+        }
 
         if (!$item) {
             throw $this->createNotFoundException('Item not found.');

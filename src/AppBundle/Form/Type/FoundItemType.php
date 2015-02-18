@@ -67,6 +67,12 @@ class FoundItemType extends AbstractType
             ->add('date', 'date', [
                 'widget' => 'single_text'
             ])
+            ->add('photos', 'collection', [
+                'type'         => 'photo',
+                'allow_add'    => true,
+                'by_reference' => false,
+                'allow_delete' => true,
+            ])
             ->add('save', 'submit', [
                 'label' => 'Create',
                 'attr'  => [
