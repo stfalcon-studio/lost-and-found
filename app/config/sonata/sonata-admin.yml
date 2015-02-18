@@ -1,3 +1,8 @@
 sonata_admin:
     title: Lost and Found
     title_logo: images/marker.png
+    dashboard:
+        blocks:
+            # display a dashboard block
+            - { position: right, type: sonata.block.service.statistic}
+            - { position: left, type: sonata.admin.block.admin_list }

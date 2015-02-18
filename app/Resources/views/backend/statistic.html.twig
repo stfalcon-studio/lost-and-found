@@ -1,0 +1,58 @@
+{% extends '@SonataAdmin/standard_layout.html.twig' %}
+
+{% block breadcrumb %}
+    <li><a href="{{ url('sonata_admin_dashboard') }}">{% trans %}Dashboard{% endtrans %}</a></li>
+    <li class="active">Statistic Page</li>
+{% endblock breadcrumb %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock stylesheets %}
+
+{% set title = 'Statistic' %}
+
+{% block title %} - {{ title }}{% endblock title %}
+
+{% block content %}
+    <h1>Statistic</h1>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+
+    <table class="table table-hover">
+        <tr>
+            <th>Category</th>
+            <th>Total lost items</th>
+            <th>Total found items</th>
+        </tr>
+        {% for category in categories %}
+            <tr>
+                <td>{{ category }}</td>
+                {% if lost_items is not empty %}
+                    {% for i in 0..lost_items|length - 1 if lost_items[i].title == category %}
+                        <td>{{ lost_items[i].totalItems }}</td>
+                    {% else %}
+                        <td>0</td>
+                    {% endfor %}
+                {% else %}
+                    <td>0</td>
+                {% endif %}
+
+                {% if found_items is not empty %}
+                    {% for i in 0..found_items|length - 1 if found_items[i].title == category %}
+                        <td>{{ found_items[i].totalItems }}</td>
+                    {% else %}
+                        <td>0</td>
+                    {% endfor %}
+                {% else %}
+                    <td>0</td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock javascripts %}
