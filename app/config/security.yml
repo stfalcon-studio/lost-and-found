@@ -41,5 +41,6 @@ security:
         - { path: ^/add-lost-item, roles: ROLE_USER }
         - { path: ^/add-found-item, roles: ROLE_USER }
         - { path: ^/profile/, role: ROLE_USER }
+        - { path: ^/request-user, role: ROLE_USER }
 
 

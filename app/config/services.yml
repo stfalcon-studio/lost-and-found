@@ -7,3 +7,9 @@ services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+
+    sonata.block.service.statistic:
+        class: AppBundle\Service\StatisticBlockService
+        arguments: [ "sonata.block.service.statistic:", @templating ]
+        tags:
+            - { name: sonata.block }

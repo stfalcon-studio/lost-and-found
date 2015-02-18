@@ -2,11 +2,8 @@
 
 namespace AppBundle\Controller\Frontend;
 
-use AppBundle\Event\AppEvents;
-use AppBundle\Event\FeedbackSendEvent;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Swift_Mailer;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -40,6 +37,8 @@ class DefaultController extends Controller
 
     /**
      * Feedback
+     *
+     * @param Request $request
      *
      * @Route("/feedback", name="feedback")
      *
