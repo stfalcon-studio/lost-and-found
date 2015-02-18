@@ -39,3 +39,8 @@ services:
         class: AppBundle\Form\Type\FeedbackType
         tags:
             - { name: form.type, alias: feedback }
+
+    app.form.type.statistic:
+        class: AppBundle\Form\Type\StatisticType
+        tags:
+            - { name: form.type, alias: statistic }
