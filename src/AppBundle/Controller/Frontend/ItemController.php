@@ -182,12 +182,12 @@ class ItemController extends Controller
                 'request'  => $userItemRequest,
                 'facebook' => $userFacebookId,
             ]);
-        } else {
-            return $this->render('frontend/item/show_item_details.html.twig', [
-                'item'     => $item,
-                'request'  => $userItemRequest,
-            ]);
         }
+
+        return $this->render('frontend/item/show_item_details.html.twig', [
+            'item'     => $item,
+            'request'  => $userItemRequest,
+        ]);
     }
 
     /**
