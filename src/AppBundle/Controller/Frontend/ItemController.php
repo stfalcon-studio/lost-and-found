@@ -166,9 +166,28 @@ class ItemController extends Controller
             throw $this->createNotFoundException('Item not found.');
         }
 
-        return $this->render('frontend/item/show_item_details.html.twig', [
-            'item' => $item,
-        ]);
+        $request = $this->getDoctrine()
+            ->getRepository('AppBundle:ItemRequest')
+            ->findOneBy([
+                'item' => $item,
+                'user' => $this->getUser(),
+            ]);
+        $userItemRequest = false;
+        if (!empty($request)) {
+            $userItemRequest = true;
+            $userFacebookId  = $item->getCreatedBy()->getFacebookId();
+
+            return $this->render('frontend/item/show_item_details.html.twig', [
+                'item'     => $item,
+                'request'  => $userItemRequest,
+                'facebook' => $userFacebookId,
+            ]);
+        } else {
+            return $this->render('frontend/item/show_item_details.html.twig', [
+                'item'     => $item,
+                'request'  => $userItemRequest,
+            ]);
+        }
     }
 
     /**
