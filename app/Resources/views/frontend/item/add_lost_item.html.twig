@@ -26,12 +26,19 @@
 
     <div>
         {{ form_start(form) }}
-        {{ form_errors(form) }}
-        <ul class="photos" data-prototype="{{ form_widget(form.photos.vars.prototype)|e }}">
-        </ul>
+            {{ form_errors(form) }}
+            {{ form_row(form.category) }}
+            {{ form_row(form.title) }}
+            {{ form_row(form.description) }}
+            {{ form_row(form.date) }}
+            {{ form_row(form.photos) }}
+            <div id="map" style="width: auto; height: 800px"></div>
         {{ form_end(form) }}
 
     </div>
 
-    <div id="map" style="width: auto; height: 800px"></div>
+    <div class="type" hidden="hidden" data-type="{{ pageType }}">
+    </div>
+
+
 {% endblock content %}
