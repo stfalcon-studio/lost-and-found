@@ -66,6 +66,8 @@
         "behat/mink-browserkit-driver":         "~1.2",
         "behat/mink-selenium2-driver":          "~1.2",
         "behat/mink":                           "~1.6",
+        "behat/mink-goutte-driver":             "@stable",
+
         "doctrine/data-fixtures": "dev-master",
         "doctrine/doctrine-fixtures-bundle": "2.2.*@dev",
         "sensio/generator-bundle": "~2.3"
