@@ -209,7 +209,7 @@ class UserController extends Controller
     {
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
 
-        $requests = $itemRepository->getUserRequests($item);
+        $requests = $itemRepository->getItemRequests($item);
 
         return $this->render('frontend/user/show_item_requests.html.twig', [
             'requests' => $requests,

@@ -90,7 +90,8 @@ class ItemController extends Controller
         }
 
         return $this->render('frontend/item/add_lost_item.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'pageType' => 'lost',
         ]);
     }
 
@@ -124,7 +125,8 @@ class ItemController extends Controller
         }
 
         return $this->render('frontend/item/add_found_item.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'pageType' => 'found',
         ]);
     }
 
@@ -146,12 +148,45 @@ class ItemController extends Controller
                 'moderated' => true,
             ]);
 
+        $vichUploader = $this->get('vich_uploader.storage.file_system');
+        foreach ($item->getPhotos() as $photo) {
+            if ($photo->getImageName() !== null) {
+                $photo->setImageName(
+                    $this
+                        ->get('service_container')
+                        ->getParameter('host') . $vichUploader
+                        ->resolveUri($photo, 'imageFile')
+                );
+            } else {
+                $photo->setImageName(null);
+            }
+        }
+
         if (!$item) {
             throw $this->createNotFoundException('Item not found.');
         }
 
+        $request = $this->getDoctrine()
+            ->getRepository('AppBundle:ItemRequest')
+            ->findOneBy([
+                'item' => $item,
+                'user' => $this->getUser(),
+            ]);
+        $userItemRequest = false;
+        if (!empty($request)) {
+            $userItemRequest = true;
+            $userFacebookId  = $item->getCreatedBy()->getFacebookId();
+
+            return $this->render('frontend/item/show_item_details.html.twig', [
+                'item'     => $item,
+                'request'  => $userItemRequest,
+                'facebook' => $userFacebookId,
+            ]);
+        }
+
         return $this->render('frontend/item/show_item_details.html.twig', [
-            'item' => $item,
+            'item'     => $item,
+            'request'  => $userItemRequest,
         ]);
     }
 

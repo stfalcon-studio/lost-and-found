@@ -1,0 +1,23 @@
+# behat.yml
+default:
+    autoload:
+        '': %paths.base%/features/bootstrap
+
+    suites:
+        default:
+            contexts:
+                - FeatureContext:
+                    session:   '@session'
+
+    extensions:
+        Behat\Symfony2Extension: ~
+
+        Behat\MinkExtension:
+            base_url: http://lost-and-found.work/app_dev.php
+            selenium2: ~
+            sessions:
+                default:
+                    symfony2: ~
+
+    formatters:
+        pretty: true

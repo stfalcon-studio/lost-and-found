@@ -69,7 +69,8 @@ class LostItemType extends AbstractType
             ->add('photos', 'collection', [
                 'type'         => 'photo',
                 'allow_add'    => true,
-                'by_reference' => false
+                'by_reference' => false,
+                'allow_delete' => true,
             ])
             ->add('save', 'submit', [
                 'label' => 'Create',
