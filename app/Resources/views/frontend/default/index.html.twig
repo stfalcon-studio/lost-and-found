@@ -18,11 +18,17 @@
 {% block content %}
     <h1>{{ 'index.header' | trans({}, 'main-page')}}</h1>
     <div>
-
+        <p>
+            Память порой подводит всех. Например, знаете ли вы, что в бюро находок крупных городов, таких как Барселона или Мадрид, поступает 33 тысячи утерянных предметов в год? Среди найденных предметов иногда попадаются такие, о которых и предположить нельзя, что их можно потерять, например, стиральная машина, инвалидное кресло или вставная челюсть.
+        </p>
+        <div class="index-description">
+            <blockquote class="blockquote-reverse">
+                В среднем владельцы пропавших вещей обращаются только за пятнадцатью процентами всех находок. То есть о 85% вещей люди либо не помнят, либо не хотят их забирать.
+            </blockquote>
+        </div>
         <div class="well">
             {{ 'index.description' | trans({}, 'main-page')}}
         </div>
-
         <div>
             <a href="{{ path('add_lost_item') }}" class="btn btn-danger" title="Add an item you've lost">{{ 'index.lost-button' | trans({}, 'main-page')}}</a>
             &nbsp;

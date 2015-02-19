@@ -205,7 +205,7 @@ class UserController extends Controller
      * @Route("/item/{id}/requests", name="user_item_requests")
      * @ParamConverter("item", class="AppBundle\Entity\Item")
      */
-    public function showItemRequests(Item $item)
+    public function showItemRequestsAction(Item $item)
     {
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
 

@@ -9,10 +9,16 @@
 
     <div>
         <dl>
-            {% for item in faq %}
-                <dt>{{ item.question }}</dt>
-                <dd>{{ item.answer }}</dd>
-            {% endfor %}
+            {#{% if locale != 'en' %}#}
+                {#{% for item in faq %}#}
+                    {#<dt>{{ item.content }}</dt>#}
+                {#{% endfor %}#}
+            {#{% else %}#}
+                {% for item in faq %}
+                    <dt>{{ item.question }}</dt>
+                    <dd>{{ item.answer }}</dd><br>
+                {% endfor %}
+            {#{% endif %}#}
         </dl>
     </div>
 {% endblock content %}

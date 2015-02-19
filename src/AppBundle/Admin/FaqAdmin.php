@@ -49,9 +49,55 @@ class FaqAdmin extends Admin
     {
         $formMapper
             ->with('faq')
-                ->add('question')
-                ->add('answer')
                 ->add('enabled')
+//            ->add('translations', 'a2lix_translations_gedmo', [
+//                'translatable_class' => 'AppBundle\Entity\Faq',
+//                'fields'             => [
+//                    'question' => [
+//                        'field_type' => 'ckeditor'
+//                    ],
+//                    'answer'   => [
+//                        'field_type' => 'ckeditor'
+//                    ]
+//                ]
+//            ])
+//                ->add('translations', 'a2lix_translations', [
+//                    'class' => 'src\AppBundle\Entity\Faq',
+//                    'translation_property' => 'text',
+//                    'multiple' => true
+//                ])
+                ->add('translations', 'a2lix_translations_gedmo', [
+                    'translatable_class' => 'AppBundle\Entity\Faq',
+                    'fields' => [
+                      'question' => [
+                          'label' => 'Питання',
+                          'locale_options' => [
+                              'ua' => [
+                                  'required' => true
+                              ],
+                              'en' => [
+                                  'required' => false
+                              ],
+                              'ru' => [
+                                  'required' => false
+                              ]
+                          ]
+                      ],
+                      'answer'=> [
+                          'label' => 'Відповідь',
+                          'locale_options' => [
+                              'ua' => [
+                                  'required' => true
+                            ],
+                              'en' => [
+                                  'required' => false
+                            ],
+                              'ru' => [
+                                  'required' => false
+                            ]
+                        ]
+                    ]
+                  ]])
                 ->end();
     }
 
@@ -61,9 +107,8 @@ class FaqAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('id')
-            ->add('question')
-            ->add('answer')
+            ->addIdentifier('question', null, array('label' => 'Question'))
+            ->add('answer', null, array('label' => 'Answer'))
             ->add('enabled')
             ->add('_action', 'actions', [
                 'actions' => [
@@ -89,9 +134,9 @@ class FaqAdmin extends Admin
     /**
      * {@inheritdoc}
      */
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    protected function configureDataGridFilters(DataGridMapper $dataGridMapper)
     {
-        $datagridMapper
+        $dataGridMapper
             ->add('id')
             ->add('question')
             ->add('answer')

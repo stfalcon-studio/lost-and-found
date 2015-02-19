@@ -25,6 +25,7 @@ parameters:
     facebook_oauth_client_secret: FacebookClientSecret
 
     admin_emails:
-        - 'genvaldartem@gmail.com' # Artem Genvald
-        - 'Logansoleg@gmail.com'   # Oleg Kachinsky
-        - 'svatok13@gmail.com'     # Yuri Svatok
+        - 'genvaldartem@gmail.com'  # Artem Genvald
+        - 'Logansoleg@gmail.com'    # Oleg Kachinsky
+        - 'svatok13@gmail.com'      # Yuri Svatok
+        - 'prohorovychua@gmail.com' # Andrew Prohorovych

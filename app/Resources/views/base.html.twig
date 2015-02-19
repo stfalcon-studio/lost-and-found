@@ -56,7 +56,7 @@
                                     <a href="{{ path('show_faq') }}">F.A.Q.</a>
                                 </li>
                                 <li>
-                                    <a href="{{ path('feedback') }}">Feedback</a>
+                                    <a href="{{ path('feedback') }}">{{ 'feedback.header' | trans({}, 'main-page')}}</a>
                                 </li>
                             </ul>
 
@@ -164,7 +164,7 @@
                                 </p>
                                 <p>
                                     <a href="{{ path('show_faq') }}" title="FAQ">F.A.Q.</a> |
-                                    <a href="{{ path('feedback') }}" title="Feedback">Feedback</a>
+                                    <a href="{{ path('feedback') }}" title="Feedback">{{ 'feedback.header' | trans({}, 'main-page')}}</a>
                                 </p>
                             </div>
                         </div>

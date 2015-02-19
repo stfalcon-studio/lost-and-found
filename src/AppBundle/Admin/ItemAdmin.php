@@ -52,16 +52,12 @@ class ItemAdmin extends Admin
         switch ($name) {
             case 'list':
                 return 'backend\item\list.html.twig';
-                break;
             case 'show':
                 return 'backend\item\show.html.twig';
-                break;
             case 'edit':
                 return 'backend\item\edit.html.twig';
-                break;
             default:
                 return parent::getTemplate($name);
-                break;
         }
     }
 

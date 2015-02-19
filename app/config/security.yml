@@ -20,18 +20,18 @@ security:
         secured_area:
             pattern: ^/
             oauth:
-                login_path:   /auth/connect/facebook
-                failure_path: /auth/connect
-                check_path:   /auth/connect
+                login_path:   /%locale%/auth/connect/facebook
+                failure_path: /%locale%/auth/connect
+                check_path:   /%locale%/auth/connect
                 provider:     fos_userbundle
                 resource_owners:
-                    facebook:      /auth/check-facebook
+                    facebook:      /%locale%/auth/check-facebook
                 oauth_user_provider:
                     service: app.user.provider
                 default_target_path: /
             anonymous: ~
             logout:
-                path:   /logout
+                path:   /%locale%/logout
                 target: /
 
     access_control:

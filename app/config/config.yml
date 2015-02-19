@@ -13,7 +13,7 @@ imports:
 
 framework:
     #esi:             ~
-    translator:      { fallback: uk }
+    translator:      { fallback: %locale% }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -57,3 +57,18 @@ sensio_framework_extra:
     request:
         converters: true
         auto_convert: false
+
+# A2lix translation form
+a2lix_translation_form:
+    locales: [uk, ru, en]
+    default_required: true
+    manager_registry: doctrine
+
+#jms i18n routing bundle
+jms_i18n_routing:
+    default_locale: %locale%
+    locales:
+           - uk
+           - ru
+           - en
+    strategy: prefix

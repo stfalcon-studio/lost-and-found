@@ -43,3 +43,7 @@ profile:
 
 faq:
 
+feedback:
+    header: "Зворотній зв’язок"
+    button: "Надіслати"
+
