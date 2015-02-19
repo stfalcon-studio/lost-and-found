@@ -402,13 +402,13 @@ class ItemRepository extends EntityRepository
     }
 
     /**
-     * Get user requests
+     * Get item requests
      *
      * @param Item $item Item
      *
      * @return array
      */
-    public function getUserRequests(Item $item)
+    public function getItemRequests(Item $item)
     {
         $qb = $this->createQueryBuilder('i');
 
@@ -453,8 +453,6 @@ class ItemRepository extends EntityRepository
                 ->andWhere($qb->expr()->between('i.createdAt', ':from', ':to'))
                 ->setParameter('from', $from)
                 ->setParameter('to', $to);
-
-            $query = $qb->getQuery();
         }
 
         return $qb->getQuery()->getArrayResult();
@@ -489,8 +487,6 @@ class ItemRepository extends EntityRepository
                 ->andWhere($qb->expr()->between('i.createdAt', ':from', ':to'))
                 ->setParameter('from', $from)
                 ->setParameter('to', $to);
-
-            $query = $qb->getQuery();
         }
 
         return $qb->getQuery()->getArrayResult();
