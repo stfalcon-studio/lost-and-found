@@ -6,12 +6,11 @@
 
 {% block content %}
     <h1>F.A.Q.</h1>
-
     <div>
         <dl>
             {% for item in faq %}
                 <dt>{{ item.question }}</dt>
-                <dd>{{ item.answer }}</dd>
+                <dd>{{ item.answer }}</dd><br>
             {% endfor %}
         </dl>
     </div>

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}I lost something... | {{ parent() }}{% endblock title %}
+{% block title %}{{ 'lost-items.title' | trans({}, 'main-page')}}. | {{ parent() }}{% endblock title %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -22,7 +22,7 @@
 {% endblock javascripts %}
 
 {% block content %}
-    <h1>I lost something...</h1>
+    <h1>{{ 'lost-items.header2' | trans({}, 'main-page')}}</h1>
 
     <div>
         {{ form_start(form) }}

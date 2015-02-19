@@ -7,10 +7,10 @@
                         <a href="{{ path('item_details', {'id': item.id}) }}">{{ item.title }}</a>
                     </td>
                     <td>
-                        <a href="{{ path('item_edit', {'id': item.id}) }}">Edit</a>
+                        <a href="{{ path('item_edit', {'id': item.id}) }}">{{ 'profile.edit' | trans({}, 'main-page')}}</a>
                     </td>
                     <td>
-                        <a href="{{ path('item_deactivate', {'id': item.id}) }}">Deactivate</a>
+                        <a href="{{ path('item_deactivate', {'id': item.id}) }}">{{ 'profile.deactivate' | trans({}, 'main-page')}}</a>
                     </td>
                     <td>
                         <a href="{{ path('user_item_requests', {'id':item.id}) }}">Requests</a>
@@ -31,11 +31,11 @@
                         <a href="{{ path('item_details', {'id': item.id}) }}">{{ item.title }}</a>
                     </td>
                     <td>
-                        <a href="{{ path('item_delete', {'id': item.id}) }}">Delete</a>
+                        <a href="{{ path('item_delete', {'id': item.id}) }}">{{ 'profile.delete' | trans({}, 'main-page')}}</a>
                     </td>
 
                     <td>
-                        <a href="{{ path('item_activate', {'id': item.id}) }}">Activate</a>
+                        <a href="{{ path('item_activate', {'id': item.id}) }}">{{ 'profile.activate' | trans({}, 'main-page')}}</a>
                     </td>
                 </tr>
             {% endfor %}
@@ -52,10 +52,10 @@
                         <a href="{{ path('item_details', {'id': item.id}) }}">{{ item.title }}</a>
                     </td>
                     <td>
-                        <a href="{{ path('item_edit', {'id': item.id}) }}">Edit</a>
+                        <a href="{{ path('item_edit', {'id': item.id}) }}">{{ 'profile.edit' | trans({}, 'main-page')}}</a>
                     </td>
                     <td>
-                        <a href="{{ path('item_delete', {'id': item.id}) }}">Delete</a>
+                        <a href="{{ path('item_delete', {'id': item.id}) }}">{{ 'profile.delete' | trans({}, 'main-page')}}</a>
                     </td>
                 </tr>
             {% endfor %}
@@ -84,31 +84,31 @@
     <ul class="nav nav-tabs">
         <li role="presentation" {% if active_tab == 'lost_items' %}class="active"{% endif %}>
             {% if active_tab == 'lost_items' %}
-                <a href="#">My lost items {% if count.lost > 0 %}[{{count.lost}}]{% endif %}</a>
+                <a href="#">{{ 'profile.my-lost-items' | trans({}, 'main-page')}}{% if count.lost > 0 %}[{{count.lost}}]{% endif %}</a>
             {% else %}
-                <a href="{{ path('user_actual_lost_items') }}">My lost items {% if count.lost > 0 %}[{{count.lost}}]{% endif %}</a>
+                <a href="{{ path('user_actual_lost_items') }}">{{ 'profile.my-lost-items' | trans({}, 'main-page')}}{% if count.lost > 0 %}[{{count.lost}}]{% endif %}</a>
             {% endif %}
         </li>
 
         <li role="presentation" {% if active_tab == 'found_items' %}class="active"{% endif %}>
             {% if active_tab == 'found_items' %}
-                <a href="#">My found items {% if count.found > 0 %}[{{count.found}}]{% endif %}</a>
+                <a href="#">{{ 'profile.my-found-items' | trans({}, 'main-page')}}{% if count.found > 0 %}[{{count.found}}]{% endif %}</a>
             {% else %}
-                <a href="{{ path('user_actual_found_items') }}">My found items {% if count.found > 0 %}[{{count.found}}]{% endif %}</a>
+                <a href="{{ path('user_actual_found_items') }}">{{ 'profile.my-found-items' | trans({}, 'main-page')}}{% if count.found > 0 %}[{{count.found}}]{% endif %}</a>
             {% endif %}
         </li>
         <li role="presentation" {% if active_tab == 'deactivated_items' %}class="active"{% endif %}>
             {% if active_tab == 'deactivated_items' %}
-                <a href="#">My deactivated items {% if count.notActive > 0 %}[{{count.notActive}}]{% endif %}</a>
+                <a href="#">{{ 'profile.my-deactivated-items' | trans({}, 'main-page')}}{% if count.notActive > 0 %}[{{count.notActive}}]{% endif %}</a>
             {% else %}
-                <a href="{{ path('user_deactivated_items') }}">My deactivated items {% if count.notActive > 0 %}[{{count.notActive}}]{% endif %}</a>
+                <a href="{{ path('user_deactivated_items') }}">{{ 'profile.my-deactivated-items' | trans({}, 'main-page')}}{% if count.notActive > 0 %}[{{count.notActive}}]{% endif %}</a>
             {% endif %}
         </li>
         <li role="presentation" {% if active_tab == 'not_moderated_items' %}class="active"{% endif %}>
             {% if active_tab == 'not_moderated_items' %}
-                <a href="#">My not moderated items {% if count.notModerated > 0 %}[{{count.notModerated}}]{% endif %}</a>
+                <a href="#">{{ 'profile.my-not-moderated-items' | trans({}, 'main-page')}}{% if count.notModerated > 0 %}[{{count.notModerated}}]{% endif %}</a>
             {% else %}
-                <a href="{{ path('user_not_moderated_items') }}">My not moderated items {% if count.notModerated > 0 %}[{{count.notModerated}}]{% endif %}</a>
+                <a href="{{ path('user_not_moderated_items') }}">{{ 'profile.my-not-moderated-items' | trans({}, 'main-page')}}{% if count.notModerated > 0 %}[{{count.notModerated}}]{% endif %}</a>
             {% endif %}
         </li>
     </ul>
@@ -118,23 +118,23 @@
     <ul class="nav nav-pills">
         <li role="presentation" {% if active_pill == 'actual' %}class="active"{% endif %}>
             {% if active_pill == 'actual' %}
-                <a href="#">Actual</a>
+                <a href="#">{{ 'profile.actual' | trans({}, 'main-page')}}</a>
             {% else %}
                 {% if active_tab == 'found_items' %}
-                    <a href="{{ path('user_actual_found_items') }}">Actual</a>
+                    <a href="{{ path('user_actual_found_items') }}">{{ 'profile.actual' | trans({}, 'main-page')}}</a>
                 {% elseif active_tab == 'lost_items' %}
-                    <a href="{{ path('user_actual_lost_items') }}">Actual</a>
+                    <a href="{{ path('user_actual_lost_items') }}">{{ 'profile.actual' | trans({}, 'main-page')}}</a>
                 {% endif %}
             {% endif %}
         </li>
         <li role="presentation" {% if active_pill == 'resolved' %}class="active"{% endif %}>
             {% if active_pill == 'resolved' %}
-                <a href="#">Resolved</a>
+                <a href="#">{{ 'profile.resolved' | trans({}, 'main-page')}}</a>
             {% else %}
                 {% if active_tab == 'found_items' %}
-                    <a href="{{ path('user_resolved_found_items') }}">Resolved</a>
+                    <a href="{{ path('user_resolved_found_items') }}">{{ 'profile.resolved' | trans({}, 'main-page')}}</a>
                 {% elseif active_tab == 'lost_items' %}
-                    <a href="{{ path('user_resolved_lost_items') }}">Resolved</a>
+                    <a href="{{ path('user_resolved_lost_items') }}">{{ 'profile.resolved' | trans({}, 'main-page')}}</a>
                 {% endif %}
             {% endif %}
         </li>

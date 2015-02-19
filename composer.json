@@ -57,7 +57,10 @@
         "sonata-project/doctrine-orm-admin-bundle": "2.3.0",
         "hwi/oauth-bundle": "0.4.*@dev",
         "friendsofsymfony/user-bundle": "~1.3",
-        "vich/uploader-bundle": "0.14.*"
+        "vich/uploader-bundle": "0.14.*",
+        "a2lix/translation-form-bundle": "1.*@dev",
+        "jms/i18n-routing-bundle": "dev-master",
+        "jms/translation-bundle": "dev-master"
     },
     "require-dev": {
         "behat/behat":                          "~3.0",
