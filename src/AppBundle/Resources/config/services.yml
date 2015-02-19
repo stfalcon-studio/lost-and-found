@@ -17,6 +17,14 @@ services:
             - @doctrine.orm.default_entity_manager
 
     app.user_items_count:
-            class: AppBundle\Service\ItemsCountService
-            arguments:
-                - @doctrine.orm.default_entity_manager
+        class: AppBundle\Service\ItemsCountService
+        arguments:
+            - @doctrine.orm.default_entity_manager
+
+    sonata.block.service.statistic:
+        class: AppBundle\Service\StatisticBlockService
+        arguments:
+            - sonata.block.service.statistic
+            - @templating
+        tags:
+            - { name: sonata.block }

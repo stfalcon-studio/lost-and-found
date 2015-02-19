@@ -12,7 +12,6 @@
     {{ parent() }}
 
     <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-    {#<script src="{{ asset('js/main.js') }}"></script>#}
 {% endblock javascripts %}
 
 {% block content %}
@@ -34,12 +33,5 @@
             &nbsp;
             <a href="{{ path('add_found_item') }}" class="btn btn-success" title="Add an item you've found">{{ 'index.found-button' | trans({}, 'main-page')}}</a>
         </div>
-
-        {#<div>#}
-            {#<button id="show-found-items" class="btn btn-default">Show found items</button>#}
-            {#&nbsp;#}
-            {#<button id="show-lost-items" class="btn btn-default">Show lost items</button>#}
-        {#</div>#}
-        {#<div id="map" class="map"></div>#}
     </div>
 {% endblock content %}

@@ -30,8 +30,8 @@
             <tr>
                 <td>{{ category }}</td>
                 {% if lost_items is not empty %}
-                    {% for i in 0..lost_items|length - 1 if lost_items[i].title == category %}
-                        <td>{{ lost_items[i].totalItems }}</td>
+                    {% for item in lost_items if item.title == category %}
+                        <td>{{ item.totalItems }}</td>
                     {% else %}
                         <td>0</td>
                     {% endfor %}
@@ -40,8 +40,8 @@
                 {% endif %}
 
                 {% if found_items is not empty %}
-                    {% for i in 0..found_items|length - 1 if found_items[i].title == category %}
-                        <td>{{ found_items[i].totalItems }}</td>
+                    {% for item in found_items if item.title == category %}
+                        <td>{{ item.totalItems }}</td>
                     {% else %}
                         <td>0</td>
                     {% endfor %}

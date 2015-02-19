@@ -10,8 +10,6 @@ use Behat\Behat\Tester\Exception\PendingException;
  */
 class FeatureContext extends MinkContext implements SnippetAcceptingContext
 {
-    private $session;
-
     /**
      * Initializes context.
      *
@@ -21,7 +19,7 @@ class FeatureContext extends MinkContext implements SnippetAcceptingContext
      */
     public function __construct(Session $session)
     {
-        $this->session = $session;
+
     }
 
     /**

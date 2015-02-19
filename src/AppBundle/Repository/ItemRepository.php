@@ -479,7 +479,7 @@ class ItemRepository extends EntityRepository
             ->groupBy('i.category')
             ->setParameter('type', ItemTypeType::FOUND);
 
-        if (!is_null($dateFrom) && !is_null($dateTo)) {
+        if (null !== $dateFrom && null !== $dateTo) {
             $from = $dateFrom->format('Y-m-d 00:00:00');
             $to = $dateTo->format('Y-m-d 23:59:59');
 
