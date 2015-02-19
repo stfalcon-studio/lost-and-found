@@ -11,6 +11,7 @@ default:
 
     extensions:
         Behat\Symfony2Extension: ~
+
         Behat\MinkExtension:
             base_url: http://lost-and-found.work/app_dev.php
             selenium2: ~
