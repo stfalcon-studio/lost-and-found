@@ -43,4 +43,7 @@ profile:
 
 faq:
 
+feedback:
+    header: "Feedback"
+    button: "Send"
 

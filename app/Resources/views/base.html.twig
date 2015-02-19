@@ -176,6 +176,8 @@
         {% block javascripts %}
             <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
             <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+            <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
         {% endblock javascripts %}
     </body>
 </html>

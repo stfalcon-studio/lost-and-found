@@ -60,7 +60,8 @@
         "vich/uploader-bundle": "0.14.*",
         "a2lix/translation-form-bundle": "1.*@dev",
         "jms/i18n-routing-bundle": "dev-master",
-        "jms/translation-bundle": "dev-master"
+        "jms/translation-bundle": "dev-master",
+        "friendsofsymfony/jsrouting-bundle": "2.0.*@dev"
     },
     "require-dev": {
         "behat/behat":                          "~3.0",

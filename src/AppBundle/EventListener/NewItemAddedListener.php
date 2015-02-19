@@ -12,6 +12,11 @@ use Swift_Mailer;
  */
 class NewItemAddedListener
 {
+    private $adminEmail = [
+        /* TODO: Fill with admin emeils */
+        'genvaldartem@gmail.com', //Artem Genvald
+        'LogansOleg@gmail.com',   //Kachinsky Oleg
+    ];
     /**
      * @var Swift_Mailer $mailer Mailer
      */
@@ -32,13 +37,11 @@ class NewItemAddedListener
     {
         $item = $args;
 
-        $adminEmails = $this->container->getParameter('admin_emails');
-
         $message = $this->mailer
             ->createMessage()
             ->setSubject('Hey admin! Users added new item!')
             ->setFrom('Logansoleg@gmail.com')
-            ->setTo($adminEmails)
+            ->setTo($this->adminEmail)
             ->setBody('Blabla');
 
         $this->mailer->send($message);

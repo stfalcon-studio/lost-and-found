@@ -41,10 +41,11 @@ class AppKernel extends Kernel
             new Vich\UploaderBundle\VichUploaderBundle(),
             // Application bundles
             new AppBundle\AppBundle(),
-            // Translation
+            // Translation and routing
             new A2lix\TranslationFormBundle\A2lixTranslationFormBundle(),
             new JMS\I18nRoutingBundle\JMSI18nRoutingBundle(),
-            new JMS\TranslationBundle\JMSTranslationBundle()
+            new JMS\TranslationBundle\JMSTranslationBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'])) {

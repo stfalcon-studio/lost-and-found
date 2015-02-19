@@ -27,7 +27,7 @@ class ItemController extends Controller
      *
      * @return Response
      *
-     * @Route("/lost-items", name="lost_items_list")
+     * @Route("/lost-items", name="lost_items_list", options={"expose"=true})
      */
     public function lostItemsListAction()
     {
@@ -46,7 +46,7 @@ class ItemController extends Controller
      *
      * @return Response
      *
-     * @Route("/found-items", name="found_items_list")
+     * @Route("/found-items", name="found_items_list", options={"expose"=true})
      */
     public function foundItemsListAction()
     {
@@ -199,7 +199,7 @@ class ItemController extends Controller
      *
      * @return Response
      *
-     * @Route("/show/found-points", name="show_found_points")
+     * @Route("/show/found-points", name="show_found_points", options={"expose"=true})
      */
     public function getFoundPointsAction(Request $request)
     {
@@ -234,7 +234,7 @@ class ItemController extends Controller
      * @return Response
      * @throws AccessDeniedException
      *
-     * @Route("/show/lost-points", name="show_lost_points")
+     * @Route("/show/lost-points", name="show_lost_points", options={"expose"=true})
      */
     public function getLostPointsAction(Request $request)
     {
@@ -359,7 +359,7 @@ class ItemController extends Controller
      *
      * @return Response
      *
-     * @Route("item/{id}/request-user", name="item_user_get_facebook")
+     * @Route("item/{id}/request-user", name="item_user_get_facebook", options={"expose"=true})
      * @ParamConverter("item", class="AppBundle\Entity\Item")
      */
     public function requestUserAction(Item $item)

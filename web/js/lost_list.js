@@ -37,21 +37,21 @@ $(document).ready(function () {
         layerGroup.clearLayers();
         $('#items').empty();
     }
-
     var categories;
-    var categoriesId = [];;
+    var categoriesId = [];
     var checkedCategory = false;
     $.ajax({
-        url: 'http://lost-and-found.work/app_dev.php/get/categories',
+        url: Routing.generate('get_categories', true),
         type: 'get',
         dataType: 'JSON',
         success: function (data) {
             categories = new Object(data);
             $.ajax({
-                url: 'http://lost-and-found.work/app_dev.php/show/lost-points',
+                url: Routing.generate('show_lost_points'),
                 type: 'get',
                 dataType: 'JSON',
                 success: function (data) {
+                    console.log(Routing.generate('show_lost_points'));
                     var layer = null;
                     var center = null;
                     $('.btn-group').on('change', function() {

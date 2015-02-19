@@ -65,7 +65,9 @@ $(document).ready(function() {
 $('#contact-with-author').on('click', function(e) {
     e.preventDefault();
     $.ajax({
-        url: 'http://lost-and-found.work/app_dev.php/item/' + $('#itemId').data('item-id') + '/request-user',
+        url: Routing.generate('item_user_get_facebook', {
+            id : $('#itemId').data('item-id')
+        }),
         type: 'get',
         dataType: 'JSON',
         success: function (data) {
