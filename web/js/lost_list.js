@@ -41,7 +41,7 @@ $(document).ready(function () {
     var categoriesId = [];
     var checkedCategory = false;
     $.ajax({
-        url: Routing.generate('get_categories', true),
+        url: Routing.generate('get_categories'),
         type: 'get',
         dataType: 'JSON',
         success: function (data) {
@@ -51,7 +51,6 @@ $(document).ready(function () {
                 type: 'get',
                 dataType: 'JSON',
                 success: function (data) {
-                    console.log(Routing.generate('show_lost_points'));
                     var layer = null;
                     var center = null;
                     $('.btn-group').on('change', function() {
