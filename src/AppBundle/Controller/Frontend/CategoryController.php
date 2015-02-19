@@ -26,7 +26,7 @@ class CategoryController extends Controller
      *
      * @throws AccessDeniedException
      *
-     * @Route("/get/categories", name="get_categories")
+     * @Route("/get/categories", name="get_categories", options={"expose"=true})
      */
     public function getAllModeratedAction(Request $request)
     {
