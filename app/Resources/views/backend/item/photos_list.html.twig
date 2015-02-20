@@ -1,9 +1,13 @@
 {% extends '@SonataAdmin/CRUD/base_show_field.html.twig' %}
 
 {% block field %}
-    <link rel="stylesheet" href="{{ asset('css/jquery.fancybox.css') }}" type="text/css" media="screen" />
-    <script type="text/javascript" src="{{ asset('js/jquery.fancybox.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/jquery.fancybox.pack.js') }}"></script>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/jquery.fancybox.css') }}" type="text/css" media="screen" />
+    {% endblock stylesheets %}
+    {% block javascripts %}
+        <script type="text/javascript" src="{{ asset('js/jquery.fancybox.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/jquery.fancybox.pack.js') }}"></script>
+    {% endblock javascripts %}
     {% for photo in object.photos %}
         {% if photo %}
         <ul class="photos">

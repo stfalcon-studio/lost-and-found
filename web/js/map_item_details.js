@@ -1,7 +1,4 @@
 $(document).ready(function() {
-
-
-    //map
     var map = L.map('map').setView([48.76375572, 31.62963867], 6);
 
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -64,13 +61,10 @@ $(document).ready(function() {
 
     var figureLayer = L.layerGroup().addLayer(layer).addTo(map);
 
-    //fancybox for photos
-    /* This is basic - uses default settings */
-
     $("a.photo_group")
         .attr('rel', 'gallery')
         .fancybox({
-            padding     : 0,
+            padding : 0,
             helpers : {
                 overlay : {
                     css : {
