@@ -86,7 +86,7 @@ class Item implements UserManageableInterface
     private $longitude;
 
     /**
-     * @var array $type Type
+     * @var string $type Type
      *
      * @DoctrineAssert\Enum(entity="AppBundle\DBAL\Types\ItemTypeType")
      *
@@ -119,7 +119,7 @@ class Item implements UserManageableInterface
     private $area;
 
     /**
-     * @var array $areaType Area type
+     * @var string $areaType Area type
      *
      * @DoctrineAssert\Enum(entity="AppBundle\DBAL\Types\ItemAreaTypeType")
      *
@@ -130,7 +130,7 @@ class Item implements UserManageableInterface
     private $areaType;
 
     /**
-     * @var array $status Status
+     * @var string $status Status
      *
      * @DoctrineAssert\Enum(entity="AppBundle\DBAL\Types\ItemStatusType")
      *

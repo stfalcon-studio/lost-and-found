@@ -45,7 +45,7 @@ class CategoryAdminController extends CRUDController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $categoryIds = $this->getRequest()->get('idx', []);
+        $categoryIds = $this->get('request')->get('idx', []);
 
         if (count($categoryIds)) {
             $categoryRepository = $em->getRepository($this->admin->getClass());

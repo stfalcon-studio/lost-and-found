@@ -49,8 +49,9 @@ class ItemAreaValidator extends ConstraintValidator
      */
     private function buildMessage($replacedMessage, Constraint $constraint)
     {
-        return $this->context->buildViolation($constraint->message)
-                             ->setParameter('%areaType%', $replacedMessage)
-                             ->addViolation();
+        return $this->context
+            ->buildViolation($constraint->message)
+            ->setParameter('%areaType%', $replacedMessage)
+            ->addViolation();
     }
 }

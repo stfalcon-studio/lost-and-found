@@ -2,6 +2,7 @@
 
 namespace AppBundle\Command;
 
+use AppBundle\DBAL\Types\ItemTypeType;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -27,8 +28,8 @@ class GeoCommand extends ContainerAwareCommand
         $geo = $this->getContainer()->get('geo');
         $itemRepository = $this->getContainer()->get('doctrine.orm.entity_manager')->getRepository('AppBundle:Item');
 
-        $foundItems = $itemRepository->getFoundItems();
-        $lostItems = $itemRepository->getLostItems();
+        $foundItems = $itemRepository->getItemsJoinCategories(ItemTypeType::FOUND);
+        $lostItems = $itemRepository->getItemsJoinCategories(ItemTypeType::LOST);
 
         $output->writeln('-----------Found Items----------');
 

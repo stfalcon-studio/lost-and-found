@@ -44,7 +44,7 @@ class ItemAdminController extends CRUDController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $itemIds = $this->getRequest()->get('idx', []);
+        $itemIds = $this->get('request')->get('idx', []);
 
         if (count($itemIds)) {
             $itemRepository = $em->getRepository($this->admin->getClass());
