@@ -1,16 +1,16 @@
 /* TEAM */
     Sensei: Genvald Artem
-    Email: genvaldartem@gmail.com
+    Email: GenvaldArtem@gmail.com
     Twitter: @_fre5h
     From: Ukraine, Khmelnytskyi
 
     Developer: Prohorovych Andrew
-    Email: prohorovychua@gmail.com
+    Email: ProhorovychUA@gmail.com
     Twitter: @prokhorovych
     From: Ukraine, Khmelnytskyi
 
     Developer: Svatok Yuri
-    Email: svatok13@gmail.com
+    Email: Svatok13@gmail.com
     Twitter: @yurisvatok
     From: Ukraine, Khmelnytskyi
 
@@ -20,7 +20,7 @@
     From: Ukraine, Khmelnytskyi
 
 /* THANKS */
-    Web-studio  stfalcon.com
+    Web-studio  Stfalcon.com
     Site:       stfalcon.com
     Contact:    info@stfalcon.com
     Located:    Ukraine, Khmelnytskyi
