@@ -61,7 +61,8 @@
         "a2lix/translation-form-bundle": "1.*@dev",
         "jms/i18n-routing-bundle": "dev-master",
         "jms/translation-bundle": "dev-master",
-        "friendsofsymfony/jsrouting-bundle": "2.0.*@dev"
+        "friendsofsymfony/jsrouting-bundle": "2.0.*@dev",
+        "sonata-project/seo-bundle": "1.1.*@dev"
     },
     "require-dev": {
         "behat/behat":                          "~3.0",
