@@ -479,7 +479,7 @@ class ItemRepository extends EntityRepository
             ->groupBy('i.category')
             ->setParameter('type', ItemTypeType::FOUND);
 
-        if (!is_null($dateFrom) && !is_null($dateTo)) {
+        if (null !== $dateFrom && null !== $dateTo) {
             $from = $dateFrom->format('Y-m-d 00:00:00');
             $to = $dateTo->format('Y-m-d 23:59:59');
 
@@ -490,5 +490,28 @@ class ItemRepository extends EntityRepository
         }
 
         return $qb->getQuery()->getArrayResult();
+    }
+
+    /**
+     * Find moderated item by id
+     *
+     * @param integer $id
+     *
+     * @return Item
+     */
+    public function findModeratedItemById($id)
+    {
+        $qb = $this->createQueryBuilder('i');
+
+        $qb
+            ->select('i')
+            ->where($qb->expr()->eq('i.id', ':id'))
+            ->andWhere($qb->expr()->eq('i.moderated', ':moderated'))
+            ->setParameters([
+                'id' => $id,
+                'moderated' => true,
+            ]);
+
+        return $qb->getQuery()->getSingleResult();
     }
 }

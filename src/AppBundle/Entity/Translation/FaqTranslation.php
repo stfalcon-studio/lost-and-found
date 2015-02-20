@@ -21,30 +21,8 @@ use Gedmo\Translatable\Entity\MappedSuperclass\AbstractPersonalTranslation;
 class FaqTranslation extends AbstractPersonalTranslation
 {
     /**
-     * Convinient constructor
-     *
-     * @param string $locale
-     * @param string $field
-     * @param string $content
-     */
-    public function __construct($locale = null, $field = null, $content = null)
-    {
-        $this->setLocale($locale);
-        $this->setField($field);
-        $this->setContent($content);
-    }
-
-    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Faq", inversedBy="translations")
      * @ORM\JoinColumn(name="object_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $object;
-
-    /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->getLocale();
-    }
 }

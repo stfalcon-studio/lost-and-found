@@ -21,12 +21,6 @@ doctrine:
         auto_mapping: true
         naming_strategy: doctrine.orm.naming_strategy.underscore
         mappings:
-#            gedmo_translatable:
-#                type: annotation
-#                prefix: Gedmo\Translatable\Entity
-#                dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translatable/Entity"
-#                alias: GedmoTranslatable # this one is optional and will default to the name set for the mapping
-#                is_bundle: false
             gedmo_loggable:
                 type: annotation
                 prefix: Gedmo\Loggable\Entity

@@ -60,9 +60,9 @@ class StatisticBlockService extends BaseBlockService
     {
         $settings = array_merge($this->getDefaultSettings(), $blockContext->getSettings());
 
-        return $this->renderResponse(':backend:block_admin_list.html.twig', array(
+        return $this->renderResponse(':backend:block_admin_list.html.twig', [
             'block'     => $blockContext->getBlock(),
             'settings'  => $settings
-        ), $response);
+        ], $response);
     }
 }
