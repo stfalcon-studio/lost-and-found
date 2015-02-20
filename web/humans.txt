@@ -1,20 +1,20 @@
 /* TEAM */
-    Sensei: Genvald Artem
+    Sensei: Artem Genvald
     Email: GenvaldArtem@gmail.com
     Twitter: @_fre5h
     From: Ukraine, Khmelnytskyi
 
-    Developer: Prohorovych Andrew
+    Developer: Andrew Prohorovych
     Email: ProhorovychUA@gmail.com
     Twitter: @prokhorovych
     From: Ukraine, Khmelnytskyi
 
-    Developer: Svatok Yuri
+    Developer: Yuri Svatok
     Email: Svatok13@gmail.com
     Twitter: @yurisvatok
     From: Ukraine, Khmelnytskyi
 
-    Developer: Kachinsky Oleg
+    Developer: Oleg Kachinsky 
     Email: LogansOleg@gmail.com
     Twitter: @LogansUA
     From: Ukraine, Khmelnytskyi
