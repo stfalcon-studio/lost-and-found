@@ -5,9 +5,11 @@
         {{ sonata_seo_metadatas() }}
         {{ sonata_seo_link_canonical() }}
         {{ sonata_seo_lang_alternates() }}
-        <title>{% block title %}
-            Lost and Found - Service for announcements of lost and found items
-        {% endblock title %}</title>
+        <title>
+            {% block title %}
+                Lost and Found - Service for announcements of lost and found items
+            {% endblock title %}
+        </title>
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         {% block stylesheets %}
             {% stylesheets

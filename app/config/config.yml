@@ -87,4 +87,4 @@ sonata_seo:
             http-equiv:
                 'Content-Type': text/html; charset=utf-8
             charset:
-                UTF-8:    ''
+                UTF-8: ''
