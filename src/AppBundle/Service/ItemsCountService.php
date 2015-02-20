@@ -36,15 +36,16 @@ class ItemsCountService
         $repository = $this->entityManager->getRepository('AppBundle:Item');
 
         $foundCount = $repository->getUserItemsCountByType($user, ItemTypeType::FOUND);
-        $lostCount = $repository->getUserItemsCountByType($user, ItemTypeType::LOST);
+        $lostCount  = $repository->getUserItemsCountByType($user, ItemTypeType::LOST);
+
         $notModeratedCount = $repository->getUserItemsCountByModerate($user, false);
-        $notActiveCount = $repository->getUserItemsCountByActivate($user, false);
+        $notActiveCount    = $repository->getUserItemsCountByActivate($user, false);
 
         return [
-            'lost' => $lostCount,
-            'found' => $foundCount,
+            'lost'         => $lostCount,
+            'found'        => $foundCount,
             'notModerated' => $notModeratedCount,
-            'notActive' => $notActiveCount,
+            'notActive'    => $notActiveCount,
         ];
     }
 }

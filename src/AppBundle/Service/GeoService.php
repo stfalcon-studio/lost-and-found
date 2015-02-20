@@ -4,6 +4,7 @@ namespace AppBundle\Service;
 
 use AppBundle\Entity\Item;
 use Doctrine\ORM\EntityManager;
+use AppBundle\DBAL\Types\ItemTypeType;
 
 
 /**
@@ -35,8 +36,8 @@ class GeoService
     {
         $itemRepository = $this->entityManager->getRepository('AppBundle:Item');
 
-        $foundItems = $itemRepository->getFoundItems();
-        $lostItems = $itemRepository->getLostItems();
+        $foundItems = $itemRepository->getItemsJoinCategories(ItemTypeType::FOUND);
+        $lostItems = $itemRepository->getItemsJoinCategories(ItemTypeType::LOST);
 
         $foundMatches = [];
         $numbersFound = [];
@@ -124,8 +125,8 @@ class GeoService
     {
         $itemRepository = $this->entityManager->getRepository('AppBundle:Item');
 
-        $foundItems = $itemRepository->getFoundItems();
-        $lostItems = $itemRepository->getLostItems();
+        $foundItems = $itemRepository->getItemsJoinCategories(ItemTypeType::FOUND);
+        $lostItems = $itemRepository->getItemsJoinCategories(ItemTypeType::LOST);
 
         $lostMatches = [];
         $numbersLost = [];

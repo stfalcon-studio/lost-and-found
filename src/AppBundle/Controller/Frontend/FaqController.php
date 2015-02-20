@@ -4,7 +4,6 @@ namespace AppBundle\Controller\Frontend;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Gedmo\Translatable\Entity\Repository;
 
@@ -16,20 +15,17 @@ use Gedmo\Translatable\Entity\Repository;
 class FaqController extends Controller
 {
     /**
-     * Show Faq
-     *
-     * @param Request $request
+     * Show all faq list
      *
      * @Route("/faq", name="show_faq")
      *
      * @return Response
      */
-    public function allFaqListAction(Request $request)
+    public function allFaqListAction()
     {
         $faqRepository = $this->getDoctrine()->getRepository('AppBundle:Faq');
-        $faq = $faqRepository->findBy([
-            'enabled' => true,
-        ]);
+
+        $faq = $faqRepository->getAllEnabled();
 
         return $this->render('frontend/default/faq.html.twig', [
             'faq' => $faq,
