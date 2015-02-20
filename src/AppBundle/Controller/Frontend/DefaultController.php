@@ -9,8 +9,9 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * DefaultController
  *
- * @author Artem Genvald <genvaldartem@gmail.com>
- * @author svatok13 <svatok13@gmail.com>
+ * @author Artem Genvald  <GenvaldArtem@gmail.com>
+ * @author Yuri Svatok    <Svatok13@gmail.com>
+ * @author Oleg Kachinsky <LogansOleg@gmail.com>
  */
 class DefaultController extends Controller
 {

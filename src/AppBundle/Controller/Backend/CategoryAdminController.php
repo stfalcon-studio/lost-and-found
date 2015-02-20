@@ -8,7 +8,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 /**
  * CategoryAdminController
  *
- * @author svatok13
+ * @author Artem Genvald <GenvaldArtem@gmail.com>
+ * @author Yuri Svatok   <Svatok13@gmail.com>
  */
 class CategoryAdminController extends CRUDController
 {

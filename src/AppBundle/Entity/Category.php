@@ -14,7 +14,10 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * Category Entity
  *
- * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Artem Genvald      <GenvaldArtem@gmail.com>
+ * @author Yuri Svatok        <Svatok13@gmail.com>
+ * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
+ * @author Oleg Kachinsky     <LogansOleg@gmail.com>
  *
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CategoryRepository")
  * @ORM\Table(name="categories")

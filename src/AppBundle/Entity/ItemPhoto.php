@@ -11,6 +11,9 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * ItemPhoto Entity
  *
+ * @author Artem Genvald <GenvaldArtem@gmail.com>
+ * @author Yuri Svatok   <Svatok13@gmail.com>
+ *
  * @ORM\Entity
  * @ORM\Table(name="item_photos")
  *

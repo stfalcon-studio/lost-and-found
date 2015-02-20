@@ -11,7 +11,10 @@ use Doctrine\ORM\EntityRepository;
 /**
  * Class ItemRepository
  *
- * @author svatok13 <svatok13@gmail.com>
+ * @author Artem Genvald      <GenvaldArtem@gmail.com>
+ * @author Yuri Svatok        <Svatok13@gmail.com>
+ * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
+ * @author Oleg Kachinsky     <LogansOleg@gmail.com>
  */
 class ItemRepository extends EntityRepository
 {

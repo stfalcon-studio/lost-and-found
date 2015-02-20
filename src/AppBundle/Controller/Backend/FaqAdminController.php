@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Class Faq Admin Controller
+ *
+ * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
  */
 class FaqAdminController extends CRUDController
 {

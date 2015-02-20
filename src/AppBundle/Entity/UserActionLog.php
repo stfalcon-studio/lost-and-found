@@ -11,6 +11,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * UserActionLog Entity
  *
+ * @author Artem Genvald <GenvaldArtem@gmail.com>
+ * @author Yuri Svatok   <Svatok13@gmail.com>
+ *
  * @ORM\Table(name="user_log_actions")
  * @ORM\Entity
  */

@@ -10,6 +10,9 @@ use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * UserActionLog Entity Test
+ *
+ * @author Artem Genvald <GenvaldArtem@gmail.com>
+ * @author Yuri Svatok   <Svatok13@gmail.com>
  */
 class UserActionLogTest extends \PHPUnit_Framework_TestCase
 {

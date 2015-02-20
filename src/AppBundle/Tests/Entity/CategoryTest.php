@@ -10,7 +10,8 @@ use Symfony\Component\Validator\Constraints\File;
 /**
  * Category Entity Test
  *
- * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Artem Genvald <GenvaldArtem@gmail.com>
+ * @author Yuri Svatok   <Svatok13@gmail.com>
  */
 class CategoryTest extends \PHPUnit_Framework_TestCase
 {

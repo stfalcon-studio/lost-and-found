@@ -11,7 +11,7 @@ use AppBundle\Entity\Item;
 /**
  * Class AddUserEditListener
  *
- * @package AppBundle\Entity
+ * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
  */
 class AddUserEditListener
 {

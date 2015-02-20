@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * StatisticAdminController
  *
- * @author Logans <Logansoleg@gmail.com>
+ * @author Oleg Kachinsky <LogansOleg@gmail.com>
  */
 class StatisticAdminController extends Controller
 {

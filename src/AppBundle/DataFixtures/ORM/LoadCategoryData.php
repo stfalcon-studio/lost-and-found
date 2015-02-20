@@ -9,7 +9,9 @@ use Doctrine\Common\Persistence\ObjectManager;
 /**
  * Load Category fixtures
  *
- * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Artem Genvald  <GenvaldArtem@gmail.com>
+ * @author Yuri Svatok    <Svatok13@gmail.com>
+ * @author Oleg Kachinsky <LogansOleg@gmail.com>
  */
 class LoadCategoryData extends AbstractFixture
 {

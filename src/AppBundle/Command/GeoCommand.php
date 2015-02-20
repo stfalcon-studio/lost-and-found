@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * GeoCommand
  *
- * @author Logans <Logansoleg@gmail.com>
+ * @author Oleg Kachinsky <LogansOleg@gmail.com>
  */
 class GeoCommand extends ContainerAwareCommand
 {

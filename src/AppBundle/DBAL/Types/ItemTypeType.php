@@ -7,8 +7,8 @@ use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 /**
  * ItemTypeType type
  *
- * @author Logans <LogansOleg@gmail.com>
- * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Artem Genvald  <GenvaldArtem@gmail.com>
+ * @author Oleg Kachinsky <LogansOleg@gmail.com>
  */
 class ItemTypeType extends AbstractEnumType
 {

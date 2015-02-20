@@ -8,6 +8,8 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 /**
  * Load FAQ fixtures
+ *
+ * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
  */
 class LoadFaqData extends AbstractFixture
 {

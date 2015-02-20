@@ -11,8 +11,8 @@ use Sonata\AdminBundle\Show\ShowMapper;
 /**
  * Category Entity Admin
  *
- * @author Artem Genvald <genvaldartem@gmail.com>
- * @author svatok13
+ * @author Artem Genvald <GenvaldArtem@gmail.com>
+ * @author Yuri Svatok   <Svatok13@gmail.com>
  */
 class CategoryAdmin extends Admin
 {
