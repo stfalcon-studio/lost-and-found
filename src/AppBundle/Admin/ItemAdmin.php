@@ -85,10 +85,14 @@ class ItemAdmin extends Admin
                 ])
                 ->add('areaType', 'text')
                 ->add('status')
-                ->add('moderated')
+                ->add('moderated', 'checkbox', [
+                    'required' => false,
+                ])
                 ->add('createdBy')
                 ->add('date', 'sonata_type_date_picker')
-                ->add('deleted')
+                ->add('deleted', 'checkbox', [
+                    'required' => false,
+                ])
             ->end();
     }
 

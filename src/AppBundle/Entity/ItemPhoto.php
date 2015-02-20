@@ -7,6 +7,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * ItemPhoto Entity
@@ -43,8 +44,13 @@ class ItemPhoto
 
     /**
      * @var File $imageFile Image file
-     *
-     * @Vich\UploadableField(mapping="item_photos", fileNameProperty="imageName")
+     * @Assert\Image(
+     *      minWidth = 50,
+     *      maxWidth = 1920,
+     *      minHeight = 50,
+     *      maxHeight = 1080
+     * )
+     * @Vich\UploadableField(mapping="item_photos", fileNameProperty="imageName", nullable=true)
      */
     private $imageFile;
 
