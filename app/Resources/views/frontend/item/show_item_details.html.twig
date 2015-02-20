@@ -11,6 +11,7 @@
 {% block stylesheets %}
     {{ parent() }}
 
+    <link rel="stylesheet" href="{{ asset('css/jquery.fancybox.css') }}" type="text/css" media="screen" />
     {% stylesheets 'http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css' %}
         <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
     {% endstylesheets %}
@@ -19,8 +20,11 @@
 {% block javascripts %}
     {{ parent() }}
 
+    <script type="text/javascript" src="{{ asset('js/jquery.fancybox.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery.fancybox.pack.js') }}"></script>
     <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
     <script src="{{ asset('js/map_item_details.js') }}"></script>
+
 {% endblock javascripts %}
 
 {% block content %}
@@ -43,15 +47,18 @@
             </div>
         </div>
 
-
-        <h3>Photos</h3>
-        <ul class="photos">
-            {% for photo in item.photos %}
-                <li style="list-style-type: none; display: inline; padding: 10px;">
-                    <img src="{{ photo.imageName }}" width="150" height="150">
-                </li>
-            {% endfor %}
-        </ul>
+        {% if item.photos is not empty %}
+            <h3>Photos</h3>
+            <ul class="photos">
+                {% for photo in item.photos %}
+                    <li style="list-style-type: none; display: inline; padding: 10px;">
+                        <a class="photo_group" href="{{ photo.imageName }}">
+                            <img src="{{ photo.imageName }}" width="150" height="150">
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
         {% if is_granted('ROLE_USER') %}
             {% if request %}
                 <div>
