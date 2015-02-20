@@ -8,7 +8,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 /**
  * CategoryAdminController
  *
- * @author svatok13
+ * @author Artem Genvald <GenvaldArtem@gmail.com>
+ * @author Yuri Svatok   <Svatok13@gmail.com>
  */
 class CategoryAdminController extends CRUDController
 {
@@ -44,7 +45,7 @@ class CategoryAdminController extends CRUDController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $categoryIds = $this->getRequest()->get('idx', []);
+        $categoryIds = $this->get('request')->get('idx', []);
 
         if (count($categoryIds)) {
             $categoryRepository = $em->getRepository($this->admin->getClass());

@@ -11,7 +11,10 @@ use Sonata\AdminBundle\Show\ShowMapper;
 /**
  * Item Entity Admin
  *
- * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Artem Genvald      <GenvaldArtem@gmail.com>
+ * @author Yuri Svatok        <Svatok13@gmail.com>
+ * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
+ * @author Oleg Kachinsky     <LogansOleg@gmail.com>
  */
 class ItemAdmin extends Admin
 {
@@ -82,10 +85,14 @@ class ItemAdmin extends Admin
                 ])
                 ->add('areaType', 'text')
                 ->add('status')
-                ->add('moderated')
+                ->add('moderated', 'checkbox', [
+                    'required' => false,
+                ])
                 ->add('createdBy')
                 ->add('date', 'sonata_type_date_picker')
-                ->add('deleted')
+                ->add('deleted', 'checkbox', [
+                    'required' => false,
+                ])
             ->end();
     }
 

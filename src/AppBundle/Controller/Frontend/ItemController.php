@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller\Frontend;
 
+use AppBundle\DBAL\Types\ItemTypeType;
 use AppBundle\Entity\Item;
 use AppBundle\Event\AppEvents;
 use AppBundle\Entity\ItemRequest;
@@ -17,27 +18,37 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 /**
  * ItemController
  *
- * @author Logans <Logansoleg@gmail.com>
- * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Artem Genvald      <GenvaldArtem@gmail.com>
+ * @author Yuri Svatok        <Svatok13@gmail.com>
+ * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
+ * @author Oleg Kachinsky     <LogansOleg@gmail.com>
  */
 class ItemController extends Controller
 {
     /**
-     * Lost items list
-     *
-     * @return Response
-     *
-     * @Route("/lost-items", name="lost_items_list", options={"expose"=true})
+     * @return array
      */
-    public function lostItemsListAction()
+    private function listAction()
     {
         /** @var \AppBundle\Repository\CategoryRepository $categoryRepository */
         $categoryRepository = $this->getDoctrine()->getRepository('AppBundle:Category');
 
         $categories = $categoryRepository->getCategories();
 
+        return $categories;
+    }
+
+    /**
+     * Lost items list
+     *
+     * @return Response
+     *
+     * @Route("/lost-items", name="lost_items_list")
+     */
+    public function lostItemsListAction()
+    {
         return $this->render('frontend/item/lost_items.html.twig', [
-            'categories' => $categories,
+            'categories' => $this->listAction(),
         ]);
     }
 
@@ -50,13 +61,8 @@ class ItemController extends Controller
      */
     public function foundItemsListAction()
     {
-        /** @var \AppBundle\Repository\CategoryRepository $categoryRepository */
-        $categoryRepository = $this->getDoctrine()->getRepository('AppBundle:Category');
-
-        $categories = $categoryRepository->getCategories();
-
         return $this->render('frontend/item/found_items.html.twig', [
-            'categories'  => $categories,
+            'categories'  => $this->listAction(),
         ]);
     }
 
@@ -204,7 +210,7 @@ class ItemController extends Controller
 
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
 
-        $foundMarkers = $itemRepository->getFoundMarkers();
+        $foundMarkers = $itemRepository->getMarkers(ItemTypeType::FOUND);
 
         $router = $this->get('router');
 
@@ -239,7 +245,7 @@ class ItemController extends Controller
 
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
 
-        $lostMarkers = $itemRepository->getLostMarkers();
+        $lostMarkers = $itemRepository->getMarkers(ItemTypeType::LOST);
 
         $router = $this->get('router');
 

@@ -16,7 +16,9 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 /**
  * Class EditItemType
  *
- * @author svatok13 <svatok13@gmail.com>
+ * @author Artem Genvald      <GenvaldArtem@gmail.com>
+ * @author Yuri Svatok        <Svatok13@gmail.com>
+ * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
  */
 class EditItemType extends AbstractType
 {

@@ -16,8 +16,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Item Entity
  *
- * @author Logans <Logansoleg@gmail.com>
- * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Artem Genvald      <GenvaldArtem@gmail.com>
+ * @author Yuri Svatok        <Svatok13@gmail.com>
+ * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
+ * @author Oleg Kachinsky     <LogansOleg@gmail.com>
  *
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ItemRepository")
  * @ORM\Table(name="items")
@@ -84,7 +86,7 @@ class Item implements UserManageableInterface
     private $longitude;
 
     /**
-     * @var array $type Type
+     * @var string $type Type
      *
      * @DoctrineAssert\Enum(entity="AppBundle\DBAL\Types\ItemTypeType")
      *
@@ -117,7 +119,7 @@ class Item implements UserManageableInterface
     private $area;
 
     /**
-     * @var array $areaType Area type
+     * @var string $areaType Area type
      *
      * @DoctrineAssert\Enum(entity="AppBundle\DBAL\Types\ItemAreaTypeType")
      *
@@ -128,7 +130,7 @@ class Item implements UserManageableInterface
     private $areaType;
 
     /**
-     * @var array $status Status
+     * @var string $status Status
      *
      * @DoctrineAssert\Enum(entity="AppBundle\DBAL\Types\ItemStatusType")
      *
@@ -171,6 +173,8 @@ class Item implements UserManageableInterface
      *
      * @ORM\OneToMany(targetEntity="ItemPhoto", mappedBy="item", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\JoinColumn(onDelete="CASCADE")
+     *
+     * @Assert\Valid()
      */
     private $photos;
 
@@ -702,6 +706,7 @@ class Item implements UserManageableInterface
         foreach ($photos as $photo) {
             $photo->setItem($this);
         }
+        $this->setUpdatedAt(new \DateTime('now'));
         $this->photos = $photos;
 
         return $this;

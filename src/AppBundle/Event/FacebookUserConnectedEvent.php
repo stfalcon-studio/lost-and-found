@@ -8,7 +8,7 @@ use Symfony\Component\EventDispatcher\Event;
 /**
  * FacebookUserConnectedEvent
  *
- * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Artem Genvald <GenvaldArtem@gmail.com>
  */
 class FacebookUserConnectedEvent extends Event
 {

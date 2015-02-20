@@ -60,6 +60,19 @@ $(document).ready(function() {
     }
 
     var figureLayer = L.layerGroup().addLayer(layer).addTo(map);
+
+    $("a.photo_group")
+        .attr('rel', 'gallery')
+        .fancybox({
+            padding : 0,
+            helpers : {
+                overlay : {
+                    css : {
+                        'background' : 'rgba(58, 42, 45, 0.95)'
+                    }
+                }
+            }
+        });
 });
 
 $('#contact-with-author').on('click', function(e) {

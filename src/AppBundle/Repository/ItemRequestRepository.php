@@ -10,7 +10,8 @@ use AppBundle\Entity\ItemRequest;
 /**
  * ItemRequestRepository
  *
- * @author Logans <Logansoleg@gmail.com>
+ * @author Yuri Svatok    <Svatok13@gmail.com>
+ * @author Oleg Kachinsky <LogansOleg@gmail.com>
  */
 class ItemRequestRepository extends EntityRepository
 {

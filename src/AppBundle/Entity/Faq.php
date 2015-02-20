@@ -16,6 +16,9 @@ use Doctrine\Common\Collections\Collection;
 /**
  * Faq Entity
  *
+ * @author Artem Genvald      <GenvaldArtem@gmail.com>
+ * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
+ *
  * @ORM\Entity(repositoryClass="AppBundle\Repository\FaqRepository")
  * @ORM\Table(name="faq")
  *

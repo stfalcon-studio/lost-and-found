@@ -5,12 +5,14 @@ namespace AppBundle\Controller\Frontend;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * DefaultController
  *
- * @author Artem Genvald <genvaldartem@gmail.com>
- * @author svatok13 <svatok13@gmail.com>
+ * @author Artem Genvald  <GenvaldArtem@gmail.com>
+ * @author Yuri Svatok    <Svatok13@gmail.com>
+ * @author Oleg Kachinsky <LogansOleg@gmail.com>
  */
 class DefaultController extends Controller
 {
@@ -19,20 +21,11 @@ class DefaultController extends Controller
      *
      * @Route("/", name="homepage")
      *
-     * @return array
+     * @return Response
      */
     public function indexAction()
     {
-        /** @var \AppBundle\Repository\ItemRepository $itemRepository */
-        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
-
-        $foundItems = $itemRepository->getActiveFoundItem();
-        $lostItems  = $itemRepository->getActiveLostItem();
-
-        return $this->render('frontend/default/index.html.twig', [
-            'found_items'  => $foundItems,
-            'lost_items'   => $lostItems
-        ]);
+        return $this->render('frontend/default/index.html.twig');
     }
 
     /**
@@ -42,7 +35,7 @@ class DefaultController extends Controller
      *
      * @Route("/feedback", name="feedback")
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function feedbackAction(Request $request)
     {
@@ -51,8 +44,7 @@ class DefaultController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $email = $form->get('email')->getData();
-            $message = $form->get('message')->getData();
+            $formData = $form->getData();
 
             $adminEmails = $this->container->getParameter('admin_emails');
             $mailer = $this->get('mailer');
@@ -60,9 +52,9 @@ class DefaultController extends Controller
             $feedback = $mailer
                 ->createMessage()
                 ->setSubject('New feedback!')
-                ->setFrom($email)
+                ->setFrom($formData['email'])
                 ->setTo($adminEmails)
-                ->setBody($message);
+                ->setBody($formData['email']);
 
             $mailer->send($feedback);
 

@@ -13,8 +13,10 @@ use AppBundle\DBAL\Types\ItemStatusType;
 /**
  * Load Item fixtures
  *
- * @author Artem Genvald <genvaldartem@gmail.com>
- * @author Andrew Prohorych <prohorovychua@gmail.com>
+ * @author Artem Genvald      <GenvaldArtem@gmail.com>
+ * @author Yuri Svatok        <Svatok13@gmail.com>
+ * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
+ * @author Oleg Kachinsky     <LogansOleg@gmail.com>
  */
 class LoadItemData extends AbstractFixture implements DependentFixtureInterface
 {

@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Class Faq Admin Controller
+ *
+ * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
  */
 class FaqAdminController extends CRUDController
 {
@@ -42,7 +44,7 @@ class FaqAdminController extends CRUDController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $faqIds = $this->getRequest()->get('idx', []);
+        $faqIds = $this->get('request')->get('idx', []);
 
         if (count($faqIds)) {
             $faqRepository = $em->getRepository($this->admin->getClass());

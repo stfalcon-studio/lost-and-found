@@ -2,14 +2,16 @@
 
 namespace AppBundle\Controller\Backend;
 
+use AppBundle\DBAL\Types\ItemTypeType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * StatisticAdminController
  *
- * @author Logans <Logansoleg@gmail.com>
+ * @author Oleg Kachinsky <LogansOleg@gmail.com>
  */
 class StatisticAdminController extends Controller
 {
@@ -18,7 +20,7 @@ class StatisticAdminController extends Controller
      *
      * @param Request $request
      *
-     * @return array
+     * @return Response
      *
      * @Route("/admin/statistic", name="admin_show_statistic")
      */
@@ -27,9 +29,9 @@ class StatisticAdminController extends Controller
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
         $categoryRepository = $this->getDoctrine()->getRepository('AppBundle:Category');
 
-        $foundItems = $itemRepository->getFoundItemsOrderByCategory();
-        $lostItems = $itemRepository->getLostItemsOrderByCategory();
-        $categories = $categoryRepository->getAllEnabled();
+        $foundItems = $itemRepository->getItemsOrderByCategory(ItemTypeType::FOUND);
+        $lostItems = $itemRepository->getItemsOrderByCategory(ItemTypeType::LOST);
+        $categories = $categoryRepository->getCategories();
 
         $form = $this->createForm('statistic');
 
@@ -39,8 +41,8 @@ class StatisticAdminController extends Controller
             $from = $form->get('from')->getData();
             $to = $form->get('to')->getData();
 
-            $foundItems = $itemRepository->getFoundItemsOrderByCategory($from, $to);
-            $lostItems = $itemRepository->getLostItemsOrderByCategory($from, $to);
+            $foundItems = $itemRepository->getItemsOrderByCategory(ItemTypeType::FOUND, $from, $to);
+            $lostItems = $itemRepository->getItemsOrderByCategory(ItemTypeType::LOST, $from, $to);
         }
 
         return $this->render(':backend:statistic.html.twig', [

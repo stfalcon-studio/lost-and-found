@@ -7,6 +7,7 @@ use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 /**
  * UserActionType type
  *
+ * @author Yuri Svatok <Svatok13@gmail.com>
  */
 class UserActionType extends AbstractEnumType
 {

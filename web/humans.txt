@@ -1,0 +1,31 @@
+/* TEAM */
+    Sensei: Artem Genvald
+    Email: GenvaldArtem@gmail.com
+    Twitter: @_fre5h
+    From: Ukraine, Khmelnytskyi
+
+    Developer: Andrew Prohorovych
+    Email: ProhorovychUA@gmail.com
+    Twitter: @prokhorovych
+    From: Ukraine, Khmelnytskyi
+
+    Developer: Yuri Svatok
+    Email: Svatok13@gmail.com
+    Twitter: @yurisvatok
+    From: Ukraine, Khmelnytskyi
+
+    Developer: Oleg Kachinsky 
+    Email: LogansOleg@gmail.com
+    Twitter: @LogansUA
+    From: Ukraine, Khmelnytskyi
+
+/* THANKS */
+    Web-studio  Stfalcon.com
+    Site:       stfalcon.com
+    Contact:    info@stfalcon.com
+    Located:    Ukraine, Khmelnytskyi
+
+/* SITE */
+    Language: Ukraine / English / Russian
+    Components: Symfony2, jQuery, Sonata Project, Bootstrap Twitter.
+    Software: PhpStorm, GitHub, MySQL Workbench, Slack, Trello

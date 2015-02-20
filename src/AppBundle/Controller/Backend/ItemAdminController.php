@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 /**
  * ItemAdminController
  *
- * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Artem Genvald <GenvaldArtem@gmail.com>
  */
 class ItemAdminController extends CRUDController
 {
@@ -44,7 +44,7 @@ class ItemAdminController extends CRUDController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $itemIds = $this->getRequest()->get('idx', []);
+        $itemIds = $this->get('request')->get('idx', []);
 
         if (count($itemIds)) {
             $itemRepository = $em->getRepository($this->admin->getClass());
