@@ -7,7 +7,6 @@ use AppBundle\Entity\User;
 use AppBundle\DBAL\Types\ItemStatusType;
 use AppBundle\DBAL\Types\ItemTypeType;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query\Expr\Join;
 
 /**
  * Class ItemRepository
@@ -403,13 +402,13 @@ class ItemRepository extends EntityRepository
     }
 
     /**
-     * Get user requests
+     * Get item requests
      *
      * @param Item $item Item
      *
      * @return array
      */
-    public function getUserRequests(Item $item)
+    public function getItemRequests(Item $item)
     {
         $qb = $this->createQueryBuilder('i');
 
@@ -423,5 +422,96 @@ class ItemRepository extends EntityRepository
            ->setParameter('id', $item->getId());
 
         return $qb->getQuery()->getArrayResult();
+    }
+
+    /**
+     * Get lost items order by category
+     *
+     * @param \DateTime $dateFrom
+     * @param \DateTime $dateTo
+     *
+     * @return array
+     */
+    public function getLostItemsOrderByCategory(\DateTime $dateFrom = null, \DateTime $dateTo = null)
+    {
+        $qb = $this->createQueryBuilder('i');
+
+        $qb
+            ->select('COUNT(i) AS totalItems')
+            ->addSelect('c.title')
+            ->addSelect('i.createdAt')
+            ->join('i.category', 'c')
+            ->where($qb->expr()->eq('i.type', ':type'))
+            ->groupBy('i.category')
+            ->setParameter('type', ItemTypeType::LOST);
+
+        if (!is_null($dateFrom) && !is_null($dateTo)) {
+            $from = $dateFrom->format('Y-m-d 00:00:00');
+            $to = $dateTo->format('Y-m-d 23:59:59');
+
+            $qb
+                ->andWhere($qb->expr()->between('i.createdAt', ':from', ':to'))
+                ->setParameter('from', $from)
+                ->setParameter('to', $to);
+        }
+
+        return $qb->getQuery()->getArrayResult();
+    }
+
+    /**
+     * Get found items order by category
+     *
+     * @param \DateTime $dateFrom
+     * @param \DateTime $dateTo
+     *
+     * @return array
+     */
+    public function getFoundItemsOrderByCategory(\DateTime $dateFrom = null, \DateTime $dateTo = null)
+    {
+        $qb = $this->createQueryBuilder('i');
+
+        $qb
+            ->select('COUNT(i) AS totalItems')
+            ->addSelect('c.title')
+            ->addSelect('i.createdAt')
+            ->join('i.category', 'c')
+            ->where($qb->expr()->eq('i.type', ':type'))
+            ->groupBy('i.category')
+            ->setParameter('type', ItemTypeType::FOUND);
+
+        if (null !== $dateFrom && null !== $dateTo) {
+            $from = $dateFrom->format('Y-m-d 00:00:00');
+            $to = $dateTo->format('Y-m-d 23:59:59');
+
+            $qb
+                ->andWhere($qb->expr()->between('i.createdAt', ':from', ':to'))
+                ->setParameter('from', $from)
+                ->setParameter('to', $to);
+        }
+
+        return $qb->getQuery()->getArrayResult();
+    }
+
+    /**
+     * Find moderated item by id
+     *
+     * @param integer $id
+     *
+     * @return Item
+     */
+    public function findModeratedItemById($id)
+    {
+        $qb = $this->createQueryBuilder('i');
+
+        $qb
+            ->select('i')
+            ->where($qb->expr()->eq('i.id', ':id'))
+            ->andWhere($qb->expr()->eq('i.moderated', ':moderated'))
+            ->setParameters([
+                'id' => $id,
+                'moderated' => true,
+            ]);
+
+        return $qb->getQuery()->getSingleResult();
     }
 }

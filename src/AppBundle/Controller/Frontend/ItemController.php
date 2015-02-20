@@ -27,7 +27,7 @@ class ItemController extends Controller
      *
      * @return Response
      *
-     * @Route("/lost-items", name="lost_items_list")
+     * @Route("/lost-items", name="lost_items_list", options={"expose"=true})
      */
     public function lostItemsListAction()
     {
@@ -46,7 +46,7 @@ class ItemController extends Controller
      *
      * @return Response
      *
-     * @Route("/found-items", name="found_items_list")
+     * @Route("/found-items", name="found_items_list", options={"expose"=true})
      */
     public function foundItemsListAction()
     {
@@ -90,7 +90,8 @@ class ItemController extends Controller
         }
 
         return $this->render('frontend/item/add_lost_item.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'pageType' => 'lost',
         ]);
     }
 
@@ -124,7 +125,8 @@ class ItemController extends Controller
         }
 
         return $this->render('frontend/item/add_found_item.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'pageType' => 'found',
         ]);
     }
 
@@ -139,19 +141,47 @@ class ItemController extends Controller
      */
     public function itemDetailsAction($id)
     {
-        $item = $this->getDoctrine()
-            ->getRepository('AppBundle:Item')
-            ->findOneBy([
-                'id'        => $id,
-                'moderated' => true,
-            ]);
+        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+
+        $item = $itemRepository->findModeratedItemById($id);
+
+        $vichUploader = $this->get('vich_uploader.storage.file_system');
+        foreach ($item->getPhotos() as $photo) {
+            if ($photo->getImageName() !== null) {
+                $photo->setImageName(
+                    $this
+                        ->get('service_container')
+                        ->getParameter('host') . $vichUploader
+                        ->resolveUri($photo, 'imageFile')
+                );
+            } else {
+                $photo->setImageName(null);
+            }
+        }
 
         if (!$item) {
             throw $this->createNotFoundException('Item not found.');
         }
 
+        $requestRepository = $this->getDoctrine()->getRepository('AppBundle:ItemRequest');
+        $request = $requestRepository->findUserItemRequest($item, $this->getUser());
+
+        $userItemRequest = false;
+
+        if (!empty($request)) {
+            $userItemRequest = true;
+            $userFacebookId  = $item->getCreatedBy()->getFacebookId();
+
+            return $this->render('frontend/item/show_item_details.html.twig', [
+                'item'     => $item,
+                'request'  => $userItemRequest,
+                'facebook' => $userFacebookId,
+            ]);
+        }
+
         return $this->render('frontend/item/show_item_details.html.twig', [
-            'item' => $item,
+            'item'     => $item,
+            'request'  => $userItemRequest,
         ]);
     }
 
@@ -164,7 +194,7 @@ class ItemController extends Controller
      *
      * @return Response
      *
-     * @Route("/show/found-points", name="show_found_points")
+     * @Route("/show/found-points", name="show_found_points", options={"expose"=true})
      */
     public function getFoundPointsAction(Request $request)
     {
@@ -199,7 +229,7 @@ class ItemController extends Controller
      * @return Response
      * @throws AccessDeniedException
      *
-     * @Route("/show/lost-points", name="show_lost_points")
+     * @Route("/show/lost-points", name="show_lost_points", options={"expose"=true})
      */
     public function getLostPointsAction(Request $request)
     {
@@ -324,7 +354,7 @@ class ItemController extends Controller
      *
      * @return Response
      *
-     * @Route("item/{id}/request-user", name="item_user_get_facebook")
+     * @Route("item/{id}/request-user", name="item_user_get_facebook", options={"expose"=true})
      * @ParamConverter("item", class="AppBundle\Entity\Item")
      */
     public function requestUserAction(Item $item)

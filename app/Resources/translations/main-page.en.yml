@@ -1,0 +1,49 @@
+index:
+    header: "Lost and Found"
+    description: "Web-service for announcements of lost and found items. Was created by students from Khmelnytskyi Polytechnic College during their practice at Studio Stfalcon.com"
+    lost-button: "I lost something :("
+    found-button: "I found something :)"
+    lost-items: "Lost items"
+    found-items: "Found items"
+    login: "Login with Facebook"
+    profile: "Profile"
+    admin: "Admin Dashboard"
+    logout: "Logout"
+
+form:
+    category: "Category"
+    title: "Title"
+    description: "Description"
+    date: "Date"
+    create-button: "Create"
+
+lost-items:
+    header: "Lost items"
+    header2: "I lost something"
+    lost-button: "I lost something :("
+    title: "I lost something :("
+
+found-items:
+    header: "Found items"
+    header2: "I lost something"
+    found-button: "I found something :)"
+    title: "I found something :)"
+
+profile:
+    my-lost-items: "My lost items"
+    my-found-items: "My found items"
+    my-deactivated-items: "My deactivated items"
+    my-not-moderated-items: "My not moderated items"
+    actual: "Actual"
+    resolved: "Resolved"
+    edit: "Edit"
+    delete: "Delete"
+    deactivate: "Deactivate"
+    activate: "Activate"
+
+faq:
+
+feedback:
+    header: "Feedback"
+    button: "Send"
+

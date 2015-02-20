@@ -47,16 +47,16 @@
                         <div class="navbar-collapse collapse" id="navbar-main">
                             <ul class="nav navbar-nav">
                                 <li>
-                                    <a href="{{ path('lost_items_list') }}">Lost items</a>
+                                    <a href="{{ path('lost_items_list') }}">{{ 'index.lost-items' | trans({}, 'main-page')}}</a>
                                 </li>
                                 <li>
-                                    <a href="{{ path('found_items_list') }}">Found items</a>
+                                    <a href="{{ path('found_items_list') }}">{{ 'index.found-items' | trans({}, 'main-page')}}</a>
                                 </li>
                                 <li>
                                     <a href="{{ path('show_faq') }}">F.A.Q.</a>
                                 </li>
                                 <li>
-                                    <a href="{{ path('feedback') }}">Feedback</a>
+                                    <a href="{{ path('feedback') }}">{{ 'feedback.header' | trans({}, 'main-page')}}</a>
                                 </li>
                             </ul>
 
@@ -72,29 +72,29 @@
                                             <ul class="dropdown-menu" aria-labelledby="download">
                                                 {#<li><a href="https://facebook.com/{{ app.user.username }}">fb account</a></li>#}
                                                 <li>
-                                                    <a href="{{ path('add_lost_item') }}">I lost something :(</a>
+                                                    <a href="{{ path('add_lost_item') }}">{{ 'index.lost-button' | trans({}, 'main-page')}}</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{ path('add_found_item') }}">I found something :)</a>
+                                                    <a href="{{ path('add_found_item') }}">{{ 'index.found-button' | trans({}, 'main-page')}}</a>
                                                 </li>
                                                 <li class="divider"></li>
                                                 <li>
-                                                    <a href="{{ path('user_actual_lost_items') }}">Profile</a>
+                                                    <a href="{{ path('user_actual_lost_items') }}">{{ 'index.profile' | trans({}, 'main-page')}}</a>
                                                 </li>
                                                 {% if is_granted('ROLE_ADMIN') %}
                                                     <li class="divider"></li>
                                                     <li>
-                                                        <a href="{{ path('sonata_admin_dashboard') }}">Admin Dashboard</a>
+                                                        <a href="{{ path('sonata_admin_dashboard') }}">{{ 'index.admin' | trans({}, 'main-page')}}</a>
                                                     </li>
                                                 {% endif %}
                                                 <li class="divider"></li>
                                                 <li>
-                                                    <a href="{{ path('fos_user_security_logout') }}">Logout</a>
+                                                    <a href="{{ path('fos_user_security_logout') }}">{{ 'index.logout' | trans({}, 'main-page')}}</a>
                                                 </li>
                                             </ul>
                                         {% else %}
                                             <a href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook'}) }}">
-                                               Login with Facebook {#<div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="true"></div>#}
+                                                {{ 'index.login' | trans({}, 'main-page')}} {#<div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="true"></div>#}
                                             </a>
                                         {% endif %}
                                     </li>
@@ -164,7 +164,7 @@
                                 </p>
                                 <p>
                                     <a href="{{ path('show_faq') }}" title="FAQ">F.A.Q.</a> |
-                                    <a href="{{ path('feedback') }}" title="Feedback">Feedback</a>
+                                    <a href="{{ path('feedback') }}" title="Feedback">{{ 'feedback.header' | trans({}, 'main-page')}}</a>
                                 </p>
                             </div>
                         </div>
@@ -176,6 +176,8 @@
         {% block javascripts %}
             <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
             <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+            <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
         {% endblock javascripts %}
     </body>
 </html>

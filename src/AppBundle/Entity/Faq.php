@@ -3,11 +3,15 @@
 namespace AppBundle\Entity;
 
 use AppBundle\Validator\Constraints as AppAssert;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use AppBundle\Entity\Translation\FaqTranslation;
+use Gedmo\Translatable\Translatable;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * Faq Entity
@@ -16,8 +20,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="faq")
  *
  * @Gedmo\Loggable
+ * @Gedmo\TranslationEntity(class="AppBundle\Entity\Translation\FaqTranslation")
  */
-class Faq
+class Faq implements Translatable
 {
     use TimestampableEntity;
 
@@ -40,6 +45,7 @@ class Faq
      * @Assert\Type(type="string")
      *
      * @Gedmo\Versioned
+     * @Gedmo\Translatable()
      */
     private $question;
 
@@ -53,6 +59,7 @@ class Faq
      * @Assert\Type(type="string")
      *
      * @Gedmo\Versioned
+     * @Gedmo\Translatable()
      */
     private $answer;
 
@@ -65,6 +72,44 @@ class Faq
      * @Gedmo\Versioned
      */
     private $enabled = true;
+
+    /**
+     * @var Collection|FaqTranslation[] $translations Translations
+     *
+     * @Assert\Type(type="object")
+     *
+     * @ORM\OneToMany(
+     *     targetEntity="AppBundle\Entity\Translation\FaqTranslation",
+     *      mappedBy="object",
+     *      cascade={"persist", "remove"},
+     *      orphanRemoval=true
+     * )
+     * @ORM\JoinColumn(onDelete="CASCADE")
+     */
+    private $translations;
+
+    /**
+     * Required for Translatable behaviour
+     *
+     * @Gedmo\Locale
+     */
+    private $locale;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->translations = new ArrayCollection();
+    }
+
+    /**
+     * @return string
+     */
+    public static function getTranslationEntityClass()
+    {
+        return 'AppBundle\Entity\Translation\FaqTranslation';
+    }
 
     /**
      * To string
@@ -84,6 +129,22 @@ class Faq
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return string Locale
+     */
+    public function getLocale()
+    {
+        return $this->locale;
+    }
+
+    /**
+     * @param string $locale Locale
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
     }
 
     /**
@@ -144,5 +205,50 @@ class Faq
         $this->enabled = $enabled;
 
         return $this;
+    }
+
+    /**
+     * Set translations
+     *
+     * @param Collection|FaqTranslation[] $translations Translations
+     *
+     * @return $this
+     */
+    public function setTranslations($translations)
+    {
+        $this->translations = $translations;
+
+        return $this;
+    }
+
+    /**
+     * Get translations
+     *
+     * @return Collection|FaqTranslation[] Translations
+     */
+    public function getTranslations()
+    {
+        return $this->translations;
+    }
+
+    /**
+     * @param FaqTranslation $translation Translation
+     *
+     * @return $this
+     */
+    public function addTranslation(FaqTranslation $translation)
+    {
+        $this->translations->add($translation);
+        $translation->setObject($this);
+    }
+
+    /**
+     * @param FaqTranslation $translation Translation
+     *
+     * @return $this
+     */
+    public function removeTranslation(FaqTranslation $translation)
+    {
+        $this->translations->removeElement($translation);
     }
 }

@@ -43,24 +43,37 @@
             </div>
         </div>
 
-        <div>
-            <a id="contact-with-author" href="" class="btn btn-success" title="Contact with author">
-               Contact with author
-            </a>
-        </div>
 
-        {#<blockquote>#}
-            {#<p>{{ item.description }}</p>#}
-        {#</blockquote>#}
+        <h3>Photos</h3>
+        <ul class="photos">
+            {% for photo in item.photos %}
+                <li style="list-style-type: none; display: inline; padding: 10px;">
+                    <img src="{{ photo.imageName }}" width="150" height="150">
+                </li>
+            {% endfor %}
+        </ul>
+        {% if is_granted('ROLE_USER') %}
+            {% if request %}
+                <div>
+                    <a id="facebook-profile" href='https://www.facebook.com/{{ facebook }}' class="btn btn-primary" target="_blank">
+                        Author Facebook profile</a>
+                </div>
+            {% else %}
+                <div>
+                    <a id="contact-with-author" href="" class="btn btn-success" title="Contact with author">
+                        Contact with author
+                    </a>
+                </div>
+                <a id="facebook-profile" href="" class="btn btn-primary" style="display:none;" target="_blank">
+                    Author Facebook profile</a>
+            {% endif %}
+        {% endif %}
 
         <div id="latitude" data-latitude="{{ item.latitude }}"></div>
         <div id="longitude" data-longitude="{{ item.longitude }}"></div>
         <div id="area" data-area="{{ item.area|json_encode }}"></div>
         <div id="areaType" data-area-type="{{ item.areaType }}"></div>
         <div id="itemId" data-item-id="{{ item.id }}"></div>
-        <a id="facebook-profile" href="" class="btn btn-primary" style="display:none;" target="_blank">
-            Author Facebook profile</a>
-
         <div id="map" style="width: auto; height: 800px"></div>
 
 

@@ -11,8 +11,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * UserItemRequest entity
  *
- * @ORM\Table(name="item_requests")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ItemRequestRepository")
+ * @ORM\Table(name="item_requests",
+ *          uniqueConstraints={@ORM\UniqueConstraint(name="unique_request", columns={"item_id", "user_id"})})
  */
 class ItemRequest
 {

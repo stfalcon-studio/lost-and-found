@@ -5,7 +5,7 @@
 {% block title %}{{ title }} | {{ parent() }}{% endblock title %}
 
 {% block content %}
-    <h1>Feedback</h1>
+    <h1>{{ 'feedback.header' | trans({}, 'main-page')}}</h1>
 
     <div>
         {{ form(form) }}

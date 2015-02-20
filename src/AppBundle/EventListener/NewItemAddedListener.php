@@ -12,15 +12,11 @@ use Swift_Mailer;
  */
 class NewItemAddedListener
 {
-    /**
-     * @var array $adminEmail Admin email
-     */
     private $adminEmail = [
-        /* TODO: Fill with admin emails */
-        'genvaldartem@gmail.com', // Artem Genvald
-        'LogansOleg@gmail.com',   // Oleg Kachinsky
+        /* TODO: Fill with admin emeils */
+        'genvaldartem@gmail.com', //Artem Genvald
+        'LogansOleg@gmail.com',   //Kachinsky Oleg
     ];
-
     /**
      * @var Swift_Mailer $mailer Mailer
      */

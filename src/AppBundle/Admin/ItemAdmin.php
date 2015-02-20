@@ -52,16 +52,12 @@ class ItemAdmin extends Admin
         switch ($name) {
             case 'list':
                 return 'backend\item\list.html.twig';
-                break;
             case 'show':
                 return 'backend\item\show.html.twig';
-                break;
             case 'edit':
                 return 'backend\item\edit.html.twig';
-                break;
             default:
                 return parent::getTemplate($name);
-                break;
         }
     }
 
@@ -148,6 +144,9 @@ class ItemAdmin extends Admin
             ->add('longitude')
             ->add('type')
             ->add('description')
+            ->add('photos', 'string', [
+                'template' => 'backend/item/photos_list.html.twig'
+            ])
             ->add('area', 'text', [
                 'template' => 'backend/item/show_map.html.twig'
             ])
