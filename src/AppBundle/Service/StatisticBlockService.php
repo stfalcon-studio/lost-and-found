@@ -12,7 +12,7 @@ use Sonata\BlockBundle\Block\BlockContextInterface;
 /**
  * StatisticBlockService
  *
- * @author Logans <Logansoleg@gmail.com>
+ * @author Oleg Kachinsky <LogansOleg@gmail.com>
  */
 class StatisticBlockService extends BaseBlockService
 {

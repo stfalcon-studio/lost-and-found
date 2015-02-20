@@ -7,8 +7,8 @@ use Composer\Script\Event;
 /**
  * Class Heroku Environment
  *
- * @author Prohorovych <prohorovychua@gmail.com>
- * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Artem Genvald      <GenvaldArtem@gmail.com>
+ * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
  */
 class HerokuEnvironment
 {

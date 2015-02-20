@@ -16,7 +16,8 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 /**
  * Class AuthProvider
  *
- * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Artem Genvald <GenvaldArtem@gmail.com>
+ * @author Yuri Svatok   <Svatok13@gmail.com>
  */
 class AuthProvider extends BaseProvider
 {

@@ -10,6 +10,8 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 /**
  * Admin faq  Entity
+ *
+ * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
  */
 class FaqAdmin extends Admin
 {

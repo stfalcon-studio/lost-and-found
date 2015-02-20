@@ -7,8 +7,8 @@ use AppBundle\Entity\User;
 /**
  * Interface UserManageableInterface
  *
- * @author Artem Genvald <genvaldartem@gmail.com>
- * @author Logans <Logansoleg@gmail.com>
+ * @author Artem Genvald  <GenvaldArtem@gmail.com>
+ * @author Oleg Kachinsky <LogansOleg@gmail.com>
  */
 interface UserManageableInterface
 {

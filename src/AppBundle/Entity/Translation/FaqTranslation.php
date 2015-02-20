@@ -8,7 +8,7 @@ use Gedmo\Translatable\Entity\MappedSuperclass\AbstractPersonalTranslation;
 /**
  * Entity Class Faq Translation
  *
- * @author Andrew Prohorovych <prohorovychua@gmail.com>
+ * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
  *
  * @ORM\Entity(repositoryClass="Gedmo\Translatable\Entity\Repository\TranslationRepository")
  * @ORM\Table(name="faq_translations",

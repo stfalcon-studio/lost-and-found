@@ -17,8 +17,10 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 /**
  * ItemController
  *
- * @author Logans <Logansoleg@gmail.com>
- * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Artem Genvald      <GenvaldArtem@gmail.com>
+ * @author Yuri Svatok        <Svatok13@gmail.com>
+ * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
+ * @author Oleg Kachinsky     <LogansOleg@gmail.com>
  */
 class ItemController extends Controller
 {

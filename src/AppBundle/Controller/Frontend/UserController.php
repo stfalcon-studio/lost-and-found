@@ -17,6 +17,10 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * Class UserController
  *
+ * @author Artem Genvald      <GenvaldArtem@gmail.com>
+ * @author Yuri Svatok        <Svatok13@gmail.com>
+ * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
+ *
  * @Route("/profile", name="user_profile")
  */
 class UserController extends Controller

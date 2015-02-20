@@ -12,8 +12,9 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 /**
  * User Entity
  *
- * @author svatok13 <svatok13@gmail.com>
- * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Artem Genvald  <GenvaldArtem@gmail.com>
+ * @author Yuri Svatok    <Svatok13@gmail.com>
+ * @author Oleg Kachinsky <LogansOleg@gmail.com>
  *
  * @ORM\Table(name="users")
  * @ORM\Entity
@@ -294,7 +295,7 @@ class User extends BaseUser
     /**
      * Get itemRequests
      *
-     * @return UserItemRequest[]|Collection UserItemRequest
+     * @return ItemRequest[]|Collection UserItemRequest
      */
     public function getItemRequests()
     {
@@ -304,7 +305,7 @@ class User extends BaseUser
     /**
      * Set itemRequests
      *
-     * @param UserItemRequest[]|Collection $itemRequests
+     * @param ItemRequest[]|Collection $itemRequests
      *
      * @return $this
      */
@@ -321,7 +322,7 @@ class User extends BaseUser
     /**
      * Add itemRequest
      *
-     * @param UserItemRequest $itemRequest
+     * @param ItemRequest $itemRequest
      *
      * @return $this
      */
@@ -335,7 +336,7 @@ class User extends BaseUser
     /**
      * Remove itemRequest
      *
-     * @param UserItemRequest $itemRequest
+     * @param ItemRequest $itemRequest
      *
      * @return $this
      */

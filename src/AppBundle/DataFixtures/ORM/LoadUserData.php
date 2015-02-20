@@ -8,7 +8,8 @@ use AppBundle\Entity\User;
 /**
  * Load User fixtures
  *
- * @author Andrew Prohorych <prohorovychua@gmail.com>
+ * @author Artem Genvald      <GenvaldArtem@gmail.com>
+ * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
  */
 class LoadUserData extends AbstractFixture
 {

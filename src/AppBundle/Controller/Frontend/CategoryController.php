@@ -12,8 +12,10 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 /**
  * CategoryController
  *
- * @author Artem Genvald <genvaldartem@gmail.com>
- * @author svatok13
+ * @author Artem Genvald      <GenvaldArtem@gmail.com>
+ * @author Yuri Svatok        <Svatok13@gmail.com>
+ * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
+ * @author Oleg Kachinsky     <LogansOleg@gmail.com>
  */
 class CategoryController extends Controller
 {

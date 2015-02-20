@@ -9,6 +9,8 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 /**
  * ItemAreaValidator
+ *
+ *
  */
 class ItemAreaValidator extends ConstraintValidator
 {

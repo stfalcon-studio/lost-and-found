@@ -15,7 +15,10 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 /**
  * Class LostItemType
  *
- * @author Logans <Logansoleg@gmail.com>
+ * @author Artem Genvald      <GenvaldArtem@gmail.com>
+ * @author Yuri Svatok        <Svatok13@gmail.com>
+ * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
+ * @author Oleg Kachinsky     <LogansOleg@gmail.com>
  */
 class LostItemType extends AbstractType
 {

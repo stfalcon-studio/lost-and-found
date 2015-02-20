@@ -10,7 +10,7 @@ use AppBundle\Entity\Item;
 /**
  * Class Add User Edit Event
  *
- * @package AppBundle\Event
+ * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
  */
 class AddUserEditEvent extends Event
 {

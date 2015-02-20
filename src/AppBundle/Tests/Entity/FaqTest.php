@@ -6,6 +6,9 @@ use AppBundle\Entity\Faq;
 
 /**
  * FAQ Entity Test
+ *
+ * @author Artem Genvald      <GenvaldArtem@gmail.com>
+ * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
  */
 class FAQTest extends \PHPUnit_Framework_TestCase
 {

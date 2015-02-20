@@ -11,6 +11,7 @@ use Gedmo\Translatable\Entity\Repository;
 /**
  * Class Faq Controller
  *
+ * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
  */
 class FaqController extends Controller
 {
