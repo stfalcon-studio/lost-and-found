@@ -491,4 +491,27 @@ class ItemRepository extends EntityRepository
 
         return $qb->getQuery()->getArrayResult();
     }
+
+    /**
+     * Find moderated item by id
+     *
+     * @param integer $id
+     *
+     * @return Item
+     */
+    public function findModeratedItemById($id)
+    {
+        $qb = $this->createQueryBuilder('i');
+
+        $qb
+            ->select('i')
+            ->where($qb->expr()->eq('i.id', ':id'))
+            ->andWhere($qb->expr()->eq('i.moderated', ':moderated'))
+            ->setParameters([
+                'id' => $id,
+                'moderated' => true,
+            ]);
+
+        return $qb->getQuery()->getSingleResult();
+    }
 }

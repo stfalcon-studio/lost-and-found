@@ -7,10 +7,11 @@ var $newLinkLi = $('<p></p>').append($addPhotoLink);
 jQuery(document).ready(function() {
     // Get the ul that holds the collection of tags
     var type = $('.type').data().type;
-    if (type == 'lost')
+    if (type == 'lost') {
         $collectionHolder = $('#lost_item_photos');
-    else
+    } else {
         $collectionHolder = $('#found_item_photos');
+    }
 
     // add the "add a tag" anchor and li to the tags ul
     $collectionHolder.append($newLinkLi);
@@ -47,7 +48,6 @@ function addPhotoForm($collectionHolder, $newLinkLi) {
 
     $('.remove-photo').click(function(e) {
         e.preventDefault();
-
         $(this).parent().remove();
 
         return false;
