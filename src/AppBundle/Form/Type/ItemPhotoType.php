@@ -31,6 +31,7 @@ class ItemPhotoType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
+            'cascade_validation' => true,
             'data_class' => 'AppBundle\Entity\ItemPhoto'
         ]);
     }

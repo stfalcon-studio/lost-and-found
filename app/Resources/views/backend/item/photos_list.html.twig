@@ -1,11 +1,26 @@
 {% extends '@SonataAdmin/CRUD/base_show_field.html.twig' %}
 
 {% block field %}
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/jquery.fancybox.css') }}" type="text/css" media="screen" />
+    {% endblock stylesheets %}
+
     {% for photo in object.photos %}
         {% if photo %}
-            <img src="{{ vich_uploader_asset(photo, 'imageFile') }}" width="32" height="32"/>
+        <ul class="photos">
+            <li style="list-style-type: none; display: inline; padding: 10px;">
+                <a class="photo_group" href="{{ vich_uploader_asset(photo, 'imageFile') }}">
+                    <img src="{{ vich_uploader_asset(photo, 'imageFile') }}" width="150" height="150"/>
+                </a>
+            </li>
+        </ul>
         {% else %}
             none
         {% endif %}
     {% endfor %}
+
+    {% block javascripts %}
+        <script type="text/javascript" src="{{ asset('js/jquery.fancybox.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/jquery.fancybox.pack.js') }}"></script>
+    {% endblock javascripts %}
 {% endblock %}
