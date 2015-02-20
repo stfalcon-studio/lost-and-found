@@ -72,3 +72,19 @@ jms_i18n_routing:
            - ru
            - en
     strategy: prefix
+
+#Sonata Seo Bundle
+sonata_seo:
+    default: sonata.seo.page.default
+    encoding: UTF-8
+    page:
+        title: Lost and Found - Service for announcements of lost and found items
+        metas:
+            name:
+                keywords: бюро знахідо хмельницький  lost found
+                description: Бюро знахідок Хмельницький
+                robots: index, follow
+            http-equiv:
+                'Content-Type':         text/html; charset=utf-8
+            charset:
+                UTF-8:    ''
