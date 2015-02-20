@@ -44,6 +44,7 @@
                                 Lost and Found
                             </a>
                         </div>
+
                         <div class="navbar-collapse collapse" id="navbar-main">
                             <ul class="nav navbar-nav">
                                 <li>
@@ -59,7 +60,12 @@
                                     <a href="{{ path('feedback') }}">{{ 'feedback.header' | trans({}, 'main-page')}}</a>
                                 </li>
                             </ul>
-
+                            {# LANGUAGE MENU SWITCHER#}
+                            <ul class="list-inline nav navbar-nav">
+                                <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'uk'})) }}">UK</a></li>
+                                <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'}))}}">EN</a></li>
+                                <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'ru'}))}}">RU</a></li>
+                            </ul>
                             <ul class="nav navbar-nav navbar-right">
                                 {#<li><a href="http://builtwithbootstrap.com/" target="_blank">Built With Bootstrap</a></li>#}
                                 {% block user_login %}
@@ -101,6 +107,7 @@
                                 {% endblock user_login %}
                             </ul>
                         </div>
+
                     </div>
 
                     {#{% block fork_me_button %}#}
