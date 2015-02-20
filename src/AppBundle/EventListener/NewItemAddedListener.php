@@ -8,7 +8,8 @@ use Swift_Mailer;
 /**
  * NewItemAddedListener
  *
- * @author Logans <Logansoleg@gmail.com>
+ * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
+ * @author Oleg Kachinsky     <LogansOleg@gmail.com>
  */
 class NewItemAddedListener
 {

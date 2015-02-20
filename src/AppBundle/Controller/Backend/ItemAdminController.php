@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 /**
  * ItemAdminController
  *
- * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Artem Genvald <GenvaldArtem@gmail.com>
  */
 class ItemAdminController extends CRUDController
 {

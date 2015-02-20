@@ -5,7 +5,8 @@ namespace AppBundle\Event;
 /**
  * AppEvents
  *
- * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Artem Genvald  <GenvaldArtem@gmail.com>
+ * @author Oleg Kachinsky <LogansOleg@gmail.com>
  */
 final class AppEvents
 {

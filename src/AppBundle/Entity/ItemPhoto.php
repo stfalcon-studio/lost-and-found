@@ -12,6 +12,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * ItemPhoto Entity
  *
+ * @author Artem Genvald <GenvaldArtem@gmail.com>
+ * @author Yuri Svatok   <Svatok13@gmail.com>
+ *
  * @ORM\Entity
  * @ORM\Table(name="item_photos")
  *

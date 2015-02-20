@@ -9,7 +9,7 @@ use Doctrine\ORM\EntityManager;
 /**
  * GeoService
  *
- * @author Logans <Logansoleg@gmail.com>
+ * @author Oleg Kachinsky <LogansOleg@gmail.com>
  */
 class GeoService
 {

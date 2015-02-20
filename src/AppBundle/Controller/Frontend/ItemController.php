@@ -17,8 +17,10 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 /**
  * ItemController
  *
- * @author Logans <Logansoleg@gmail.com>
- * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Artem Genvald      <GenvaldArtem@gmail.com>
+ * @author Yuri Svatok        <Svatok13@gmail.com>
+ * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
+ * @author Oleg Kachinsky     <LogansOleg@gmail.com>
  */
 class ItemController extends Controller
 {
@@ -141,12 +143,9 @@ class ItemController extends Controller
      */
     public function itemDetailsAction($id)
     {
-        $item = $this->getDoctrine()
-            ->getRepository('AppBundle:Item')
-            ->findOneBy([
-                'id'        => $id,
-                'moderated' => true,
-            ]);
+        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+
+        $item = $itemRepository->findModeratedItemById($id);
 
         $vichUploader = $this->get('vich_uploader.storage.file_system');
         foreach ($item->getPhotos() as $photo) {
@@ -166,13 +165,11 @@ class ItemController extends Controller
             throw $this->createNotFoundException('Item not found.');
         }
 
-        $request = $this->getDoctrine()
-            ->getRepository('AppBundle:ItemRequest')
-            ->findOneBy([
-                'item' => $item,
-                'user' => $this->getUser(),
-            ]);
+        $requestRepository = $this->getDoctrine()->getRepository('AppBundle:ItemRequest');
+        $request = $requestRepository->findUserItemRequest($item, $this->getUser());
+
         $userItemRequest = false;
+
         if (!empty($request)) {
             $userItemRequest = true;
             $userFacebookId  = $item->getCreatedBy()->getFacebookId();

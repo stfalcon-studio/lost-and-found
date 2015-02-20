@@ -10,6 +10,7 @@ use AppBundle\Entity\User;
 /**
  * Class ItemsCountService
  *
+ * @author Yuri Svatok <Svatok13@gmail.com>
  */
 class ItemsCountService
 {

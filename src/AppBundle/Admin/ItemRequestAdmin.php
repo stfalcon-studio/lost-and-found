@@ -14,7 +14,8 @@ use Sonata\AdminBundle\Show\ShowMapper;
 /**
  * Class ItemRequestAdmin
  *
- * @author svatok13 <svatok13@gmail.com>
+ * @author Artem Genvald <GenvaldArtem@gmail.com>
+ * @author Yuri Svatok   <Svatok13@gmail.com>
  */
 class ItemRequestAdmin extends Admin
 {

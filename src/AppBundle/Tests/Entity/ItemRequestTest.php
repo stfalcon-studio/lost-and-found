@@ -9,6 +9,9 @@ use AppBundle\Entity\Item;
 
 /**
  * UserActionLog Entity Test
+ *
+ * @author Artem Genvald <GenvaldArtem@gmail.com>
+ * @author Yuri Svatok   <Svatok13@gmail.com>
  */
 class ItemRequestTest extends \PHPUnit_Framework_TestCase
 {

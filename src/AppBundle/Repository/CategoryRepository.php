@@ -10,8 +10,9 @@ use Gedmo\Tree\Entity\Repository\MaterializedPathRepository;
 /**
  * Class CategoryRepository
  *
- * @author svatok13
- * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Artem Genvald  <GenvaldArtem@gmail.com>
+ * @author Yuri Svatok    <Svatok13@gmail.com>
+ * @author Oleg Kachinsky <LogansOleg@gmail.com>
  */
 class CategoryRepository extends MaterializedPathRepository
 {
