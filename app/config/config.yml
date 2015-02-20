@@ -81,10 +81,10 @@ sonata_seo:
         title: Lost and Found - Service for announcements of lost and found items
         metas:
             name:
-                keywords: бюро знахідо хмельницький  lost found
+                keywords: бюро знахідок хмельницький  lost found
                 description: Бюро знахідок Хмельницький
                 robots: index, follow
             http-equiv:
-                'Content-Type':         text/html; charset=utf-8
+                'Content-Type': text/html; charset=utf-8
             charset:
                 UTF-8:    ''
