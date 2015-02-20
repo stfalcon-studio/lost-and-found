@@ -173,6 +173,8 @@ class Item implements UserManageableInterface
      *
      * @ORM\OneToMany(targetEntity="ItemPhoto", mappedBy="item", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\JoinColumn(onDelete="CASCADE")
+     *
+     * @Assert\Valid()
      */
     private $photos;
 
@@ -704,6 +706,7 @@ class Item implements UserManageableInterface
         foreach ($photos as $photo) {
             $photo->setItem($this);
         }
+        $this->setUpdatedAt(new \DateTime('now'));
         $this->photos = $photos;
 
         return $this;

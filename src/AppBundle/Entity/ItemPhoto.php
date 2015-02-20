@@ -44,8 +44,13 @@ class ItemPhoto
 
     /**
      * @var File $imageFile Image file
-     * @Assert\Image(minWidth="50", maxWidth="1920", minHeight="50", maxHeight="1080")
-     * @Vich\UploadableField(mapping="item_photos", fileNameProperty="imageName")
+     * @Assert\Image(
+     *      minWidth = 50,
+     *      maxWidth = 500,
+     *      minHeight = 50,
+     *      maxHeight = 500
+     * )
+     * @Vich\UploadableField(mapping="item_photos", fileNameProperty="imageName", nullable=true)
      */
     private $imageFile;
 
