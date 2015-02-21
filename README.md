@@ -1,7 +1,7 @@
 Lost and Found
 ==============
 
-Web-service for announcements of lost and found items.
+Web-service for announcements of lost and found things.
 
 *Currently in development. Things may change or break until a solid release has been announced.*
 

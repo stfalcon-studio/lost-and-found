@@ -9,8 +9,8 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 /**
  * Class ItemPhotoType
  *
- * @author Artem Genvald      <GenvaldArtem@gmail.com>
- * @author Yuri Svatok        <Svatok13@gmail.com>
+ * @author Artem Genvald      <genvaldartem@gmail.com>
+ * @author Yuri Svatok        <svatok13@gmail.com>
  */
 class ItemPhotoType extends AbstractType
 {

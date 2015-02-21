@@ -9,9 +9,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * User Entity Test
  *
- * @author Artem Genvald      <GenvaldArtem@gmail.com>
- * @author Yuri Svatok        <Svatok13@gmail.com>
- * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
+ * @author Artem Genvald      <genvaldartem@gmail.com>
+ * @author Yuri Svatok        <svatok13@gmail.com>
+ * @author Andrew Prohorovych <prohorovychua@gmail.com>
  */
 class UserTest extends \PHPUnit_Framework_TestCase
 {

@@ -3,13 +3,15 @@
 namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\Faq;
+use AppBundle\Entity\Translation\FaqTranslation;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
 /**
  * Load FAQ fixtures
  *
- * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
+ * @author Artem Genvald      <genvaldartem@gmail.com>
+ * @author Andrew Prohorovych <prohorovychua@gmail.com>
  */
 class LoadFaqData extends AbstractFixture
 {
@@ -18,17 +20,65 @@ class LoadFaqData extends AbstractFixture
      */
     public function load(ObjectManager $manager)
     {
-        $question1 = (new Faq())
+        $faq1 = (new Faq())
             ->setQuestion('How i could ask some question?')
             ->setAnswer('Just type the text.')
-            ->setEnabled(true);
-        $manager->persist($question1);
+            ->setEnabled(true)
+            ->addTranslation(
+                (new FaqTranslation())
+                    ->setLocale('uk')
+                    ->setField('question')
+                    ->setContent('')
+            )
+            ->addTranslation(
+                (new FaqTranslation())
+                    ->setLocale('uk')
+                    ->setField('answer')
+                    ->setContent('')
+            )
+            ->addTranslation(
+                (new FaqTranslation())
+                    ->setLocale('ru')
+                    ->setField('question')
+                    ->setContent('')
+            )
+            ->addTranslation(
+                (new FaqTranslation())
+                    ->setLocale('ru')
+                    ->setField('answer')
+                    ->setContent('')
+            );
+        $manager->persist($faq1);
 
-        $question2 = (new Faq())
+        $faq2 = (new Faq())
             ->setQuestion('What is F.A.Q.?')
             ->setAnswer('It`s friendly answer question.')
-            ->setEnabled(true);
-        $manager->persist($question2);
+            ->setEnabled(true)
+            ->addTranslation(
+                (new FaqTranslation())
+                    ->setLocale('uk')
+                    ->setField('question')
+                    ->setContent('')
+            )
+            ->addTranslation(
+                (new FaqTranslation())
+                    ->setLocale('uk')
+                    ->setField('answer')
+                    ->setContent('')
+            )
+            ->addTranslation(
+                (new FaqTranslation())
+                    ->setLocale('ru')
+                    ->setField('question')
+                    ->setContent('')
+            )
+            ->addTranslation(
+                (new FaqTranslation())
+                    ->setLocale('ru')
+                    ->setField('answer')
+                    ->setContent('')
+            );
+        $manager->persist($faq2);
 
         $manager->flush();
     }

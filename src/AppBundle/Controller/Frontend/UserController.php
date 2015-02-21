@@ -14,9 +14,9 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * Class UserController
  *
- * @author Artem Genvald      <GenvaldArtem@gmail.com>
- * @author Yuri Svatok        <Svatok13@gmail.com>
- * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
+ * @author Artem Genvald      <genvaldartem@gmail.com>
+ * @author Yuri Svatok        <svatok13@gmail.com>
+ * @author Andrew Prohorovych <prohorovychua@gmail.com>
  *
  * @Route("/profile", name="user_profile")
  */
@@ -35,6 +35,11 @@ class UserController extends Controller
      */
     public function editItemAction(Item $item, Request $request)
     {
+        // Check if item belongs to user
+        if ($item->getCreatedBy()->getId() != $this->getUser()->getId()) {
+            throw $this->createAccessDeniedException();
+        }
+
         $form = $this->createForm('item_edit', $item);
 
         $form->handleRequest($request);
@@ -81,7 +86,7 @@ class UserController extends Controller
 
         return $this->render('frontend/user/show_actual_lost_items.html.twig', [
             'items' => $items,
-            'count' => $count,
+            'count' => $count
         ]);
     }
 
@@ -105,7 +110,7 @@ class UserController extends Controller
 
         return $this->render('frontend/user/show_actual_found_items.html.twig', [
             'items' => $items,
-            'count' => $count,
+            'count' => $count
         ]);
     }
 
@@ -129,7 +134,7 @@ class UserController extends Controller
 
         return $this->render('frontend/user/show_resolved_lost_items.html.twig', [
             'items' => $items,
-            'count' => $count,
+            'count' => $count
         ]);
     }
 
@@ -152,7 +157,7 @@ class UserController extends Controller
 
         return $this->render('frontend/user/show_resolved_found_items.html.twig', [
             'items' => $items,
-            'count' => $count,
+            'count' => $count
         ]);
     }
 
@@ -173,7 +178,7 @@ class UserController extends Controller
 
         return $this->render('frontend/user/show_deactivated_items.html.twig', [
             'items' => $items,
-            'count' => $count,
+            'count' => $count
         ]);
     }
 
@@ -194,7 +199,7 @@ class UserController extends Controller
 
         return $this->render('frontend/user/show_not_moderated_items.html.twig', [
             'items' => $items,
-            'count' => $count,
+            'count' => $count
         ]);
     }
 

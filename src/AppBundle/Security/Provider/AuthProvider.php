@@ -16,8 +16,8 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 /**
  * Class AuthProvider
  *
- * @author Artem Genvald <GenvaldArtem@gmail.com>
- * @author Yuri Svatok   <Svatok13@gmail.com>
+ * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Yuri Svatok   <svatok13@gmail.com>
  */
 class AuthProvider extends BaseProvider
 {
@@ -27,12 +27,12 @@ class AuthProvider extends BaseProvider
     protected $userManager;
 
     /**
-     * @var EventDispatcherInterface $eventDispatcher eventDispatcher
+     * @var EventDispatcherInterface $eventDispatcher Event dispatcher
      */
-    protected $eventDispatcher;
+    private $eventDispatcher;
 
     /**
-     * @var EntityManager $entityManager
+     * @var EntityManager $entityManager Entity manager
      */
     private $entityManager;
 
@@ -41,13 +41,17 @@ class AuthProvider extends BaseProvider
      *
      * @param UserManagerInterface     $userManager     User manager
      * @param EventDispatcherInterface $eventDispatcher Event dispatcher
-     * @param EntityManager            $em
+     * @param EntityManager            $em              Entity manager
      */
-    public function __construct(UserManagerInterface $userManager, EventDispatcherInterface $eventDispatcher, EntityManager $em)
+    public function __construct(
+        UserManagerInterface $userManager,
+        EventDispatcherInterface $eventDispatcher,
+        EntityManager $em
+    )
     {
         $this->userManager     = $userManager;
         $this->eventDispatcher = $eventDispatcher;
-        $this->entityManager = $em;
+        $this->entityManager   = $em;
     }
 
     /**
@@ -60,10 +64,10 @@ class AuthProvider extends BaseProvider
         ]);
 
         if ($user instanceof User) {
-            $actionLog = new UserActionLog();
-            $actionLog->setActionType(UserActionType::LOGIN);
-            $actionLog->setUser($user);
-            $actionLog->setCreatedAt(new \DateTime('now'));
+            $actionLog = (new UserActionLog())
+                ->setActionType(UserActionType::LOGIN)
+                ->setUser($user)
+                ->setCreatedAt(new \DateTime('now'));
 
             $em = $this->entityManager;
             $em->persist($actionLog);

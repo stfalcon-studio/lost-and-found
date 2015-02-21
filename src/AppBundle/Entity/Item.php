@@ -16,10 +16,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Item Entity
  *
- * @author Artem Genvald      <GenvaldArtem@gmail.com>
- * @author Yuri Svatok        <Svatok13@gmail.com>
- * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
- * @author Oleg Kachinsky     <LogansOleg@gmail.com>
+ * @author Artem Genvald      <genvaldartem@gmail.com>
+ * @author Yuri Svatok        <svatok13@gmail.com>
+ * @author Andrew Prohorovych <prohorovychua@gmail.com>
+ * @author Oleg Kachinsky     <logansoleg@gmail.com>
  *
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ItemRepository")
  * @ORM\Table(name="items")
@@ -237,6 +237,7 @@ class Item implements UserManageableInterface
         $this->userRequests = new ArrayCollection();
         $this->photos       = new ArrayCollection();
     }
+
     /**
      * To string
      *
@@ -794,5 +795,4 @@ class Item implements UserManageableInterface
 
         return $this;
     }
-
 }

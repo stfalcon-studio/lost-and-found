@@ -14,10 +14,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Item Entity Test
  *
- * @author Artem Genvald      <GenvaldArtem@gmail.com>
- * @author Yuri Svatok        <Svatok13@gmail.com>
- * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
- * @author Oleg Kachinsky     <LogansOleg@gmail.com>
+ * @author Artem Genvald      <genvaldartem@gmail.com>
+ * @author Yuri Svatok        <svatok13@gmail.com>
+ * @author Andrew Prohorovych <prohorovychua@gmail.com>
+ * @author Oleg Kachinsky     <logansoleg@gmail.com>
  */
 class ItemTest extends \PHPUnit_Framework_TestCase
 {

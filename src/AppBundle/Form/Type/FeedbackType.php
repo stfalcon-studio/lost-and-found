@@ -8,8 +8,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * FeedbackType
  *
- * @author Artem Genvald  <GenvaldArtem@gmail.com>
- * @author Oleg Kachinsky <LogansOleg@gmail.com>
+ * @author Artem Genvald  <genvaldartem@gmail.com>
+ * @author Oleg Kachinsky <logansoleg@gmail.com>
  */
 class FeedbackType extends AbstractType
 {

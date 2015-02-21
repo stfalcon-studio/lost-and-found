@@ -12,9 +12,9 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 /**
  * User Entity
  *
- * @author Artem Genvald  <GenvaldArtem@gmail.com>
- * @author Yuri Svatok    <Svatok13@gmail.com>
- * @author Oleg Kachinsky <LogansOleg@gmail.com>
+ * @author Artem Genvald  <genvaldartem@gmail.com>
+ * @author Yuri Svatok    <svatok13@gmail.com>
+ * @author Oleg Kachinsky <logansoleg@gmail.com>
  *
  * @ORM\Table(name="users")
  * @ORM\Entity

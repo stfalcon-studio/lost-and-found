@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * StatisticAdminController
  *
- * @author Oleg Kachinsky <LogansOleg@gmail.com>
+ * @author Oleg Kachinsky <logansoleg@gmail.com>
  */
 class StatisticAdminController extends Controller
 {
@@ -26,11 +26,11 @@ class StatisticAdminController extends Controller
      */
     public function showStatisticAction(Request $request)
     {
-        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+        $itemRepository     = $this->getDoctrine()->getRepository('AppBundle:Item');
         $categoryRepository = $this->getDoctrine()->getRepository('AppBundle:Category');
 
         $foundItems = $itemRepository->getItemsOrderByCategory(ItemTypeType::FOUND);
-        $lostItems = $itemRepository->getItemsOrderByCategory(ItemTypeType::LOST);
+        $lostItems  = $itemRepository->getItemsOrderByCategory(ItemTypeType::LOST);
         $categories = $categoryRepository->getCategories();
 
         $form = $this->createForm('statistic');
@@ -39,10 +39,10 @@ class StatisticAdminController extends Controller
 
         if ($form->isValid()) {
             $from = $form->get('from')->getData();
-            $to = $form->get('to')->getData();
+            $to   = $form->get('to')->getData();
 
             $foundItems = $itemRepository->getItemsOrderByCategory(ItemTypeType::FOUND, $from, $to);
-            $lostItems = $itemRepository->getItemsOrderByCategory(ItemTypeType::LOST, $from, $to);
+            $lostItems  = $itemRepository->getItemsOrderByCategory(ItemTypeType::LOST, $from, $to);
         }
 
         return $this->render(':backend:statistic.html.twig', [

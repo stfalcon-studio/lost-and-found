@@ -10,12 +10,12 @@ use Gedmo\Translatable\Entity\Repository;
 /**
  * Class Faq Controller
  *
- * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
+ * @author Andrew Prohorovych <prohorovychua@gmail.com>
  */
 class FaqController extends Controller
 {
     /**
-     * Show all faq list
+     * Show all enabled F.A.Q.
      *
      * @Route("/faq", name="show_faq")
      *
@@ -28,7 +28,7 @@ class FaqController extends Controller
         $faq = $faqRepository->getAllEnabled();
 
         return $this->render('frontend/default/faq.html.twig', [
-            'faq' => $faq,
+            'faq' => $faq
         ]);
     }
 }

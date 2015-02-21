@@ -2,22 +2,22 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Entity\Translation\FaqTranslation;
 use AppBundle\Validator\Constraints as AppAssert;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
-use Symfony\Component\Validator\Constraints as Assert;
-use AppBundle\Entity\Translation\FaqTranslation;
 use Gedmo\Translatable\Translatable;
-use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Faq Entity
  *
- * @author Artem Genvald      <GenvaldArtem@gmail.com>
- * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
+ * @author Artem Genvald      <genvaldartem@gmail.com>
+ * @author Andrew Prohorovych <prohorovychua@gmail.com>
  *
  * @ORM\Entity(repositoryClass="AppBundle\Repository\FaqRepository")
  * @ORM\Table(name="faq")
@@ -66,7 +66,6 @@ class Faq implements Translatable
      */
     private $answer;
 
-
     /**
      * @var boolean $enabled Enabled
      *
@@ -77,12 +76,19 @@ class Faq implements Translatable
     private $enabled = true;
 
     /**
+     * @var string $locale Required for Translatable behaviour
+     *
+     * @Gedmo\Locale
+     */
+    private $locale;
+
+    /**
      * @var Collection|FaqTranslation[] $translations Translations
      *
      * @Assert\Type(type="object")
      *
      * @ORM\OneToMany(
-     *     targetEntity="AppBundle\Entity\Translation\FaqTranslation",
+     *      targetEntity="AppBundle\Entity\Translation\FaqTranslation",
      *      mappedBy="object",
      *      cascade={"persist", "remove"},
      *      orphanRemoval=true
@@ -92,26 +98,11 @@ class Faq implements Translatable
     private $translations;
 
     /**
-     * Required for Translatable behaviour
-     *
-     * @Gedmo\Locale
-     */
-    private $locale;
-
-    /**
      * Constructor
      */
     public function __construct()
     {
         $this->translations = new ArrayCollection();
-    }
-
-    /**
-     * @return string
-     */
-    public static function getTranslationEntityClass()
-    {
-        return 'AppBundle\Entity\Translation\FaqTranslation';
     }
 
     /**
@@ -132,22 +123,6 @@ class Faq implements Translatable
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @return string Locale
-     */
-    public function getLocale()
-    {
-        return $this->locale;
-    }
-
-    /**
-     * @param string $locale Locale
-     */
-    public function setLocale($locale)
-    {
-        $this->locale = $locale;
     }
 
     /**
@@ -211,6 +186,26 @@ class Faq implements Translatable
     }
 
     /**
+     * Get locale
+     *
+     * @return string Locale
+     */
+    public function getLocale()
+    {
+        return $this->locale;
+    }
+
+    /**
+     * Set locale
+     *
+     * @param string $locale Locale
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
+    }
+
+    /**
      * Set translations
      *
      * @param Collection|FaqTranslation[] $translations Translations
@@ -219,6 +214,9 @@ class Faq implements Translatable
      */
     public function setTranslations($translations)
     {
+        foreach ($translations as $translation) {
+            $translation->setObject($this);
+        }
         $this->translations = $translations;
 
         return $this;
@@ -235,17 +233,22 @@ class Faq implements Translatable
     }
 
     /**
+     * Add translation
+     *
      * @param FaqTranslation $translation Translation
      *
      * @return $this
      */
     public function addTranslation(FaqTranslation $translation)
     {
-        $this->translations->add($translation);
-        $translation->setObject($this);
+        $this->translations->add($translation->setObject($this));
+
+        return $this;
     }
 
     /**
+     * Remove translation
+     *
      * @param FaqTranslation $translation Translation
      *
      * @return $this
@@ -253,5 +256,7 @@ class Faq implements Translatable
     public function removeTranslation(FaqTranslation $translation)
     {
         $this->translations->removeElement($translation);
+
+        return $this;
     }
 }

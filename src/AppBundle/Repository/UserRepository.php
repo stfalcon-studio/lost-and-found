@@ -7,8 +7,8 @@ use Doctrine\ORM\EntityRepository;
 /**
  * Class UserRepository
  *
- * @author Artem Genvald <GenvaldArtem@gmail.com>
- * @author Yuri Svatok   <Svatok13@gmail.com>
+ * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Yuri Svatok   <svatok13@gmail.com>
  */
 class UserRepository extends EntityRepository
 {

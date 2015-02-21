@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Class Faq Repository
  *
- * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
+ * @author Andrew Prohorovych <prohorovychua@gmail.com>
  */
 class FaqRepository extends EntityRepository
 {

@@ -11,9 +11,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * UserItemRequest entity
  *
- * @author Artem Genvald  <GenvaldArtem@gmail.com>
- * @author Yuri Svatok    <Svatok13@gmail.com>
- * @author Oleg Kachinsky <LogansOleg@gmail.com>
+ * @author Artem Genvald  <genvaldartem@gmail.com>
+ * @author Yuri Svatok    <svatok13@gmail.com>
+ * @author Oleg Kachinsky <logansoleg@gmail.com>
  *
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ItemRequestRepository")
  * @ORM\Table(name="item_requests",

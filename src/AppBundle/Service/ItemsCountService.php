@@ -10,17 +10,19 @@ use AppBundle\Entity\User;
 /**
  * Class ItemsCountService
  *
- * @author Yuri Svatok <Svatok13@gmail.com>
+ * @author Yuri Svatok <svatok13@gmail.com>
  */
 class ItemsCountService
 {
     /**
-     * @var EntityManager $entityManager
+     * @var EntityManager $entityManager Entity manager
      */
     private $entityManager;
 
     /**
-     * @param EntityManager $em EntityManager
+     * Constructor
+     *
+     * @param EntityManager $em Entity manager
      */
     public function __construct(EntityManager $em)
     {
@@ -28,7 +30,8 @@ class ItemsCountService
     }
 
     /**
-     * @param User $user
+     * @param User $user User
+     *
      * @return array
      */
     public function getCount(User $user)
@@ -45,7 +48,7 @@ class ItemsCountService
             'lost'         => $lostCount,
             'found'        => $foundCount,
             'notModerated' => $notModeratedCount,
-            'notActive'    => $notActiveCount,
+            'notActive'    => $notActiveCount
         ];
     }
 }

@@ -9,9 +9,10 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
 /**
- * Admin faq  Entity
+ * FAQ Entity Admin
  *
- * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
+ * @author Andrew Prohorovych <prohorovychua@gmail.com>
+ * @author Artem Genvald      <genvaldartem@gmail.com>
  */
 class FaqAdmin extends Admin
 {
@@ -50,41 +51,47 @@ class FaqAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('faq')
-                ->add('enabled')
-                ->add('translations', 'a2lix_translations_gedmo', [
-                    'translatable_class' => 'AppBundle\Entity\Faq',
-                    'fields' => [
-                      'question' => [
-                          'label' => 'Питання',
-                          'locale_options' => [
-                              'ua' => [
-                                  'required' => true
-                              ],
-                              'en' => [
-                                  'required' => false
-                              ],
-                              'ru' => [
-                                  'required' => false
-                              ]
-                          ]
-                      ],
-                      'answer'=> [
-                          'label' => 'Відповідь',
-                          'locale_options' => [
-                              'ua' => [
-                                  'required' => true
+            ->tab('Administrative')
+                ->with(null)
+                    ->add('enabled')
+                ->end()
+            ->end()
+            ->tab('Translations')
+                ->with(null)
+                    ->add('translations', 'a2lix_translations_gedmo', [
+                        'translatable_class' => 'AppBundle\Entity\Faq',
+                        'fields' => [
+                            'question' => [
+                                'locale_options' => [
+                                    'ua' => [
+                                        'required' => true
+                                    ],
+                                    'en' => [
+                                        'required' => true
+                                    ],
+                                    'ru' => [
+                                        'required' => true
+                                    ]
+                                ]
                             ],
-                              'en' => [
-                                  'required' => false
-                            ],
-                              'ru' => [
-                                  'required' => false
+                            'answer' => [
+                                'field_type'     => 'ckeditor',
+                                'locale_options' => [
+                                    'ua' => [
+                                        'required' => true
+                                    ],
+                                    'en' => [
+                                        'required' => true
+                                    ],
+                                    'ru' => [
+                                        'required' => true
+                                    ]
+                                ]
                             ]
                         ]
-                    ]
-                  ]])
-                ->end();
+                    ])
+                ->end()
+            ->end();
     }
 
     /**
@@ -93,10 +100,15 @@ class FaqAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('question', null, array('label' => 'Question'))
-            ->add('answer', null, array('label' => 'Answer'))
+            ->addIdentifier('question')
             ->add('enabled', null, [
                 'editable' => true,
+            ])
+            ->add('createdAt', 'datetime', [
+                'format' => 'd.m.Y H:i:s'
+            ])
+            ->add('updatedAt', 'datetime', [
+                'format' => 'd.m.Y H:i:s'
             ])
             ->add('_action', 'actions', [
                 'actions' => [
@@ -116,7 +128,14 @@ class FaqAdmin extends Admin
             ->add('id')
             ->add('question')
             ->add('answer')
-            ->add('enabled');
+            ->add('translations')
+            ->add('enabled')
+            ->add('createdAt', 'datetime', [
+                'format' => 'd.m.Y H:i:s'
+            ])
+            ->add('updatedAt', 'datetime', [
+                'format' => 'd.m.Y H:i:s'
+            ]);
     }
 
     /**
@@ -128,6 +147,8 @@ class FaqAdmin extends Admin
             ->add('id')
             ->add('question')
             ->add('answer')
-            ->add('enabled');
+            ->add('enabled')
+            ->add('createdAt')
+            ->add('updatedAt');
     }
 }
