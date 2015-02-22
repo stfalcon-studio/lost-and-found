@@ -2,10 +2,11 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\DBAL\Types\ItemAreaTypeType;
 use AppBundle\DBAL\Types\ItemStatusType;
 use AppBundle\Model\UserManageableInterface;
 use AppBundle\Validator\Constraints as AppAssert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -15,8 +16,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Item Entity
  *
- * @author Logans <Logansoleg@gmail.com>
- * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Artem Genvald      <genvaldartem@gmail.com>
+ * @author Yuri Svatok        <svatok13@gmail.com>
+ * @author Andrew Prohorovych <prohorovychua@gmail.com>
+ * @author Oleg Kachinsky     <logansoleg@gmail.com>
  *
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ItemRepository")
  * @ORM\Table(name="items")
@@ -83,7 +86,7 @@ class Item implements UserManageableInterface
     private $longitude;
 
     /**
-     * @var array $type Type
+     * @var string $type Type
      *
      * @DoctrineAssert\Enum(entity="AppBundle\DBAL\Types\ItemTypeType")
      *
@@ -116,7 +119,7 @@ class Item implements UserManageableInterface
     private $area;
 
     /**
-     * @var array $areaType Area type
+     * @var string $areaType Area type
      *
      * @DoctrineAssert\Enum(entity="AppBundle\DBAL\Types\ItemAreaTypeType")
      *
@@ -127,7 +130,7 @@ class Item implements UserManageableInterface
     private $areaType;
 
     /**
-     * @var array $status Status
+     * @var string $status Status
      *
      * @DoctrineAssert\Enum(entity="AppBundle\DBAL\Types\ItemStatusType")
      *
@@ -158,6 +161,24 @@ class Item implements UserManageableInterface
     private $date;
 
     /**
+     * @var Collection|ItemRequest[] $userRequests userRequest
+     *
+     * @ORM\OneToMany(targetEntity="ItemRequest", mappedBy="item", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(onDelete="CASCADE")
+     */
+    private $userRequests;
+
+    /**
+     * @var Collection|ItemPhoto[] $photos Photos
+     *
+     * @ORM\OneToMany(targetEntity="ItemPhoto", mappedBy="item", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\JoinColumn(onDelete="CASCADE")
+     *
+     * @Assert\Valid()
+     */
+    private $photos;
+
+    /**
      * @var User $createdBy Created by
      *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="items")
@@ -184,6 +205,38 @@ class Item implements UserManageableInterface
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $moderatedAt;
+
+    /**
+     * @var \DateTime $activatedAt Activated at
+     *
+     * @ORM\Column(type = "datetime", nullable=true)
+     */
+    private $activatedAt;
+
+    /**
+     * @var boolean $deleted Is deleted?
+     *
+     * @ORM\Column(name="deleted", type="boolean")
+     *
+     * @Gedmo\Versioned
+     */
+    private $deleted = false;
+
+    /**
+     * @var \DateTime $deletedAt Deleted at
+     *
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $deletedAt;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->userRequests = new ArrayCollection();
+        $this->photos       = new ArrayCollection();
+    }
 
     /**
      * To string
@@ -320,6 +373,9 @@ class Item implements UserManageableInterface
      */
     public function setActive($active)
     {
+        if ($active) {
+           $this->setActivatedAt(new \DateTime());
+        }
         $this->active = $active;
 
         return $this;
@@ -520,7 +576,7 @@ class Item implements UserManageableInterface
     /**
      * Get moderated at
      *
-     * @return \DateTime
+     * @return \DateTime Moderated at
      */
     public function getModeratedAt()
     {
@@ -530,7 +586,7 @@ class Item implements UserManageableInterface
     /**
      * Set moderated at
      *
-     * @param \DateTime $moderatedAt
+     * @param \DateTime $moderatedAt Moderated at
      *
      * @return $this
      */
@@ -552,5 +608,191 @@ class Item implements UserManageableInterface
         if (true === $this->moderated) {
             $this->setModeratedAt(new \DateTime());
         }
+    }
+
+    /**
+     * Get activated at
+     *
+     * @return \DateTime Activated at
+     */
+    public function getActivatedAt()
+    {
+        return $this->activatedAt;
+    }
+
+    /**
+     * Set activated at
+     *
+     * @param \DateTime $activatedAt Activated at
+     *
+     * @return $this
+     */
+    public function setActivatedAt($activatedAt)
+    {
+        $this->activatedAt = $activatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get deleted at
+     *
+     * @return \DateTime Deleted at
+     */
+    public function getDeletedAt()
+    {
+        return $this->deletedAt;
+    }
+
+    /**
+     * Set deleted at
+     *
+     * @param \DateTime $deletedAt
+     *
+     * @return $this
+     */
+    public function setDeletedAt($deletedAt)
+    {
+        $this->deletedAt = $deletedAt;
+
+        return $this;
+    }
+
+    /**
+     * Is delete
+     *
+     * @return boolean
+     */
+    public function isDeleted()
+    {
+        return $this->deleted;
+    }
+
+    /**
+     * Set deleted at
+     *
+     * @param boolean $delete
+     *
+     * @return $this
+     */
+    public function setDeleted($delete)
+    {
+        if ($delete) {
+           $this->setDeletedAt(new \DateTime());
+        }
+        $this->deleted = $delete;
+
+        return $this;
+    }
+
+    /**
+     * Get photos
+     *
+     * @return ItemPhoto[]|Collection Photos
+     */
+    public function getPhotos()
+    {
+        return $this->photos;
+    }
+
+    /**
+     * Set photos
+     *
+     * @param ItemPhoto[]|Collection $photos Photos
+     *
+     * @return $this
+     */
+    public function setPhotos(Collection $photos)
+    {
+        foreach ($photos as $photo) {
+            $photo->setItem($this);
+        }
+        $this->setUpdatedAt(new \DateTime('now'));
+        $this->photos = $photos;
+
+        return $this;
+    }
+
+    /**
+     * Add photo
+     *
+     * @param ItemPhoto $photo Photo
+     *
+     * @return $this
+     */
+    public function addPhoto(ItemPhoto $photo)
+    {
+        $this->photos->add($photo->setItem($this));
+
+        return $this;
+    }
+
+    /**
+     * Remove photo
+     *
+     * @param ItemPhoto $photo Photo
+     *
+     * @return $this
+     */
+    public function removePhoto(ItemPhoto $photo)
+    {
+        $this->photos->removeElement($photo);
+
+        return $this;
+    }
+
+    /**
+     * Get userRequest
+     *
+     * @return ItemRequest[]|Collection UserItemRequest
+     */
+    public function getUserRequests()
+    {
+        return $this->userRequests;
+    }
+
+    /**
+     * Set userRequests
+     *
+     * @param ItemRequest[]|Collection $userRequests
+     *
+     * @return $this
+     */
+    public function setUserRequests(Collection $userRequests)
+    {
+        foreach ($userRequests as $userRequest) {
+            $userRequest->setItem($this);
+        }
+        $this->userRequests = $userRequests;
+
+        return $this;
+    }
+
+    /**
+     * Add userRequest
+     *
+     * @param ItemRequest $userRequest
+     *
+     * @return $this
+     */
+    public function addUserRequest(ItemRequest $userRequest)
+    {
+        $this->userRequests->add($userRequest->setItem($this));
+
+        return $this;
+    }
+
+    /**
+     * Remove userRequest
+     *
+     * @param ItemRequest $userRequest
+     *
+     * @return $this
+     */
+    public function removeUserRequest(ItemRequest $userRequest)
+    {
+        $this->userRequests->removeElement($userRequest);
+
+        return $this;
     }
 }

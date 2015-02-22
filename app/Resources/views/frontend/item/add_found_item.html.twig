@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-{% block title %}I found something... | {{ parent() }}{% endblock title %}
+{% block title %} {{ 'found-items.title' | trans({}, 'main-page')}} | {{ parent() }}{% endblock title %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -14,16 +14,25 @@
 
     <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
     <script src="{{ asset('js/map_found.js') }}"></script>
+    <script src="{{ asset('js/add_image_photos.js') }}"></script>
 {% endblock javascripts %}
 
 {% block content %}
-    <h1>I found something...</h1>
+    <h1>{{ 'found-items.header2' | trans({}, 'main-page')}}</h1>
 
     <div>
         {{ form_start(form) }}
-        {{ form_errors(form) }}
+            {{ form_errors(form) }}
+            {{ form_row(form.category) }}
+            {{ form_row(form.title) }}
+            {{ form_row(form.description) }}
+            {{ form_row(form.date) }}
+            {{ form_row(form.photos) }}
+            <div id="map" style="width: auto; height: 800px"></div>
         {{ form_end(form) }}
+
     </div>
 
-    <div id="map" style="width: auto; height: 800px"></div>
+    <div class="type" hidden="hidden" data-type="{{ pageType }}">
+    </div>
 {% endblock content %}

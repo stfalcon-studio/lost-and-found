@@ -1,0 +1,48 @@
+index:
+    header: "Бюро находок"
+    description: "Веб-сервис для объявлений о потеряных и найденых вещах. Был разработан студентами Хмельницкого Политехнического колледжа на протяжении ъх практики в студии Stfalcon.com"
+    lost-button: "Я что-то потерял :("
+    found-button: "Я что-то нашел :)"
+    lost-items: "Потеряные вещи"
+    found-items: "Найденые вещи"
+    login: "Ввойти с помощью Facebook"
+    profile: "Профиль"
+    admin: "Админка"
+    logout: "Выйти"
+
+form:
+    category: "Категория"
+    title: "Заголовок"
+    description: "Описание"
+    date: "Дата"
+    create-button: "Создать"
+
+lost-items:
+    header: "Потеряные вещи"
+    header2: "Я что-то потерял..."
+    lost-button: "Я что-то потерял :("
+    title: "Я что-то потерял :("
+
+found-items:
+    header: "Найденые вещи"
+    header2: "Я что-то нашел..."
+    found-button: "Я что-то нашел :)"
+    title: "Я что-то нашел :)"
+
+profile:
+    my-lost-items: "Мои потеряные вещи"
+    my-found-items: "Мои найденые вещи"
+    my-deactivated-items: "Мои не активированые вещи"
+    my-not-moderated-items: "Мои не промодерированые вещи"
+    actual: "Актуальные"
+    resolved: "Решены"
+    edit: "Редактировать"
+    delete: "Удалить"
+    deactivate: "Деактивировать"
+    activate: "Активировать"
+
+faq:
+
+feedback:
+    header: "Обратная связь"
+    button: "Отправить"

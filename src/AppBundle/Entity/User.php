@@ -12,8 +12,9 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 /**
  * User Entity
  *
- * @author svatok13 <svatok13@gmail.com>
- * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Artem Genvald  <genvaldartem@gmail.com>
+ * @author Yuri Svatok    <svatok13@gmail.com>
+ * @author Oleg Kachinsky <logansoleg@gmail.com>
  *
  * @ORM\Table(name="users")
  * @ORM\Entity
@@ -38,6 +39,22 @@ class User extends BaseUser
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $items;
+
+    /**
+     * @var Collection|UserActionLog[] $actionLogs Actionlog
+     *
+     * @ORM\OneToMany(targetEntity="UserActionLog", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(onDelete="CASCADE")
+     */
+    private $actionLogs;
+
+    /**
+     * @var Collection|ItemRequest[] $itemRequests Item request
+     *
+     * @ORM\OneToMany(targetEntity="ItemRequest", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(onDelete="CASCADE")
+     */
+    private $itemRequests;
 
     /**
      * @var string $fullName Full name
@@ -68,6 +85,8 @@ class User extends BaseUser
         parent::__construct();
 
         $this->items = new ArrayCollection();
+        $this->actionLogs = new ArrayCollection();
+        $this->itemRequests = new ArrayCollection();
     }
 
     /**
@@ -145,6 +164,62 @@ class User extends BaseUser
         return $this;
     }
 
+
+    /**
+     * Get ActionLogs
+     *
+     * @return UserActionLog[]|Collection action logs
+     */
+    public function getActionLogs()
+    {
+        return $this->actionLogs;
+    }
+
+    /**
+     * Set ActionLogs
+     *
+     * @param UserActionLog[]|Collection $actionLogs actionLogs
+     *
+     * @return $this
+     */
+    public function setActionLogs(Collection $actionLogs)
+    {
+        foreach ($actionLogs as $actionLog) {
+            $actionLog->setUser($this);
+        }
+        $this->actionLogs = $actionLogs;
+
+        return $this;
+    }
+
+    /**
+     * Add actionLog
+     *
+     * @param UserActionLog $actionLog actionLog
+     *
+     * @return $this
+     */
+    public function addActionLog(UserActionLog $actionLog)
+    {
+        $this->actionLogs->add($actionLog->setUser($this));
+
+        return $this;
+    }
+
+    /**
+     * Remove actionLog
+     *
+     * @param UserActionLog $actionLog actionLog
+     *
+     * @return $this
+     */
+    public function removeActionLog(UserActionLog $actionLog)
+    {
+        $this->actionLogs->removeElement($actionLog);
+
+        return $this;
+    }
+
     /**
      * Get full name
      *
@@ -213,6 +288,61 @@ class User extends BaseUser
     public function setFacebookAccessToken($facebookAccessToken)
     {
         $this->facebookAccessToken = $facebookAccessToken;
+
+        return $this;
+    }
+
+    /**
+     * Get itemRequests
+     *
+     * @return ItemRequest[]|Collection UserItemRequest
+     */
+    public function getItemRequests()
+    {
+        return $this->itemRequests;
+    }
+
+    /**
+     * Set itemRequests
+     *
+     * @param ItemRequest[]|Collection $itemRequests
+     *
+     * @return $this
+     */
+    public function setUserRequests(Collection $itemRequests)
+    {
+        foreach ($itemRequests as $itemRequest) {
+            $itemRequest->setUser($this);
+        }
+        $this->itemRequests = $itemRequests;
+
+        return $this;
+    }
+
+    /**
+     * Add itemRequest
+     *
+     * @param ItemRequest $itemRequest
+     *
+     * @return $this
+     */
+    public function addUserRequest(ItemRequest $itemRequest)
+    {
+        $this->itemRequests->add($itemRequest->setUser($this));
+
+        return $this;
+    }
+
+    /**
+     * Remove itemRequest
+     *
+     * @param ItemRequest $itemRequest
+     *
+     * @return $this
+     */
+    public function removeUserRequest(ItemRequest $itemRequest)
+    {
+        $this->itemRequests->removeElement($itemRequest);
 
         return $this;
     }

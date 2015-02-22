@@ -11,7 +11,10 @@ use Sonata\AdminBundle\Show\ShowMapper;
 /**
  * Item Entity Admin
  *
- * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Artem Genvald      <genvaldartem@gmail.com>
+ * @author Yuri Svatok        <svatok13@gmail.com>
+ * @author Andrew Prohorovych <prohorovychua@gmail.com>
+ * @author Oleg Kachinsky     <logansoleg@gmail.com>
  */
 class ItemAdmin extends Admin
 {
@@ -32,11 +35,11 @@ class ItemAdmin extends Admin
     {
         $actions = parent::getBatchActions();
 
-        $actions['mark_as_moderated'] = [
+        $actions['mark_as_moderated_action']   = [
             'label'            => 'Mark as moderated',
             'ask_confirmation' => true
         ];
-        $actions['unmark_as_moderated']    = [
+        $actions['unmark_as_moderated_action'] = [
             'label'            => 'Unmark as moderated',
             'ask_confirmation' => true
         ];
@@ -52,16 +55,12 @@ class ItemAdmin extends Admin
         switch ($name) {
             case 'list':
                 return 'backend\item\list.html.twig';
-                break;
             case 'show':
                 return 'backend\item\show.html.twig';
-                break;
             case 'edit':
                 return 'backend\item\edit.html.twig';
-                break;
             default:
                 return parent::getTemplate($name);
-                break;
         }
     }
 
@@ -86,9 +85,14 @@ class ItemAdmin extends Admin
                 ])
                 ->add('areaType', 'text')
                 ->add('status')
-                ->add('moderated')
+                ->add('moderated', 'checkbox', [
+                    'required' => false,
+                ])
                 ->add('createdBy')
-                ->add('date', 'date')
+                ->add('date', 'sonata_type_date_picker')
+                ->add('deleted', 'checkbox', [
+                    'required' => false,
+                ])
             ->end();
     }
 
@@ -107,6 +111,12 @@ class ItemAdmin extends Admin
                 'template' => 'backend/item/list_status.html.twig',
             ])
             ->add('moderated', null, [
+                'editable' => true
+            ])
+            ->add('active', null, [
+                'editable' => true
+            ])
+            ->add('deleted', null, [
                 'editable' => true
             ])
             ->add('date', 'date', [
@@ -141,11 +151,15 @@ class ItemAdmin extends Admin
             ->add('longitude')
             ->add('type')
             ->add('description')
+            ->add('photos', 'string', [
+                'template' => 'backend/item/photos_list.html.twig'
+            ])
             ->add('area', 'text', [
                 'template' => 'backend/item/show_map.html.twig'
             ])
             ->add('areaType')
             ->add('status')
+            ->add('activatedAt')
             ->add('moderated', 'boolean')
             ->add('date', 'date', [
                 'format' => 'd.m.Y'
@@ -159,7 +173,10 @@ class ItemAdmin extends Admin
             ])
             ->add('moderatedAt', 'datetime', [
                 'format' => 'd.m.Y H:i:s'
-            ]);
+            ])
+            ->add('delete')
+            ->add('deletedAt')
+            ->add('useRequests');
     }
 
     /**
@@ -178,10 +195,13 @@ class ItemAdmin extends Admin
             ->add('area')
             ->add('areaType')
             ->add('status')
+            ->add('activatedAt')
             ->add('moderated')
             ->add('createdAt')
             ->add('updatedAt')
             ->add('moderatedAt')
-            ->add('date');
+            ->add('date')
+            ->add('deleted')
+            ->add('deletedAt');
     }
 }

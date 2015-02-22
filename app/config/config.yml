@@ -2,18 +2,19 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
-    - { resource: doctrine.yml }
     - { resource: assetic.yml }
     - { resource: hwi_oauth.yml }
     - { resource: fos_user.yml }
     - { resource: vich_uploader.yml }
+    - { resource: doctrine/doctrine.yml }
+    - { resource: doctrine/extensions.yml }
     - { resource: sonata/sonata-admin.yml }
     - { resource: sonata/sonata-admin-orm.yml }
     - { resource: sonata/sonata-block.yml }
 
 framework:
     #esi:             ~
-    translator:      { fallback: "%locale%" }
+    translator:      { fallback: %locale% }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -57,3 +58,34 @@ sensio_framework_extra:
     request:
         converters: true
         auto_convert: false
+
+# A2lix translation form
+a2lix_translation_form:
+    locales: [uk, ru, en]
+    default_required: true
+    manager_registry: doctrine
+
+#jms i18n routing bundle
+jms_i18n_routing:
+    default_locale: %locale%
+    locales:
+           - uk
+           - ru
+           - en
+    strategy: prefix
+
+#Sonata Seo Bundle
+sonata_seo:
+    default: sonata.seo.page.default
+    encoding: UTF-8
+    page:
+        title: Lost and Found - Service for announcements of lost and found items
+        metas:
+            name:
+                keywords: бюро знахідок хмельницький  lost found
+                description: Бюро знахідок Хмельницький
+                robots: index, follow
+            http-equiv:
+                'Content-Type': text/html; charset=utf-8
+            charset:
+                UTF-8: ''

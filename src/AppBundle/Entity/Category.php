@@ -2,11 +2,13 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Entity\Translation\CategoryTranslation;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Gedmo\Translatable\Translatable;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -14,7 +16,10 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * Category Entity
  *
- * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Artem Genvald      <genvaldartem@gmail.com>
+ * @author Yuri Svatok        <svatok13@gmail.com>
+ * @author Andrew Prohorovych <prohorovychua@gmail.com>
+ * @author Oleg Kachinsky     <logansoleg@gmail.com>
  *
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CategoryRepository")
  * @ORM\Table(name="categories")
@@ -23,8 +28,9 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @Gedmo\Tree(type="materializedPath")
  *
  * @Vich\Uploadable
+ * @Gedmo\TranslationEntity(class="AppBundle\Entity\Translation\CategoryTranslation")
  */
-class Category
+class Category implements Translatable
 {
     use TimestampableEntity;
 
@@ -42,21 +48,22 @@ class Category
      *
      * @ORM\Column(type="string", length=60)
      *
-     * @Gedmo\Versioned
-     *
      * @Assert\NotBlank()
      * @Assert\Type(type="string")
      * @Assert\Length(min="1", max="255")
+     *
+     * @Gedmo\Versioned
+     * @Gedmo\Translatable()
      */
     private $title;
 
     /**
      * @var Collection|Item[] $items Items
      *
-     * @Assert\Type(type="object")
-     *
      * @ORM\OneToMany(targetEntity="Item", mappedBy="category", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\JoinColumn(onDelete="CASCADE")
+     *
+     * @Assert\Type(type="object")
      */
     private $items;
 
@@ -70,7 +77,7 @@ class Category
     private $enabled = false;
 
     /**
-     * @var File $imageFile
+     * @var File $imageFile Image file
      *
      * @Vich\UploadableField(mapping="category_image", fileNameProperty="imageName")
      */
@@ -91,7 +98,6 @@ class Category
      * @ORM\Column(type="string", length=3000, nullable=true)
      *
      * @Gedmo\TreePath
-     *
      * @Gedmo\Versioned
      */
     private $path;
@@ -102,7 +108,6 @@ class Category
      * @ORM\Column(type="string", length=3000, nullable=true)
      *
      * @Gedmo\TreePathSource
-     *
      * @Gedmo\Versioned
      */
     private $pathSource;
@@ -114,7 +119,6 @@ class Category
      * @ORM\JoinColumn(referencedColumnName="id", onDelete="CASCADE")
      *
      * @Gedmo\TreeParent
-     *
      * @Gedmo\Versioned
      */
     private $parent;
@@ -125,7 +129,6 @@ class Category
      * @ORM\Column(type="integer", nullable=true)
      *
      * @Gedmo\TreeLevel
-     *
      * @Gedmo\Versioned
      */
     private $level;
@@ -138,11 +141,34 @@ class Category
     private $children;
 
     /**
+     * @var string $locale Required for Translatable behaviour
+     *
+     * @Gedmo\Locale
+     */
+    private $locale;
+
+    /**
+     * @var Collection|CategoryTranslation[] $translations Translations
+     *
+     * @Assert\Type(type="object")
+     *
+     * @ORM\OneToMany(
+     *      targetEntity="AppBundle\Entity\Translation\CategoryTranslation",
+     *      mappedBy="object",
+     *      cascade={"persist", "remove"},
+     *      orphanRemoval=true
+     * )
+     * @ORM\JoinColumn(onDelete="CASCADE")
+     */
+    private $translations;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
-        $this->items = new ArrayCollection();
+        $this->items        = new ArrayCollection();
+        $this->translations = new ArrayCollection();
     }
 
     /**
@@ -284,6 +310,7 @@ class Category
     public function setImageFile($imageFile)
     {
         $this->imageFile = $imageFile;
+
         if ($imageFile) {
             $this->updatedAt = new \DateTime('now');
         }
@@ -417,6 +444,81 @@ class Category
     public function setChildren($children)
     {
         $this->children = $children;
+
+        return $this;
+    }
+
+    /**
+     * Get locale
+     *
+     * @return string Locale
+     */
+    public function getLocale()
+    {
+        return $this->locale;
+    }
+
+    /**
+     * Set locale
+     *
+     * @param string $locale Locale
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
+    }
+
+    /**
+     * Set translations
+     *
+     * @param Collection|CategoryTranslation[] $translations Translations
+     *
+     * @return $this
+     */
+    public function setTranslations($translations)
+    {
+        foreach ($translations as $translation) {
+            $translation->setObject($this);
+        }
+        $this->translations = $translations;
+
+        return $this;
+    }
+
+    /**
+     * Get translations
+     *
+     * @return Collection|CategoryTranslation[] Translations
+     */
+    public function getTranslations()
+    {
+        return $this->translations;
+    }
+
+    /**
+     * Add translation
+     *
+     * @param CategoryTranslation $translation Translation
+     *
+     * @return $this
+     */
+    public function addTranslation(CategoryTranslation $translation)
+    {
+        $this->translations->add($translation->setObject($this));
+
+        return $this;
+    }
+
+    /**
+     * Remove translation
+     *
+     * @param CategoryTranslation $translation Translation
+     *
+     * @return $this
+     */
+    public function removeTranslation(CategoryTranslation $translation)
+    {
+        $this->translations->removeElement($translation);
 
         return $this;
     }

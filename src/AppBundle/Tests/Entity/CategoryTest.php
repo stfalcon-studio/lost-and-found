@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints\File;
  * Category Entity Test
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Yuri Svatok   <svatok13@gmail.com>
  */
 class CategoryTest extends \PHPUnit_Framework_TestCase
 {
@@ -157,5 +158,15 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
         $child =(new Category())->setTitle('child');
         $category = (new Category())->setChildren($child);
         $this->assertEquals($child, $category->getChildren());
+    }
+
+    /**
+     * Test setter and getter for path source
+     */
+    public function testSetGetPathSource()
+    {
+        $pathSource = 'pathSource';
+        $category = (new Category())->setPathSource($pathSource);
+        $this->assertEquals($pathSource, $category->getPathSource());
     }
 }

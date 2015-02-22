@@ -17,7 +17,7 @@ class ItemAdminController extends CRUDController
      *
      * @return RedirectResponse
      */
-    public function batchMarkAsModeratedAction()
+    public function batchActionMarkAsModeratedAction()
     {
         return $this->commonBatchWork(true, 'Moderation was marked successfully');
     }
@@ -27,7 +27,7 @@ class ItemAdminController extends CRUDController
      *
      * @return RedirectResponse
      */
-    public function batchUnmarkAsModeratedAction()
+    public function batchActionUnmarkAsModeratedAction()
     {
         return $this->commonBatchWork(false, 'Moderation was unmarked successfully');
     }
@@ -44,7 +44,7 @@ class ItemAdminController extends CRUDController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $itemIds = $this->getRequest()->get('idx', []);
+        $itemIds = $this->get('request')->get('idx', []);
 
         if (count($itemIds)) {
             $itemRepository = $em->getRepository($this->admin->getClass());

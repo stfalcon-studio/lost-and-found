@@ -9,6 +9,9 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 /**
  * ItemAreaValidator
+ *
+ * @author Artem Genvald  <genvaldartem@gmail.com>
+ * @author Oleg Kachinsky <logansoleg@gmail.com>
  */
 class ItemAreaValidator extends ConstraintValidator
 {
@@ -46,8 +49,9 @@ class ItemAreaValidator extends ConstraintValidator
      */
     private function buildMessage($replacedMessage, Constraint $constraint)
     {
-        return $this->context->buildViolation($constraint->message)
-                             ->setParameter('%areaType%', $replacedMessage)
-                             ->addViolation();
+        return $this->context
+            ->buildViolation($constraint->message)
+            ->setParameter('%areaType%', $replacedMessage)
+            ->addViolation();
     }
 }

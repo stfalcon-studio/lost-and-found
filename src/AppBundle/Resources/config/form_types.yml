@@ -1,10 +1,16 @@
 services:
+    app.form.type.photo:
+        class: AppBundle\Form\Type\ItemPhotoType
+        tags:
+            - { name: form.type, alias: photo }
+
     app.form.type.found_item:
         class: AppBundle\Form\Type\FoundItemType
         tags:
             - { name: form.type, alias: found_item }
         arguments:
             - @security.token_storage
+            - @event_dispatcher
 
     app.form.type.lost_item:
         class: AppBundle\Form\Type\LostItemType
@@ -12,6 +18,7 @@ services:
             - { name: form.type, alias: lost_item }
         arguments:
             - @security.token_storage
+            - @event_dispatcher
 
     app.form.type.area_map:
         class: AppBundle\Form\Type\AreaMapType
@@ -21,8 +28,19 @@ services:
             - @security.token_storage
 
     app.form.type.item_edit:
-            class: AppBundle\Form\Type\EditItemType
-            tags:
-                - { name: form.type, alias: item_edit }
-            arguments:
-                - @security.token_storage
+        class: AppBundle\Form\Type\EditItemType
+        tags:
+            - { name: form.type, alias: item_edit }
+        arguments:
+            - @security.token_storage
+            - @event_dispatcher
+
+    app.form.type.feedback:
+        class: AppBundle\Form\Type\FeedbackType
+        tags:
+            - { name: form.type, alias: feedback }
+
+    app.form.type.statistic:
+        class: AppBundle\Form\Type\StatisticType
+        tags:
+            - { name: form.type, alias: statistic }

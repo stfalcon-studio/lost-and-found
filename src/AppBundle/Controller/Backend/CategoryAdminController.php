@@ -8,7 +8,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 /**
  * CategoryAdminController
  *
- * @author svatok13
+ * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Yuri Svatok   <svatok13@gmail.com>
  */
 class CategoryAdminController extends CRUDController
 {
@@ -17,9 +18,9 @@ class CategoryAdminController extends CRUDController
      *
      * @return RedirectResponse
      */
-    public function batchEnableAction()
+    public function batchActionEnableAction()
     {
-        return $this->commonBatchWork(false, 'Enabled successfully');
+        return $this->commonBatchWork(true, 'Enabled successfully');
     }
 
     /**
@@ -27,7 +28,7 @@ class CategoryAdminController extends CRUDController
      *
      * @return RedirectResponse
      */
-    public function batchDisableAction()
+    public function batchActionDisableAction()
     {
         return $this->commonBatchWork(false, 'Disabled successfully');
     }
@@ -44,7 +45,7 @@ class CategoryAdminController extends CRUDController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $categoryIds = $this->getRequest()->get('idx', []);
+        $categoryIds = $this->get('request')->get('idx', []);
 
         if (count($categoryIds)) {
             $categoryRepository = $em->getRepository($this->admin->getClass());

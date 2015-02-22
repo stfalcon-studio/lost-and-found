@@ -12,7 +12,7 @@ use Sonata\AdminBundle\Show\ShowMapper;
  * Category Entity Admin
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
- * @author svatok13
+ * @author Yuri Svatok   <svatok13@gmail.com>
  */
 class CategoryAdmin extends Admin
 {
@@ -33,11 +33,11 @@ class CategoryAdmin extends Admin
     {
         $actions = parent::getBatchActions();
 
-        $actions['enable'] = [
+        $actions['enable_action']  = [
             'label'            => 'Enable',
             'ask_confirmation' => true
         ];
-        $actions['disable']    = [
+        $actions['disable_action'] = [
             'label'            => 'Disable',
             'ask_confirmation' => true
         ];
@@ -51,13 +51,38 @@ class CategoryAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('Category')
-                ->add('parent')
-                ->add('title')
-                ->add('enabled')
-                ->add('imageFile', 'file', [
-                    'required' => false
-                ])
+            ->tab('Administrative')
+                ->with(null)
+                    ->add('parent')
+                    ->add('enabled', 'checkbox', [
+                        'required' => false,
+                    ])
+                    ->add('imageFile', 'file', [
+                        'required' => false
+                    ])
+                ->end()
+            ->end()
+            ->tab('Translations')
+                ->with(null)
+                    ->add('translations', 'a2lix_translations_gedmo', [
+                        'translatable_class' => 'AppBundle\Entity\Category',
+                        'fields' => [
+                            'title' => [
+                                'locale_options' => [
+                                    'ua' => [
+                                        'required' => true
+                                    ],
+                                    'en' => [
+                                        'required' => true
+                                    ],
+                                    'ru' => [
+                                        'required' => true
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ])
+                ->end()
             ->end();
     }
 

@@ -31,3 +31,7 @@ facebook_login:
 fos_user_security_logout:
     path: /logout
     defaults: { _controller: FOSUserBundle:Security:logout }
+
+#FOSJsRoutingBundle
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

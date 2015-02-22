@@ -27,3 +27,20 @@
 .add-lost-found-item {
     margin: 15px;
 }
+
+.category-list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.category-label {
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+.index-description {
+    width: 50%;
+    margin-left: 50%;
+}
+

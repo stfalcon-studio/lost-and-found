@@ -3,16 +3,19 @@
 namespace AppBundle\EventListener;
 
 use AppBundle\Event\FacebookUserConnectedEvent;
-use FOS\UserBundle\Mailer\Mailer;
 use Swift_Mailer;
+use AppBundle\Entity\UserActionLog;
+use AppBundle\DBAL\Types\UserActionType;
+use Doctrine\ORM\EntityManager;
 
 /**
  * FacebookUserConnectedListener
  *
  * Add ROLE_ADMIN for some Facebook users
  *
- * @author Artem Genvald <genvaldartem@gmail.com>
- * @author Logans <Logansoleg@gmail.com>
+ * @author Artem Genvald  <genvaldartem@gmail.com>
+ * @author Yuri Svatok    <svatok13@gmail.com>
+ * @author Oleg Kachinsky <logansoleg@gmail.com>
  */
 class FacebookUserConnectedListener
 {
@@ -32,11 +35,18 @@ class FacebookUserConnectedListener
     private $mailer;
 
     /**
-     * @param Swift_Mailer $mailer Mailer
+     * @var EntityManager $entityManager
      */
-    public function __construct(Swift_Mailer $mailer)
+    private $entityManager;
+
+    /**
+     * @param Swift_Mailer  $mailer Mailer
+     * @param EntityManager $em     EntityManager
+     */
+    public function __construct(Swift_Mailer $mailer, EntityManager $em)
     {
         $this->mailer = $mailer;
+        $this->entityManager = $em;
     }
 
     /**
@@ -51,6 +61,15 @@ class FacebookUserConnectedListener
         if (in_array($user->getUsername(), $this->adminFacebookIds)) {
             $user->addRole('ROLE_ADMIN');
         }
+
+        $actionLog = new UserActionLog();
+        $actionLog->setActionType(UserActionType::CONNECT);
+        $actionLog->setUser($user);
+        $actionLog->setCreatedAt(new \DateTime('now'));
+
+        $em = $this->entityManager;
+        $em->persist($actionLog);
+        $em->flush();
 
         $message = $this->mailer
             ->createMessage()

@@ -24,21 +24,34 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
+
             // Doctrine related bundles
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Fresh\DoctrineEnumBundle\FreshDoctrineEnumBundle(),
+
             // Sonata related bundles
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
             new Sonata\BlockBundle\SonataBlockBundle(),
             new Sonata\AdminBundle\SonataAdminBundle(),
             new Sonata\CoreBundle\SonataCoreBundle(),
+            new Sonata\SeoBundle\SonataSeoBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+
             // User related bundles
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+
             // Media related bundles
             new Vich\UploaderBundle\VichUploaderBundle(),
+
+            // Translation and routing related bundles
+            new A2lix\TranslationFormBundle\A2lixTranslationFormBundle(),
+            new JMS\I18nRoutingBundle\JMSI18nRoutingBundle(),
+            new JMS\TranslationBundle\JMSTranslationBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+
             // Application bundles
             new AppBundle\AppBundle(),
         ];

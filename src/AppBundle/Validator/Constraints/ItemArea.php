@@ -7,6 +7,9 @@ use Symfony\Component\Validator\Constraint;
 /**
  * Class CheckItemType
  *
+ * @author Artem Genvald  <genvaldartem@gmail.com>
+ * @author Oleg Kachinsky <logansoleg@gmail.com>
+ *
  * @Annotation
  */
 class ItemArea extends Constraint

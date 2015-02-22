@@ -8,9 +8,16 @@ use AppBundle\DBAL\Types\ItemTypeType;
 use AppBundle\Entity\Category;
 use AppBundle\Entity\Item;
 use AppBundle\Entity\User;
+use AppBundle\Entity\ItemRequest;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Class ItemTest
+ * Item Entity Test
+ *
+ * @author Artem Genvald      <genvaldartem@gmail.com>
+ * @author Yuri Svatok        <svatok13@gmail.com>
+ * @author Andrew Prohorovych <prohorovychua@gmail.com>
+ * @author Oleg Kachinsky     <logansoleg@gmail.com>
  */
 class ItemTest extends \PHPUnit_Framework_TestCase
 {
@@ -35,6 +42,9 @@ class ItemTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($item->getCreatedBy());
         $this->assertFalse($item->isModerated());
         $this->assertNull($item->getModeratedAt());
+        $this->assertFalse($item->isDeleted());
+        $this->assertNull($item->getActivatedAt());
+        $this->assertNull($item->getDeletedAt());
     }
 
     /**
@@ -102,10 +112,10 @@ class ItemTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetGetArea()
     {
-        $area = array(
+        $area = [
             'a' => 1,
             'b' => 2,
-        );
+        ];
 
         $item = (new Item())->setArea($area);
         $this->assertEquals($area, $item->getArea());
@@ -134,9 +144,19 @@ class ItemTest extends \PHPUnit_Framework_TestCase
     /**
      * Test setter and getter for Active
      */
-    public function testSetGetActive()
+    public function testSetGetActiveFalse()
     {
         $active = false;
+        $item = (new Item())->setActive($active);
+        $this->assertEquals($active, $item->isActive());
+    }
+
+    /**
+     * Test setter and getter for Active
+     */
+    public function testSetGetActiveTrue()
+    {
+        $active = true;
         $item = (new Item())->setActive($active);
         $this->assertEquals($active, $item->isActive());
     }
@@ -187,5 +207,75 @@ class ItemTest extends \PHPUnit_Framework_TestCase
     public function testPostModerate()
     {
         /* TODO: Test for post moderate method */
+    }
+
+    /**
+     *  Test setter and getter for activated at method
+     */
+    public function testSetGetActivatedAt()
+    {
+        $time = new \DateTime();
+        $item = (new Item())->setActivatedAt($time);
+        $this->assertEquals($time, $item->getActivatedAt());
+    }
+
+    /**
+     * Test setter and getter for deleted at method
+     */
+    public function testSetGetDeletedAt()
+    {
+        $time = new \DateTime();
+        $item = (new Item())->setDeletedAt($time);
+        $this->assertEquals($time, $item->getDeletedAt());
+    }
+
+    /**
+     * Test setter and getter for deleted with param false
+     */
+    public function testSetIsDeletedFalse()
+    {
+        $deleted = false;
+        $item = (new Item())->setDeleted($deleted);
+        $this->assertEquals($deleted, $item->isDeleted());
+    }
+
+    /**
+     * Test setter and getter for deleted with param true
+     */
+    public function testSetIsDeletedTrue()
+    {
+        $deleted = true;
+        $item = (new Item())->setDeleted($deleted);
+        $this->assertEquals($deleted, $item->isDeleted());
+    }
+
+    /**
+     * Test setter and getter itemRequests
+     */
+    public function testSetGetItemRequests()
+    {
+        $arr        = [
+            'log1' => new ItemRequest(),
+            'log2' => new ItemRequest()
+        ];
+        $user = new User();
+        $collection = new ArrayCollection($arr);
+        $item       = ((new Item())->setCreatedBy($user)->setUserRequests($collection));
+        $this->assertEquals($collection, $item->getUserRequests());
+    }
+
+    /**
+     * Test add and remove for userRequests
+     */
+    public function testAddRemoveActionLog()
+    {
+        $item = new Item();
+        $user = new User();
+        $this->assertEquals(0, $item->getUserRequests()->count());
+        $item->setCreatedBy($user)->addUserRequest(new ItemRequest());
+        $this->assertEquals(1, $item->getUserRequests()->count());
+        $userRequest = $item->getUserRequests()->first();
+        $item->removeUserRequest($userRequest);
+        $this->assertEquals(0, $item->getUserRequests()->count());
     }
 }

@@ -5,3 +5,6 @@ vich_uploader:
         category_image:
             uri_prefix:         /images/categories
             upload_destination: %kernel.root_dir%/../web/images/categories
+        item_photos:
+            uri_prefix:         /images/item-photos
+            upload_destination: %kernel.root_dir%/../web/images/item-photos

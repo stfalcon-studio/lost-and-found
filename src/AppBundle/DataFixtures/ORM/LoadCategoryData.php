@@ -3,13 +3,16 @@
 namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\Category;
+use AppBundle\Entity\Translation\CategoryTranslation;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
 /**
  * Load Category fixtures
  *
- * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Artem Genvald  <genvaldartem@gmail.com>
+ * @author Yuri Svatok    <svatok13@gmail.com>
+ * @author Oleg Kachinsky <logansoleg@gmail.com>
  */
 class LoadCategoryData extends AbstractFixture
 {
@@ -21,58 +24,166 @@ class LoadCategoryData extends AbstractFixture
         $keys = (new Category())
             ->setTitle('Keys')
             ->setEnabled(true)
-            ->setImageName('keys.png');
+            ->setImageName('keys.png')
+            ->addTranslation(
+                (new CategoryTranslation())
+                    ->setLocale('uk')
+                    ->setField('title')
+                    ->setContent('Ключі')
+            )
+            ->addTranslation(
+                (new CategoryTranslation())
+                    ->setLocale('ru')
+                    ->setField('title')
+                    ->setContent('Ключи')
+            );
         $this->setReference('category-keys', $keys);
         $manager->persist($keys);
 
         $phone = (new Category())
             ->setTitle('Phone')
             ->setEnabled(true)
-            ->setImageName('Phone-icon.png');
+            ->setImageName('Phone-icon.png')
+            ->addTranslation(
+                (new CategoryTranslation())
+                    ->setLocale('uk')
+                    ->setField('title')
+                    ->setContent('Телефон')
+            )
+            ->addTranslation(
+                (new CategoryTranslation())
+                    ->setLocale('ru')
+                    ->setField('title')
+                    ->setContent('Телефон')
+            );
         $this->setReference('category-phone', $phone);
         $manager->persist($phone);
 
         $documents = (new Category())
             ->setTitle('Documents')
-            ->setEnabled(true);
+            ->setEnabled(true)
+            ->addTranslation(
+                (new CategoryTranslation())
+                    ->setLocale('uk')
+                    ->setField('title')
+                    ->setContent('Документи')
+            )
+            ->addTranslation(
+                (new CategoryTranslation())
+                    ->setLocale('ru')
+                    ->setField('title')
+                    ->setContent('Документы')
+            );
         $this->setReference('category-documents', $documents);
         $manager->persist($documents);
 
         $clothes = (new Category())
             ->setTitle('Clothes')
-            ->setEnabled(true);
+            ->setEnabled(true)
+            ->addTranslation(
+                (new CategoryTranslation())
+                    ->setLocale('uk')
+                    ->setField('title')
+                    ->setContent('Одяг')
+            )
+            ->addTranslation(
+                (new CategoryTranslation())
+                    ->setLocale('ru')
+                    ->setField('title')
+                    ->setContent('Одежда')
+            );
         $this->setReference('category-clothes', $clothes);
         $manager->persist($clothes);
 
         $jewelry = (new Category())
             ->setTitle('Jewelry')
-            ->setEnabled(true);
+            ->setEnabled(true)
+            ->addTranslation(
+                (new CategoryTranslation())
+                    ->setLocale('uk')
+                    ->setField('title')
+                    ->setContent('Ювелірні вироби')
+            )
+            ->addTranslation(
+                (new CategoryTranslation())
+                    ->setLocale('ru')
+                    ->setField('title')
+                    ->setContent('Ювелирные изделия')
+            );
         $this->setReference('category-jewelry', $jewelry);
         $manager->persist($jewelry);
 
         $miscellaneous = (new Category())
             ->setTitle('Miscellaneous')
-            ->setEnabled(true);
+            ->setEnabled(true)
+            ->addTranslation(
+                (new CategoryTranslation())
+                    ->setLocale('uk')
+                    ->setField('title')
+                    ->setContent('Різне')
+            )
+            ->addTranslation(
+                (new CategoryTranslation())
+                    ->setLocale('ru')
+                    ->setField('title')
+                    ->setContent('Разное')
+            );
         $this->setReference('category-miscellaneous', $miscellaneous);
         $manager->persist($miscellaneous);
 
         $animals = (new Category())
             ->setTitle('Animals')
-            ->setEnabled(true);
+            ->setEnabled(true)
+            ->addTranslation(
+                (new CategoryTranslation())
+                    ->setLocale('uk')
+                    ->setField('title')
+                    ->setContent('Тварини')
+            )
+            ->addTranslation(
+                (new CategoryTranslation())
+                    ->setLocale('ru')
+                    ->setField('title')
+                    ->setContent('Животные')
+            );
         $this->setReference('category-animals', $animals);
         $manager->persist($animals);
 
         $dogs = (new Category())
             ->setTitle('Dogs')
             ->setEnabled(true)
-            ->setParent($animals);
+            ->setParent($animals)
+            ->addTranslation(
+                (new CategoryTranslation())
+                    ->setLocale('uk')
+                    ->setField('title')
+                    ->setContent('Собаки')
+            )
+            ->addTranslation(
+                (new CategoryTranslation())
+                    ->setLocale('ru')
+                    ->setField('title')
+                    ->setContent('Собаки')
+            );
         $this->setReference('category-dogs', $dogs);
         $manager->persist($dogs);
 
         $cats = (new Category())
             ->setTitle('Cats')
             ->setEnabled(true)
-            ->setParent($animals);
+            ->setParent($animals)
+            ->addTranslation(
+                (new CategoryTranslation())
+                    ->setLocale('uk')
+                    ->setField('title')
+                    ->setContent('Коти')
+            )
+            ->addTranslation(
+                (new CategoryTranslation())
+                    ->setLocale('ru')
+                    ->setField('title')
+                    ->setContent('Коты')
+            );
         $this->setReference('category-cats', $cats);
         $manager->persist($cats);
 

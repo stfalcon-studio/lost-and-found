@@ -1,11 +1,11 @@
 Lost and Found
 ==============
 
-Web-service for announcements of lost and found items.
+Web-service for announcements of lost and found things.
 
 *Currently in development. Things may change or break until a solid release has been announced.*
 
-[![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/stfalcon-studio/lost-and-found.svg?style=flat-square)](https://scrutinizer-ci.com/g/fre5h/olivier/)
+[![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/stfalcon-studio/lost-and-found.svg?style=flat-square)](https://scrutinizer-ci.com/g/stfalcon-studio/lost-and-found/)
 [![Build Status](https://img.shields.io/travis/stfalcon-studio/lost-and-found.svg?style=flat-square)](https://travis-ci.org/stfalcon-studio/lost-and-found)
 [![Codecov](https://img.shields.io/codecov/c/github/stfalcon-studio/lost-and-found.svg?style=flat-square)](https://codecov.io/github/stfalcon-studio/lost-and-found?branch=develop)
 [![Total Downloads](https://img.shields.io/packagist/dt/stfalcon-studio/lost-and-found.svg?style=flat-square)](https://packagist.org/packages/stfalcon-studio/lost-and-found)

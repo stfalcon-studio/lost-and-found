@@ -2,7 +2,7 @@ services:
     admin.category:
         class: AppBundle\Admin\CategoryAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Default", label: "Categories" }
+            - { name: sonata.admin, manager_type: orm, group: "Management", label: "Categories" }
         arguments:
             - ~
             - AppBundle\Entity\Category
@@ -11,7 +11,7 @@ services:
     admin.item:
         class: AppBundle\Admin\ItemAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Default", label: "Items" }
+            - { name: sonata.admin, manager_type: orm, group: "Management", label: "Items" }
         arguments:
             - ~
             - AppBundle\Entity\Item
@@ -20,8 +20,26 @@ services:
     admin.user:
         class: AppBundle\Admin\UserAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Default", label: "Users" }
+            - { name: sonata.admin, manager_type: orm, group: "User Management", label: "Users" }
         arguments:
             - ~
             - AppBundle\Entity\User
             - ~
+
+    admin.item_request:
+        class: AppBundle\Admin\ItemRequestAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "User Management", label: "Requests to items" }
+        arguments:
+            - ~
+            - AppBundle\Entity\ItemRequest
+            - ~
+
+    admin.faq:
+        class: AppBundle\Admin\FaqAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "F.A.Q.", label: "Question and answers" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Faq
+            - AppBundle:Backend\FaqAdmin

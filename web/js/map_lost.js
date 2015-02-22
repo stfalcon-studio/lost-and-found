@@ -101,7 +101,7 @@ $(document).ready(function() {
         }
 
         switch (type) {
-            case "polygon":
+            case 'polygon':
                 getLatLngs(area);
                 break;
             case 'rectangle':

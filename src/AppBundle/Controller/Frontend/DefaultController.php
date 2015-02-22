@@ -10,8 +10,9 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * DefaultController
  *
- * @author Artem Genvald <genvaldartem@gmail.com>
- * @author svatok13 <svatok13@gmail.com>
+ * @author Artem Genvald  <genvaldartem@gmail.com>
+ * @author Yuri Svatok    <svatok13@gmail.com>
+ * @author Oleg Kachinsky <logansoleg@gmail.com>
  */
 class DefaultController extends Controller
 {
@@ -20,19 +21,50 @@ class DefaultController extends Controller
      *
      * @Route("/", name="homepage")
      *
-     * @return array
+     * @return Response
      */
     public function indexAction()
     {
-        /** @var \AppBundle\Repository\ItemRepository $itemRepository */
-        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+        return $this->render('frontend/default/index.html.twig');
+    }
 
-        $foundItems = $itemRepository->getActiveFoundItem();
-        $lostItems  = $itemRepository->getActiveLostItem();
+    /**
+     * Feedback
+     *
+     * @param Request $request
+     *
+     * @Route("/feedback", name="feedback")
+     *
+     * @return Response
+     */
+    public function feedbackAction(Request $request)
+    {
+        $form = $this->createForm('feedback');
 
-        return $this->render('frontend/default/index.html.twig', [
-            'found_items'  => $foundItems,
-            'lost_items'   => $lostItems
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $formData = $form->getData();
+
+            $adminEmails = $this->container->getParameter('admin_emails');
+            $mailer = $this->get('mailer');
+
+            $feedback = $mailer
+                ->createMessage()
+                ->setSubject('New feedback!')
+                ->setFrom($formData['email'])
+                ->setTo($adminEmails)
+                ->setBody($formData['email']);
+
+            $mailer->send($feedback);
+
+            $this->get('session')->getFlashBag()->add('notice', 'Your feedback was sent!');
+
+            return $this->redirect($this->generateUrl('homepage'));
+        }
+
+        return $this->render('frontend/default/feedback.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 }

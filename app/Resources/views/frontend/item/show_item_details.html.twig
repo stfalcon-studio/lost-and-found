@@ -11,6 +11,7 @@
 {% block stylesheets %}
     {{ parent() }}
 
+    <link rel="stylesheet" href="{{ asset('css/jquery.fancybox.css') }}" type="text/css" media="screen" />
     {% stylesheets 'http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css' %}
         <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
     {% endstylesheets %}
@@ -19,8 +20,11 @@
 {% block javascripts %}
     {{ parent() }}
 
+    <script type="text/javascript" src="{{ asset('js/jquery.fancybox.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery.fancybox.pack.js') }}"></script>
     <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
     <script src="{{ asset('js/map_item_details.js') }}"></script>
+
 {% endblock javascripts %}
 
 {% block content %}
@@ -43,15 +47,42 @@
             </div>
         </div>
 
-        {#<blockquote>#}
-            {#<p>{{ item.description }}</p>#}
-        {#</blockquote>#}
+        {% if item.photos is not empty %}
+            <h3>Photos</h3>
+            <ul class="photos">
+                {% for photo in item.photos %}
+                    <li style="list-style-type: none; display: inline; padding: 10px;">
+                        <a class="photo_group" href="{{ photo.imageName }}">
+                            <img src="{{ photo.imageName }}" width="150" height="150">
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% if is_granted('ROLE_USER') %}
+            {% if request %}
+                <div>
+                    <a id="facebook-profile" href='https://www.facebook.com/{{ facebook }}' class="btn btn-primary" target="_blank">
+                        Author Facebook profile</a>
+                </div>
+            {% else %}
+                <div>
+                    <a id="contact-with-author" href="" class="btn btn-success" title="Contact with author">
+                        Contact with author
+                    </a>
+                </div>
+                <a id="facebook-profile" href="" class="btn btn-primary" style="display:none;" target="_blank">
+                    Author Facebook profile</a>
+            {% endif %}
+        {% endif %}
 
         <div id="latitude" data-latitude="{{ item.latitude }}"></div>
         <div id="longitude" data-longitude="{{ item.longitude }}"></div>
         <div id="area" data-area="{{ item.area|json_encode }}"></div>
         <div id="areaType" data-area-type="{{ item.areaType }}"></div>
-
+        <div id="itemId" data-item-id="{{ item.id }}"></div>
         <div id="map" style="width: auto; height: 800px"></div>
+
+
     </article>
 {% endblock content %}

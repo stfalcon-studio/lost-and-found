@@ -60,4 +60,34 @@ $(document).ready(function() {
     }
 
     var figureLayer = L.layerGroup().addLayer(layer).addTo(map);
+
+    $("a.photo_group")
+        .attr('rel', 'gallery')
+        .fancybox({
+            padding : 0,
+            helpers : {
+                overlay : {
+                    css : {
+                        'background' : 'rgba(58, 42, 45, 0.95)'
+                    }
+                }
+            }
+        });
 });
+
+$('#contact-with-author').on('click', function(e) {
+    e.preventDefault();
+    $.ajax({
+        url: Routing.generate('item_user_get_facebook', {
+            id : $('#itemId').data('item-id')
+        }),
+        type: 'get',
+        dataType: 'JSON',
+        success: function (data) {
+            $('#contact-with-author').hide();
+            document.getElementById('facebook-profile').href = 'https://www.facebook.com/' + data;
+            $("#facebook-profile").toggle();
+        }
+    });
+});
+
