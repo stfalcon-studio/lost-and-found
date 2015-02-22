@@ -199,10 +199,14 @@ class Faq implements Translatable
      * Set locale
      *
      * @param string $locale Locale
+     *
+     * @return $this
      */
     public function setLocale($locale)
     {
         $this->locale = $locale;
+
+        return $this;
     }
 
     /**

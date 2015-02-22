@@ -2,7 +2,6 @@
 
 namespace AppBundle\Controller\Backend;
 
-use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
@@ -11,7 +10,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
  * @author Artem Genvald <genvaldartem@gmail.com>
  * @author Yuri Svatok   <svatok13@gmail.com>
  */
-class CategoryAdminController extends CRUDController
+class CategoryAdminController extends BaseAdminController
 {
     /**
      * Mark categories as enabled

@@ -21,6 +21,7 @@ class LoadFaqData extends AbstractFixture
     public function load(ObjectManager $manager)
     {
         $faq1 = (new Faq())
+            ->setLocale('en')
             ->setQuestion('How i could ask some question?')
             ->setAnswer('Just type the text.')
             ->setEnabled(true)
@@ -28,55 +29,56 @@ class LoadFaqData extends AbstractFixture
                 (new FaqTranslation())
                     ->setLocale('uk')
                     ->setField('question')
-                    ->setContent('')
+                    ->setContent('Як я можу написати питання?')
             )
             ->addTranslation(
                 (new FaqTranslation())
                     ->setLocale('uk')
                     ->setField('answer')
-                    ->setContent('')
+                    ->setContent('Просто напиши текст.')
             )
             ->addTranslation(
                 (new FaqTranslation())
                     ->setLocale('ru')
                     ->setField('question')
-                    ->setContent('')
+                    ->setContent('Как я могу задать вопрос?')
             )
             ->addTranslation(
                 (new FaqTranslation())
                     ->setLocale('ru')
                     ->setField('answer')
-                    ->setContent('')
+                    ->setContent('Просто напиши текст.')
             );
         $manager->persist($faq1);
 
         $faq2 = (new Faq())
+            ->setLocale('en')
             ->setQuestion('What is F.A.Q.?')
-            ->setAnswer('It`s friendly answer question.')
+            ->setAnswer('It`s frequently answer question.')
             ->setEnabled(true)
             ->addTranslation(
                 (new FaqTranslation())
                     ->setLocale('uk')
                     ->setField('question')
-                    ->setContent('')
+                    ->setContent('Що таке Ч.А.П.И.?')
             )
             ->addTranslation(
                 (new FaqTranslation())
                     ->setLocale('uk')
                     ->setField('answer')
-                    ->setContent('')
+                    ->setContent('Це питання, які часто задаються.')
             )
             ->addTranslation(
                 (new FaqTranslation())
                     ->setLocale('ru')
                     ->setField('question')
-                    ->setContent('')
+                    ->setContent('Что такое Ч.А.В.О.?')
             )
             ->addTranslation(
                 (new FaqTranslation())
                     ->setLocale('ru')
                     ->setField('answer')
-                    ->setContent('')
+                    ->setContent('Это часто задаваемые вопросы.')
             );
         $manager->persist($faq2);
 
