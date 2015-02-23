@@ -6,3 +6,6 @@ sonata_admin:
             # display a dashboard block
             - { position: right, type: sonata.block.service.statistic}
             - { position: left, type: sonata.admin.block.admin_list }
+
+    templates:
+        layout: ':backend:standard_layout.html.twig'
