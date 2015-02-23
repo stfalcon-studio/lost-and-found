@@ -92,7 +92,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetGetActionLog()
     {
-        $arr        = [
+        $arr = [
             'log1' => new UserActionLog(),
             'log2' => new UserActionLog()
         ];
