@@ -22,6 +22,7 @@ class LoadCategoryData extends AbstractFixture
     public function load(ObjectManager $manager)
     {
         $keys = (new Category())
+            ->setLocale('en')
             ->setTitle('Keys')
             ->setEnabled(true)
             ->setImageName('keys.png')
@@ -41,6 +42,7 @@ class LoadCategoryData extends AbstractFixture
         $manager->persist($keys);
 
         $phone = (new Category())
+            ->setLocale('en')
             ->setTitle('Phone')
             ->setEnabled(true)
             ->setImageName('Phone-icon.png')
@@ -60,6 +62,7 @@ class LoadCategoryData extends AbstractFixture
         $manager->persist($phone);
 
         $documents = (new Category())
+            ->setLocale('en')
             ->setTitle('Documents')
             ->setEnabled(true)
             ->addTranslation(
@@ -78,6 +81,7 @@ class LoadCategoryData extends AbstractFixture
         $manager->persist($documents);
 
         $clothes = (new Category())
+            ->setLocale('en')
             ->setTitle('Clothes')
             ->setEnabled(true)
             ->addTranslation(
@@ -96,6 +100,7 @@ class LoadCategoryData extends AbstractFixture
         $manager->persist($clothes);
 
         $jewelry = (new Category())
+            ->setLocale('en')
             ->setTitle('Jewelry')
             ->setEnabled(true)
             ->addTranslation(
@@ -114,6 +119,7 @@ class LoadCategoryData extends AbstractFixture
         $manager->persist($jewelry);
 
         $miscellaneous = (new Category())
+            ->setLocale('en')
             ->setTitle('Miscellaneous')
             ->setEnabled(true)
             ->addTranslation(
@@ -132,6 +138,7 @@ class LoadCategoryData extends AbstractFixture
         $manager->persist($miscellaneous);
 
         $animals = (new Category())
+            ->setLocale('en')
             ->setTitle('Animals')
             ->setEnabled(true)
             ->addTranslation(
@@ -150,6 +157,7 @@ class LoadCategoryData extends AbstractFixture
         $manager->persist($animals);
 
         $dogs = (new Category())
+            ->setLocale('en')
             ->setTitle('Dogs')
             ->setEnabled(true)
             ->setParent($animals)
@@ -169,6 +177,7 @@ class LoadCategoryData extends AbstractFixture
         $manager->persist($dogs);
 
         $cats = (new Category())
+            ->setLocale('en')
             ->setTitle('Cats')
             ->setEnabled(true)
             ->setParent($animals)
