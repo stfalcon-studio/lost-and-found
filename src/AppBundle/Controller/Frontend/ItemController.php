@@ -259,6 +259,9 @@ class ItemController extends Controller
      */
     public function itemDeactivatedAction(Item $item)
     {
+        if ($item->getCreatedBy()->getId() != $this->getUser()->getId()) {
+            throw $this->createAccessDeniedException();
+        }
         $item->setActive(false);
 
         $em = $this->getDoctrine()->getManager();
@@ -290,6 +293,9 @@ class ItemController extends Controller
      */
     public function itemDeleteAction(Item $item)
     {
+        if ($item->getCreatedBy()->getId() != $this->getUser()->getId()) {
+            throw $this->createAccessDeniedException();
+        }
         $item->setDeleted(true);
 
         $em = $this->getDoctrine()->getManager();
@@ -321,6 +327,9 @@ class ItemController extends Controller
      */
     public function itemActivatedAction(Item $item)
     {
+        if ($item->getCreatedBy()->getId() != $this->getUser()->getId()) {
+            throw $this->createAccessDeniedException();
+        }
         $item->setActive(true);
 
         $em = $this->getDoctrine()->getManager();

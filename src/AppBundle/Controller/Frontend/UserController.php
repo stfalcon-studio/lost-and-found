@@ -213,6 +213,10 @@ class UserController extends Controller
      */
     public function showItemRequestsAction(Item $item)
     {
+        if ($item->getCreatedBy()->getId() != $this->getUser()->getId()) {
+            throw $this->createAccessDeniedException();
+        }
+
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
 
         $requests = $itemRepository->getItemRequests($item);
