@@ -36,7 +36,7 @@
                     <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
-                    {#{% include admin_pool.getTemplate('user_block') %}#}
+                    {% include admin_pool.getTemplate('user_block') %}
                     <li {% if is_granted('ROLE_USER') %}class="dropdown"{% endif %}></li>
 
                     {% if is_granted('ROLE_USER') %}
