@@ -1,10 +1,12 @@
 <?php
+
 namespace AppBundle\Tests\Entity;
 
 use AppBundle\Entity\User;
 use AppBundle\Entity\Item;
 use AppBundle\Entity\UserActionLog;
 use Doctrine\Common\Collections\ArrayCollection;
+use AppBundle\Entity\ItemRequest;
 
 /**
  * User Entity Test
@@ -111,5 +113,31 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $actionLog = $user->getActionLogs()->first();
         $user->removeActionLog($actionLog);
         $this->assertEquals(0, $user->getActionLogs()->count());
+    }
+
+    /**
+     * Test setter and getter userRequests
+     */
+    public function testSetGetUserRequests()
+    {
+        $arr        = [
+            'log1' => new ItemRequest(),
+            'log2' => new ItemRequest()
+        ];
+        $collection = new ArrayCollection($arr);
+        $user = (new User())->setUserRequests($collection);
+        $this->assertEquals($collection, $user->getItemRequests());
+    }
+
+    /**
+     * Test add and remove user Request
+     */
+    public function testAddRemoveUserRequest()
+    {
+        $user = (new User())->addUserRequest(new ItemRequest());
+        $this->assertEquals(1, $user->getItemRequests()->count());
+        $userRequest = $user->getItemRequests()->first();
+        $user->removeUserRequest($userRequest);
+        $this->assertEquals(0, $user->getItemRequests()->count());
     }
 }
