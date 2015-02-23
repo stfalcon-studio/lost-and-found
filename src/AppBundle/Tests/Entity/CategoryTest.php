@@ -4,7 +4,9 @@ namespace AppBundle\Tests\Entity;
 
 use AppBundle\Entity\Category;
 use AppBundle\Entity\Item;
+use AppBundle\Entity\Translation\CategoryTranslation;
 use Doctrine\Common\Collections\ArrayCollection;
+use Gedmo\Translatable\Entity\Translation;
 use Symfony\Component\Validator\Constraints\File;
 
 /**
@@ -168,5 +170,43 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
         $pathSource = 'pathSource';
         $category = (new Category())->setPathSource($pathSource);
         $this->assertEquals($pathSource, $category->getPathSource());
+    }
+
+    /**
+     * Test setter and getter for locale
+     */
+    public function testSetGetLocale()
+    {
+        $locale = 'en';
+        $category = (new Category())->setLocale($locale);
+        $this->assertEquals($locale, $category->getLocale());
+    }
+
+    /**
+     * Test setter and getter for translation
+     */
+    public function testSetGetTranslation()
+    {
+        $tr = new ArrayCollection();
+        $tr->add(new CategoryTranslation());
+        $category = (new Category())->setTranslations($tr);
+        $this->assertEquals(1, $category->getTranslations()->count());
+        $this->assertEquals($tr, $category->getTranslations());
+    }
+
+    /**
+     * Test add and remove translation
+     */
+    public function testAddRemoveTranslation()
+    {
+        $category = new Category();
+        $this->assertEquals(0, $category->getTranslations()->count());
+
+        $category->addTranslation(new CategoryTranslation());
+        $this->assertEquals(1, $category->getTranslations()->count());
+
+        $tr = $category->getTranslations()->first();
+        $category->removeTranslation($tr);
+        $this->assertEquals(0, $category->getTranslations()->count());
     }
 }

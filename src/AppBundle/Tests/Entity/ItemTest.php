@@ -7,6 +7,7 @@ use AppBundle\DBAL\Types\ItemStatusType;
 use AppBundle\DBAL\Types\ItemTypeType;
 use AppBundle\Entity\Category;
 use AppBundle\Entity\Item;
+use AppBundle\Entity\ItemPhoto;
 use AppBundle\Entity\User;
 use AppBundle\Entity\ItemRequest;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -277,5 +278,33 @@ class ItemTest extends \PHPUnit_Framework_TestCase
         $userRequest = $item->getUserRequests()->first();
         $item->removeUserRequest($userRequest);
         $this->assertEquals(0, $item->getUserRequests()->count());
+    }
+
+    /**
+     * Test add and remove photos
+     */
+    public function testAddRemovePhotos()
+    {
+        $item = new Item();
+        $this->assertEquals(0, $item->getPhotos()->count());
+
+        $item->addPhoto(new ItemPhoto());
+        $this->assertEquals(1, $item->getPhotos()->count());
+
+        $photos = $item->getPhotos()->first();
+        $item->removePhoto($photos);
+        $this->assertEquals(0, $item->getPhotos()->count());
+    }
+
+    /**
+     * Test set and get photos
+     */
+    public function testSetGetPhotos()
+    {
+        $photos = new ArrayCollection();
+        $photos->add(new ItemPhoto());
+        $item = (new Item())->setPhotos($photos);
+        $this->assertEquals(1, $item->getPhotos()->count());
+        $this->assertEquals($photos, $item->getPhotos());
     }
 }
