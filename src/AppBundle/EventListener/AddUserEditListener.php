@@ -4,14 +4,12 @@ namespace AppBundle\EventListener;
 
 use AppBundle\Event\AddUserEditEvent;
 use AppBundle\Model\UserManageableInterface;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Doctrine\ORM\EntityManager;
-use AppBundle\Entity\Item;
 
 /**
  * Class AddUserEditListener
  *
- * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
+ * @author Andrew Prohorovych <prohorovychua@gmail.com>
  */
 class AddUserEditListener
 {

@@ -10,7 +10,7 @@ use AppBundle\DBAL\Types\ItemTypeType;
 /**
  * GeoService
  *
- * @author Oleg Kachinsky <LogansOleg@gmail.com>
+ * @author Oleg Kachinsky <logansoleg@gmail.com>
  */
 class GeoService
 {
@@ -20,6 +20,8 @@ class GeoService
     private $entityManager;
 
     /**
+     * Constructor
+     *
      * @param EntityManager $em Entity manager
      */
     public function __construct(EntityManager $em)
@@ -37,7 +39,7 @@ class GeoService
         $itemRepository = $this->entityManager->getRepository('AppBundle:Item');
 
         $foundItems = $itemRepository->getItemsJoinCategories(ItemTypeType::FOUND);
-        $lostItems = $itemRepository->getItemsJoinCategories(ItemTypeType::LOST);
+        $lostItems  = $itemRepository->getItemsJoinCategories(ItemTypeType::LOST);
 
         $foundMatches = [];
         $numbersFound = [];
@@ -48,7 +50,7 @@ class GeoService
                 case 'rectangle':
                     $area = json_decode($foundItems[$i]['area'], true);
 
-                    $latitudeArray = [];
+                    $latitudeArray  = [];
                     $longitudeArray = [];
 
                     for ($j = 0; $j < count($area); $j++) {
@@ -59,13 +61,13 @@ class GeoService
                     for ($j = 0; $j < count($lostItems); $j++) {
                         if ($foundItems[$i]['categoryId'] == $lostItems[$j]['categoryId']) {
                             if (
-                            $this->isInPolygon(
-                                count($area),
-                                $latitudeArray,
-                                $longitudeArray,
-                                $lostItems[$j]['latitude'],
-                                $lostItems[$j]['longitude']
-                            )
+                                $this->isInPolygon(
+                                    count($area),
+                                    $latitudeArray,
+                                    $longitudeArray,
+                                    $lostItems[$j]['latitude'],
+                                    $lostItems[$j]['longitude']
+                                )
                             ) {
                                 $numbersFound[count($numbersFound)] = $lostItems[$j]['id'];
                             }
@@ -126,7 +128,7 @@ class GeoService
         $itemRepository = $this->entityManager->getRepository('AppBundle:Item');
 
         $foundItems = $itemRepository->getItemsJoinCategories(ItemTypeType::FOUND);
-        $lostItems = $itemRepository->getItemsJoinCategories(ItemTypeType::LOST);
+        $lostItems  = $itemRepository->getItemsJoinCategories(ItemTypeType::LOST);
 
         $lostMatches = [];
         $numbersLost = [];
@@ -265,8 +267,8 @@ class GeoService
     {
         $latFrom = deg2rad($latitudeFrom);
         $lonFrom = deg2rad($longitudeFrom);
-        $latTo = deg2rad($latitudeTo);
-        $lonTo = deg2rad($longitudeTo);
+        $latTo   = deg2rad($latitudeTo);
+        $lonTo   = deg2rad($longitudeTo);
 
         $latDelta = $latTo - $latFrom;
         $lonDelta = $lonTo - $lonFrom;

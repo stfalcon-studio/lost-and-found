@@ -11,10 +11,10 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 /**
  * CategoryController
  *
- * @author Artem Genvald      <GenvaldArtem@gmail.com>
- * @author Yuri Svatok        <Svatok13@gmail.com>
- * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
- * @author Oleg Kachinsky     <LogansOleg@gmail.com>
+ * @author Artem Genvald      <genvaldartem@gmail.com>
+ * @author Yuri Svatok        <svatok13@gmail.com>
+ * @author Andrew Prohorovych <prohorovychua@gmail.com>
+ * @author Oleg Kachinsky     <logansoleg@gmail.com>
  */
 class CategoryController extends Controller
 {
@@ -46,6 +46,7 @@ class CategoryController extends Controller
             $id                   = $category->getId();
             $result[$id]['id']    = $category->getId();
             $result[$id]['title'] = $category->getTitle();
+
             if (null !== $category->getImageName()) {
                 $result[$id]['imageName'] = $this
                         ->get('service_container')

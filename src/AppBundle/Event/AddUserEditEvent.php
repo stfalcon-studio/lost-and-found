@@ -10,17 +10,34 @@ use AppBundle\Entity\Item;
 /**
  * Class Add User Edit Event
  *
- * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
+ * @author Artem Genvald      <genvaldartem@gmail.com>
+ * @author Andrew Prohorovych <prohorovychua@gmail.com>
  */
 class AddUserEditEvent extends Event
 {
-
     /**
     * @var TokenStorageInterface $tokenStorage Token storage
     */
     private $tokenStorage;
 
     /**
+     * @var Item $item Item
+     */
+    private $item;
+
+    /**
+     * @param TokenStorageInterface $tokenStorage Token storage
+     * @param Item                  $item         Item
+     */
+    public function __construct(TokenStorageInterface $tokenStorage, Item $item)
+    {
+        $this->tokenStorage = $tokenStorage;
+        $this->item         = $item;
+    }
+
+    /**
+     * Get token stogare
+     *
      * @return TokenStorageInterface
      */
     public function getTokenStorage()
@@ -29,25 +46,12 @@ class AddUserEditEvent extends Event
     }
 
     /**
-     * @var Item $item
-     */
-    private $item;
-
-    /**
+     * Get item
+     *
      * @return Item
      */
     public function getItem()
     {
         return $this->item;
-    }
-
-    /**
-     * @param TokenStorageInterface $tokenStorage
-     * @param Item                  $item
-     */
-    public function __construct(TokenStorageInterface $tokenStorage, Item $item)
-    {
-        $this->tokenStorage = $tokenStorage;
-        $this->item = $item;
     }
 }

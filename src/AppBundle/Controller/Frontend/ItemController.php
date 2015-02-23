@@ -4,8 +4,8 @@ namespace AppBundle\Controller\Frontend;
 
 use AppBundle\DBAL\Types\ItemTypeType;
 use AppBundle\Entity\Item;
-use AppBundle\Event\AppEvents;
 use AppBundle\Entity\ItemRequest;
+use AppBundle\Event\AppEvents;
 use AppBundle\Event\NewItemAddedEvent;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -18,26 +18,13 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 /**
  * ItemController
  *
- * @author Artem Genvald      <GenvaldArtem@gmail.com>
- * @author Yuri Svatok        <Svatok13@gmail.com>
- * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
- * @author Oleg Kachinsky     <LogansOleg@gmail.com>
+ * @author Artem Genvald      <genvaldartem@gmail.com>
+ * @author Yuri Svatok        <svatok13@gmail.com>
+ * @author Andrew Prohorovych <prohorovychua@gmail.com>
+ * @author Oleg Kachinsky     <logansoleg@gmail.com>
  */
 class ItemController extends Controller
 {
-    /**
-     * @return array
-     */
-    private function listAction()
-    {
-        /** @var \AppBundle\Repository\CategoryRepository $categoryRepository */
-        $categoryRepository = $this->getDoctrine()->getRepository('AppBundle:Category');
-
-        $categories = $categoryRepository->getCategories();
-
-        return $categories;
-    }
-
     /**
      * Lost items list
      *
@@ -62,7 +49,7 @@ class ItemController extends Controller
     public function foundItemsListAction()
     {
         return $this->render('frontend/item/found_items.html.twig', [
-            'categories'  => $this->listAction(),
+            'categories' => $this->listAction(),
         ]);
     }
 
@@ -272,6 +259,9 @@ class ItemController extends Controller
      */
     public function itemDeactivatedAction(Item $item)
     {
+        if ($item->getCreatedBy()->getId() != $this->getUser()->getId()) {
+            throw $this->createAccessDeniedException();
+        }
         $item->setActive(false);
 
         $em = $this->getDoctrine()->getManager();
@@ -303,6 +293,9 @@ class ItemController extends Controller
      */
     public function itemDeleteAction(Item $item)
     {
+        if ($item->getCreatedBy()->getId() != $this->getUser()->getId()) {
+            throw $this->createAccessDeniedException();
+        }
         $item->setDeleted(true);
 
         $em = $this->getDoctrine()->getManager();
@@ -334,6 +327,9 @@ class ItemController extends Controller
      */
     public function itemActivatedAction(Item $item)
     {
+        if ($item->getCreatedBy()->getId() != $this->getUser()->getId()) {
+            throw $this->createAccessDeniedException();
+        }
         $item->setActive(true);
 
         $em = $this->getDoctrine()->getManager();
@@ -367,14 +363,26 @@ class ItemController extends Controller
     {
         $user = $item->getCreatedBy();
 
-        $userItemRequest = new ItemRequest();
-        $userItemRequest->setItem($item)
-            ->setUser($this->getUser());
+        $userItemRequest = (new ItemRequest())->setItem($item)
+                                              ->setUser($this->getUser());
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($userItemRequest);
         $em->flush();
 
         return new JsonResponse($user->getFacebookId());
+    }
+
+    /**
+     * @return array
+     */
+    private function listAction()
+    {
+        /** @var \AppBundle\Repository\CategoryRepository $categoryRepository */
+        $categoryRepository = $this->getDoctrine()->getRepository('AppBundle:Category');
+
+        $categories = $categoryRepository->getCategories();
+
+        return $categories;
     }
 }

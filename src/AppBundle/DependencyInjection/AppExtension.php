@@ -10,9 +10,9 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 /**
  * This is the class that loads and manages AppBundle configuration
  *
- * @author Artem Genvald  <GenvaldArtem@gmail.com>
- * @author Yuri Svatok    <Svatok13@gmail.com>
- * @author Oleg Kachinsky <LogansOleg@gmail.com>
+ * @author Artem Genvald  <genvaldartem@gmail.com>
+ * @author Yuri Svatok    <svatok13@gmail.com>
+ * @author Oleg Kachinsky <logansoleg@gmail.com>
  */
 class AppExtension extends Extension
 {

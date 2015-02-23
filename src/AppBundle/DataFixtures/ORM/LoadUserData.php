@@ -8,8 +8,8 @@ use AppBundle\Entity\User;
 /**
  * Load User fixtures
  *
- * @author Artem Genvald      <GenvaldArtem@gmail.com>
- * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
+ * @author Artem Genvald      <genvaldartem@gmail.com>
+ * @author Andrew Prohorovych <prohorovychua@gmail.com>
  */
 class LoadUserData extends AbstractFixture
 {
@@ -30,6 +30,19 @@ class LoadUserData extends AbstractFixture
             ->setFacebookAccessToken('FacebookClientSecret');
         $this->setReference('user-simple', $simpleUser);
         $manager->persist($simpleUser);
+
+        // Admin user
+        $adminUser = (new User())
+            ->setUsername('Admin User')
+            ->setEnabled(true)
+            ->setEmail('admin_user@facebook')
+            ->setRoles(['ROLE_ADMIN'])
+            ->setPlainPassword('qwerty')
+            ->setFullName('Admin User')
+            ->setFacebookId('FacebookClientId')
+            ->setFacebookAccessToken('FacebookClientSecret');
+        $this->setReference('user-admin', $adminUser);
+        $manager->persist($adminUser);
 
         $manager->flush();
     }

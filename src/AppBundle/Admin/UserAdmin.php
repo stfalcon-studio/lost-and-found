@@ -11,7 +11,7 @@ use Sonata\AdminBundle\Show\ShowMapper;
 /**
  * User Entity Admin
  *
- * @author Artem Genvald <GenvaldArtem@gmail.com>
+ * @author Artem Genvald <genvaldartem@gmail.com>
  */
 class UserAdmin extends Admin
 {

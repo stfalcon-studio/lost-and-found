@@ -7,8 +7,8 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 /**
  * AppBundle
  *
- * @author Artem Genvald      <GenvaldArtem@gmail.com>
- * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
+ * @author Artem Genvald      <genvaldartem@gmail.com>
+ * @author Andrew Prohorovych <prohorovychua@gmail.com>
  */
 class AppBundle extends Bundle
 {

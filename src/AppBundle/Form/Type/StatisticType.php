@@ -8,7 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * StatisticType
  *
- * @author Oleg Kachinsky <LogansOleg@gmail.com>
+ * @author Oleg Kachinsky <logansoleg@gmail.com>
  */
 class StatisticType extends AbstractType
 {

@@ -7,7 +7,7 @@ use Symfony\Component\Form\AbstractType;
 /**
  * Class LostItemType
  *
- * @author Oleg Kachinsky <LogansOleg@gmail.com>
+ * @author Oleg Kachinsky <logansoleg@gmail.com>
  */
 class AreaMapType extends AbstractType
 {

@@ -3,20 +3,20 @@
 namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\DBAL\Types\ItemAreaTypeType;
+use AppBundle\DBAL\Types\ItemStatusType;
+use AppBundle\DBAL\Types\ItemTypeType;
+use AppBundle\Entity\Item;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use AppBundle\Entity\Item;
-use AppBundle\DBAL\Types\ItemTypeType;
-use AppBundle\DBAL\Types\ItemStatusType;
 
 /**
  * Load Item fixtures
  *
- * @author Artem Genvald      <GenvaldArtem@gmail.com>
- * @author Yuri Svatok        <Svatok13@gmail.com>
- * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
- * @author Oleg Kachinsky     <LogansOleg@gmail.com>
+ * @author Artem Genvald      <genvaldartem@gmail.com>
+ * @author Yuri Svatok        <svatok13@gmail.com>
+ * @author Andrew Prohorovych <prohorovychua@gmail.com>
+ * @author Oleg Kachinsky     <logansoleg@gmail.com>
  */
 class LoadItemData extends AbstractFixture implements DependentFixtureInterface
 {

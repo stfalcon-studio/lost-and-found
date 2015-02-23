@@ -5,12 +5,16 @@
         {{ sonata_seo_metadatas() }}
         {{ sonata_seo_link_canonical() }}
         {{ sonata_seo_lang_alternates() }}
+
         <title>
             {% block title %}
                 Lost and Found - Service for announcements of lost and found items
             {% endblock title %}
         </title>
+
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="author" type="text/plain" href="{{ asset('humans.txt') }}" />
+
         {% block stylesheets %}
             {% stylesheets
                 'css/bootstrap.css'
@@ -65,13 +69,29 @@
                                     <a href="{{ path('feedback') }}">{{ 'feedback.header' | trans({}, 'main-page')}}</a>
                                 </li>
                             </ul>
-                            {# LANGUAGE MENU SWITCHER#}
-                            <ul class="list-inline nav navbar-nav">
-                                <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'uk'})) }}">UK</a></li>
-                                <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'})) }}">EN</a></li>
-                                <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'ru'})) }}">RU</a></li>
-                            </ul>
                             <ul class="nav navbar-nav navbar-right">
+                                <li class="{{ 'en' == app.request.locale ? 'active' : '' }}">
+                                    {% if 'en' != app.request.locale %}
+                                        <a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'})) }}">EN</a>
+                                    {% else %}
+                                        <a href="#">EN</a>
+                                    {% endif %}
+                                </li>
+                                <li class="{{ 'uk' == app.request.locale ? 'active' : '' }}">
+                                    {% if 'uk' != app.request.locale %}
+                                        <a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'uk'})) }}">UK</a>
+                                    {% else %}
+                                        <a href="#">UK</a>
+                                    {% endif %}
+                                </li>
+                                <li class="{{ 'ru' == app.request.locale ? 'active' : '' }}">
+                                    {% if 'ru' != app.request.locale %}
+                                        <a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'ru'})) }}">RU</a>
+                                    {% else %}
+                                        <a href="#">RU</a>
+                                    {% endif %}
+                                </li>
+
                                 {% block user_login %}
                                     <li {% if is_granted('ROLE_USER') %}class="dropdown"{% endif %}>
                                         {% if is_granted('ROLE_USER') %}
@@ -94,7 +114,7 @@
                                                 {% if is_granted('ROLE_ADMIN') %}
                                                     <li class="divider"></li>
                                                     <li>
-                                                        <a href="{{ path('sonata_admin_dashboard') }}">{{ 'index.admin' | trans({}, 'main-page')}}</a>
+                                                        <a href="{{ path('sonata_admin_dashboard') }}" target="_blank">{{ 'index.admin' | trans({}, 'main-page')}}</a>
                                                     </li>
                                                 {% endif %}
                                                 <li class="divider"></li>
@@ -111,7 +131,6 @@
                                 {% endblock user_login %}
                             </ul>
                         </div>
-
                     </div>
 
                     {#{% block fork_me_button %}#}
@@ -121,6 +140,7 @@
                     {#{% endblock fork_me_button %}#}
                 {% endblock header %}
             </header>
+
             <div class="container">
                 <main>
                     {# Flash messages #}

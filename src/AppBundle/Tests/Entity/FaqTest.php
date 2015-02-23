@@ -7,8 +7,8 @@ use AppBundle\Entity\Faq;
 /**
  * FAQ Entity Test
  *
- * @author Artem Genvald      <GenvaldArtem@gmail.com>
- * @author Andrew Prohorovych <ProhorovychUA@gmail.com>
+ * @author Artem Genvald      <genvaldartem@gmail.com>
+ * @author Andrew Prohorovych <prohorovychua@gmail.com>
  */
 class FAQTest extends \PHPUnit_Framework_TestCase
 {

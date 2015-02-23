@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d2684f7e291e6c83265f3a94ef35f473",
+    "hash": "e1c9a007b4a28aa23ca2f398c84a435a",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
@@ -938,6 +938,115 @@
             "time": "2014-12-16 13:45:01"
         },
         {
+            "name": "egeloen/ckeditor-bundle",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/egeloen/IvoryCKEditorBundle.git",
+                "reference": "60f2c03bdc8c4792f48cc16fd26780f5bdef24c3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/egeloen/IvoryCKEditorBundle/zipball/60f2c03bdc8c4792f48cc16fd26780f5bdef24c3",
+                "reference": "60f2c03bdc8c4792f48cc16fd26780f5bdef24c3",
+                "shasum": ""
+            },
+            "require": {
+                "egeloen/json-builder": "~2.0",
+                "php": ">=5.3.3",
+                "symfony/dependency-injection": "~2.2",
+                "symfony/form": "~2.2",
+                "symfony/framework-bundle": "~2.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0",
+                "satooshi/php-coveralls": "~0.6",
+                "symfony/yaml": "^2.0.5",
+                "twig/twig": "~1.12"
+            },
+            "suggest": {
+                "twig/twig": "Allows to use twig templates"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ivory\\CKEditorBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Eric GELOEN",
+                    "email": "geloen.eric@gmail.com"
+                }
+            ],
+            "description": "Provides a CKEditor integration for your Symfony2 Project.",
+            "keywords": [
+                "CKEditor"
+            ],
+            "time": "2014-12-29 20:29:16"
+        },
+        {
+            "name": "egeloen/json-builder",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/egeloen/ivory-json-builder.git",
+                "reference": "3d3b2d4832b81e4758c1ee7d74247da0b372a6c8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/egeloen/ivory-json-builder/zipball/3d3b2d4832b81e4758c1ee7d74247da0b372a6c8",
+                "reference": "3d3b2d4832b81e4758c1ee7d74247da0b372a6c8",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": ">=5.3.0",
+                "symfony/property-access": "~2.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0",
+                "satooshi/php-coveralls": "~0.6"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ivory\\JsonBuilder\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Eric GELOEN",
+                    "email": "geloen.eric@gmail.com"
+                }
+            ],
+            "description": "JSON builder with escaping control for PHP 5.3+",
+            "keywords": [
+                "Escape",
+                "builder",
+                "json"
+            ],
+            "time": "2014-12-29 20:25:20"
+        },
+        {
             "name": "fresh/doctrine-enum-bundle",
             "version": "v3.1",
             "source": {
@@ -1420,12 +1529,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/JMSI18nRoutingBundle.git",
-                "reference": "6f69173307fdb45f2d2878d0ca8baca67c8e09dd"
+                "reference": "eda6c5ff06c9100e5cad143b8a74224e0038a97c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/JMSI18nRoutingBundle/zipball/6f69173307fdb45f2d2878d0ca8baca67c8e09dd",
-                "reference": "6f69173307fdb45f2d2878d0ca8baca67c8e09dd",
+                "url": "https://api.github.com/repos/schmittjoh/JMSI18nRoutingBundle/zipball/eda6c5ff06c9100e5cad143b8a74224e0038a97c",
+                "reference": "eda6c5ff06c9100e5cad143b8a74224e0038a97c",
                 "shasum": ""
             },
             "require": {
@@ -1466,10 +1575,8 @@
             ],
             "authors": [
                 {
-                    "name": "Johannes Schmitt",
-                    "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
-                    "role": "Developer of wrapped JMSSerializerBundle"
+                    "name": "Johannes M. Schmitt",
+                    "email": "schmittjoh@gmail.com"
                 }
             ],
             "description": "This bundle allows you to create i18n routes.",
@@ -1479,7 +1586,7 @@
                 "routing",
                 "translation"
             ],
-            "time": "2014-03-22 05:31:08"
+            "time": "2015-02-20 16:41:04"
         },
         {
             "name": "jms/metadata",
@@ -3294,16 +3401,16 @@
     "packages-dev": [
         {
             "name": "behat/behat",
-            "version": "v3.0.14",
+            "version": "v3.0.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behat/Behat.git",
-                "reference": "3f097cd577feed73e681fa56cd4e4e1dda9c115d"
+                "reference": "b35ae3d45332d80c532af69cc36f780a9397a996"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/Behat/zipball/3f097cd577feed73e681fa56cd4e4e1dda9c115d",
-                "reference": "3f097cd577feed73e681fa56cd4e4e1dda9c115d",
+                "url": "https://api.github.com/repos/Behat/Behat/zipball/b35ae3d45332d80c532af69cc36f780a9397a996",
+                "reference": "b35ae3d45332d80c532af69cc36f780a9397a996",
                 "shasum": ""
             },
             "require": {
@@ -3316,12 +3423,12 @@
                 "symfony/console": "~2.1",
                 "symfony/dependency-injection": "~2.1",
                 "symfony/event-dispatcher": "~2.1",
-                "symfony/translation": "~2.1",
+                "symfony/translation": "~2.3",
                 "symfony/yaml": "~2.1"
             },
             "require-dev": {
                 "phpspec/prophecy-phpunit": "~1.0",
-                "phpunit/phpunit": "~4.0.7",
+                "phpunit/phpunit": "~4.0",
                 "symfony/process": "~2.1"
             },
             "suggest": {
@@ -3371,7 +3478,7 @@
                 "symfony",
                 "testing"
             ],
-            "time": "2014-09-23 10:47:14"
+            "time": "2015-02-22 14:10:33"
         },
         {
             "name": "behat/gherkin",
@@ -3602,16 +3709,16 @@
         },
         {
             "name": "behat/mink-goutte-driver",
-            "version": "v1.1.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/minkphp/MinkGoutteDriver.git",
-                "reference": "2bf327b4166694ecaa8ae7f956cb6ae252ecf03e"
+                "reference": "63a593c25a449292787c7418f08b6181c27271f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/minkphp/MinkGoutteDriver/zipball/2bf327b4166694ecaa8ae7f956cb6ae252ecf03e",
-                "reference": "2bf327b4166694ecaa8ae7f956cb6ae252ecf03e",
+                "url": "https://api.github.com/repos/minkphp/MinkGoutteDriver/zipball/63a593c25a449292787c7418f08b6181c27271f6",
+                "reference": "63a593c25a449292787c7418f08b6181c27271f6",
                 "shasum": ""
             },
             "require": {
@@ -3627,8 +3734,8 @@
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Behat\\Mink\\Driver": "src/"
+                "psr-4": {
+                    "Behat\\Mink\\Driver\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -3650,7 +3757,7 @@
                 "headless",
                 "testing"
             ],
-            "time": "2014-10-09 09:21:12"
+            "time": "2015-01-25 22:24:40"
         },
         {
             "name": "behat/mink-selenium2-driver",
@@ -4114,15 +4221,15 @@
         "doctrine/migrations": 20,
         "doctrine/doctrine-migrations-bundle": 20,
         "stof/doctrine-extensions-bundle": 20,
+        "sonata-project/seo-bundle": 20,
         "hwi/oauth-bundle": 20,
         "a2lix/translation-form-bundle": 20,
         "jms/i18n-routing-bundle": 20,
         "jms/translation-bundle": 20,
         "friendsofsymfony/jsrouting-bundle": 20,
-        "sonata-project/seo-bundle": 20,
-        "behat/mink-goutte-driver": 0,
         "doctrine/data-fixtures": 20,
-        "doctrine/doctrine-fixtures-bundle": 20
+        "doctrine/doctrine-fixtures-bundle": 20,
+        "behat/mink-goutte-driver": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

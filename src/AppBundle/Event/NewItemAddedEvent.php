@@ -8,7 +8,7 @@ use Symfony\Component\EventDispatcher\Event;
 /**
  * Class NewItemAddedEvent
  *
- * @author Oleg Kachinsky <LogansOleg@gmail.com>
+ * @author Oleg Kachinsky <logansoleg@gmail.com>
  */
 class NewItemAddedEvent extends Event
 {

@@ -10,9 +10,9 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * DefaultController
  *
- * @author Artem Genvald  <GenvaldArtem@gmail.com>
- * @author Yuri Svatok    <Svatok13@gmail.com>
- * @author Oleg Kachinsky <LogansOleg@gmail.com>
+ * @author Artem Genvald  <genvaldartem@gmail.com>
+ * @author Yuri Svatok    <svatok13@gmail.com>
+ * @author Oleg Kachinsky <logansoleg@gmail.com>
  */
 class DefaultController extends Controller
 {
@@ -63,7 +63,7 @@ class DefaultController extends Controller
             return $this->redirect($this->generateUrl('homepage'));
         }
 
-        return $this->render(':frontend/default:feedback.html.twig', [
+        return $this->render('frontend/default/feedback.html.twig', [
             'form' => $form->createView(),
         ]);
     }

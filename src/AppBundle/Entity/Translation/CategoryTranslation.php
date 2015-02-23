@@ -6,21 +6,21 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Translatable\Entity\MappedSuperclass\AbstractPersonalTranslation;
 
 /**
- * FaqTranslation Entity
+ * CategoryTranslation Entity
  *
- * @author Andrew Prohorovych <prohorovychua@gmail.com>
+ * @author Artem Genvald <genvaldartem@gmail.com>
  *
  * @ORM\Entity(repositoryClass="Gedmo\Translatable\Entity\Repository\TranslationRepository")
- * @ORM\Table(name="faq_translations",
- *   uniqueConstraints={@ORM\UniqueConstraint(name="faq_translation_unique_idx", columns={
+ * @ORM\Table(name="category_translations",
+ *   uniqueConstraints={@ORM\UniqueConstraint(name="category_translation_unique_idx", columns={
  *     "locale", "object_id", "field"
  *   })}
  * )
  */
-class FaqTranslation extends AbstractPersonalTranslation
+class CategoryTranslation extends AbstractPersonalTranslation
 {
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Faq", inversedBy="translations")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category", inversedBy="translations")
      * @ORM\JoinColumn(name="object_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $object;
