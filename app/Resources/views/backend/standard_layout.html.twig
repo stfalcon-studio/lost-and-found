@@ -36,7 +36,28 @@
                     <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
-                    {% include admin_pool.getTemplate('user_block') %}
+                    {#{% include admin_pool.getTemplate('user_block') %}#}
+                    <li {% if is_granted('ROLE_USER') %}class="dropdown"{% endif %}></li>
+
+                    {% if is_granted('ROLE_USER') %}
+                        <li>
+                            <a href="{{ path('user_actual_lost_items') }}">{{ 'index.profile' | trans({}, 'main-page')}}</a>
+                        </li>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li class="divider"></li>
+                            <li>
+                                <a href="{{ path('sonata_admin_dashboard') }}" target="_blank">{{ 'index.admin' | trans({}, 'main-page')}}</a>
+                            </li>
+                        {% endif %}
+                        <li class="divider"></li>
+                        <li>
+                            <a href="{{ path('fos_user_security_logout') }}">{{ 'index.logout' | trans({}, 'main-page')}}</a>
+                        </li>
+                    {% else %}
+                        <a href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook'}) }}">
+                            {{ 'index.login' | trans({}, 'main-page')}} {#<div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="true"></div>#}
+                        </a>
+                    {% endif %}
                 </ul>
             </li>
         </ul>
