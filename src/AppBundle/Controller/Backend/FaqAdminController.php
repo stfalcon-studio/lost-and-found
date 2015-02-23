@@ -2,18 +2,18 @@
 
 namespace AppBundle\Controller\Backend;
 
-use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Class Faq Admin Controller
  *
  * @author Andrew Prohorovych <prohorovychua@gmail.com>
+ * @author Artem Genvald      <genvaldartem@gmail.com>
  */
-class FaqAdminController extends CRUDController
+class FaqAdminController extends BaseAdminController
 {
     /**
-     * Mark faq as enabled
+     * Mark F.A.Q. as enabled
      *
      * @return RedirectResponse
      */
@@ -23,7 +23,7 @@ class FaqAdminController extends CRUDController
     }
 
     /**
-     * Mark faq as disabled
+     * Mark F.A.Q. as disabled
      *
      * @return RedirectResponse
      */
