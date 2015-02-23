@@ -13,8 +13,10 @@ use Symfony\Component\HttpFoundation\Request;
 class FaqRepository extends EntityRepository
 {
     /**
-     * @param int  $offset
-     * @param null $limit
+     * Get all enabled
+     *
+     * @param int  $offset Offset
+     * @param null $limit  Limit
      *
      * @return Request
      */
@@ -30,6 +32,6 @@ class FaqRepository extends EntityRepository
             $qb->setMaxResults($limit);
         }
 
-        return $qb->getQuery()->getArrayResult();
+        return $qb->getQuery()->getResult();
     }
 }
