@@ -6,5 +6,5 @@ Feature: Add lost items
 
     Scenario: Viewing the add lost item page
         Given I am authorized
-          And I am on "/add-lost-item"
+          And I am on "/en/add-lost-item"
           And I should see "I lost something..." in the "h1" element
