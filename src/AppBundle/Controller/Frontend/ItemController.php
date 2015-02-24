@@ -135,12 +135,12 @@ class ItemController extends Controller
     public function itemDetailsAction($id)
     {
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
-
-        $item = $itemRepository->findModeratedItemById($id);
+        $item           = $itemRepository->findModeratedItemById($id);
 
         $vichUploader = $this->get('vich_uploader.storage.file_system');
+
         foreach ($item->getPhotos() as $photo) {
-            if ($photo->getImageName() !== null) {
+            if (null !== $photo->getImageName()) {
                 $photo->setImageName(
                     $this
                         ->get('service_container')
@@ -155,7 +155,8 @@ class ItemController extends Controller
         if (!$item) {
             throw $this->createNotFoundException('Item not found.');
         }
-        if ($this->getUser()!=null) {
+
+        if (null != $this->getUser()) {
             $requestRepository = $this->getDoctrine()->getRepository('AppBundle:ItemRequest');
             $request           = $requestRepository->findUserItemRequest($item, $this->getUser());
 
