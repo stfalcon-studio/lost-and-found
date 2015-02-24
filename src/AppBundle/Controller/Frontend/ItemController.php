@@ -409,7 +409,7 @@ class ItemController extends Controller
     {
         /** @var \AppBundle\Repository\CategoryRepository $categoryRepository */
         $categoryRepository = $this->getDoctrine()->getRepository('AppBundle:Category');
-        $categories         = $categoryRepository->getCategories();
+        $categories         = $categoryRepository->getParentCategories();
 
         return $categories;
     }

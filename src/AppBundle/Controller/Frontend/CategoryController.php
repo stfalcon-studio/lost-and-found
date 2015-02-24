@@ -37,15 +37,18 @@ class CategoryController extends Controller
 
         $categoryRepository = $this->getDoctrine()->getRepository('AppBundle:Category');
 
-        $categories = $categoryRepository->getCategories();
+        $parentCategories = $categoryRepository->getParentCategories();
 
         $vichUploader = $this->get('vich_uploader.storage.file_system');
         $result = [];
 
-        foreach ($categories as $category) {
-            $id                   = $category->getId();
-            $result[$id]['id']    = $category->getId();
-            $result[$id]['title'] = $category->getTitle();
+        foreach ($parentCategories as $category) {
+            $id                      = $category->getId();
+            $result[$id]['id']       = $category->getId();
+            $result[$id]['title']    = $category->getTitle();
+
+            /* Get all children as array for current category */
+            $result[$id]['children'] = $categoryRepository->getChildrenQuery($category)->getArrayResult();
 
             if (null !== $category->getImageName()) {
                 $result[$id]['imageName'] = $this
