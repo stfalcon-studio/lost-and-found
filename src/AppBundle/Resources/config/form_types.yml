@@ -44,3 +44,8 @@ services:
         class: AppBundle\Form\Type\StatisticType
         tags:
             - { name: form.type, alias: statistic }
+
+    app.form.item.details:
+        class: AppBundle\Form\Type\ItemDetailsType
+        tags:
+            - { name: form.type, alias: item_details }

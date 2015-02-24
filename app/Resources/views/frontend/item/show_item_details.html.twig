@@ -67,9 +67,9 @@
                 </div>
             {% else %}
                 <div>
-                    <a id="contact-with-author" href="" class="btn btn-success" title="Contact with author">
-                        Contact with author
-                    </a>
+                    {{ form_start(form) }}
+                    {{ form_errors(form) }}
+                    {{ form_end(form) }}
                 </div>
                 <a id="facebook-profile" href="" class="btn btn-primary" style="display:none;" target="_blank">
                     Author Facebook profile</a>
