@@ -31,7 +31,7 @@ class StatisticAdminController extends Controller
 
         $foundItems = $itemRepository->getItemsOrderByCategory(ItemTypeType::FOUND);
         $lostItems  = $itemRepository->getItemsOrderByCategory(ItemTypeType::LOST);
-        $categories = $categoryRepository->getCategories();
+        $categories = $categoryRepository->getParentCategories();
 
         $form = $this->createForm('statistic');
 
