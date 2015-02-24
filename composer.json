@@ -63,7 +63,12 @@
         "a2lix/translation-form-bundle": "1.*@dev",
         "jms/i18n-routing-bundle": "dev-master",
         "jms/translation-bundle": "dev-master",
-        "friendsofsymfony/jsrouting-bundle": "2.0.*@dev"
+        "friendsofsymfony/jsrouting-bundle": "2.0.*@dev",
+        "jms/serializer-bundle": "~0.13",
+        "sonata-project/media-bundle": "~2.3",
+        "sonata-project/intl-bundle": "2.2.x-dev",
+        "tilleuls/ckeditor-sonata-media-bundle": "dev-master",
+        "egeloen/ckeditor-bundle": "2.*"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
