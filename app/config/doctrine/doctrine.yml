@@ -16,11 +16,14 @@ doctrine:
             ItemStatusType: AppBundle\DBAL\Types\ItemStatusType
             ItemAreaTypeType: AppBundle\DBAL\Types\ItemAreaTypeType
             UserActionType: AppBundle\DBAL\Types\UserActionType
+            json: Sonata\Doctrine\Types\JsonType
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true
         naming_strategy: doctrine.orm.naming_strategy.underscore
         mappings:
+            ApplicationSonataMediaBundle: ~
+            SonataMediaBundle: ~
             gedmo_loggable:
                 type: annotation
                 prefix: Gedmo\Loggable\Entity
@@ -33,3 +36,4 @@ doctrine:
                 dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Tree/Entity"
                 alias: GedmoTree # this one is optional and will default to the name set for the mapping
                 is_bundle: false
+
