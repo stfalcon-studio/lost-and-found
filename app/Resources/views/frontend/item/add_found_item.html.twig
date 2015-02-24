@@ -22,15 +22,25 @@
 
     <div>
         {{ form_start(form) }}
+        <div class="half-form">
             {{ form_errors(form) }}
-            {{ form_row(form.category) }}
+
+            <div class="half-category">
+                {{ form_row(form.category) }}
+            </div>
+            <div class="half-date">
+                {{ form_row(form.date) }}
+            </div>
             {{ form_row(form.title) }}
             {{ form_row(form.description) }}
-            {{ form_row(form.date) }}
             {{ form_row(form.photos) }}
-            <div id="map" style="width: auto; height: 800px"></div>
-        {{ form_end(form) }}
+        </div>
 
+        <div class="map-block">
+            <label for="map">Map</label>
+            <div id="map"></div>
+        </div>
+        {{ form_end(form) }}
     </div>
 
     <div class="type" hidden="hidden" data-type="{{ pageType }}">

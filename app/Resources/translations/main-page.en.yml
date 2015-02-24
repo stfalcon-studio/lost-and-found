@@ -25,7 +25,7 @@ lost-items:
 
 found-items:
     header: "Found items"
-    header2: "I lost something"
+    header2: "I found something"
     found-button: "I found something :)"
     title: "I found something :)"
 
