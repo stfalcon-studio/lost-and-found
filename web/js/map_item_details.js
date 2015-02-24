@@ -75,19 +75,29 @@ $(document).ready(function() {
         });
 });
 
-$('#contact-with-author').on('click', function(e) {
+$('#item_details_save').on('click', function(e) {
     e.preventDefault();
-    $.ajax({
-        url: Routing.generate('item_user_get_facebook', {
+
+    var $form = $('form[name=item_details]');
+    var values = $form.serialize();
+    jqhr = $.post(
+        // Url
+        Routing.generate('item_user_get_facebook', {
             id : $('#itemId').data('item-id')
         }),
-        type: 'get',
-        dataType: 'JSON',
-        success: function (data) {
-            $('#contact-with-author').hide();
+
+        // Data
+        values,
+
+        // Callback
+        function(data) {
+            $('#item_details_save').hide();
             document.getElementById('facebook-profile').href = 'https://www.facebook.com/' + data;
             $("#facebook-profile").toggle();
-        }
-    });
+        },
+
+        // Data-type
+        "json"
+    );
 });
 

@@ -80,6 +80,7 @@ class FoundItemType extends AbstractType
                     'class' => 'btn-success'
                 ]
             ]);
+
         $tokenStorage = $this->tokenStorage;
         $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) use ($tokenStorage) {
             $item = $event->getData();

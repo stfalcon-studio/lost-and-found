@@ -126,13 +126,14 @@ class ItemController extends Controller
     /**
      * Item details
      *
-     * @param int $id ID
+     * @param int     $id      ID
+     * @param Request $request Request
      *
      * @return Response
      *
      * @Route("/item/{id}/details", name="item_details")
      */
-    public function itemDetailsAction($id)
+    public function itemDetailsAction($id, Request $request)
     {
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
         $item           = $itemRepository->findModeratedItemById($id);
@@ -156,6 +157,10 @@ class ItemController extends Controller
             throw $this->createNotFoundException('Item not found.');
         }
 
+        $form = $this->createForm('item_details');
+
+        $form->handleRequest($request);
+
         if (null != $this->getUser()) {
             $requestRepository = $this->getDoctrine()->getRepository('AppBundle:ItemRequest');
             $request           = $requestRepository->findUserItemRequest($item, $this->getUser());
@@ -170,6 +175,7 @@ class ItemController extends Controller
                     'item'     => $item,
                     'request'  => $userItemRequest,
                     'facebook' => $userFacebookId,
+                    'form'     => $form->createView(),
                 ]);
             }
         } else {
@@ -179,6 +185,7 @@ class ItemController extends Controller
         return $this->render('frontend/item/show_item_details.html.twig', [
             'item'     => $item,
             'request'  => $userItemRequest,
+            'form'     => $form->createView(),
         ]);
     }
 
@@ -356,25 +363,43 @@ class ItemController extends Controller
     }
 
     /**
-     * @param Item $item Item
+     * Request user facebook page
+     *
+     * @param Item    $item    Item
+     * @param Request $request Request
      *
      * @return Response
      *
      * @Route("item/{id}/request-user", name="item_user_get_facebook", options={"expose"=true})
      * @ParamConverter("item", class="AppBundle\Entity\Item")
      */
-    public function requestUserAction(Item $item)
+    public function requestUserAction(Item $item, Request $request)
     {
-        $user = $item->getCreatedBy();
+        if (!$request->isXmlHttpRequest()) {
+            throw new AccessDeniedException();
+        }
 
-        $userItemRequest = (new ItemRequest())->setItem($item)
-                                              ->setUser($this->getUser());
+        $form = $this->createForm('item_details');
 
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($userItemRequest);
-        $em->flush();
+        if ($request->isMethod('post')) {
+            $form->submit($request);
 
-        return new JsonResponse($user->getFacebookId());
+            if ($form->isValid()) {
+                $user = $item->getCreatedBy();
+
+                $userItemRequest = (new ItemRequest())
+                    ->setItem($item)
+                    ->setUser($this->getUser());
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($userItemRequest);
+                $em->flush();
+
+                return new JsonResponse($user->getFacebookId());
+            }
+
+            throw new AccessDeniedException();
+        }
     }
 
     /**
@@ -384,8 +409,7 @@ class ItemController extends Controller
     {
         /** @var \AppBundle\Repository\CategoryRepository $categoryRepository */
         $categoryRepository = $this->getDoctrine()->getRepository('AppBundle:Category');
-
-        $categories = $categoryRepository->getCategories();
+        $categories         = $categoryRepository->getCategories();
 
         return $categories;
     }
