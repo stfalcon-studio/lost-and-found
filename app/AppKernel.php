@@ -59,6 +59,7 @@ class AppKernel extends Kernel
 
             // API bundles
             new FOS\RestBundle\FOSRestBundle(),
+            new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
 
             // Application bundles
