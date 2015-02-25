@@ -34,7 +34,7 @@ class MessageController extends Controller
 
         return $this->render(':frontend/user:show_messages.html.twig', [
             'count' => $count,
-            'mes'   => 'sent',
+            'type'   => 'sent',
         ]);
     }
 }

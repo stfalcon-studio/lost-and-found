@@ -10,10 +10,10 @@
 {% block content %}
     {{ user_macro.active_tab('messages', count) }}
 
-    {{ user_macro.active_pill('messages', mes) }}
+    {{ user_macro.active_pill('messages', type) }}
 
     <br />
     {% if messages is defined and messages is not empty %}
-        {{ user_macro.messages_list(messages, mes) }}
+        {{ user_macro.messages_list(messages, type) }}
     {% endif %}
 {% endblock content %}
