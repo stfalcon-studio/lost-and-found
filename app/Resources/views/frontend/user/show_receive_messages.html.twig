@@ -1,0 +1,19 @@
+{% extends 'frontend/user/profile.html.twig' %}
+
+{% import 'frontend/user/macro.html.twig' as user_macro %}
+
+{% block title %}
+    Show received messages |
+    {{ parent() }}
+{% endblock title %}
+
+{% block content %}
+    {{ user_macro.active_tab('messages', count) }}
+
+    {{ user_macro.active_pill('messages', 'receive') }}
+
+    <br />
+    {% if messages is defined and messages is not empty %}
+        {{ user_macro.messages_list(messages, 'receive') }}
+    {% endif %}
+{% endblock content %}

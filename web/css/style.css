@@ -38,6 +38,19 @@
     margin-left: 50%;
 }
 
+.message-date {
+    float: right;
+}
+
+.message-name {
+    float: left;
+}
+
+.message-content {
+    float: left;
+    margin: 5px;
+    background-color: #cdc76c;
+}
 .half-category {
     width: 48%;
     float: left;

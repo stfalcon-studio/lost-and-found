@@ -40,6 +40,9 @@ profile:
     delete: "Delete"
     deactivate: "Deactivate"
     activate: "Activate"
+    messages: "Messages"
+    send: "Sent"
+    receive: "Received"
 
 faq:
 
