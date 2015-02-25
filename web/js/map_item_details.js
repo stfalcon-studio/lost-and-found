@@ -75,14 +75,20 @@ $(document).ready(function() {
         });
 });
 
+$.ajaxSetup({
+    statusCode: {
+        400: function(data) {
+            alert('Bad request!');
+        }
+    }
+});
+
 $('#item_details_save').on('click', function(e) {
     e.preventDefault();
-    $("#message").toggle();
-    $('#item_details_save').hide();
 
     var $form = $('form[name=item_details]');
     var values = $form.serialize();
-    jqhr = $.post(
+    $.post(
         // Url
         Routing.generate('item_user_get_facebook', {
             id : $('#itemId').data('item-id')
@@ -93,13 +99,17 @@ $('#item_details_save').on('click', function(e) {
 
         // Callback
         function(data) {
+            $("#message").toggle();
+            $('#item_details_save').hide();
+
             document.getElementById('facebook-profile').href = 'https://www.facebook.com/' + data;
+
+            $("#facebook-profile").toggle();
         },
 
         // Data-type
         "json"
     );
 
-    $("#facebook-profile").toggle();
-});
 
+});

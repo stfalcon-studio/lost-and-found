@@ -35,7 +35,7 @@ fos_user_security_logout:
 #FOSJsRoutingBundle
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
-    
+
 #SonataMedia
 gallery:
     resource: '@SonataMediaBundle/Resources/config/routing/gallery.xml'
@@ -44,3 +44,7 @@ gallery:
 media:
     resource: '@SonataMediaBundle/Resources/config/routing/media.xml'
     prefix: /media
+
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /api/doc

@@ -124,3 +124,5 @@ ivory_ck_editor:
             filebrowserImageUploadRouteParameters:
                 provider: sonata.media.provider.image
                 context: images # Optional, to upload in a custom context
+
+nelmio_api_doc: ~
