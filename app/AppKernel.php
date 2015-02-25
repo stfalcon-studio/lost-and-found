@@ -40,10 +40,9 @@ class AppKernel extends Kernel
             new Sonata\SeoBundle\SonataSeoBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
-            new JMS\SerializerBundle\JMSSerializerBundle(),
             new CoopTilleuls\Bundle\CKEditorSonataMediaBundle\CoopTilleulsCKEditorSonataMediaBundle(),
-            new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
             new Sonata\IntlBundle\SonataIntlBundle(),
+
             // User related bundles
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new FOS\UserBundle\FOSUserBundle(),
@@ -57,7 +56,13 @@ class AppKernel extends Kernel
             new JMS\TranslationBundle\JMSTranslationBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
 
+            // API bundles
+            new FOS\RestBundle\FOSRestBundle(),
+            new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
+
             // Application bundles
+            new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
             new AppBundle\AppBundle(),
         ];
 

@@ -1,3 +1,29 @@
+{% macro messages_list(messages,type) %}
+    <table class="table table-bordered table-hover">
+        <tbody>
+            {% for message in messages %}
+                <tr>
+                    <td>
+                        <p>
+                        {% if type == 'receive' %}
+                            <div class="message-name">From: {{ message.fullName }}</div>
+                        {% else %}
+                            <div class="message-name">To: {{ message.fullName }}</div>
+                        {% endif %}
+                            <div class="message-date">
+                                {{ message.createdAt|date('Y-m-d') }}
+                                <a href="{{ path('message_delete',{'id': message.id}) }}">Delete</a>
+                            </div><br />
+                            <div class="message-content">{{ message.content }}</div>
+                        </p>
+                    </td>
+                </tr>
+            {% endfor %}
+            <b></b>
+        </tbody>
+    </table>
+{% endmacro messages_list %}
+
 {% macro actual_items_list(items) %}
     <table class="table table-bordered table-hover">
         <tbody>
@@ -111,6 +137,13 @@
                 <a href="{{ path('user_not_moderated_items') }}">{{ 'profile.my-not-moderated-items' | trans({}, 'main-page')}}{% if count.notModerated > 0 %}[{{count.notModerated}}]{% endif %}</a>
             {% endif %}
         </li>
+        <li role="presentation" {% if active_tab == 'messages' %}class="active"{% endif %}>
+            {% if active_tab == 'messages' %}
+                <a href="#">{{ 'profile.messages' | trans({}, 'main-page')}}{% if count.lost > 0 %}[{{count.lost}}]{% endif %}</a>
+            {% else %}
+                <a href="{{ path('user_sent_messages') }}">{{ 'profile.messages' | trans({}, 'main-page')}}{% if count.lost > 0 %}[{{count.lost}}]{% endif %}</a>
+            {% endif %}
+        </li>
     </ul>
 {% endmacro active_tab %}
 
@@ -135,6 +168,24 @@
                     <a href="{{ path('user_resolved_found_items') }}">{{ 'profile.resolved' | trans({}, 'main-page')}}</a>
                 {% elseif active_tab == 'lost_items' %}
                     <a href="{{ path('user_resolved_lost_items') }}">{{ 'profile.resolved' | trans({}, 'main-page')}}</a>
+                {% endif %}
+            {% endif %}
+        </li>
+        <li role="presentation" {% if active_pill == 'sent' %}class="active"{% endif %}>
+            {% if active_pill == 'sent' %}
+                <a href="#">{{ 'profile.send' | trans({}, 'main-page')}}</a>
+            {% else %}
+                {% if active_tab == 'messages' %}
+                    <a href="{{ path('user_sent_messages') }}">{{ 'profile.send' | trans({}, 'main-page')}}</a>
+                {% endif %}
+            {% endif %}
+        </li>
+        <li role="presentation" {% if active_pill == 'receive' %}class="active"{% endif %}>
+            {% if active_pill == 'receive' %}
+                <a href="#">{{ 'profile.receive' | trans({}, 'main-page')}}</a>
+            {% else %}
+                {% if active_tab == 'messages' %}
+                    <a href="{{ path('user_receive_messages') }}">{{ 'profile.receive' | trans({}, 'main-page')}}</a>
                 {% endif %}
             {% endif %}
         </li>

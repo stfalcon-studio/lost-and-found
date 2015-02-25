@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Entity\User as BaseUser;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User Entity
@@ -16,8 +17,8 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
  * @author Yuri Svatok    <svatok13@gmail.com>
  * @author Oleg Kachinsky <logansoleg@gmail.com>
  *
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  * @ORM\Table(name="users")
- * @ORM\Entity
  */
 class User extends BaseUser
 {
@@ -76,6 +77,26 @@ class User extends BaseUser
      * @ORM\Column(type="string", length=255, nullable=false)
      */
     private $facebookAccessToken;
+
+    /**
+     * @var Collection|Message[] $receiveMessages ReceiveMessages
+     *
+     * @ORM\OneToMany(targetEntity = "Message", mappedBy = "receiver", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\JoinColumn(onDelete = "CASCADE")
+     *
+     * @Assert\Type(type = "object")
+     */
+    private $receivedMessages;
+
+    /**
+     * @var Collection|Message[] $sentMessages SendMessages
+     *
+     * @ORM\OneToMany(targetEntity = "Message", mappedBy = "sender", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\JoinColumn(onDelete = "CASCADE")
+     *
+     * @Assert\Type(type = "object")
+     */
+    private $sentMessages;
 
     /**
      * Constructor
@@ -343,6 +364,46 @@ class User extends BaseUser
     public function removeUserRequest(ItemRequest $itemRequest)
     {
         $this->itemRequests->removeElement($itemRequest);
+
+        return $this;
+    }
+
+    /**
+     * @return Message
+     */
+    public function getReceiveMessages()
+    {
+        return $this->receivedMessages;
+    }
+
+    /**
+     * @param Message $receivedMessages
+     *
+     * @return $this
+     */
+    public function setReceiveMessages($receivedMessages)
+    {
+        $this->receivedMessages = $receivedMessages;
+
+        return $this;
+    }
+
+    /**
+     * @return Message
+     */
+    public function getSentMessages()
+    {
+        return $this->sentMessages;
+    }
+
+    /**
+     * @param Message $sentMessages
+     *
+     * @return $this
+     */
+    public function setSentMessages($sentMessages)
+    {
+        $this->sentMessages = $sentMessages;
 
         return $this;
     }

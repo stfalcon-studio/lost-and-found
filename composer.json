@@ -80,7 +80,9 @@
         "behat/mink-extension": "~2.0",
         "behat/mink-browserkit-driver": "~1.2",
         "behat/mink-selenium2-driver": "~1.2",
-        "behat/mink-goutte-driver": "1.1.*@dev"
+        "behat/mink-goutte-driver": "1.1.*@dev",
+        "friendsofsymfony/rest-bundle": "1.6.*@dev",
+        "nelmio/api-doc-bundle": "2.7.*@dev"
     },
     "autoload": {
         "psr-4": {

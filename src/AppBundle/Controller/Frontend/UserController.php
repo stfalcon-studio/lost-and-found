@@ -245,4 +245,52 @@ class UserController extends Controller
 //
 //        return $this->redirect($this->generateUrl('homepage'));
 //    }
+
+    /**
+     * Show send messages
+     *
+     * @return Response
+     *
+     * @Route("/messages/sent", name="user_sent_messages")
+     */
+    public function showSendMessagesAction()
+    {
+        /** @var \AppBundle\Repository\MessageRepository $messageRepository */
+        $messageRepository = $this->getDoctrine()->getRepository('AppBundle:Message');
+
+        $count = $this->get('app.user_items_count');
+        $count = $count->getCount($this->getUser());
+
+        $messages = $messageRepository->getSendMessages($this->getUser());
+
+        return $this->render('frontend/user/show_messages.html.twig', [
+            'messages' => $messages,
+            'count'    => $count,
+            'type'     => 'sent',
+        ]);
+    }
+
+    /**
+     * Show receive messages
+     *
+     * @return Response
+     *
+     * @Route("/messages/receive", name="user_receive_messages")
+     */
+    public function showReceiveMessagesAction()
+    {
+        /** @var \AppBundle\Repository\MessageRepository $messageRepository */
+        $messageRepository = $this->getDoctrine()->getRepository('AppBundle:Message');
+
+        $count = $this->get('app.user_items_count');
+        $count = $count->getCount($this->getUser());
+
+        $messages = $messageRepository->getReceivedMessages($this->getUser());
+
+        return $this->render('frontend/user/show_messages.html.twig', [
+            'messages' => $messages,
+            'count'    => $count,
+            'type'     => 'receive',
+        ]);
+    }
 }

@@ -37,7 +37,7 @@ class ItemPhotoTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     *
+     * Test for set and get imageName
      */
     public function testSetGetImageName()
     {
@@ -47,7 +47,7 @@ class ItemPhotoTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     *
+     * Test for set and get imageFile
      */
     public function testSetGetImageFile()
     {

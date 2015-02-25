@@ -64,6 +64,9 @@
                 <div>
                     <a id="facebook-profile" href='https://www.facebook.com/{{ facebook }}' class="btn btn-primary" target="_blank">
                         Author Facebook profile</a>
+                    {{ form_start(message_form) }}
+                    {{ form_errors(message_form) }}
+                    {{ form_end(message_form) }}
                 </div>
             {% else %}
                 <div>
@@ -73,7 +76,13 @@
                 </div>
                 <a id="facebook-profile" href="" class="btn btn-primary" style="display:none;" target="_blank">
                     Author Facebook profile</a>
+                <div style="display:none;" id="message">
+                    {{ form_start(message_form) }}
+                    {{ form_errors(message_form) }}
+                    {{ form_end(message_form) }}
+                </div>
             {% endif %}
+
         {% endif %}
 
         <div id="latitude" data-latitude="{{ item.latitude }}"></div>
