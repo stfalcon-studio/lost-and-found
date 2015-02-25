@@ -11,7 +11,6 @@
 /bin/
 /composer.phar
 *.*~
-/web/images/categories/
 /web/images/item-photos/
 !/web/images/categories/.gitkeep
 !/web/images/item-photos/.gitkeep
