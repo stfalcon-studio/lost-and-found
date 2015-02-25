@@ -4,6 +4,7 @@ namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use AppBundle\Entity\User;
+use AppBundle\Entity\Message;
 
 /**
  * Class Faq Repository
@@ -17,7 +18,7 @@ class MessageRepository extends EntityRepository
      * @param int  $offset
      * @param null $limit
      *
-     * @return array
+     * @return Message[]
      */
     public function getSendMessages(User $user, $offset = 0, $limit = null)
     {
@@ -50,7 +51,7 @@ class MessageRepository extends EntityRepository
      * @param int  $offset
      * @param null $limit
      *
-     * @return array
+     * @return Message[]
      */
     public function getReceivedMessages(User $user, $offset = 0, $limit = null)
     {
