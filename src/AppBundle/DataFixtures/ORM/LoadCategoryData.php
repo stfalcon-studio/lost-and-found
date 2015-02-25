@@ -65,6 +65,7 @@ class LoadCategoryData extends AbstractFixture
             ->setLocale('en')
             ->setTitle('Documents')
             ->setEnabled(true)
+            ->setImageName('documents.png')
             ->addTranslation(
                 (new CategoryTranslation())
                     ->setLocale('uk')
@@ -84,6 +85,7 @@ class LoadCategoryData extends AbstractFixture
             ->setLocale('en')
             ->setTitle('Clothes')
             ->setEnabled(true)
+            ->setImageName('clothes.png')
             ->addTranslation(
                 (new CategoryTranslation())
                     ->setLocale('uk')
@@ -103,6 +105,7 @@ class LoadCategoryData extends AbstractFixture
             ->setLocale('en')
             ->setTitle('Jewelry')
             ->setEnabled(true)
+            ->setImageName('jewels.png')
             ->addTranslation(
                 (new CategoryTranslation())
                     ->setLocale('uk')
@@ -141,6 +144,7 @@ class LoadCategoryData extends AbstractFixture
             ->setLocale('en')
             ->setTitle('Animals')
             ->setEnabled(true)
+            ->setImageName('animals.png')
             ->addTranslation(
                 (new CategoryTranslation())
                     ->setLocale('uk')
@@ -161,6 +165,7 @@ class LoadCategoryData extends AbstractFixture
             ->setTitle('Dogs')
             ->setEnabled(true)
             ->setParent($animals)
+            ->setImageName('dogs.png')
             ->addTranslation(
                 (new CategoryTranslation())
                     ->setLocale('uk')
@@ -181,6 +186,7 @@ class LoadCategoryData extends AbstractFixture
             ->setTitle('Cats')
             ->setEnabled(true)
             ->setParent($animals)
+            ->setImageName('cats.png')
             ->addTranslation(
                 (new CategoryTranslation())
                     ->setLocale('uk')

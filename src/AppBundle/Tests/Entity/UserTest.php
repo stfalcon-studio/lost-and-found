@@ -1,10 +1,13 @@
 <?php
+
 namespace AppBundle\Tests\Entity;
 
+use AppBundle\Entity\Message;
 use AppBundle\Entity\User;
 use AppBundle\Entity\Item;
 use AppBundle\Entity\UserActionLog;
 use Doctrine\Common\Collections\ArrayCollection;
+use AppBundle\Entity\ItemRequest;
 
 /**
  * User Entity Test
@@ -90,7 +93,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetGetActionLog()
     {
-        $arr        = [
+        $arr = [
             'log1' => new UserActionLog(),
             'log2' => new UserActionLog()
         ];
@@ -112,4 +115,50 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $user->removeActionLog($actionLog);
         $this->assertEquals(0, $user->getActionLogs()->count());
     }
+
+    /**
+     * Test setter and getter userRequests
+     */
+    public function testSetGetUserRequests()
+    {
+        $arr        = [
+            'log1' => new ItemRequest(),
+            'log2' => new ItemRequest()
+        ];
+        $collection = new ArrayCollection($arr);
+        $user = (new User())->setUserRequests($collection);
+        $this->assertEquals($collection, $user->getItemRequests());
+    }
+
+    /**
+     * Test add and remove user Request
+     */
+    public function testAddRemoveUserRequest()
+    {
+        $user = (new User())->addUserRequest(new ItemRequest());
+        $this->assertEquals(1, $user->getItemRequests()->count());
+        $userRequest = $user->getItemRequests()->first();
+        $user->removeUserRequest($userRequest);
+        $this->assertEquals(0, $user->getItemRequests()->count());
+    }
+
+    /**
+     * Test set and get receive message
+     */
+    public function testSetGetReceiveMessage()
+    {
+        $message = new Message();
+        $user = (new User())->setReceiveMessages($message);
+        $this->assertEquals($message, $user->getReceiveMessages());
+    }
+    /**
+     * Test set and get sent message
+     */
+    public function testSetGetSendMessage()
+    {
+        $message = new Message();
+        $user = (new User())->setSentMessages($message);
+        $this->assertEquals($message, $user->getSentMessages());
+    }
+
 }

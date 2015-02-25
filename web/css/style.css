@@ -14,12 +14,6 @@
     background-color: #f89406;
 }
 
-.map {
-    float:  left;
-    width:  1200px;
-    height: 500px;
-}
-
 .lost-and-found-items-div {
     float: left;
 }
@@ -44,3 +38,44 @@
     margin-left: 50%;
 }
 
+.message-date {
+    float: right;
+}
+
+.message-name {
+    float: left;
+}
+
+.message-content {
+    float: left;
+    margin: 5px;
+    background-color: #cdc76c;
+}
+.half-category {
+    width: 48%;
+    float: left;
+}
+
+.half-date {
+    width: 48%;
+    float: right;
+}
+
+.half-form {
+    width: 48%;
+    float: left;
+}
+
+.map-block {
+    width: 48%;
+    float: right;
+}
+
+#map {
+    width: auto;
+    height: 400px;
+}
+
+.nav-list-panel {
+    margin-bottom: 5%;
+}

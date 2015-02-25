@@ -75,19 +75,41 @@ $(document).ready(function() {
         });
 });
 
-$('#contact-with-author').on('click', function(e) {
-    e.preventDefault();
-    $.ajax({
-        url: Routing.generate('item_user_get_facebook', {
-            id : $('#itemId').data('item-id')
-        }),
-        type: 'get',
-        dataType: 'JSON',
-        success: function (data) {
-            $('#contact-with-author').hide();
-            document.getElementById('facebook-profile').href = 'https://www.facebook.com/' + data;
-            $("#facebook-profile").toggle();
+$.ajaxSetup({
+    statusCode: {
+        400: function(data) {
+            alert('Bad request!');
         }
-    });
+    }
 });
 
+$('#item_details_save').on('click', function(e) {
+    e.preventDefault();
+
+    var $form = $('form[name=item_details]');
+    var values = $form.serialize();
+    $.post(
+        // Url
+        Routing.generate('item_user_get_facebook', {
+            id : $('#itemId').data('item-id')
+        }),
+
+        // Data
+        values,
+
+        // Callback
+        function(data) {
+            $("#message").toggle();
+            $('#item_details_save').hide();
+
+            document.getElementById('facebook-profile').href = 'https://www.facebook.com/' + data;
+
+            $("#facebook-profile").toggle();
+        },
+
+        // Data-type
+        "json"
+    );
+
+
+});

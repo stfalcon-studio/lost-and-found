@@ -53,7 +53,6 @@ $(document).ready(function () {
                 type: 'get',
                 dataType: 'JSON',
                 success: function (data) {
-
                     $('.btn-group').on('change', function() {
                         categoriesId = [];
                         clearPage();

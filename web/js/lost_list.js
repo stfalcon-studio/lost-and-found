@@ -53,6 +53,7 @@ $(document).ready(function () {
                 success: function (data) {
                     var layer = null;
                     var center = null;
+
                     $('.btn-group').on('change', function() {
                         categoriesId = [];
                         clearPage();
@@ -60,6 +61,7 @@ $(document).ready(function () {
                         $('.btn-group input:checked').each(function(id, label) {
                             categoriesId.push($(label).data('categoryId'));
                             clearPage();
+
                             for (var i = 0; i < data.length; i++) {
                                 if ((categoriesId.indexOf(data[i].categoryId)) >= 0) {
                                     checkedCategory = true;

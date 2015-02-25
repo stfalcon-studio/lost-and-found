@@ -40,6 +40,9 @@ profile:
     delete: "Удалить"
     deactivate: "Деактивировать"
     activate: "Активировать"
+    messages: "Сообщения"
+    send: "Отправленные"
+    receive: "Полученные"
 
 faq:
 
