@@ -41,7 +41,6 @@ class AppKernel extends Kernel
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
             new CoopTilleuls\Bundle\CKEditorSonataMediaBundle\CoopTilleulsCKEditorSonataMediaBundle(),
-            new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
             new Sonata\IntlBundle\SonataIntlBundle(),
 
             // User related bundles
@@ -63,6 +62,7 @@ class AppKernel extends Kernel
             new JMS\SerializerBundle\JMSSerializerBundle(),
 
             // Application bundles
+            new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
             new AppBundle\AppBundle(),
         ];
 

@@ -265,8 +265,8 @@ class UserController extends Controller
 
         return $this->render('frontend/user/show_messages.html.twig', [
             'messages' => $messages,
-            'count' => $count,
-            'type'   => 'sent',
+            'count'    => $count,
+            'type'     => 'sent',
         ]);
     }
 
@@ -289,8 +289,8 @@ class UserController extends Controller
 
         return $this->render('frontend/user/show_messages.html.twig', [
             'messages' => $messages,
-            'count' => $count,
-            'type'   => 'receive',
+            'count'    => $count,
+            'type'     => 'receive',
         ]);
     }
 }

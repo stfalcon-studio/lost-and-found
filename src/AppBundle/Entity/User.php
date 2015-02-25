@@ -86,17 +86,17 @@ class User extends BaseUser
      *
      * @Assert\Type(type = "object")
      */
-    private $receiveMessages;
+    private $receivedMessages;
 
     /**
-     * @var Collection|Message[] $sendMessages SendMessages
+     * @var Collection|Message[] $sentMessages SendMessages
      *
      * @ORM\OneToMany(targetEntity = "Message", mappedBy = "sender", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\JoinColumn(onDelete = "CASCADE")
      *
      * @Assert\Type(type = "object")
      */
-    private $sendMessages;
+    private $sentMessages;
 
     /**
      * Constructor
@@ -369,41 +369,41 @@ class User extends BaseUser
     }
 
     /**
-     * @return mixed
+     * @return Message
      */
     public function getReceiveMessages()
     {
-        return $this->receiveMessages;
+        return $this->receivedMessages;
     }
 
     /**
-     * @param mixed $receiveMessage
+     * @param Message $receivedMessages
      *
      * @return $this
      */
-    public function setReceiveMessages($receiveMessage)
+    public function setReceiveMessages($receivedMessages)
     {
-        $this->receiveMessages = $receiveMessage;
+        $this->receivedMessages = $receivedMessages;
 
         return $this;
     }
 
     /**
-     * @return mixed
+     * @return Message
      */
-    public function getSendMessages()
+    public function getSentMessages()
     {
-        return $this->sendMessages;
+        return $this->sentMessages;
     }
 
     /**
-     * @param mixed $sendMessages
+     * @param Message $sentMessages
      *
      * @return $this
      */
-    public function setSendMessages($sendMessages)
+    public function setSentMessages($sentMessages)
     {
-        $this->sendMessages = $sendMessages;
+        $this->sentMessages = $sentMessages;
 
         return $this;
     }

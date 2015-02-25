@@ -10,7 +10,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Message Entity
  *
- * @package Entity\Message
  * @author Andrew Prohorovych <prohorovychua@gmail.com>
  *
  * @ORM\Entity(repositoryClass="AppBundle\Repository\MessageRepository")
@@ -54,7 +53,7 @@ class Message
     /**
      * @var User $sender
      *
-     * @ORM\ManyToOne(targetEntity = "User", inversedBy = "sendMessages")
+     * @ORM\ManyToOne(targetEntity = "User", inversedBy = "sentMessages")
      * @ORM\JoinColumn(name = "sender", referencedColumnName = "id")
      *
      * @Gedmo\Versioned
@@ -81,7 +80,7 @@ class Message
     private $deleted = false;
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getId()
     {
@@ -89,7 +88,7 @@ class Message
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getContent()
     {
@@ -97,7 +96,7 @@ class Message
     }
 
     /**
-     * @param mixed $content
+     * @param string $content
      *
      * @return $this
      */
@@ -109,7 +108,7 @@ class Message
     }
 
     /**
-     * @return mixed
+     * @return boolean
      */
     public function getActive()
     {
@@ -117,7 +116,7 @@ class Message
     }
 
     /**
-     * @param mixed $active
+     * @param boolean $active
      *
      * @return $this
      */
@@ -129,7 +128,7 @@ class Message
     }
 
     /**
-     * @return mixed
+     * @return User
      */
     public function getSender()
     {
@@ -137,7 +136,7 @@ class Message
     }
 
     /**
-     * @param mixed $sender
+     * @param User $sender
      *
      * @return $this
      */
@@ -149,7 +148,7 @@ class Message
     }
 
     /**
-     * @return mixed
+     * @return User
      */
     public function getReceiver()
     {
@@ -157,7 +156,7 @@ class Message
     }
 
     /**
-     * @param mixed $receiver
+     * @param User $receiver
      *
      * @return $this
      */
