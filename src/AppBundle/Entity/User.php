@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Entity\User as BaseUser;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User Entity
@@ -16,6 +17,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
  * @author Yuri Svatok    <svatok13@gmail.com>
  * @author Oleg Kachinsky <logansoleg@gmail.com>
  *
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  * @ORM\Table(name="users")
  * @ORM\Entity
  */
@@ -76,6 +78,26 @@ class User extends BaseUser
      * @ORM\Column(type="string", length=255, nullable=false)
      */
     private $facebookAccessToken;
+
+    /**
+     * @var Collection|Message[] $receiveMessages ReceiveMessages
+     *
+     * @ORM\OneToMany(targetEntity = "Message", mappedBy = "receiver", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\JoinColumn(onDelete = "CASCADE")
+     *
+     * @Assert\Type(type = "object")
+     */
+    private $receiveMessages;
+
+    /**
+     * @var Collection|Message[] $sendMessages SendMessages
+     *
+     * @ORM\OneToMany(targetEntity = "Message", mappedBy = "sender", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\JoinColumn(onDelete = "CASCADE")
+     *
+     * @Assert\Type(type = "object")
+     */
+    private $sendMessages;
 
     /**
      * Constructor
@@ -343,6 +365,46 @@ class User extends BaseUser
     public function removeUserRequest(ItemRequest $itemRequest)
     {
         $this->itemRequests->removeElement($itemRequest);
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getReceiveMessages()
+    {
+        return $this->receiveMessages;
+    }
+
+    /**
+     * @param mixed $receiveMessage
+     *
+     * @return $this
+     */
+    public function setReceiveMessages($receiveMessage)
+    {
+        $this->receiveMessages = $receiveMessage;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSendMessages()
+    {
+        return $this->sendMessages;
+    }
+
+    /**
+     * @param mixed $sendMessages
+     *
+     * @return $this
+     */
+    public function setSendMessages($sendMessages)
+    {
+        $this->sendMessages = $sendMessages;
 
         return $this;
     }

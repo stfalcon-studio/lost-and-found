@@ -77,6 +77,8 @@ $(document).ready(function() {
 
 $('#item_details_save').on('click', function(e) {
     e.preventDefault();
+    $("#message").toggle();
+    $('#item_details_save').hide();
 
     var $form = $('form[name=item_details]');
     var values = $form.serialize();
@@ -91,13 +93,13 @@ $('#item_details_save').on('click', function(e) {
 
         // Callback
         function(data) {
-            $('#item_details_save').hide();
             document.getElementById('facebook-profile').href = 'https://www.facebook.com/' + data;
-            $("#facebook-profile").toggle();
         },
 
         // Data-type
         "json"
     );
+
+    $("#facebook-profile").toggle();
 });
 
