@@ -63,7 +63,7 @@ class Message
     /**
      * @var User $receiver
      *
-     * @ORM\ManyToOne(targetEntity = "User", inversedBy = "receiveMessages")
+     * @ORM\ManyToOne(targetEntity = "User", inversedBy = "receivedMessages")
      * @ORM\JoinColumn(name = "receiver", referencedColumnName = "id")
      *
      * @Gedmo\Versioned
