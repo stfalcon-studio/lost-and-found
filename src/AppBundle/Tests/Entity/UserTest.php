@@ -2,6 +2,7 @@
 
 namespace AppBundle\Tests\Entity;
 
+use AppBundle\Entity\Message;
 use AppBundle\Entity\User;
 use AppBundle\Entity\Item;
 use AppBundle\Entity\UserActionLog;
@@ -140,4 +141,24 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $user->removeUserRequest($userRequest);
         $this->assertEquals(0, $user->getItemRequests()->count());
     }
+
+    /**
+     * Test set and get receive message
+     */
+    public function testSetGetReceiveMessage()
+    {
+        $message = new Message();
+        $user = (new User())->setReceiveMessages($message);
+        $this->assertEquals($message, $user->getReceiveMessages());
+    }
+    /**
+     * Test set and get sent message
+     */
+    public function testSetGetSendMessage()
+    {
+        $message = new Message();
+        $user = (new User())->setSentMessages($message);
+        $this->assertEquals($message, $user->getSentMessages());
+    }
+
 }

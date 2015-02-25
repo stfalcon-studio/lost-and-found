@@ -179,6 +179,8 @@ class ItemController extends Controller
             $em->flush();
 
             $this->get('session')->getFlashBag()->add('notice', 'Your message was sent!');
+            unset($messageForm);
+            $messageForm = $this->createForm('send_message');
         }
 
         if (null != $this->getUser()) {
