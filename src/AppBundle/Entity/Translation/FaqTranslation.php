@@ -32,6 +32,6 @@ class FaqTranslation extends AbstractPersonalTranslation
      */
     public function __toString()
     {
-        return $this->getContent();
+        return $this->getContent() ?: 'New F.A.Q. Translation';
     }
 }

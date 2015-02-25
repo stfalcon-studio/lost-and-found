@@ -115,10 +115,8 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetGetImageFile()
     {
-        $now = new \DateTime();
         $file = new File();
         $category = (new Category())->setImageFile($file);
-        $this->assertEquals($now, $category->getUpdatedAt());
         $this->assertEquals($file, $category->getImageFile());
     }
 
