@@ -5,6 +5,7 @@ namespace AppBundle\Controller\Frontend;
 use AppBundle\DBAL\Types\ItemTypeType;
 use AppBundle\Entity\Item;
 use AppBundle\Entity\ItemRequest;
+use AppBundle\Entity\Message;
 use AppBundle\Event\AppEvents;
 use AppBundle\Event\NewItemAddedEvent;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -158,8 +159,26 @@ class ItemController extends Controller
         }
 
         $form = $this->createForm('item_details');
-
         $form->handleRequest($request);
+
+        $messageForm = $this->createForm('send_message');
+        $messageForm->handleRequest($request);
+
+        if ($messageForm->isValid()) {
+            $messageData = $messageForm->getData();
+            $receiver = $item->getCreatedBy();
+
+            $message = (new Message())
+                ->setReceiver($receiver)
+                ->setSender($this->getUser())
+                ->setContent($messageData['content']);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($message);
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add('notice', 'Your message was sent!');
+        }
 
         if (null != $this->getUser()) {
             $requestRepository = $this->getDoctrine()->getRepository('AppBundle:ItemRequest');
@@ -176,6 +195,7 @@ class ItemController extends Controller
                     'request'  => $userItemRequest,
                     'facebook' => $userFacebookId,
                     'form'     => $form->createView(),
+                    'message_form' => $messageForm->createView(),
                 ]);
             }
         } else {
@@ -186,6 +206,7 @@ class ItemController extends Controller
             'item'     => $item,
             'request'  => $userItemRequest,
             'form'     => $form->createView(),
+            'message_form' => $messageForm->createView(),
         ]);
     }
 
