@@ -259,14 +259,14 @@ class UserController extends Controller
         $messageRepository = $this->getDoctrine()->getRepository('AppBundle:Message');
 
         $count = $this->get('app.user_items_count');
-
         $count = $count->getCount($this->getUser());
 
         $messages = $messageRepository->getSendMessages($this->getUser());
 
-        return $this->render('frontend/user/show_sent_messages.html.twig', [
+        return $this->render('frontend/user/show_messages.html.twig', [
             'messages' => $messages,
-            'count' => $count
+            'count' => $count,
+            'mes'   => 'sent',
         ]);
     }
 
@@ -283,14 +283,14 @@ class UserController extends Controller
         $messageRepository = $this->getDoctrine()->getRepository('AppBundle:Message');
 
         $count = $this->get('app.user_items_count');
-
         $count = $count->getCount($this->getUser());
 
         $messages = $messageRepository->getReceivedMessages($this->getUser());
 
-        return $this->render('frontend/user/show_receive_messages.html.twig', [
+        return $this->render('frontend/user/show_messages.html.twig', [
             'messages' => $messages,
             'count' => $count,
+            'mes'   => 'receive',
         ]);
     }
 }

@@ -30,11 +30,11 @@ class MessageController extends Controller
         $em->flush();
 
         $count = $this->get('app.user_items_count');
-
         $count = $count->getCount($this->getUser());
 
-        return $this->render(':frontend/user:show_sent_messages.html.twig', [
+        return $this->render(':frontend/user:show_messages.html.twig', [
             'count' => $count,
+            'mes'   => 'sent',
         ]);
     }
 }

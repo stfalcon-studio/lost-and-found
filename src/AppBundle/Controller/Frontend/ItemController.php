@@ -168,10 +168,10 @@ class ItemController extends Controller
             $messageData = $messageForm->getData();
             $receiver = $item->getCreatedBy();
 
-            $message = new Message();
-            $message->setReceiver($receiver);
-            $message->setSender($this->getUser());
-            $message->setContent($messageData['content']);
+            $message = (new Message())
+                ->setReceiver($receiver)
+                ->setSender($this->getUser())
+                ->setContent($messageData['content']);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($message);
