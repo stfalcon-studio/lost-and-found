@@ -4,6 +4,7 @@ namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Entity\Faq;
 
 /**
  * Class Faq Repository
@@ -33,5 +34,31 @@ class FaqRepository extends EntityRepository
         }
 
         return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * Get Faq list
+     *
+     * @param int  $offset
+     * @param null $limit
+     *
+     * @return Faq[]
+     */
+    public function getFaqList($offset = 0, $limit = null)
+    {
+        $qb = $this->createQueryBuilder('f');
+
+        $qb
+            ->select('f.id')
+            ->addSelect('f.question')
+            ->addSelect('f.answer')
+            ->addSelect('f.enabled')
+            ->setFirstResult($offset);;
+
+        if (null !== $limit) {
+            $qb->setMaxResults($limit);
+        }
+
+        return $qb->getQuery()->getArrayResult();
     }
 }
