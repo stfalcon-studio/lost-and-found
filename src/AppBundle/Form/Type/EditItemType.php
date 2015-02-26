@@ -66,6 +66,9 @@ class EditItemType extends AbstractType
             ->add('area', 'hidden', [
                 'required' => false,
             ])
+            ->add('areaMap', 'area_map', [
+                'mapped' => false,
+             ])
             ->add('update', 'submit', [
                 'attr'  => [
                     'class' => 'btn-success'

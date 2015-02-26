@@ -39,9 +39,8 @@
             {{ form_row(form.description) }}
             {#{{ form_row(form.photos) }}#}
         </div>
-        <div class="map-block">
-            <label for="map">Map</label>
-            <div id="map"></div>
+        <div style="float: right; width: 50%; padding: 0">
+            {{ form_row(form.areaMap) }}
         </div>
         {{ form_end(form) }}
     </div>
