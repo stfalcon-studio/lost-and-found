@@ -28,6 +28,7 @@ class CategoryController extends FOSRestController
 
         $serializer = $this->container->get('serializer');
         $reports = $serializer->serialize($categories, 'json');
+
         return new Response($reports);
 //        return $categories;
     }

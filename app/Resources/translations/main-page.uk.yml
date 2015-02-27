@@ -22,12 +22,18 @@ lost-items:
     header2: "Я дещо загубив..."
     lost-button: "Я дещо загубив :("
     title: "Я дещо загубив :("
+    items-table-name: "Назва"
+    items-table-category: "Категорія"
+    items-table-date: "Дата"
 
 found-items:
     header: "Знайдені речі"
     header2: "Я дещо знайшов..."
     found-button: "Я дещо знайшов :)"
     title: "Я дещо знайшов :)"
+    items-table-name: "Назва"
+    items-table-category: "Категорія"
+    items-table-date: "Дата"
 
 profile:
     my-lost-items: "Мої загублені речі"
