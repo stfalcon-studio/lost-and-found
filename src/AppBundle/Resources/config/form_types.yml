@@ -54,3 +54,8 @@ services:
         class: AppBundle\Form\Type\SendMessageType
         tags:
             - { name: form.type, alias: send_message }
+
+    app.form.items.list:
+        class: AppBundle\Form\Type\ItemsListType
+        tags:
+            - { name: form.type, alias: items_list_type }
