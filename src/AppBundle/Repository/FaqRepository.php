@@ -53,12 +53,39 @@ class FaqRepository extends EntityRepository
             ->addSelect('f.question')
             ->addSelect('f.answer')
             ->addSelect('f.enabled')
-            ->setFirstResult($offset);;
+            ->setFirstResult($offset);
 
         if (null !== $limit) {
             $qb->setMaxResults($limit);
         }
 
         return $qb->getQuery()->getArrayResult();
+    }
+
+    /**
+     * @param int  $id
+     * @param int  $offset
+     * @param null $limit
+     *
+     * @return Faq
+     */
+    public function getFaqById($id, $offset = 0, $limit = null)
+    {
+        $qb = $this->createQueryBuilder('f');
+
+        $qb
+            ->select('f.id')
+            ->addSelect('f.question')
+            ->addSelect('f.answer')
+            ->addSelect('f.enabled')
+            ->where($qb->expr()->eq('f.id', ':id'))
+            ->setParameter('id', $id)
+            ->setFirstResult($offset);
+
+        if (null !== $limit) {
+            $qb->setMaxResults($limit);
+        }
+
+        return $qb->getQuery()->getResult();
     }
 }
