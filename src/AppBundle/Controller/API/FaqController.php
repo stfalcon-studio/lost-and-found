@@ -7,7 +7,6 @@ use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Util\Codes;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Entity\Faq;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
@@ -31,9 +30,6 @@ class FaqController extends FOSRestController
         $faqRepository = $this->getDoctrine()->getRepository('AppBundle:Faq');
 
         $faq = $faqRepository->getFaqList();
-
-        //        $serializer = $this->container->get('serializer');
-        //        $reports = $serializer->serialize($faq, 'json');
 
         return $faq;
     }
