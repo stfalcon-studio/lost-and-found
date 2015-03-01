@@ -1,5 +1,12 @@
 <?php
-
+/*
+ * This file is part of the "Lost and Found" project
+ *
+ * (c) Stfalcon.com <info@stfalcon.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace AppBundle\Entity;
 
@@ -33,8 +40,7 @@ class UserActionLog
      *
      * @DoctrineAssert\Enum(entity="AppBundle\DBAL\Types\UserActionType")
      *
-     * @ORM\Column(name="action", type="UserActionType", nullable=false)
-     *
+     * @ORM\Column(type="UserActionType", nullable=false)
      */
     private $actionType;
 
@@ -118,7 +124,7 @@ class UserActionLog
     /**
      * Get created at
      *
-     * @return \DateTime
+     * @return \DateTime Created at
      */
     public function getCreatedAt()
     {

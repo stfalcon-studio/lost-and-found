@@ -1,0 +1,3 @@
+api_faq:
+    resource: AppBundle\Controller\API\FaqController
+    type:     rest

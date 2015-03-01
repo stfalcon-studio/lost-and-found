@@ -1,4 +1,12 @@
 <?php
+/*
+ * This file is part of the "Lost and Found" project
+ *
+ * (c) Stfalcon.com <info@stfalcon.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace AppBundle\Command;
 
@@ -11,6 +19,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  * GeoCommand
  *
  * @author Oleg Kachinsky <logansoleg@gmail.com>
+ * @author Artem Genvald  <genvaldartem@gmail.com>
  */
 class GeoCommand extends ContainerAwareCommand
 {
@@ -29,21 +38,25 @@ class GeoCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $geo = $this->getContainer()->get('geo');
+        $geoService = $this->getContainer()->get('geo');
+
         $itemRepository = $this->getContainer()->get('doctrine.orm.entity_manager')->getRepository('AppBundle:Item');
 
         $foundItems = $itemRepository->getItemsJoinCategories(ItemTypeType::FOUND);
-        $lostItems = $itemRepository->getItemsJoinCategories(ItemTypeType::LOST);
+        $lostItems  = $itemRepository->getItemsJoinCategories(ItemTypeType::LOST);
 
         $output->writeln('-----------Found Items----------');
 
-        $foundMatches = $geo->searchFoundMatches();
+        $foundMatches = $geoService->searchFoundMatches();
 
-        for ($i = 0; $i < count($foundMatches); $i++) {
+        $countFoundMatches = count($foundMatches);
+        $countLostItems    = count($lostItems);
+
+        for ($i = 0; $i < $countFoundMatches; $i++) {
             $output->writeln($foundItems[$i]['itemTitle'] . " ---- ");
 
             foreach ($foundMatches[$i] as $itemId) {
-                for ($j = 0; $j < count($lostItems); $j++) {
+                for ($j = 0; $j < $countLostItems; $j++) {
                     if ($lostItems[$j]['id'] == $itemId) {
                         $output->writeln("\t ---- " . $lostItems[$j]['itemTitle']);
                     }
@@ -53,13 +66,16 @@ class GeoCommand extends ContainerAwareCommand
 
         $output->writeln("\n-----------Lost Items-----------");
 
-        $lostMatches = $geo->searchLostMatches();
+        $lostMatches = $geoService->searchLostMatches();
 
-        for ($i = 0; $i < count($lostMatches); $i++) {
+        $countLostMatches = count($lostMatches);
+        $countFoundItems  = count($foundItems);
+        for ($i = 0; $i < $countLostMatches; $i++) {
             $output->writeln($lostItems[$i]['itemTitle'] . " ---- ");
 
             foreach ($lostMatches[$i] as $itemId) {
-                for ($j = 0; $j < count($foundItems); $j++) {
+
+                for ($j = 0; $j < $countFoundItems; $j++) {
                     if ($foundItems[$j]['id'] == $itemId) {
                         $output->writeln("\t ---- " . $foundItems[$j]['itemTitle']);
                     }

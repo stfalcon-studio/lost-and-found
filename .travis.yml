@@ -14,7 +14,8 @@ before_install:
   - sudo pip install codecov
 
 before_script:
-  - mysql -e 'create database lost_and_found;'
+  - mysql -e 'create database lost_and_found_testing;'
+  - php app/console doctrine:schema:create -e=test
   - composer install --dev
 
 script:

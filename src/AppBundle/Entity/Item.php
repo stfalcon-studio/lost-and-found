@@ -1,4 +1,12 @@
 <?php
+/*
+ * This file is part of the "Lost and Found" project
+ *
+ * (c) Stfalcon.com <info@stfalcon.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace AppBundle\Entity;
 
@@ -22,7 +30,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @author Oleg Kachinsky     <logansoleg@gmail.com>
  *
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ItemRepository")
- * @ORM\Table(name="items")
+ * @ORM\Table(name="items", indexes={
+ *      @ORM\Index(name="search_idx", columns={"latitude", "longitude"})
+ * })
  * @ORM\HasLifecycleCallbacks
  *
  * @AppAssert\ItemArea()
@@ -90,7 +100,7 @@ class Item implements UserManageableInterface
      *
      * @DoctrineAssert\Enum(entity="AppBundle\DBAL\Types\ItemTypeType")
      *
-     * @ORM\Column(name="type", type="ItemTypeType", nullable=false)
+     * @ORM\Column(type="ItemTypeType", nullable=false)
      *
      * @Gedmo\Versioned
      */
@@ -123,7 +133,7 @@ class Item implements UserManageableInterface
      *
      * @DoctrineAssert\Enum(entity="AppBundle\DBAL\Types\ItemAreaTypeType")
      *
-     * @ORM\Column(name="areaType", type="ItemAreaTypeType", nullable=false)
+     * @ORM\Column(type="ItemAreaTypeType", nullable=false)
      *
      * @Gedmo\Versioned
      */
@@ -134,7 +144,7 @@ class Item implements UserManageableInterface
      *
      * @DoctrineAssert\Enum(entity="AppBundle\DBAL\Types\ItemStatusType")
      *
-     * @ORM\Column(name="status", type="ItemStatusType", nullable=false)
+     * @ORM\Column(type="ItemStatusType", nullable=false)
      *
      * @Gedmo\Versioned
      */
@@ -143,7 +153,7 @@ class Item implements UserManageableInterface
     /**
      * @var boolean $active Is active?
      *
-     * @ORM\Column(name="active", type="boolean")
+     * @ORM\Column(type="boolean")
      *
      * @Gedmo\Versioned
      */
@@ -182,7 +192,7 @@ class Item implements UserManageableInterface
      * @var User $createdBy Created by
      *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="items")
-     * @ORM\JoinColumn(name="created_by", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(referencedColumnName="id", nullable=false)
      *
      * @Gedmo\Versioned
      *
@@ -216,7 +226,7 @@ class Item implements UserManageableInterface
     /**
      * @var boolean $deleted Is deleted?
      *
-     * @ORM\Column(name="deleted", type="boolean")
+     * @ORM\Column(type="boolean")
      *
      * @Gedmo\Versioned
      */
@@ -526,9 +536,9 @@ class Item implements UserManageableInterface
     }
 
     /**
-     * Get createdBy
+     * Get created by
      *
-     * @return User CreatedBy
+     * @return User Created by
      */
     public function getCreatedBy()
     {
@@ -536,9 +546,9 @@ class Item implements UserManageableInterface
     }
 
     /**
-     * Set createdBy
+     * Set created by
      *
-     * @param User $createdBy createdBy
+     * @param User $createdBy Created by
      *
      * @return $this
      */
@@ -550,9 +560,9 @@ class Item implements UserManageableInterface
     }
 
     /**
-     * Is moderated
+     * Is moderated?
      *
-     * @return boolean
+     * @return boolean Is moderated?
      */
     public function isModerated()
     {
@@ -605,7 +615,7 @@ class Item implements UserManageableInterface
      */
     public function postModerate()
     {
-        if (true === $this->moderated) {
+        if ($this->isModerated()) {
             $this->setModeratedAt(new \DateTime());
         }
     }
@@ -647,7 +657,7 @@ class Item implements UserManageableInterface
     /**
      * Set deleted at
      *
-     * @param \DateTime $deletedAt
+     * @param \DateTime $deletedAt Deleted at
      *
      * @return $this
      */
@@ -671,7 +681,7 @@ class Item implements UserManageableInterface
     /**
      * Set deleted at
      *
-     * @param boolean $delete
+     * @param boolean $delete Delete
      *
      * @return $this
      */
@@ -742,9 +752,9 @@ class Item implements UserManageableInterface
     }
 
     /**
-     * Get userRequest
+     * Get user requests
      *
-     * @return ItemRequest[]|Collection UserItemRequest
+     * @return ItemRequest[]|Collection User requests
      */
     public function getUserRequests()
     {
@@ -752,9 +762,9 @@ class Item implements UserManageableInterface
     }
 
     /**
-     * Set userRequests
+     * Set user requests
      *
-     * @param ItemRequest[]|Collection $userRequests
+     * @param ItemRequest[]|Collection $userRequests User requests
      *
      * @return $this
      */
@@ -769,9 +779,9 @@ class Item implements UserManageableInterface
     }
 
     /**
-     * Add userRequest
+     * Add user request
      *
-     * @param ItemRequest $userRequest
+     * @param ItemRequest $userRequest User request
      *
      * @return $this
      */
@@ -783,9 +793,9 @@ class Item implements UserManageableInterface
     }
 
     /**
-     * Remove userRequest
+     * Remove user request
      *
-     * @param ItemRequest $userRequest
+     * @param ItemRequest $userRequest User request
      *
      * @return $this
      */

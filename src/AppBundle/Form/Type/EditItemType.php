@@ -1,11 +1,17 @@
 <?php
+/*
+ * This file is part of the "Lost and Found" project
+ *
+ * (c) Stfalcon.com <info@stfalcon.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace AppBundle\Form\Type;
 
-use AppBundle\Event\AppEvents;
-use AppBundle\Model\UserManageableInterface;
-use Doctrine\ORM\EntityRepository;
 use AppBundle\Event\AddUserEditEvent;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -35,7 +41,7 @@ class EditItemType extends AbstractType
      */
     public function __construct(TokenStorageInterface $tokenStorage, EventDispatcherInterface $eventDispatcher)
     {
-        $this->tokenStorage = $tokenStorage;
+        $this->tokenStorage    = $tokenStorage;
         $this->eventDispatcher = $eventDispatcher;
     }
 

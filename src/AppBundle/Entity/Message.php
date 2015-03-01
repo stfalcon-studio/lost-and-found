@@ -1,10 +1,18 @@
 <?php
+/*
+ * This file is part of the "Lost and Found" project
+ *
+ * (c) Stfalcon.com <info@stfalcon.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace AppBundle\Entity;
 
-use Gedmo\Timestampable\Traits\TimestampableEntity;
-use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -13,7 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @author Andrew Prohorovych <prohorovychua@gmail.com>
  *
  * @ORM\Entity(repositoryClass="AppBundle\Repository\MessageRepository")
- * @ORM\Table(name = "messages")
+ * @ORM\Table(name="messages")
  *
  * @Gedmo\Loggable
  */
@@ -44,43 +52,45 @@ class Message
     /**
      * @var boolean $active Active
      *
-     * @ORM\Column(name="active", type="boolean")
+     * @ORM\Column(type="boolean")
      *
      * @Gedmo\Versioned
      */
     private $active = true;
 
     /**
-     * @var User $sender
+     * @var User $sender User
      *
-     * @ORM\ManyToOne(targetEntity = "User", inversedBy = "sentMessages")
-     * @ORM\JoinColumn(name = "sender", referencedColumnName = "id")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="sentMessages")
+     * @ORM\JoinColumn(name="sender", referencedColumnName="id")
      *
      * @Gedmo\Versioned
      */
     private $sender;
 
     /**
-     * @var User $receiver
+     * @var User $receiver User
      *
-     * @ORM\ManyToOne(targetEntity = "User", inversedBy = "receivedMessages")
-     * @ORM\JoinColumn(name = "receiver", referencedColumnName = "id")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="receivedMessages")
+     * @ORM\JoinColumn(name="receiver", referencedColumnName="id")
      *
      * @Gedmo\Versioned
      */
     private $receiver;
 
     /**
-     * @var boolean $deleted
+     * @var boolean $deleted Deleted
      *
-     * @ORM\Column(name="deleted", type="boolean")
+     * @ORM\Column(type="boolean")
      *
      * @Gedmo\Versioned
      */
     private $deleted = false;
 
     /**
-     * @return int
+     * Get ID
+     *
+     * @return int ID
      */
     public function getId()
     {
@@ -88,7 +98,9 @@ class Message
     }
 
     /**
-     * @return string
+     * Get content
+     *
+     * @return string Content
      */
     public function getContent()
     {
@@ -96,7 +108,9 @@ class Message
     }
 
     /**
-     * @param string $content
+     * Set content
+     *
+     * @param string $content Content
      *
      * @return $this
      */
@@ -108,7 +122,9 @@ class Message
     }
 
     /**
-     * @return boolean
+     * Is active?
+     *
+     * @return boolean Is active
      */
     public function isActive()
     {
@@ -116,7 +132,9 @@ class Message
     }
 
     /**
-     * @param boolean $active
+     * Set active
+     *
+     * @param boolean $active Active
      *
      * @return $this
      */
@@ -128,7 +146,9 @@ class Message
     }
 
     /**
-     * @return User
+     * Get sender
+     *
+     * @return User Sender
      */
     public function getSender()
     {
@@ -136,7 +156,9 @@ class Message
     }
 
     /**
-     * @param User $sender
+     * Set sender
+     *
+     * @param User $sender Sender
      *
      * @return $this
      */
@@ -148,7 +170,9 @@ class Message
     }
 
     /**
-     * @return User
+     * Get receiver
+     *
+     * @return User Receiver
      */
     public function getReceiver()
     {
@@ -156,7 +180,9 @@ class Message
     }
 
     /**
-     * @param User $receiver
+     * Set receiver
+     *
+     * @param User $receiver Receiver
      *
      * @return $this
      */
@@ -168,7 +194,9 @@ class Message
     }
 
     /**
-     * @return boolean
+     * Is deleted?
+     *
+     * @return boolean Is deleted?
      */
     public function isDeleted()
     {
@@ -176,7 +204,9 @@ class Message
     }
 
     /**
-     * @param boolean $deleted
+     * Set deleted
+     *
+     * @param boolean $deleted Deleted
      *
      * @return $this
      */

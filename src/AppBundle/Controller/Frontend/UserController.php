@@ -1,18 +1,27 @@
 <?php
+/*
+ * This file is part of the "Lost and Found" project
+ *
+ * (c) Stfalcon.com <info@stfalcon.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace AppBundle\Controller\Frontend;
 
 use AppBundle\DBAL\Types\ItemStatusType;
 use AppBundle\DBAL\Types\ItemTypeType;
 use AppBundle\Entity\Item;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class UserController
+ * Frontend UserController
  *
  * @author Artem Genvald      <genvaldartem@gmail.com>
  * @author Yuri Svatok        <svatok13@gmail.com>
@@ -30,6 +39,7 @@ class UserController extends Controller
      *
      * @return Response
      *
+     * @Method({"GET", "POST"})
      * @Route("/item/{id}/edit", name="item_edit")
      * @ParamConverter("item", class="AppBundle\Entity\Item")
      */
@@ -71,6 +81,7 @@ class UserController extends Controller
      *
      * @return Response
      *
+     * @Method("GET")
      * @Route("/lost-items/actual", name="user_actual_lost_items")
      */
     public function showActualLostItemsAction()
@@ -95,6 +106,7 @@ class UserController extends Controller
      *
      * @return Response
      *
+     * @Method("GET")
      * @Route("/found-items/actual", name="user_actual_found_items")
      */
     public function showActualFoundItemsAction()
@@ -119,6 +131,7 @@ class UserController extends Controller
      *
      * @return Response
      *
+     * @Method("GET")
      * @Route("/lost-items/resolved", name="user_resolved_lost_items")
      */
     public function showResolvedLostItemsAction()
@@ -143,6 +156,7 @@ class UserController extends Controller
      *
      * @return Response
      *
+     * @Method("GET")
      * @Route("/found-items/resolved", name="user_resolved_found_items")
      */
     public function showResolvedFoundItemsAction()
@@ -162,8 +176,11 @@ class UserController extends Controller
     }
 
     /**
+     * Show deactivated items
+     *
      * @return Response
      *
+     * @Method("GET")
      * @Route("/deactivated-items", name="user_deactivated_items")
      */
     public function showDeactivatedItemsAction()
@@ -183,8 +200,11 @@ class UserController extends Controller
     }
 
     /**
+     * Show not moderated items
+     *
      * @return Response
      *
+     * @Method("GET")
      * @Route("/not-moderated-items", name="user_not_moderated_items")
      */
     public function showNotModeratedItemsAction()
@@ -204,6 +224,8 @@ class UserController extends Controller
     }
 
     /**
+     * Show item requests
+     *
      * @param Item $item Item
      *
      * @return Response
@@ -227,11 +249,11 @@ class UserController extends Controller
         ]);
     }
 
-    /**
-     * @return Response
-     *
-     * @Route("/deauthorize", name="user_deauthorize")
-     */
+//    /**
+//     * @return Response
+//     *
+//     * @Route("/deauthorize", name="user_deauthorize")
+//     */
 //    public function facebookDeauthorizeAction()
 //    {
 //        $actionLog = new UserActionLog();
@@ -251,6 +273,7 @@ class UserController extends Controller
      *
      * @return Response
      *
+     * @Method("GET")
      * @Route("/messages/sent", name="user_sent_messages")
      */
     public function showSendMessagesAction()
@@ -271,13 +294,14 @@ class UserController extends Controller
     }
 
     /**
-     * Show receive messages
+     * Show received messages
      *
      * @return Response
      *
-     * @Route("/messages/receive", name="user_receive_messages")
+     * @Method("GET")
+     * @Route("/messages/received", name="user_received_messages")
      */
-    public function showReceiveMessagesAction()
+    public function showReceivedMessagesAction()
     {
         /** @var \AppBundle\Repository\MessageRepository $messageRepository */
         $messageRepository = $this->getDoctrine()->getRepository('AppBundle:Message');

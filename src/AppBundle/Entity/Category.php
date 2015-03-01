@@ -1,4 +1,12 @@
 <?php
+/*
+ * This file is part of the "Lost and Found" project
+ *
+ * (c) Stfalcon.com <info@stfalcon.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace AppBundle\Entity;
 
@@ -9,8 +17,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Gedmo\Translatable\Translatable;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
@@ -26,9 +34,9 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  *
  * @Gedmo\Loggable
  * @Gedmo\Tree(type="materializedPath")
+ * @Gedmo\TranslationEntity(class="AppBundle\Entity\Translation\CategoryTranslation")
  *
  * @Vich\Uploadable
- * @Gedmo\TranslationEntity(class="AppBundle\Entity\Translation\CategoryTranslation")
  */
 class Category implements Translatable
 {
@@ -53,7 +61,7 @@ class Category implements Translatable
      * @Assert\Length(min="1", max="255")
      *
      * @Gedmo\Versioned
-     * @Gedmo\Translatable()
+     * @Gedmo\Translatable
      */
     private $title;
 
@@ -271,9 +279,9 @@ class Category implements Translatable
     }
 
     /**
-     * Is enabled
+     * Is enabled?
      *
-     * @return boolean
+     * @return boolean Is enabled?
      */
     public function isEnabled()
     {
@@ -295,6 +303,8 @@ class Category implements Translatable
     }
 
     /**
+     * Get image file
+     *
      * @return File
      */
     public function getImageFile()
@@ -303,7 +313,9 @@ class Category implements Translatable
     }
 
     /**
-     * @param File $imageFile
+     * Set image file
+     *
+     * @param File $imageFile Image file
      *
      * @return $this
      */
@@ -319,7 +331,9 @@ class Category implements Translatable
     }
 
     /**
-     * @return string
+     * Get image name
+     *
+     * @return string Image name
      */
     public function getImageName()
     {
@@ -327,7 +341,9 @@ class Category implements Translatable
     }
 
     /**
-     * @param string $imageName
+     * Set image name
+     *
+     * @param string $imageName Image name
      *
      * @return $this
      */
@@ -339,7 +355,19 @@ class Category implements Translatable
     }
 
     /**
-     * @param Category $parent
+     * Get parent
+     *
+     * @return Category|null
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * Set parent category
+     *
+     * @param Category $parent Parent category
      *
      * @return $this
      */
@@ -351,15 +379,19 @@ class Category implements Translatable
     }
 
     /**
-     * @return mixed
+     * Get path
+     *
+     * @return string Path
      */
-    public function getParent()
+    public function getPath()
     {
-        return $this->parent;
+        return $this->path;
     }
 
     /**
-     * @param string $path
+     * Set path
+     *
+     * @param string $path Path
      *
      * @return $this
      */
@@ -368,14 +400,6 @@ class Category implements Translatable
         $this->path = $path;
 
         return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPath()
-    {
-        return $this->path;
     }
 
     /**
@@ -403,7 +427,9 @@ class Category implements Translatable
     }
 
     /**
-     * @return integer
+     * Get level
+     *
+     * @return int Level
      */
     public function getLevel()
     {
@@ -413,7 +439,7 @@ class Category implements Translatable
     /**
      * Set level
      *
-     * @param integer $level level
+     * @param int $level level
      *
      * @return $this
      */
@@ -473,6 +499,16 @@ class Category implements Translatable
     }
 
     /**
+     * Get translations
+     *
+     * @return Collection|CategoryTranslation[] Translations
+     */
+    public function getTranslations()
+    {
+        return $this->translations;
+    }
+
+    /**
      * Set translations
      *
      * @param Collection|CategoryTranslation[] $translations Translations
@@ -487,16 +523,6 @@ class Category implements Translatable
         $this->translations = $translations;
 
         return $this;
-    }
-
-    /**
-     * Get translations
-     *
-     * @return Collection|CategoryTranslation[] Translations
-     */
-    public function getTranslations()
-    {
-        return $this->translations;
     }
 
     /**
