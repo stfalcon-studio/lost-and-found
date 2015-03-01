@@ -160,6 +160,26 @@ class LoadCategoryData extends AbstractFixture
         $this->setReference('category-animals', $animals);
         $manager->persist($animals);
 
+        $wallets = (new Category())
+            ->setLocale('en')
+            ->setTitle('Wallets')
+            ->setEnabled(true)
+            ->setImageName('wallet.png')
+            ->addTranslation(
+                (new CategoryTranslation())
+                    ->setLocale('uk')
+                    ->setField('title')
+                    ->setContent('Гаманці')
+            )
+            ->addTranslation(
+                (new CategoryTranslation())
+                    ->setLocale('ru')
+                    ->setField('title')
+                    ->setContent('Кошельки')
+            );
+        $this->setReference('category-wallets', $wallets);
+        $manager->persist($wallets);
+
         $dogs = (new Category())
             ->setLocale('en')
             ->setTitle('Dogs')

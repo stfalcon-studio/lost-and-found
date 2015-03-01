@@ -58,6 +58,8 @@ sensio_framework_extra:
     request:
         converters: true
         auto_convert: false
+    view:
+        annotations: false
 
 # A2lix translation form
 a2lix_translation_form:
@@ -126,3 +128,10 @@ ivory_ck_editor:
                 context: images # Optional, to upload in a custom context
 
 nelmio_api_doc: ~
+
+fos_rest:
+    param_fetcher_listener: true
+    body_listener: true
+    format_listener: true
+    view:
+        view_response_listener: 'force'

@@ -3,11 +3,13 @@
 namespace AppBundle\Controller\Frontend;
 
 use AppBundle\DBAL\Types\ItemTypeType;
+use AppBundle\Entity\Category;
 use AppBundle\Entity\Item;
 use AppBundle\Entity\ItemRequest;
 use AppBundle\Entity\Message;
 use AppBundle\Event\AppEvents;
 use AppBundle\Event\NewItemAddedEvent;
+use AppBundle\Form\Type\ItemsListType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -30,28 +32,146 @@ class ItemController extends Controller
     /**
      * Lost items list
      *
+     * @param Request $request Request
+     *
      * @return Response
      *
      * @Route("/lost-items", name="lost_items_list")
      */
-    public function lostItemsListAction()
+    public function lostItemsListAction(Request $request)
     {
+        /** @var Category $categories */
+        $categories = $this->listAction();
+
+        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+        $lostItems  = $itemRepository->getItemsByDate(ItemTypeType::LOST);
+
+        $form = $this->createForm(new ItemsListType($categories));
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $data = $form->getData();
+            $selectedCategories = $form->get('categories')->getData();
+
+            $categoriesArr = [];
+
+            foreach ($selectedCategories as $categoryNumber) {
+                array_push($categoriesArr, $categories[$categoryNumber]->getId());
+            }
+
+            $lostItems  = $itemRepository->getItemsByDate(
+                ItemTypeType::LOST,
+                $data['from'],
+                $data['to'],
+                $categoriesArr
+            );
+        }
+
+        $router = $this->get('router');
+
+        $vichUploader = $this->get('vich_uploader.storage.file_system');
+
+        foreach ($lostItems as &$item) {
+            $item['link'] = $router->generate(
+                'item_details',
+                [
+                    'id' => $item['id']
+                ],
+                $router::ABSOLUTE_URL
+            );
+
+            if (null !== $item['categoryImage']) {
+                foreach ($categories as $category) {
+                    if ($category->getTitle() == $item['categoryTitle']) {
+                        $item['categoryImage'] = $this
+                                ->get('service_container')
+                                ->getParameter('host') .
+                            $vichUploader
+                                ->resolveUri($category, 'imageFile');
+                    }
+                }
+            } else {
+                $item['categoryImage'] = null;
+            }
+        }
+
         return $this->render('frontend/item/lost_items.html.twig', [
-            'categories' => $this->listAction(),
+            'form'       => $form->createView(),
+            'lost_items' => $lostItems,
         ]);
     }
 
     /**
      * Found items list
      *
+     * @param Request $request Request
+     *
      * @return Response
      *
      * @Route("/found-items", name="found_items_list", options={"expose"=true})
      */
-    public function foundItemsListAction()
+    public function foundItemsListAction(Request $request)
     {
+        /** @var Category $categories */
+        $categories = $this->listAction();
+
+        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+        $foundItems  = $itemRepository->getItemsByDate(ItemTypeType::FOUND);
+
+        $form = $this->createForm(new ItemsListType($categories));
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $data = $form->getData();
+            $selectedCategories = $form->get('categories')->getData();
+
+            $categoriesArr = [];
+
+            foreach ($selectedCategories as $categoryNumber) {
+                array_push($categoriesArr, $categories[$categoryNumber]->getId());
+            }
+
+            $foundItems  = $itemRepository->getItemsByDate(
+                ItemTypeType::FOUND,
+                $data['from'],
+                $data['to'],
+                $categoriesArr
+            );
+        }
+
+        $router = $this->get('router');
+
+        $vichUploader = $this->get('vich_uploader.storage.file_system');
+
+        foreach ($foundItems as &$item) {
+            $item['link'] = $router->generate(
+                'item_details',
+                [
+                    'id' => $item['id']
+                ],
+                $router::ABSOLUTE_URL
+            );
+
+            if (null !== $item['categoryImage']) {
+                foreach ($categories as $category) {
+                    if ($category->getTitle() == $item['categoryTitle']) {
+                        $item['categoryImage'] = $this
+                                ->get('service_container')
+                                ->getParameter('host') .
+                            $vichUploader
+                                ->resolveUri($category, 'imageFile');
+                    }
+                }
+            } else {
+                $item['categoryImage'] = null;
+            }
+        }
+
         return $this->render('frontend/item/found_items.html.twig', [
-            'categories' => $this->listAction(),
+            'form'       => $form->createView(),
+            'found_items' => $foundItems,
         ]);
     }
 
