@@ -10,10 +10,23 @@ sonata_media:
             providers:
                 - sonata.media.provider.image
             formats: ~
+        pdf:
+            providers:
+                - sonata.media.provider.file
+            formats: ~
     cdn:
         server:
             path: /uploads/media
     filesystem:
         local:
-            directory: %kernel.root_dir%/../web/uploads/media
-            create:    false
+            directory:  %kernel.root_dir%/../web/uploads/media
+            create:     false
+    providers:
+        file:
+            service:    sonata.media.provider.file
+            resizer:    false
+            filesystem: sonata.media.filesystem.local
+            cdn:        sonata.media.cdn.server
+            generator:  sonata.media.generator.default
+            allowed_extensions: ['pdf']
+            allowed_mime_types: ['application/pdf', 'application/x-pdf']

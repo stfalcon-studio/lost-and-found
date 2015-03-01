@@ -39,6 +39,7 @@
     "require": {
         "php": ">=5.4.0",
         "ext-intl": "*",
+        "ext-gd": "*",
         "ext-mbstring": "*",
         "symfony/symfony": "2.6.*",
         "doctrine/orm": "~2.4",
@@ -53,7 +54,7 @@
         "doctrine/migrations": "dev-master",
         "doctrine/doctrine-migrations-bundle": "dev-master",
         "stof/doctrine-extensions-bundle": "1.2.*@dev",
-        "fresh/doctrine-enum-bundle": "v3.1",
+        "fresh/doctrine-enum-bundle": "v3.2",
         "sonata-project/doctrine-orm-admin-bundle": "2.3.0",
         "sonata-project/seo-bundle": "1.1.*@dev",
         "egeloen/ckeditor-bundle": "~3.0",
@@ -122,6 +123,7 @@
         "incenteev-parameters": {
             "file": "app/config/parameters.yml",
             "env_map": {
+                "database_driver": "SYMFONY__DATABASE_DRIVER",
                 "database_name": "SYMFONY__DATABASE_NAME",
                 "database_user": "SYMFONY__DATABASE_USER",
                 "database_host": "SYMFONY__DATABASE_HOST",

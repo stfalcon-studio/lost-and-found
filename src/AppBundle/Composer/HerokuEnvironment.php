@@ -19,10 +19,11 @@ class HerokuEnvironment
      */
     public static function populateEnvironment(Event $event)
     {
-        $url = getenv('CLEARDB_DATABASE_URL');
+        $url = getenv('HEROKU_POSTGRESQL_IVORY_URL');
 
         if ($url) {
             $url = parse_url($url);
+            putenv("SYMFONY__DATABASE_DRIVER=pdo_pgsql");
             putenv("SYMFONY__DATABASE_HOST={$url['host']}");
             putenv("SYMFONY__DATABASE_USER={$url['user']}");
             putenv("SYMFONY__DATABASE_PASSWORD={$url['pass']}");
@@ -33,9 +34,9 @@ class HerokuEnvironment
 
         $io = $event->getIO();
 
-        $databaseUrl = getenv('CLEARDB_DATABASE_URL');
+        $databaseUrl = getenv('HEROKU_POSTGRESQL_IVORY_URL');
         if (!empty($databaseUrl)) {
-            $io->write('CLEARDB_DATABASE_URL=' . $databaseUrl);
+            $io->write('HEROKU_POSTGRESQL_IVORY_URL=' . $databaseUrl);
         }
     }
 }
