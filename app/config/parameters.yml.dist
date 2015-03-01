@@ -19,7 +19,7 @@ parameters:
     locale:            en
 
     # A secret key that's used to generate certain security-related tokens
-    secret:            ThisTokenIsNotSoSecretChangeIt
+    secret:            LostAndFoundSecretToken
 
     host: http://lost-and-found.work
 
@@ -28,6 +28,6 @@ parameters:
 
     admin_emails:
         - 'genvaldartem@gmail.com'  # Artem Genvald
-        - 'Logansoleg@gmail.com'    # Oleg Kachinsky
+        - 'logansoleg@gmail.com'    # Oleg Kachinsky
         - 'svatok13@gmail.com'      # Yuri Svatok
         - 'prohorovychua@gmail.com' # Andrew Prohorovych

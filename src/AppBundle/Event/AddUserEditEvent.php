@@ -1,11 +1,18 @@
 <?php
+/*
+ * This file is part of the "Lost and Found" project
+ *
+ * (c) Stfalcon.com <info@stfalcon.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace AppBundle\Event;
 
-use Symfony\Component\EventDispatcher\Event;
-use AppBundle\Model\UserManageableInterface;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use AppBundle\Entity\Item;
+use Symfony\Component\EventDispatcher\Event;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
  * Class Add User Edit Event
@@ -36,7 +43,7 @@ class AddUserEditEvent extends Event
     }
 
     /**
-     * Get token stogare
+     * Get token storage
      *
      * @return TokenStorageInterface
      */

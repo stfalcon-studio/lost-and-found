@@ -1,7 +1,16 @@
 <?php
+/*
+ * This file is part of the "Lost and Found" project
+ *
+ * (c) Stfalcon.com <info@stfalcon.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace AppBundle\Controller\Frontend;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -9,7 +18,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
- * CategoryController
+ * Frontend CategoryController
  *
  * @author Artem Genvald      <genvaldartem@gmail.com>
  * @author Yuri Svatok        <svatok13@gmail.com>
@@ -27,6 +36,7 @@ class CategoryController extends Controller
      *
      * @throws AccessDeniedException
      *
+     * @Method("GET")
      * @Route("/get/categories", name="get_categories", options={"expose"=true})
      */
     public function getAllModeratedAction(Request $request)
@@ -42,20 +52,20 @@ class CategoryController extends Controller
         $vichUploader = $this->get('vich_uploader.storage.file_system');
         $result = [];
 
-        foreach ($parentCategories as $category) {
-            $id                      = $category->getId();
-            $result[$id]['id']       = $category->getId();
-            $result[$id]['title']    = $category->getTitle();
+        $host = $this->get('service_container')->getParameter('host');
 
-            /* Get all children as array for current category */
-            $result[$id]['children'] = $categoryRepository->getChildrenQuery($category)->getArrayResult();
+        foreach ($parentCategories as $category) {
+            $categoryId = $category->getId();
+
+            $result[$categoryId]['id']    = $categoryId;
+            $result[$categoryId]['title'] = $category->getTitle();
+            $result[$categoryId]['imageName'] = null;
+
+            // Get all children as array for current category
+            $result[$categoryId]['children'] = $categoryRepository->getChildrenQuery($category)->getArrayResult();
 
             if (null !== $category->getImageName()) {
-                $result[$id]['imageName'] = $this
-                        ->get('service_container')
-                        ->getParameter('host') . $vichUploader->resolveUri($category, 'imageFile');
-            } else {
-                $result[$id]['imageName'] = null;
+                $result[$categoryId]['imageName'] = $host . $vichUploader->resolveUri($category, 'imageFile');
             }
         }
 

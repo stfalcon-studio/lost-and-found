@@ -8,15 +8,16 @@
  * file that was distributed with this source code.
  */
 
-namespace AppBundle\Form\Type;
+namespace AppBundle\Form\Type\API;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Class FaqType
+ * API FaqType
  *
- * @author Andrew Prohorovych <prohorovychua@gmail.com>
+ * @author Artem Genvald <genvaldartem@gmail.com>
  */
 class FaqType extends AbstractType
 {
@@ -26,10 +27,20 @@ class FaqType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('question', 'text')
-            ->add('answer', 'text')
-            ->add('enabled', 'checkbox')
-            ->add('Submit', 'submit');
+            ->add('question')
+            ->add('answer')
+            ->add('enabled');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults([
+            'data_class'      => 'AppBundle\Entity\Faq',
+            'csrf_protection' => false,
+        ]);
     }
 
     /**

@@ -1,4 +1,12 @@
 <?php
+/*
+ * This file is part of the "Lost and Found" project
+ *
+ * (c) Stfalcon.com <info@stfalcon.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace AppBundle\Entity;
 
@@ -126,7 +134,9 @@ class Faq implements Translatable
     }
 
     /**
-     * @return string
+     * Get question
+     *
+     * @return string Question
      */
     public function getQuestion()
     {
@@ -134,7 +144,9 @@ class Faq implements Translatable
     }
 
     /**
-     * @param string $question
+     * Set question
+     *
+     * @param string $question Question
      *
      * @return $this
      */
@@ -146,7 +158,9 @@ class Faq implements Translatable
     }
 
     /**
-     * @return string
+     * Get answer
+     *
+     * @return string Answer
      */
     public function getAnswer()
     {
@@ -154,7 +168,9 @@ class Faq implements Translatable
     }
 
     /**
-     * @param string $answer
+     * Set answer
+     *
+     * @param string $answer Answer
      *
      * @return $this
      */
@@ -166,7 +182,9 @@ class Faq implements Translatable
     }
 
     /**
-     * @return boolean
+     * Is enabled?
+     *
+     * @return boolean Is enabled?
      */
     public function isEnabled()
     {
@@ -174,7 +192,9 @@ class Faq implements Translatable
     }
 
     /**
-     * @param boolean $enabled
+     * Set enabled
+     *
+     * @param boolean $enabled Enabled
      *
      * @return $this
      */
@@ -210,6 +230,16 @@ class Faq implements Translatable
     }
 
     /**
+     * Get translations
+     *
+     * @return Collection|FaqTranslation[] Translations
+     */
+    public function getTranslations()
+    {
+        return $this->translations;
+    }
+
+    /**
      * Set translations
      *
      * @param Collection|FaqTranslation[] $translations Translations
@@ -224,16 +254,6 @@ class Faq implements Translatable
         $this->translations = $translations;
 
         return $this;
-    }
-
-    /**
-     * Get translations
-     *
-     * @return Collection|FaqTranslation[] Translations
-     */
-    public function getTranslations()
-    {
-        return $this->translations;
     }
 
     /**

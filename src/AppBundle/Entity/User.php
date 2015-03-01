@@ -1,4 +1,12 @@
 <?php
+/*
+ * This file is part of the "Lost and Found" project
+ *
+ * (c) Stfalcon.com <info@stfalcon.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace AppBundle\Entity;
 
@@ -60,14 +68,14 @@ class User extends BaseUser
     /**
      * @var string $fullName Full name
      *
-     * @ORM\Column(name="full_name", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255, nullable=false)
      */
     private $fullName;
 
     /**
      * @var string $facebookId Facebook ID
      *
-     * @ORM\Column(name="facebook_id", type="string", length=32, nullable=false)
+     * @ORM\Column(type="string", length=32, nullable=false)
      */
     private $facebookId;
 
@@ -184,7 +192,6 @@ class User extends BaseUser
 
         return $this;
     }
-
 
     /**
      * Get ActionLogs
@@ -406,5 +413,23 @@ class User extends BaseUser
         $this->sentMessages = $sentMessages;
 
         return $this;
+    }
+
+    /**
+     * Get roles as string
+     *
+     * @return string
+     */
+    public function getRolesAsString()
+    {
+        $roles = [];
+
+        foreach ($this->getRoles() as $role) {
+            $roles[] = $role;
+        }
+
+        $result = implode(', ', $roles);
+
+        return $result;
     }
 }

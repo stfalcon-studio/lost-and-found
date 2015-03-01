@@ -8,10 +8,12 @@
     <h1>F.A.Q.</h1>
     <div>
         <dl>
-            {% for item in faq %}
-                <dt>{{ item.question }}</dt>
-                <dd>{{ item.answer|raw }}</dd><br>
-            {% endfor %}
+            {% autoescape %}
+                {% for item in faq %}
+                    <dt>{{ item.question }}</dt>
+                    <dd>{{ item.answer|raw }}</dd><br>
+                {% endfor %}
+            {% endautoescape %}
         </dl>
     </div>
 {% endblock content %}

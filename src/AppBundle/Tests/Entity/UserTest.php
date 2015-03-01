@@ -1,4 +1,12 @@
 <?php
+/*
+ * This file is part of the "Lost and Found" project
+ *
+ * (c) Stfalcon.com <info@stfalcon.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace AppBundle\Tests\Entity;
 
@@ -151,6 +159,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $user = (new User())->setReceiveMessages($message);
         $this->assertEquals($message, $user->getReceiveMessages());
     }
+
     /**
      * Test set and get sent message
      */
@@ -160,5 +169,4 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $user = (new User())->setSentMessages($message);
         $this->assertEquals($message, $user->getSentMessages());
     }
-
 }

@@ -1,4 +1,12 @@
 <?php
+/*
+ * This file is part of the "Lost and Found" project
+ *
+ * (c) Stfalcon.com <info@stfalcon.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace AppBundle\Entity;
 
@@ -6,8 +14,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\HttpFoundation\File\File;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * ItemPhoto Entity
@@ -37,19 +45,20 @@ class ItemPhoto
      * @var Item $item Item
      *
      * @ORM\ManyToOne(targetEntity="Item", inversedBy="photos")
-     *
      * @ORM\JoinColumn(name="item", referencedColumnName="id")
      */
     private $item;
 
     /**
      * @var File $imageFile Image file
+     *
      * @Assert\Image(
      *      minWidth = 50,
      *      maxWidth = 1920,
      *      minHeight = 50,
      *      maxHeight = 1080
      * )
+     *
      * @Vich\UploadableField(mapping="item_photos", fileNameProperty="imageName", nullable=true)
      */
     private $imageFile;
@@ -57,7 +66,7 @@ class ItemPhoto
     /**
      * @var string $imageName Image name
      *
-     * @ORM\Column(type="string", length=255, name="image_name", nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $imageName;
 
@@ -96,7 +105,9 @@ class ItemPhoto
     }
 
     /**
-     * @return File
+     * Get image file
+     *
+     * @return File Image file
      */
     public function getImageFile()
     {
@@ -104,7 +115,9 @@ class ItemPhoto
     }
 
     /**
-     * @param File $imageFile
+     * Set image file
+     *
+     * @param File $imageFile Image file
      *
      * @return $this
      */
@@ -120,7 +133,9 @@ class ItemPhoto
     }
 
     /**
-     * @return string
+     * Get image name
+     *
+     * @return string Image name
      */
     public function getImageName()
     {
@@ -128,7 +143,9 @@ class ItemPhoto
     }
 
     /**
-     * @param string $imageName
+     * Set image name
+     *
+     * @param string $imageName Image name
      *
      * @return $this
      */

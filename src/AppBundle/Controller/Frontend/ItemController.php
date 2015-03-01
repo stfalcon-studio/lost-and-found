@@ -1,15 +1,24 @@
 <?php
+/*
+ * This file is part of the "Lost and Found" project
+ *
+ * (c) Stfalcon.com <info@stfalcon.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace AppBundle\Controller\Frontend;
 
 use AppBundle\DBAL\Types\ItemTypeType;
+use AppBundle\Form\Type\ItemsListType;
 use AppBundle\Entity\Category;
 use AppBundle\Entity\Item;
 use AppBundle\Entity\ItemRequest;
 use AppBundle\Entity\Message;
 use AppBundle\Event\AppEvents;
 use AppBundle\Event\NewItemAddedEvent;
-use AppBundle\Form\Type\ItemsListType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -20,7 +29,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
- * ItemController
+ * Frontend ItemController
  *
  * @author Artem Genvald      <genvaldartem@gmail.com>
  * @author Yuri Svatok        <svatok13@gmail.com>
@@ -36,11 +45,11 @@ class ItemController extends Controller
      *
      * @return Response
      *
+     * @Method("GET")
      * @Route("/lost-items", name="lost_items_list")
      */
     public function lostItemsListAction(Request $request)
     {
-        /** @var Category $categories */
         $categories = $this->listAction();
 
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
@@ -72,6 +81,8 @@ class ItemController extends Controller
 
         $vichUploader = $this->get('vich_uploader.storage.file_system');
 
+        $host = $this->get('service_container')->getParameter('host');
+
         foreach ($lostItems as &$item) {
             $item['link'] = $router->generate(
                 'item_details',
@@ -84,11 +95,7 @@ class ItemController extends Controller
             if (null !== $item['categoryImage']) {
                 foreach ($categories as $category) {
                     if ($category->getTitle() == $item['categoryTitle']) {
-                        $item['categoryImage'] = $this
-                                ->get('service_container')
-                                ->getParameter('host') .
-                            $vichUploader
-                                ->resolveUri($category, 'imageFile');
+                        $item['categoryImage'] = $host . $vichUploader->resolveUri($category, 'imageFile');
                     }
                 }
             } else {
@@ -109,6 +116,7 @@ class ItemController extends Controller
      *
      * @return Response
      *
+     * @Method("GET")
      * @Route("/found-items", name="found_items_list", options={"expose"=true})
      */
     public function foundItemsListAction(Request $request)
@@ -145,6 +153,8 @@ class ItemController extends Controller
 
         $vichUploader = $this->get('vich_uploader.storage.file_system');
 
+        $host = $this->get('service_container')->getParameter('host');
+
         foreach ($foundItems as &$item) {
             $item['link'] = $router->generate(
                 'item_details',
@@ -157,11 +167,7 @@ class ItemController extends Controller
             if (null !== $item['categoryImage']) {
                 foreach ($categories as $category) {
                     if ($category->getTitle() == $item['categoryTitle']) {
-                        $item['categoryImage'] = $this
-                                ->get('service_container')
-                                ->getParameter('host') .
-                            $vichUploader
-                                ->resolveUri($category, 'imageFile');
+                        $item['categoryImage'] = $host . $vichUploader->resolveUri($category, 'imageFile');
                     }
                 }
             } else {
@@ -182,7 +188,8 @@ class ItemController extends Controller
      *
      * @return Response
      *
-     * @Route("/add-lost-item", name="add_lost_item")
+     * @Method({"GET", "POST"})
+     * @Route("/add-lost-item", name="add_lost_item", options={"i18n"=false})
      */
     public function addLostItemAction(Request $request)
     {
@@ -217,7 +224,8 @@ class ItemController extends Controller
      *
      * @return Response
      *
-     * @Route("/add-found-item", name="add_found_item")
+     * @Method({"GET", "POST"})
+     * @Route("/add-found-item", name="add_found_item", options={"i18n"=false})
      */
     public function addFoundItemAction(Request $request)
     {
@@ -253,6 +261,7 @@ class ItemController extends Controller
      *
      * @return Response
      *
+     * @Method({"GET", "POST"})
      * @Route("/item/{id}/details", name="item_details")
      */
     public function itemDetailsAction($id, Request $request)
@@ -262,14 +271,11 @@ class ItemController extends Controller
 
         $vichUploader = $this->get('vich_uploader.storage.file_system');
 
+        $host = $this->get('service_container')->getParameter('host');
+
         foreach ($item->getPhotos() as $photo) {
             if (null !== $photo->getImageName()) {
-                $photo->setImageName(
-                    $this
-                        ->get('service_container')
-                        ->getParameter('host') . $vichUploader
-                        ->resolveUri($photo, 'imageFile')
-                );
+                $photo->setImageName($host . $vichUploader->resolveUri($photo, 'imageFile'));
             } else {
                 $photo->setImageName(null);
             }
@@ -303,7 +309,7 @@ class ItemController extends Controller
             $messageForm = $this->createForm('send_message');
         }
 
-        if (null != $this->getUser()) {
+        if (null !== $this->getUser()) {
             $requestRepository = $this->getDoctrine()->getRepository('AppBundle:ItemRequest');
             $request           = $requestRepository->findUserItemRequest($item, $this->getUser());
 
@@ -314,11 +320,11 @@ class ItemController extends Controller
                 $userFacebookId  = $item->getCreatedBy()->getFacebookId();
 
                 return $this->render('frontend/item/show_item_details.html.twig', [
-                    'item'     => $item,
-                    'request'  => $userItemRequest,
-                    'facebook' => $userFacebookId,
-                    'form'     => $form->createView(),
-                    'message_form' => $messageForm->createView(),
+                    'item'         => $item,
+                    'request'      => $userItemRequest,
+                    'facebook'     => $userFacebookId,
+                    'form'         => $form->createView(),
+                    'message_form' => $messageForm->createView()
                 ]);
             }
         } else {
@@ -326,10 +332,10 @@ class ItemController extends Controller
         }
 
         return $this->render('frontend/item/show_item_details.html.twig', [
-            'item'     => $item,
-            'request'  => $userItemRequest,
-            'form'     => $form->createView(),
-            'message_form' => $messageForm->createView(),
+            'item'         => $item,
+            'request'      => $userItemRequest,
+            'form'         => $form->createView(),
+            'message_form' => $messageForm->createView()
         ]);
     }
 
@@ -338,10 +344,11 @@ class ItemController extends Controller
      *
      * @param Request $request Request
      *
-     * @throws AccessDeniedException
-     *
      * @return Response
      *
+     * @throws AccessDeniedException
+     *
+     * @Method("GET")
      * @Route("/show/found-points", name="show_found_points", options={"expose"=true})
      */
     public function getFoundPointsAction(Request $request)
@@ -375,8 +382,10 @@ class ItemController extends Controller
      * @param Request $request Request
      *
      * @return Response
+     *
      * @throws AccessDeniedException
      *
+     * @Method("GET")
      * @Route("/show/lost-points", name="show_lost_points", options={"expose"=true})
      */
     public function getLostPointsAction(Request $request)
@@ -409,7 +418,8 @@ class ItemController extends Controller
      *
      * @return Response
      *
-     * @Route("item/{id}/deactivate", name="item_deactivate")
+     * @Method("GET")
+     * @Route("item/{id}/deactivate", name="item_deactivate", options={"i18n"=false})))
      * @ParamConverter("item", class="AppBundle\Entity\Item")
      */
     public function itemDeactivatedAction(Item $item)
@@ -417,6 +427,7 @@ class ItemController extends Controller
         if ($item->getCreatedBy()->getId() != $this->getUser()->getId()) {
             throw $this->createAccessDeniedException();
         }
+
         $item->setActive(false);
 
         $em = $this->getDoctrine()->getManager();
@@ -432,9 +443,9 @@ class ItemController extends Controller
 
         $this->get('session')->getFlashBag()->add('notice', 'Item ' . $item->getTitle() . ' was deactivated!');
 
-        return $this->render(':frontend/user:show_deactivated_items.html.twig', [
+        return $this->render('frontend/user/show_deactivated_items.html.twig', [
             'items' => $items,
-            'count' => $count,
+            'count' => $count
         ]);
     }
 
@@ -443,7 +454,8 @@ class ItemController extends Controller
      *
      * @return Response
      *
-     * @Route("item/{id}/delete", name="item_delete")
+     * @Method("GET")
+     * @Route("item/{id}/delete", name="item_delete", options={"i18n"=false})))
      * @ParamConverter("item", class="AppBundle\Entity\Item")
      */
     public function itemDeleteAction(Item $item)
@@ -451,6 +463,7 @@ class ItemController extends Controller
         if ($item->getCreatedBy()->getId() != $this->getUser()->getId()) {
             throw $this->createAccessDeniedException();
         }
+
         $item->setDeleted(true);
 
         $em = $this->getDoctrine()->getManager();
@@ -466,9 +479,9 @@ class ItemController extends Controller
 
         $this->get('session')->getFlashBag()->add('notice', 'Item ' . $item->getTitle() . ' was deleted!');
 
-        return $this->render(':frontend/user:show_deactivated_items.html.twig', [
+        return $this->render('frontend/user/show_deactivated_items.html.twig', [
             'items' => $items,
-            'count' => $count,
+            'count' => $count
         ]);
     }
 
@@ -477,7 +490,8 @@ class ItemController extends Controller
      *
      * @return Response
      *
-     * @Route("item/{id}/activate", name="item_activate")
+     * @Method("GET")
+     * @Route("item/{id}/activate", name="item_activate", options={"i18n"=false})))
      * @ParamConverter("item", class="AppBundle\Entity\Item")
      */
     public function itemActivatedAction(Item $item)
@@ -485,6 +499,7 @@ class ItemController extends Controller
         if ($item->getCreatedBy()->getId() != $this->getUser()->getId()) {
             throw $this->createAccessDeniedException();
         }
+
         $item->setActive(true);
 
         $em = $this->getDoctrine()->getManager();
@@ -514,7 +529,8 @@ class ItemController extends Controller
      *
      * @return Response
      *
-     * @Route("item/{id}/request-user", name="item_user_get_facebook", options={"expose"=true})
+     * @Method("POST")
+     * @Route("item/{id}/request-user", name="item_user_get_facebook", options={"expose"=true, "i18n"=false}))
      * @ParamConverter("item", class="AppBundle\Entity\Item")
      */
     public function requestUserAction(Item $item, Request $request)
@@ -542,12 +558,15 @@ class ItemController extends Controller
                 return new JsonResponse($user->getFacebookId());
             }
 
-            throw new BadRequestHttpException();
         }
+
+        throw new BadRequestHttpException();
     }
 
     /**
-     * @return array
+     * List action
+     *
+     * @return Category[]
      */
     private function listAction()
     {

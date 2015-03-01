@@ -9,6 +9,7 @@ imports:
     - { resource: a2lix_translation.yml }
     - { resource: ckeditor.yml }
     - { resource: fos_rest.yml }
+    - { resource: jms_i18n_routing.yml }
     - { resource: doctrine/doctrine.yml }
     - { resource: doctrine/extensions.yml }
     - { resource: sonata/sonata-admin.yml }
@@ -58,21 +59,8 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
-# SensioFrameworkExtra
 sensio_framework_extra:
-    request:
-        converters: true
-        auto_convert: false
-    view:
-        annotations: false
-
-#jms i18n routing bundle
-jms_i18n_routing:
-    default_locale: %locale%
-    locales:
-        - uk
-        - ru
-        - en
-    strategy: prefix
+    view:    { annotations: false }
+    router:  { annotations: true }
 
 nelmio_api_doc: ~

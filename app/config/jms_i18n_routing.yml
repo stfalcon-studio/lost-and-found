@@ -1,0 +1,7 @@
+jms_i18n_routing:
+    default_locale: %locale%
+    locales:
+        - uk
+        - ru
+        - en
+    strategy: prefix

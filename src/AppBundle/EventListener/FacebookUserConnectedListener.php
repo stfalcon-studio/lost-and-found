@@ -1,4 +1,12 @@
 <?php
+/*
+ * This file is part of the "Lost and Found" project
+ *
+ * (c) Stfalcon.com <info@stfalcon.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace AppBundle\EventListener;
 
@@ -35,7 +43,7 @@ class FacebookUserConnectedListener
     private $mailer;
 
     /**
-     * @var EntityManager $entityManager
+     * @var EntityManager $entityManager Entity manager
      */
     private $entityManager;
 
@@ -45,7 +53,7 @@ class FacebookUserConnectedListener
      */
     public function __construct(Swift_Mailer $mailer, EntityManager $em)
     {
-        $this->mailer = $mailer;
+        $this->mailer        = $mailer;
         $this->entityManager = $em;
     }
 

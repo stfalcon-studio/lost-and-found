@@ -1,14 +1,23 @@
 <?php
+/*
+ * This file is part of the "Lost and Found" project
+ *
+ * (c) Stfalcon.com <info@stfalcon.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace AppBundle\Controller\Frontend;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * DefaultController
+ * Frontend DefaultController
  *
  * @author Artem Genvald  <genvaldartem@gmail.com>
  * @author Yuri Svatok    <svatok13@gmail.com>
@@ -19,9 +28,10 @@ class DefaultController extends Controller
     /**
      * Homepage
      *
-     * @Route("/", name="homepage")
-     *
      * @return Response
+     *
+     * @Method("GET")
+     * @Route("/", name="homepage")
      */
     public function indexAction()
     {
@@ -33,9 +43,10 @@ class DefaultController extends Controller
      *
      * @param Request $request
      *
-     * @Route("/feedback", name="feedback")
-     *
      * @return Response
+     *
+     * @Method("GET")
+     * @Route("/feedback", name="feedback")
      */
     public function feedbackAction(Request $request)
     {

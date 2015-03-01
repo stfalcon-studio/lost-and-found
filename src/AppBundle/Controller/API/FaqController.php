@@ -1,156 +1,226 @@
 <?php
+/*
+ * This file is part of the "Lost and Found" project
+ *
+ * (c) Stfalcon.com <info@stfalcon.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace AppBundle\Controller\API;
 
+use AppBundle\Entity\Faq;
+use AppBundle\Form\Type\API\FaqType;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Util\Codes;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
-use AppBundle\Entity\Faq;
-use FOS\RestBundle\Controller\Annotations as Rest;
-use FOS\RestBundle\View\View;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
- * FaqController
+ * API FaqController
  *
  * @author Andrew Prohorovych <prohorovychua@gmail.com>
  * @author Artem Genvald      <genvaldartem@gmail.com>
+ *
+ * @Rest\NamePrefix("api_faq_")
+ * @Rest\Prefix("/v1/faqs")
  */
 class FaqController extends FOSRestController
 {
     /**
-     * @return Faq[]
+     * Get all F.A.Q. items or sliced by limit and offset
      *
-     * @Rest\View()
-     * @Rest\Get("/api/v1/faq", name="get_faq", defaults={ "_format" = "json" })
-     */
-    public function getFaqListAction()
-    {
-        $faqRepository = $this->getDoctrine()->getRepository('AppBundle:Faq');
-
-        $faq = $faqRepository->getFaqList();
-
-        return $faq;
-    }
-
-    /**
-     * @param int $id ID
+     * GET /api/faqs
      *
-     * @return Faq
-     *
-     * @Rest\View()
-     * @Rest\Get("/api/v1/faq/{id}", name="get_faq_by_id", defaults={ "_format" = "json" })
-     */
-    public function getFaqAction($id)
-    {
-        $faqRepository = $this->getDoctrine()->getRepository('AppBundle:Faq');
-
-        $faq = $faqRepository->getFaqById($id);
-
-        if (!$faq) {
-            throw $this->createNotFoundException('Unable to find faq entity');
-        }
-
-        return $faq;
-    }
-
-    /**
-     * @param Request $request
-     *
-     * @return array|View
-     *
-     * @Rest\View()
-     * @Rest\Post("/api/v1/faq", name="create_faq")
-     */
-    public function postFaqAction(Request $request)
-    {
-        $form = $this->createForm('faq', new Faq());
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $faq = $form->getData();
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($faq);
-            $em->flush();
-
-            return Codes::HTTP_CREATED;
-        }
-
-        return [
-            'form' => $form,
-        ];
-    }
-
-    /**
      * @param Request $request Request
-     * @param int     $id      ID
      *
-     * @return array|View
+     * @return Response
      *
-     * @Rest\View()
-     * @Rest\Put("/api/v1/faq/{id}", name = "put_faq")
+     * @Rest\Get("")
      */
-    public function putFaqAction(Request $request, $id)
+    public function getAllAction(Request $request)
     {
+        $limit  = (int) $request->get('limit');
+        $offset = (int) $request->get('offset');
+
         $faqRepository = $this->getDoctrine()->getRepository('AppBundle:Faq');
 
-        /** @var Faq $faq */
-        $faq = $faqRepository->findOneBy([
-            'id' => $id,
-        ]);
-
-        $form = $this->createForm('faq', $faq);
-        $form->handleRequest($request);
-
-        if (!$faq) {
-            throw $this->createNotFoundException('Unable to find faq entity');
+        if ($limit > 0) {
+            $faqs = $faqRepository->findEnabledWithLimitAndOffset($limit, $offset);
+        } else {
+            $faqs = $faqRepository->findBy(['enabled' => true]);
         }
 
+        if (count($faqs) > 0) {
+            $numberOfFaqs = count($faqs);
+
+            $data = [
+                'faqs' => $faqs,
+                '_metadata'   => [
+                    'total'  => count($faqs),
+                    'limit'  => $limit > 0 ? $limit : $numberOfFaqs,
+                    'offset' => $offset
+                ]
+            ];
+
+            $view = $this->view($data, Codes::HTTP_OK);
+        } else {
+            $view = $this->view([], Codes::HTTP_NO_CONTENT);
+        }
+
+        return $this->handleView($view);
+    }
+
+    /**
+     * Get one F.A.Q. item
+     *
+     * GET /api/faqs/1
+     *
+     * @param Faq $faq Faq
+     *
+     * @return Response
+     *
+     * @Rest\Get("/{id}")
+     *
+     * @ParamConverter("id", class="AppBundle:Faq")
+     */
+    public function getAction(Faq $faq)
+    {
+        $data = [
+            'faq' => $faq
+        ];
+
+        $view = $this->view($data, Codes::HTTP_OK);
+
+        return $this->handleView($view);
+    }
+
+    /**
+     * Create a new F.A.Q. item
+     *
+     * POST /api/faqs
+     *
+     * @param Request $request Request
+     *
+     * @return Response
+     *
+     * @Rest\Post("")
+     */
+    public function createAction(Request $request)
+    {
+        $faq = new Faq();
+
+        $form = $this->createForm(new FaqType(), $faq);
+
+        $data = $request->request->all();
+
+        $form->submit($data);
+
         if ($form->isValid()) {
-            $question = $form->getData('question');
-            $answer = $form->getData('answer');
-            $enabled = $form->getData('enabled');
-
-            $faq
-                ->setAnswer($answer)
-                ->setEnabled($enabled)
-                ->setQuestion($question);
-
             $em = $this->getDoctrine()->getManager();
             $em->persist($faq);
             $em->flush();
 
-            return $this->view(null, Codes::HTTP_NO_CONTENT);
+            $data = ['faq' => $faq];
+            $view = $this->view($data, Codes::HTTP_CREATED);
+
+            return $this->handleView($view);
         }
 
-        return [
-            'form' => $form->createView(),
-        ];
+        return $this->handleView($this->view($form, Codes::HTTP_BAD_REQUEST));
     }
 
     /**
-     * @param int $id ID
+     * Update an existed F.A.Q. item
      *
-     * @return View
+     * PUT /api/faqs/1
      *
-     * @Rest\Delete("/api/v1/faq/{id}", name="delete_faq_by_id")
+     * @param Faq     $faq     Faq
+     * @param Request $request Request
+     *
+     * @return Response
+     *
+     * @Rest\Put("/{id}")
+     *
+     * @ParamConverter("id", class="AppBundle:Faq")
      */
-    public function deleteFaqAction($id)
+    public function updateAction(Faq $faq, Request $request)
     {
-        $faqRepository = $this->getDoctrine()->getRepository('AppBundle:Faq');
+        $form = $this->createForm(new FaqType(), $faq);
 
-        /** @var Faq $faq */
-        $faq = $faqRepository->findOneBy([
-            'id' => $id,
-        ]);
+        $data = $request->request->all();
 
-        if (!$faq) {
-            throw $this->createNotFoundException('Unable to find faq entity');
+        $form->submit($data);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($faq);
+            $em->flush();
+
+            $data = ['faq' => $faq];
+            $view = $this->view($data, Codes::HTTP_CREATED);
+
+            return $this->handleView($view);
         }
 
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($faq);
-        $em->flush();
+        $view = $this->view($form, Codes::HTTP_BAD_REQUEST);
 
-        return $this->view(null, Codes::HTTP_NO_CONTENT);
+        return $this->handleView($view);
+    }
+
+    /**
+     * Delete an existed F.A.Q. item
+     *
+     * DELETE /api/faqs/1
+     *
+     * @param int $id ID
+     *
+     * @return Response
+     *
+     * @Rest\Delete("/{id}")
+     */
+    public function deleteAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $faq = $em->getRepository('AppBundle:Faq')->find($id);
+
+        // If F.A.Q. item still exists then remove it
+        if ($faq instanceof Faq) {
+            $em->remove($faq);
+            $em->flush();
+        }
+
+        $view = $this->view(null, Codes::HTTP_NO_CONTENT);
+
+        return $this->handleView($view);
+    }
+
+    /**
+     * Delete all F.A.Q. items
+     *
+     * DELETE /api/faqs
+     *
+     * @return Response
+     *
+     * @Rest\Delete("")
+     */
+    public function deleteAllAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $faqRepository = $em->getRepository('AppBundle:Faq');
+
+        $faqs = $faqRepository->findAll();
+        if (count($faqs) > 0) {
+            foreach ($faqs as $faq) {
+                $em->remove($faq);
+            }
+            $em->flush();
+        }
+
+        return $this->handleView($this->view(null, Codes::HTTP_NO_CONTENT));
     }
 }

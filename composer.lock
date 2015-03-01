@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5df69a0dfb77102d8cbe894902227262",
+    "hash": "acdf95be5983430193187fe71cd1d779",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
@@ -1164,12 +1164,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSRestBundle.git",
-                "reference": "8ebb1e8d2c0cc5d89c78f201966fa01e2f3e7d2e"
+                "reference": "02fd6423543d673946246c7f74a738099951aaff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/8ebb1e8d2c0cc5d89c78f201966fa01e2f3e7d2e",
-                "reference": "8ebb1e8d2c0cc5d89c78f201966fa01e2f3e7d2e",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/02fd6423543d673946246c7f74a738099951aaff",
+                "reference": "02fd6423543d673946246c7f74a738099951aaff",
                 "shasum": ""
             },
             "require": {
@@ -1234,7 +1234,7 @@
             "keywords": [
                 "rest"
             ],
-            "time": "2015-03-01 10:45:10"
+            "time": "2015-03-02 08:29:42"
         },
         {
             "name": "friendsofsymfony/user-bundle",
@@ -5304,6 +5304,63 @@
                 "webtest"
             ],
             "time": "2014-05-12 21:03:05"
+        },
+        {
+            "name": "liip/functional-test-bundle",
+            "version": "1.0.4",
+            "target-dir": "Liip/FunctionalTestBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/liip/LiipFunctionalTestBundle.git",
+                "reference": "3313028ab6dcffc699b46932ba89e177c8d9f2b8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/liip/LiipFunctionalTestBundle/zipball/3313028ab6dcffc699b46932ba89e177c8d9f2b8",
+                "reference": "3313028ab6dcffc699b46932ba89e177c8d9f2b8",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/common": "2.*",
+                "php": ">=5.3.2",
+                "symfony/browser-kit": "~2.0",
+                "symfony/framework-bundle": "~2.0"
+            },
+            "suggest": {
+                "doctrine/dbal": "Required when using the fixture loading functionality with an ORM and SQLite",
+                "doctrine/doctrine-fixtures-bundle": "Required when using the fixture loading functionality",
+                "doctrine/orm": "Required when using the fixture loading functionality with an ORM and SQLite"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Liip\\FunctionalTestBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Liip AG",
+                    "homepage": "http://www.liip.ch/"
+                },
+                {
+                    "name": "Community contributions",
+                    "homepage": "https://github.com/liip/LiipFunctionalTestBundle/contributors"
+                }
+            ],
+            "description": "This bundles provides additional functional test-cases for Symfony2 applications",
+            "keywords": [
+                "Symfony2"
+            ],
+            "time": "2015-01-22 09:50:35"
         },
         {
             "name": "react/promise",

@@ -1,13 +1,21 @@
 <?php
+/*
+ * This file is part of the "Lost and Found" project
+ *
+ * (c) Stfalcon.com <info@stfalcon.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace AppBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
-use AppBundle\Entity\User;
 use AppBundle\Entity\Message;
+use AppBundle\Entity\User;
+use Doctrine\ORM\EntityRepository;
 
 /**
- * Class Faq Repository
+ * Class MessageRepository
  *
  * @author Andrew Prohorovych <prohorovychua@gmail.com>
  */
