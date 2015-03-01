@@ -1,0 +1,5 @@
+# A2lix translation form
+a2lix_translation_form:
+    locales: [uk, ru, en]
+    default_required: true
+    manager_registry: doctrine

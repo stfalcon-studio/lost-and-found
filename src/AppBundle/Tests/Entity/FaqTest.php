@@ -3,6 +3,8 @@
 namespace AppBundle\Tests\Entity;
 
 use AppBundle\Entity\Faq;
+use Doctrine\Common\Collections\ArrayCollection;
+use AppBundle\Entity\Translation\FaqTranslation;
 
 /**
  * FAQ Entity Test
@@ -74,5 +76,43 @@ class FAQTest extends \PHPUnit_Framework_TestCase
         $enabled = false;
         $faq = (new Faq())->setEnabled($enabled);
         $this->assertEquals($enabled, $faq->isEnabled());
+    }
+
+    /**
+     * Test setter and getter for locale
+     */
+    public function testSetGetLocale()
+    {
+        $locale = 'en';
+        $faq = (new Faq())->setLocale($locale);
+        $this->assertEquals($locale, $faq->getLocale());
+    }
+
+    /**
+     * Test setter and getter for translation
+     */
+    public function testSetGetTranslation()
+    {
+        $tr = new ArrayCollection();
+        $tr->add(new FaqTranslation());
+        $faq = (new Faq())->setTranslations($tr);
+        $this->assertEquals(1, $faq->getTranslations()->count());
+        $this->assertEquals($tr, $faq->getTranslations());
+    }
+
+    /**
+     * Test add and remove translation
+     */
+    public function testAddRemoveTranslation()
+    {
+        $faq = new Faq();
+        $this->assertEquals(0, $faq->getTranslations()->count());
+
+        $faq->addTranslation(new FaqTranslation());
+        $this->assertEquals(1, $faq->getTranslations()->count());
+
+        $tr = $faq->getTranslations()->first();
+        $faq->removeTranslation($tr);
+        $this->assertEquals(0, $faq->getTranslations()->count());
     }
 }

@@ -44,3 +44,23 @@ services:
         class: AppBundle\Form\Type\StatisticType
         tags:
             - { name: form.type, alias: statistic }
+
+    app.form.item.details:
+        class: AppBundle\Form\Type\ItemDetailsType
+        tags:
+            - { name: form.type, alias: item_details }
+
+    app.form.send.message:
+        class: AppBundle\Form\Type\SendMessageType
+        tags:
+            - { name: form.type, alias: send_message }
+
+    app.form.items.list:
+        class: AppBundle\Form\Type\ItemsListType
+        tags:
+            - { name: form.type, alias: items_list_type }
+
+    app.form.update.faq:
+            class: AppBundle\Form\Type\FaqType
+            tags:
+                - { name: form.type, alias: faq }

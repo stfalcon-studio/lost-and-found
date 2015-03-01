@@ -63,7 +63,7 @@ class FaqAdmin extends Admin
                         'fields' => [
                             'question' => [
                                 'locale_options' => [
-                                    'ua' => [
+                                    'uk' => [
                                         'required' => true
                                     ],
                                     'en' => [
@@ -77,7 +77,7 @@ class FaqAdmin extends Admin
                             'answer' => [
                                 'field_type'     => 'ckeditor',
                                 'locale_options' => [
-                                    'ua' => [
+                                    'uk' => [
                                         'required' => true
                                     ],
                                     'en' => [

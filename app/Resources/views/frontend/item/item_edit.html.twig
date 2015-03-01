@@ -26,9 +26,26 @@
 {% block content %}
     <div>
         {{ form_start(form) }}
-        {{ form_errors(form) }}
+        <div class="half-form">
+            {{ form_errors(form) }}
+
+            <div class="half-category">
+                {{ form_row(form.category) }}
+            </div>
+            <div class="half-date">
+                {{ form_row(form.date) }}
+            </div>
+            {{ form_row(form.title) }}
+            {{ form_row(form.description) }}
+            {#{{ form_row(form.photos) }}#}
+        </div>
+        <div style="float: right; width: 50%; padding: 0">
+            {{ form_row(form.areaMap) }}
+        </div>
         {{ form_end(form) }}
     </div>
+
+
     <div id="latitude" data-latitude="{{ item.latitude }}"></div>
     <div id="longitude" data-longitude="{{ item.longitude }}"></div>
     <div id="area" data-area="{{ item.area|json_encode }}"></div>

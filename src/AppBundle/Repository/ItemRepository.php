@@ -326,6 +326,56 @@ class ItemRepository extends EntityRepository
     }
 
     /**
+     * Get items by date
+     *
+     * @param string    $type
+     * @param \DateTime $dateFrom
+     * @param \DateTime $dateTo
+     * @param array     $categories
+     *
+     * @return array
+     */
+    public function  getItemsByDate($type,
+        \DateTime $dateFrom = null,
+        \DateTime $dateTo = null,
+        $categories = null
+    )
+    {
+        $qb = $this->createQueryBuilder('i');
+
+        $qb
+            ->select('i.id')
+            ->addSelect('i.latitude')
+            ->addSelect('i.longitude')
+            ->addSelect('i.area')
+            ->addSelect('i.areaType')
+            ->addSelect('i.title')
+            ->addSelect('i.date')
+            ->addSelect('c.title AS categoryTitle')
+            ->addSelect('c.imageName AS categoryImage')
+            ->join('i.category', 'c')
+            ->where($qb->expr()->eq('i.type', ':type'))
+            ->orderBy('i.id')
+            ->setParameter('type', $type);
+
+        if (null !== $dateFrom && null !== $dateTo) {
+            $from = $dateFrom->format('Y-m-d 00:00:00');
+            $to = $dateTo->format('Y-m-d 23:59:59');
+
+            $qb
+                ->andWhere($qb->expr()->between('i.createdAt', ':from', ':to'))
+                ->setParameter('from', $from)
+                ->setParameter('to', $to);
+        }
+
+        if (count($categories)) {
+            $qb->andWhere($qb->expr()->in('c.id', $categories));
+        }
+
+        return $qb->getQuery()->getArrayResult();
+    }
+
+    /**
      * Find moderated item by id
      *
      * @param integer $id

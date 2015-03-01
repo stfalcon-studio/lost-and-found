@@ -24,12 +24,13 @@ class CategoryRepository extends MaterializedPathRepository
      *
      * @return Category[]
      */
-    public function getCategories($offset = 0, $limit = null)
+    public function getParentCategories($offset = 0, $limit = null)
     {
         $qb = $this->createQueryBuilder('c');
 
         $qb
             ->where($qb->expr()->eq('c.enabled', true))
+            ->andWhere($qb->expr()->isNull('c.parent'))
             ->setFirstResult($offset);
 
         if (null !== $limit) {
@@ -37,5 +38,27 @@ class CategoryRepository extends MaterializedPathRepository
         }
 
         return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * @param int  $offset
+     * @param null $limit
+     *
+     * @return Category[]
+     */
+    public function getCategories($offset = 0, $limit = null)
+    {
+        $qb = $this->createQueryBuilder('c');
+
+        $qb
+            ->where($qb->expr()->eq('c.enabled', true))
+            ->andWhere($qb->expr()->isNull('c.parent'))
+            ->setFirstResult($offset);
+
+        if (null !== $limit) {
+            $qb->setMaxResults($limit);
+        }
+
+        return $qb->getQuery()->getArrayResult();
     }
 }

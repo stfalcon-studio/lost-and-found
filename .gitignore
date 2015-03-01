@@ -13,5 +13,7 @@
 *.*~
 /web/images/categories/
 /web/images/item-photos/
+/web/uploads/media/images/
 !/web/images/categories/.gitkeep
 !/web/images/item-photos/.gitkeep
+!/web/uploads/media/images/.gitkeep

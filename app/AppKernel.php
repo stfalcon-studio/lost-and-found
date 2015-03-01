@@ -6,7 +6,10 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 /**
  * Class AppKernel
  *
- * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Artem Genvald      <genvaldartem@gmail.com>
+ * @author Yuri Svatok        <svatok13@gmail.com>
+ * @author Andrew Prohorovych <prohorovychua@gmail.com>
+ * @author Oleg Kachinsky     <logansoleg@gmail.com>
  */
 class AppKernel extends Kernel
 {
@@ -35,9 +38,13 @@ class AppKernel extends Kernel
             new Sonata\BlockBundle\SonataBlockBundle(),
             new Sonata\AdminBundle\SonataAdminBundle(),
             new Sonata\CoreBundle\SonataCoreBundle(),
+            new Sonata\MediaBundle\SonataMediaBundle(),
+            new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
             new Sonata\SeoBundle\SonataSeoBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+            new CoopTilleuls\Bundle\CKEditorSonataMediaBundle\CoopTilleulsCKEditorSonataMediaBundle(),
+            new Sonata\IntlBundle\SonataIntlBundle(),
 
             // User related bundles
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
@@ -52,8 +59,14 @@ class AppKernel extends Kernel
             new JMS\TranslationBundle\JMSTranslationBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
 
+            // API related bundles
+            new FOS\RestBundle\FOSRestBundle(),
+            new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
+
             // Application bundles
             new AppBundle\AppBundle(),
+            new MediaBundle\MediaBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'])) {

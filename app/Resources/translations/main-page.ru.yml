@@ -22,12 +22,18 @@ lost-items:
     header2: "Я что-то потерял..."
     lost-button: "Я что-то потерял :("
     title: "Я что-то потерял :("
+    items-table-name: "Название"
+    items-table-category: "Категория"
+    items-table-date: "Дата"
 
 found-items:
     header: "Найденые вещи"
     header2: "Я что-то нашел..."
     found-button: "Я что-то нашел :)"
     title: "Я что-то нашел :)"
+    items-table-name: "Название"
+    items-table-category: "Категория"
+    items-table-date: "Дата"
 
 profile:
     my-lost-items: "Мои потеряные вещи"
@@ -40,6 +46,9 @@ profile:
     delete: "Удалить"
     deactivate: "Деактивировать"
     activate: "Активировать"
+    messages: "Сообщения"
+    send: "Отправленные"
+    receive: "Полученные"
 
 faq:
 

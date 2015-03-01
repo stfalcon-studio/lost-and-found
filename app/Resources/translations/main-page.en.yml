@@ -22,12 +22,18 @@ lost-items:
     header2: "I lost something"
     lost-button: "I lost something :("
     title: "I lost something :("
+    items-table-name: "Name"
+    items-table-category: "Category"
+    items-table-date: "Date"
 
 found-items:
     header: "Found items"
-    header2: "I lost something"
+    header2: "I found something"
     found-button: "I found something :)"
     title: "I found something :)"
+    items-table-name: "Name"
+    items-table-category: "Category"
+    items-table-date: "Date"
 
 profile:
     my-lost-items: "My lost items"
@@ -40,6 +46,9 @@ profile:
     delete: "Delete"
     deactivate: "Deactivate"
     activate: "Activate"
+    messages: "Messages"
+    send: "Sent"
+    receive: "Received"
 
 faq:
 

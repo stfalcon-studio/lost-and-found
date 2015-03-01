@@ -24,4 +24,14 @@ class FaqTranslation extends AbstractPersonalTranslation
      * @ORM\JoinColumn(name="object_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $object;
+
+    /**
+     * To string
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getContent() ?: 'New F.A.Q. Translation';
+    }
 }

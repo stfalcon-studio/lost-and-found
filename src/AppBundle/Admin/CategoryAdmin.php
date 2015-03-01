@@ -69,7 +69,7 @@ class CategoryAdmin extends Admin
                         'fields' => [
                             'title' => [
                                 'locale_options' => [
-                                    'ua' => [
+                                    'uk' => [
                                         'required' => true
                                     ],
                                     'en' => [
