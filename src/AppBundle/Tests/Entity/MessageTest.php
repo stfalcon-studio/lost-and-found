@@ -8,7 +8,7 @@ use AppBundle\Entity\User;
 /**
  * Message Test
  *
- * @author Logans <Logansoleg@gmail.com>
+ * @author Oleg Kachinsky <logansoleg@gmail.com>
  */
 class MessageTest extends \PHPUnit_Framework_TestCase
 {
@@ -85,6 +85,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $message = (new Message())->setDeleted($deleted);
         $this->assertFalse($deleted, $message->isDeleted());
     }
+
     /**
      * Test setter and getter for Deleted
      */

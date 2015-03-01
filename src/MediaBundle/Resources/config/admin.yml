@@ -1,0 +1,14 @@
+parameters:
+    sonata.media.admin.media.class: MediaBundle\Admin\MediaAdmin
+    sonata.media.admin.gallery.class: MediaBundle\Admin\GalleryAdmin
+    sonata.media.admin.gallery_has_media.class: MediaBundle\Admin\GalleryHasMediaAdmin
+
+services:
+    sonata.media.admin.gallery:
+        class: %sonata.media.admin.gallery.class%
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: sonata_media, label: gallery, label_catalogue: '%sonata.media.admin.gallery.translation_domain%', label_translator_strategy: sonata.admin.label.strategy.underscore, show_in_dashboard: false }
+        arguments: ['', '%sonata.media.admin.gallery.entity%', '%sonata.media.admin.gallery.controller%', '@sonata.media.pool']
+        calls:
+            - [setTranslationDomain, ['%sonata.media.admin.gallery.translation_domain%']]
+            - [setTemplates, [{ list: 'SonataMediaBundle:GalleryAdmin:list.html.twig' }]]

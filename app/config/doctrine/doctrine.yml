@@ -8,32 +8,31 @@ doctrine:
         user:     "%database_user%"
         password: "%database_password%"
         charset:  UTF8
-        server_version: 5.6
+        server_version: "%database_server_version%"
         mapping_types:
             enum: string
         types:
-            ItemTypeType:   AppBundle\DBAL\Types\ItemTypeType
-            ItemStatusType: AppBundle\DBAL\Types\ItemStatusType
+            json:             Sonata\Doctrine\Types\JsonType
             ItemAreaTypeType: AppBundle\DBAL\Types\ItemAreaTypeType
-            UserActionType: AppBundle\DBAL\Types\UserActionType
-            json: Sonata\Doctrine\Types\JsonType
+            ItemStatusType:   AppBundle\DBAL\Types\ItemStatusType
+            ItemTypeType:     AppBundle\DBAL\Types\ItemTypeType
+            UserActionType:   AppBundle\DBAL\Types\UserActionType
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true
         naming_strategy: doctrine.orm.naming_strategy.underscore
         mappings:
-            ApplicationSonataMediaBundle: ~
-            SonataMediaBundle: ~
             gedmo_loggable:
                 type: annotation
                 prefix: Gedmo\Loggable\Entity
                 dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Loggable/Entity"
-                alias: GedmoLoggable # this one is optional and will default to the name set for the mapping
+                alias: GedmoLoggable
                 is_bundle: false
             gedmo_tree:
                 type: annotation
                 prefix: Gedmo\Tree\Entity
                 dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Tree/Entity"
-                alias: GedmoTree # this one is optional and will default to the name set for the mapping
+                alias: GedmoTree
                 is_bundle: false
-
+            SonataMediaBundle: ~
+            MediaBundle: ~

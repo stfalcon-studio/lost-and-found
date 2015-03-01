@@ -54,7 +54,7 @@ class LoadFaqData extends AbstractFixture
         $faq2 = (new Faq())
             ->setLocale('en')
             ->setQuestion('What is F.A.Q.?')
-            ->setAnswer('It`s frequently answer question.')
+            ->setAnswer('It`s frequently asked question.')
             ->setEnabled(true)
             ->addTranslation(
                 (new FaqTranslation())

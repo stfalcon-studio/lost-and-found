@@ -29,7 +29,7 @@ class Version20150216231526 extends AbstractMigration
                 INDEX IDX_17881E9A126F525E (item_id),
                 PRIMARY KEY(id)
             ) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB
-');
+        ');
         $this->addSql('
             CREATE TABLE user_log_actions (
                 id INT AUTO_INCREMENT NOT NULL,
@@ -39,7 +39,7 @@ class Version20150216231526 extends AbstractMigration
                 INDEX IDX_949E00EDA76ED395 (user_id),
                 PRIMARY KEY(id)
             ) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB
-');
+        ');
         $this->addSql('
             CREATE TABLE item_photos (
                 id INT AUTO_INCREMENT NOT NULL,
@@ -50,7 +50,7 @@ class Version20150216231526 extends AbstractMigration
                 INDEX IDX_8E8F95161F1B251E (item),
                 PRIMARY KEY(id)
             ) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB
-');
+        ');
         $this->addSql('
             CREATE TABLE faq (
                 id INT AUTO_INCREMENT NOT NULL,
@@ -61,7 +61,7 @@ class Version20150216231526 extends AbstractMigration
                 updated_at DATETIME NOT NULL,
                 PRIMARY KEY(id)
             ) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB
-');
+        ');
         $this->addSql('ALTER TABLE item_requests ADD CONSTRAINT FK_17881E9AA76ED395 FOREIGN KEY (user_id) REFERENCES users (id)');
         $this->addSql('ALTER TABLE item_requests ADD CONSTRAINT FK_17881E9A126F525E FOREIGN KEY (item_id) REFERENCES items (id)');
         $this->addSql('ALTER TABLE user_log_actions ADD CONSTRAINT FK_949E00EDA76ED395 FOREIGN KEY (user_id) REFERENCES users (id)');

@@ -6,7 +6,10 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 /**
  * Class AppKernel
  *
- * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Artem Genvald      <genvaldartem@gmail.com>
+ * @author Yuri Svatok        <svatok13@gmail.com>
+ * @author Andrew Prohorovych <prohorovychua@gmail.com>
+ * @author Oleg Kachinsky     <logansoleg@gmail.com>
  */
 class AppKernel extends Kernel
 {
@@ -56,14 +59,14 @@ class AppKernel extends Kernel
             new JMS\TranslationBundle\JMSTranslationBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
 
-            // API bundles
+            // API related bundles
             new FOS\RestBundle\FOSRestBundle(),
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
 
             // Application bundles
-            new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
             new AppBundle\AppBundle(),
+            new MediaBundle\MediaBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'])) {

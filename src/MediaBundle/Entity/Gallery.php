@@ -1,23 +1,25 @@
 <?php
 
-namespace Application\Sonata\MediaBundle\Entity;
+namespace MediaBundle\Entity;
 
 use Sonata\MediaBundle\Entity\BaseGallery as BaseGallery;
 
 /**
- * Gallery
+ * Gallery Entity Class
+ *
+ * @author Artem Genvald <genvaldartem@gmail.com>
  */
 class Gallery extends BaseGallery
 {
     /**
-     * @var integer $id
+     * @var int $id ID
      */
     protected $id;
 
     /**
-     * Get id
+     * Get ID
      *
-     * @return integer $id
+     * @return int ID
      */
     public function getId()
     {

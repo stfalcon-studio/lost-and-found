@@ -10,7 +10,7 @@ use AppBundle\Entity\Category;
 /**
  * ItemsListType
  *
- * @author Logans <Logansoleg@gmail.com>
+ * @author Oleg Kachinsky <logansoleg@gmail.com>
  */
 class ItemsListType extends AbstractType
 {

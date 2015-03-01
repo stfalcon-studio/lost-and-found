@@ -11,7 +11,8 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * CategoryController
  *
- * @author Logans <Logansoleg@gmail.com>
+ * @author Oleg Kachinsky     <logansoleg@gmail.com>
+ * @author Artem Genvald      <genvaldartem@gmail.com>
  */
 class CategoryController extends FOSRestController
 {
@@ -30,6 +31,5 @@ class CategoryController extends FOSRestController
         $reports = $serializer->serialize($categories, 'json');
 
         return new Response($reports);
-//        return $categories;
     }
 }

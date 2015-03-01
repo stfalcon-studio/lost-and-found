@@ -8,7 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * ItemDetailsType
  *
- * @author Logans <Logansoleg@gmail.com>
+ * @author Oleg Kachinsky <logansoleg@gmail.com>
  */
 class ItemDetailsType extends AbstractType
 {

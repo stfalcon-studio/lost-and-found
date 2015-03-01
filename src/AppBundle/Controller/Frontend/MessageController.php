@@ -10,6 +10,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class MessageController
+ *
+ *
+ * @author Andrew Prohorovych <prohorovychua@gmail.com>
+ * @author Artem Genvald      <genvaldartem@gmail.com>
  */
 class MessageController extends Controller
 {
@@ -34,7 +38,7 @@ class MessageController extends Controller
 
         return $this->render(':frontend/user:show_messages.html.twig', [
             'count' => $count,
-            'type'   => 'sent',
+            'type'  => 'sent'
         ]);
     }
 }

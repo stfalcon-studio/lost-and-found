@@ -35,7 +35,7 @@ class Version20150210151241 extends AbstractMigration
                 INDEX log_version_lookup_idx (object_id, object_class, version),
                 PRIMARY KEY(id)
             ) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB
-');
+        ');
         $this->addSql('
             CREATE TABLE categories (
                 id INT AUTO_INCREMENT NOT NULL,
@@ -51,7 +51,7 @@ class Version20150210151241 extends AbstractMigration
                 INDEX IDX_3AF34668727ACA70 (parent_id),
                 PRIMARY KEY(id)
             ) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB
-');
+        ');
         $this->addSql('
             CREATE TABLE items (
                 id INT AUTO_INCREMENT NOT NULL,
@@ -74,8 +74,8 @@ class Version20150210151241 extends AbstractMigration
                 INDEX IDX_E11EE94D64C19C1 (category),
                 INDEX IDX_E11EE94DD3564642 (created_by),
                 PRIMARY KEY(id)
-            ) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
-
+            ) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB
+        ');
         $this->addSql('
             CREATE TABLE users (
                 id INT AUTO_INCREMENT NOT NULL,
@@ -103,8 +103,8 @@ class Version20150210151241 extends AbstractMigration
                 UNIQUE INDEX UNIQ_1483A5E992FC23A8 (username_canonical),
                 UNIQUE INDEX UNIQ_1483A5E9A0D96FBF (email_canonical),
                 PRIMARY KEY(id)
-            ) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
-
+            ) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB
+        ');
         $this->addSql('ALTER TABLE categories ADD CONSTRAINT FK_3AF34668727ACA70 FOREIGN KEY (parent_id) REFERENCES categories (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE items ADD CONSTRAINT FK_E11EE94D64C19C1 FOREIGN KEY (category) REFERENCES categories (id)');
         $this->addSql('ALTER TABLE items ADD CONSTRAINT FK_E11EE94DD3564642 FOREIGN KEY (created_by) REFERENCES users (id)');

@@ -2,10 +2,8 @@
 
 namespace AppBundle\Controller\API;
 
-use AppBundle\Form\Type\FaqType;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Util\Codes;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Faq;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -15,10 +13,10 @@ use FOS\RestBundle\View\View;
  * FaqController
  *
  * @author Andrew Prohorovych <prohorovychua@gmail.com>
+ * @author Artem Genvald      <genvaldartem@gmail.com>
  */
 class FaqController extends FOSRestController
 {
-
     /**
      * @return Faq[]
      *
@@ -35,7 +33,7 @@ class FaqController extends FOSRestController
     }
 
     /**
-     * @param integer $id
+     * @param int $id ID
      *
      * @return Faq
      *
@@ -83,8 +81,8 @@ class FaqController extends FOSRestController
     }
 
     /**
-     * @param Request $request
-     * @param int     $id
+     * @param Request $request Request
+     * @param int     $id      ID
      *
      * @return array|View
      *
@@ -130,7 +128,7 @@ class FaqController extends FOSRestController
     }
 
     /**
-     * @param int $id
+     * @param int $id ID
      *
      * @return View
      *

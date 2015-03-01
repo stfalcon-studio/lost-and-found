@@ -1,13 +1,15 @@
 <?php
 
-namespace Application\Sonata\MediaBundle;
+namespace MediaBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Application Sonata Media Bundle
+ * MediaBundle
+ *
+ * @author Artem Genvald <genvaldartem@gmail.com>
  */
-class ApplicationSonataMediaBundle extends Bundle
+class MediaBundle extends Bundle
 {
     /**
      * {@inheritdoc}
