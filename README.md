@@ -19,7 +19,3 @@ Web-service for announcements of lost and found things.
 ## Requirements
 
 * PHP 5.4 *and later*
-
-## Deploy to Heroku
-
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
