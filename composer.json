@@ -71,7 +71,7 @@
         "tilleuls/ckeditor-sonata-media-bundle": "dev-master",
         "egeloen/ckeditor-bundle": "2.*",
         "friendsofsymfony/rest-bundle": "1.6.*@dev",
-        "nelmio/api-doc-bundle": "2.7.*@dev"
+        "nelmio/api-doc-bundle": "~2.8"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
