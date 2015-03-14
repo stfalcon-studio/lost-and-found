@@ -16,8 +16,8 @@ before_install:
 before_script:
   - composer install --dev
   - app/console doctrine:database:create --env=test
-  - app/console doctrine:migrations:migrate --env=test
-  - app/console cache:warmup --env=test
+  - app/console doctrine:schema:create --env=test
+  - app/console cache:clear --env=test
 
 script:
   - phpunit -c app --coverage-clover build/logs/clover.xml

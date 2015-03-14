@@ -22,6 +22,8 @@ at <a href="http://stfalcon.com/en/">Studio Stfalcon.com</a>.
 You can also check a <a href="http://www.slideshare.net/stfalconcom/ss-45226961">presentation</a>
 and <a href="https://youtu.be/3EgilE_fpkI">video</a> about that practice.
 
+[![Stfalcon.com Logo](./web/images/stfalcon-logo.png)](http://stfalcon.com/en/)
+
 ## Requirements
 
 * PHP 5.4 *and later*
@@ -92,5 +94,3 @@ You can set `test` environment for command if you add `--env=test` to it.
 ---
 
 That's all. Enjoy "Lost and Found" and send feedback ^_^
-
-![Stfalcon.com Logo](./web/images/stfalcon-logo.png)
