@@ -20,27 +20,25 @@ security:
         secured_area:
             pattern: ^/
             oauth:
-                login_path:   /%locale%/auth/connect/facebook
-                failure_path: /%locale%/auth/connect
-                check_path:   /%locale%/auth/connect
+                login_path:   facebook_login
+                failure_path: hwi_oauth_connect
+                check_path:   hwi_oauth_connect
                 provider:     fos_userbundle
                 resource_owners:
-                    facebook:      /%locale%/auth/check-facebook
+                    facebook: facebook_login
                 oauth_user_provider:
                     service: app.user.provider
-                default_target_path: /
+                default_target_path: homepage
             anonymous: ~
             logout:
-                path:   /%locale%/logout
-                target: /
+                path:   fos_user_security_logout
+                target: homepage
 
     access_control:
         - { path: ^/auth/connect, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 #        - { path: ^/profile, roles: ROLE_USER }
-        - { path: ^/%locale%/admin/, role: ROLE_ADMIN }
+        - { path: ^/admin/, roles: ROLE_ADMIN }
         - { path: ^/%locale%/add-lost-item, roles: ROLE_USER }
         - { path: ^/%locale%/add-found-item, roles: ROLE_USER }
-        - { path: ^/%locale%/profile/, role: ROLE_USER }
-        - { path: ^/%locale%/request-user, role: ROLE_USER }
-
-
+        - { path: ^/%locale%/profile/, roles: ROLE_USER }
+        - { path: ^/%locale%/request-user, roles: ROLE_USER }

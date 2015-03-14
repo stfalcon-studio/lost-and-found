@@ -1,11 +1,19 @@
 <?php
+/*
+ * This file is part of the "Lost and Found" project
+ *
+ * (c) Stfalcon.com <info@stfalcon.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace AppBundle\Controller\Backend;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
- * Class Faq Admin Controller
+ * Backend FaqAdminController
  *
  * @author Andrew Prohorovych <prohorovychua@gmail.com>
  * @author Artem Genvald      <genvaldartem@gmail.com>

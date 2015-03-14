@@ -1,4 +1,12 @@
 <?php
+/*
+ * This file is part of the "Lost and Found" project
+ *
+ * (c) Stfalcon.com <info@stfalcon.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace AppBundle\Admin;
 
@@ -70,30 +78,46 @@ class ItemAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('Item')
-                ->add('category')
-                ->add('title')
-                ->add('latitude')
-                ->add('longitude')
-                ->add('type')
-                ->add('description')
-                ->add('areaMap', 'area_map', [
-                    'mapped' => false,
-                ])
-                ->add('area', 'text', [
-                    'required' => false,
-                ])
-                ->add('areaType', 'text')
-                ->add('status')
-                ->add('moderated', 'checkbox', [
-                    'required' => false,
-                ])
-                ->add('createdBy')
-                ->add('date', 'sonata_type_date_picker')
-                ->add('deleted', 'checkbox', [
-                    'required' => false,
-                ])
-            ->end();
+            ->tab('General')
+                ->with(null)
+                    ->add('category')
+                    ->add('title')
+                    ->add('description')
+                    ->add('date', 'sonata_type_date_picker')
+                    ->add('type')
+                    ->add('status')
+                ->end()
+            ->end()
+            ->tab('Admin')
+                ->with(null)
+                    ->add('moderated', 'checkbox', [
+                        'required' => false,
+                    ])
+                    ->add('createdBy')
+                    ->add('deleted', 'checkbox', [
+                        'required' => false,
+                    ])
+                ->end()
+            ->end()
+            ->tab('Requests')
+                ->with(null)
+                    ->add('userRequests')
+                ->end()
+            ->end()
+            ->tab('Map')
+                ->with(null)
+                    ->add('latitude', 'hidden')
+                    ->add('longitude', 'hidden')
+                    ->add('areaMap', 'area_map', [
+                        'mapped' => false,
+                    ])
+//                    ->add('areaType', 'text')
+//                    ->add('area', 'text', [
+//                        'required' => false,
+//                    ])
+                ->end()
+            ->end()
+        ;
     }
 
     /**
@@ -107,6 +131,7 @@ class ItemAdmin extends Admin
             ->add('type', 'string', [
                 'template' => 'backend/item/list_type.html.twig',
             ])
+            ->add('areaType')
             ->add('status', 'string', [
                 'template' => 'backend/item/list_status.html.twig',
             ])
@@ -174,9 +199,9 @@ class ItemAdmin extends Admin
             ->add('moderatedAt', 'datetime', [
                 'format' => 'd.m.Y H:i:s'
             ])
-            ->add('delete')
+            ->add('deleted')
             ->add('deletedAt')
-            ->add('useRequests');
+            ->add('userRequests');
     }
 
     /**

@@ -1,4 +1,12 @@
 <?php
+/*
+ * This file is part of the "Lost and Found" project
+ *
+ * (c) Stfalcon.com <info@stfalcon.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace AppBundle\Tests\Entity;
 
@@ -8,9 +16,10 @@ use AppBundle\DBAL\Types\ItemTypeType;
 use AppBundle\Entity\Category;
 use AppBundle\Entity\Item;
 use AppBundle\Entity\ItemPhoto;
-use AppBundle\Entity\User;
 use AppBundle\Entity\ItemRequest;
+use AppBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
+use Liip\FunctionalTestBundle\Test\WebTestCase;
 
 /**
  * Item Entity Test
@@ -20,7 +29,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @author Andrew Prohorovych <prohorovychua@gmail.com>
  * @author Oleg Kachinsky     <logansoleg@gmail.com>
  */
-class ItemTest extends \PHPUnit_Framework_TestCase
+class ItemTest extends WebTestCase
 {
     /**
      * Test an empty Item entity
@@ -203,14 +212,6 @@ class ItemTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test post moderate method
-     */
-    public function testPostModerate()
-    {
-        /* TODO: Test for post moderate method */
-    }
-
-    /**
      *  Test setter and getter for activated at method
      */
     public function testSetGetActivatedAt()
@@ -306,5 +307,50 @@ class ItemTest extends \PHPUnit_Framework_TestCase
         $item = (new Item())->setPhotos($photos);
         $this->assertEquals(1, $item->getPhotos()->count());
         $this->assertEquals($photos, $item->getPhotos());
+    }
+
+    /**
+     * Test postModerate hook
+     */
+    public function testPostModerate()
+    {
+        self::bootKernel();
+
+        /** @var \Doctrine\ORM\EntityManager $em */
+        $em = static::$kernel->getContainer()->get('doctrine')->getManager();
+
+        $this->loadFixtures([
+            'AppBundle\DataFixtures\ORM\LoadCategoryData',
+            'AppBundle\DataFixtures\ORM\LoadUserData'
+        ]);
+
+        // Find some category and user
+        $category = $em->getRepository('AppBundle:Category')->findOneBy(['level' => 1]);
+        $user     = $em->getRepository('AppBundle:User')->findOneBy(['enabled' => 1]);
+
+        $item = (new Item())
+            ->setTitle('phone')
+            ->setCategory($category)
+            ->setLatitude(49.437764)
+            ->setLongitude(27.005755)
+            ->setType(ItemTypeType::LOST)
+            ->setAreaType(ItemAreaTypeType::MARKER)
+            ->setDescription('description')
+            ->setDate(new \DateTime('10.11.2014'))
+            ->setCreatedBy($user);
+        $em->persist($item);
+        $em->flush();
+
+        // Null by default
+        $this->assertNull($item->getModeratedAt());
+
+        $item->setModerated(true); // Set moderation
+        $em->flush();
+
+        // Current date and time after moderation, must be DateTime object
+        $this->assertInstanceOf('DateTime', $item->getModeratedAt());
+
+        parent::tearDown();
+        $em->close();
     }
 }

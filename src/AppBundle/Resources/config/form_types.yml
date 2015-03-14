@@ -61,6 +61,6 @@ services:
             - { name: form.type, alias: items_list_type }
 
     app.form.update.faq:
-            class: AppBundle\Form\Type\FaqType
-            tags:
-                - { name: form.type, alias: faq }
+        class: AppBundle\Form\Type\FaqType
+        tags:
+            - { name: form.type, alias: faq }

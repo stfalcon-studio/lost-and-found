@@ -185,7 +185,7 @@
                 <a href="#">{{ 'profile.receive' | trans({}, 'main-page')}}</a>
             {% else %}
                 {% if active_tab == 'messages' %}
-                    <a href="{{ path('user_receive_messages') }}">{{ 'profile.receive' | trans({}, 'main-page')}}</a>
+                    <a href="{{ path('user_received_messages') }}">{{ 'profile.receive' | trans({}, 'main-page')}}</a>
                 {% endif %}
             {% endif %}
         </li>

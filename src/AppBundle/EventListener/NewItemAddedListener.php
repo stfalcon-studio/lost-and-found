@@ -1,4 +1,12 @@
 <?php
+/*
+ * This file is part of the "Lost and Found" project
+ *
+ * (c) Stfalcon.com <info@stfalcon.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace AppBundle\EventListener;
 
@@ -8,33 +16,32 @@ use Swift_Mailer;
 /**
  * NewItemAddedListener
  *
+ * @author Artem Genvald      <genvaldartem@gmail.com>
  * @author Andrew Prohorovych <prohorovychua@gmail.com>
  * @author Oleg Kachinsky     <logansoleg@gmail.com>
  */
 class NewItemAddedListener
 {
     /**
-     * @var array $adminEmails adminEmail Admin emails
-     */
-    private $adminEmails = [
-        /* TODO: Fill with admin emeils */
-        'genvaldartem@gmail.com', // Artem Genvald
-        'logansoleg@gmail.com',   // Kachinsky Oleg
-    ];
-
-    /**
      * @var Swift_Mailer $mailer Mailer
      */
     private $mailer;
 
     /**
+     * @var array $adminEmails Admin emails
+     */
+    private $adminEmails;
+
+    /**
      * Constructor
      *
-     * @param Swift_Mailer $mailer Mailer
+     * @param Swift_Mailer $mailer      Mailer
+     * @param array        $adminEmails Admin emails
      */
-    public function __construct(Swift_Mailer $mailer)
+    public function __construct(Swift_Mailer $mailer, array $adminEmails)
     {
-        $this->mailer = $mailer;
+        $this->mailer      = $mailer;
+        $this->adminEmails = $adminEmails;
     }
 
     /**
@@ -46,7 +53,7 @@ class NewItemAddedListener
 
         $message = $this->mailer
             ->createMessage()
-            ->setSubject('Hey admin! Users added new item!')
+            ->setSubject('Hey admin! User added new item!')
             ->setFrom('logansoleg@gmail.com')
             ->setTo($this->adminEmails)
             ->setBody('Bla bla..');

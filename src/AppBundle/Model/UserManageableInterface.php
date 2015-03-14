@@ -1,4 +1,12 @@
 <?php
+/*
+ * This file is part of the "Lost and Found" project
+ *
+ * (c) Stfalcon.com <info@stfalcon.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace AppBundle\Model;
 
@@ -13,6 +21,13 @@ use AppBundle\Entity\User;
 interface UserManageableInterface
 {
     /**
+     * Get created by user
+     *
+     * @return User Created by user
+     */
+    public function getCreatedBy();
+
+    /**
      * Set created by user
      *
      * @param User $createdBy Created by user
@@ -20,11 +35,4 @@ interface UserManageableInterface
      * @return $this
      */
     public function setCreatedBy(User $createdBy);
-
-    /**
-     * Get created by user
-     *
-     * @return User Created by user
-     */
-    public function getCreatedBy();
 }

@@ -11,7 +11,7 @@ Web-service for announcements of lost and found things.
 [![Total Downloads](https://img.shields.io/packagist/dt/stfalcon-studio/lost-and-found.svg?style=flat-square)](https://packagist.org/packages/stfalcon-studio/lost-and-found)
 [![Latest Stable Version](https://img.shields.io/packagist/v/stfalcon-studio/lost-and-found.svg?style=flat-square)](https://packagist.org/packages/stfalcon-studio/lost-and-found)
 [![License](https://img.shields.io/packagist/l/stfalcon-studio/lost-and-found.svg?style=flat-square)](https://packagist.org/packages/stfalcon-studio/lost-and-found)
-[![Dependency Status](https://www.versioneye.com/user/projects/54da821ec1bbbd9bd70002a9/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/54da821ec1bbbd9bd70002a9)
+[![Dependency Status](https://www.versioneye.com/user/projects/5503fd1a4a1064f144000002/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/5503fd1a4a1064f144000002)
 [![SensioLabsInsight](https://img.shields.io/sensiolabs/i/b2b46a6e-33d7-4019-8b3f-6269dc1e395c.svg?style=flat-square)](https://insight.sensiolabs.com/projects/b2b46a6e-33d7-4019-8b3f-6269dc1e395c)
 [![HHVM](https://img.shields.io/hhvm/stfalcon-studio/lost-and-found.svg?style=flat-square)](http://hhvm.h4cc.de/package/stfalcon-studio/lost-and-found)
 [![Gitter](https://img.shields.io/badge/gitter-join%20chat-brightgreen.svg?style=flat-square)](https://gitter.im/stfalcon-studio/lost-and-found?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)

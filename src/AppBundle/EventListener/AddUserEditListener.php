@@ -1,4 +1,12 @@
 <?php
+/*
+ * This file is part of the "Lost and Found" project
+ *
+ * (c) Stfalcon.com <info@stfalcon.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace AppBundle\EventListener;
 
@@ -14,12 +22,14 @@ use Doctrine\ORM\EntityManager;
 class AddUserEditListener
 {
     /**
-     * @var EntityManager $entityManager
+     * @var EntityManager $entityManager Entity manager
      */
     private $entityManager;
 
     /**
-     * @param EntityManager $em
+     * Constructor
+     *
+     * @param EntityManager $em Entity manager
      */
     public function __construct(EntityManager $em)
     {
@@ -27,7 +37,7 @@ class AddUserEditListener
     }
 
     /**
-     * @param AddUserEditEvent $args
+     * @param AddUserEditEvent $args Arguments
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException

@@ -1,14 +1,21 @@
 <?php
-
+/*
+ * This file is part of the "Lost and Found" project
+ *
+ * (c) Stfalcon.com <info@stfalcon.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace AppBundle\Tests\Entity;
 
+use AppBundle\Entity\Item;
 use AppBundle\Entity\ItemRequest;
 use AppBundle\Entity\User;
-use AppBundle\Entity\Item;
 
 /**
- * UserActionLog Entity Test
+ * ItemRequest Entity Test
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  * @author Yuri Svatok   <svatok13@gmail.com>
@@ -16,7 +23,7 @@ use AppBundle\Entity\Item;
 class ItemRequestTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Test empty UserItemRequest
+     * Test empty ItemRequest
      */
     public function testEmptyUserItemRequest()
     {
@@ -33,8 +40,8 @@ class ItemRequestTest extends \PHPUnit_Framework_TestCase
     public function testSetGetUser()
     {
         $user = new User();
-        $userItemRequest = ((new ItemRequest())->setUser($user));
-        $this->assertEquals($user, $userItemRequest->getUser());
+        $itemRequest = ((new ItemRequest())->setUser($user));
+        $this->assertEquals($user, $itemRequest->getUser());
     }
 
     /**
@@ -43,8 +50,8 @@ class ItemRequestTest extends \PHPUnit_Framework_TestCase
     public function testSetGetItem()
     {
         $item = new Item();
-        $userItemRequest = ((new ItemRequest())->setItem($item));
-        $this->assertEquals($item, $userItemRequest->getItem());
+        $itemRequest = ((new ItemRequest())->setItem($item));
+        $this->assertEquals($item, $itemRequest->getItem());
     }
 
     /**
@@ -53,7 +60,7 @@ class ItemRequestTest extends \PHPUnit_Framework_TestCase
     public function testSetGetCreatedAt()
     {
         $date = new \DateTime('now');
-        $userItemRequest = ((new ItemRequest())->setCreatedAt($date));
-        $this->assertEquals($date, $userItemRequest->getCreatedAt());
+        $itemRequest = ((new ItemRequest())->setCreatedAt($date));
+        $this->assertEquals($date, $itemRequest->getCreatedAt());
     }
 }

@@ -1,4 +1,12 @@
 <?php
+/*
+ * This file is part of the "Lost and Found" project
+ *
+ * (c) Stfalcon.com <info@stfalcon.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace AppBundle\DependencyInjection;
 
@@ -26,6 +34,12 @@ class AppExtension extends Extension
         $loader->load('form_types.yml');
         $loader->load('listeners.yml');
         $loader->load('admin.yml');
+
+        $configuration = new Configuration();
+        $config = $this->processConfiguration($configuration, $configs);
+
+        $container->setParameter('app.facebook_admin_user_ids', $config['facebook_admin_user_ids']);
+        $container->setParameter('app.admin_emails', $config['admin_emails']);
     }
 
     /**

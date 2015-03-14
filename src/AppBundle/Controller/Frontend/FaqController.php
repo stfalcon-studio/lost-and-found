@@ -1,25 +1,35 @@
 <?php
+/*
+ * This file is part of the "Lost and Found" project
+ *
+ * (c) Stfalcon.com <info@stfalcon.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace AppBundle\Controller\Frontend;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use Gedmo\Translatable\Entity\Repository;
 
 /**
- * Class Faq Controller
+ * Frontend FaqController
  *
  * @author Andrew Prohorovych <prohorovychua@gmail.com>
+ * @author Artem Genvald      <genvaldartem@gmail.com>
  */
 class FaqController extends Controller
 {
     /**
      * Show all enabled F.A.Q.
      *
-     * @Route("/faq", name="show_faq")
-     *
      * @return Response
+     *
+     * @Method("GET")
+     * @Route("/faq", name="show_faq")
      */
     public function allFaqListAction()
     {

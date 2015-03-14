@@ -1,0 +1,35 @@
+fos_rest:
+    view:
+        default_engine: twig
+        view_response_listener: true
+        formats:
+            json: true
+            jsonp: true
+        mime_types:
+            json: ['application/json', 'application/x-json', 'application/vnd.example-com.foo+json']
+            jsonp: ['application/javascript+jsonp']
+        failed_validation: HTTP_BAD_REQUEST
+        jsonp_handler:
+            callback_param: callback
+            mime_type: application/javascript+jsonp
+        empty_content: HTTP_OK
+    body_listener: true
+    routing_loader:
+        default_format: json
+    exception:
+        codes:
+            'Symfony\Component\Routing\Exception\ResourceNotFoundException': 404
+#            'Symfony\Component\HttpKernel\Exception\NotFoundHttpException': 404
+#            'Symfony\Component\HttpKernel\Exception\BadRequestHttpException': 400
+            'Doctrine\ORM\OptimisticLockException': HTTP_CONFLICT
+        messages:
+            'Symfony\Component\Routing\Exception\ResourceNotFoundException': true
+#            'Symfony\Component\HttpKernel\Exception\NotFoundHttpException': true
+#            'Symfony\Component\HttpKernel\Exception\BadRequestHttpException': true
+    service:
+        router: router
+        templating: templating
+        serializer: serializer
+        view_handler: fos_rest.view_handler.default
+    param_fetcher_listener: true
+
