@@ -15,6 +15,11 @@ Web-service for announcements of lost and found things.
 [![HHVM](https://img.shields.io/hhvm/stfalcon-studio/lost-and-found.svg?style=flat-square)](http://hhvm.h4cc.de/package/stfalcon-studio/lost-and-found)
 [![Gitter](https://img.shields.io/badge/gitter-join%20chat-brightgreen.svg?style=flat-square)](https://gitter.im/stfalcon-studio/lost-and-found?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+## History
+
+This service started as a training project for students from Khmelnytskyi Polytechnic College during their practice at <a href="http://stfalcon.com">Studio (Stfalcon.com)</a>.
+You can also check <a href="http://www.slideshare.net/stfalconcom/ss-45226961">presentation</a> and <a href="https://youtu.be/3EgilE_fpkI">video</a> about it.
+
 ## Requirements
 
 * PHP 5.4 *and later*
@@ -72,16 +77,18 @@ You can set `test` environment for command if you add `--env=test` to it.
 
 #### Create new application on GitHub
  
-* Register as <a href="https://developers.facebook.com" target="_blank">Facebook Developer</a>
-* Then open <a target="_blank" href="https://developers.facebook.com/quickstarts/?platform=web">https://developers.facebook.com/quickstarts/?platform=web</a>
+* Register as <a href="https://developers.facebook.com">Facebook Developer</a>
+* Then open <a href="https://developers.facebook.com/quickstarts/?platform=web">https://developers.facebook.com/quickstarts/?platform=web</a>
 * Type the name of your application, e.g. *Lost and Found. Localhost*
 * Press "Create New Facebook App ID"
 * Choose category "Apps for Pages"
 * Press "Create App ID"
 * Set your site URL. If it is on localhost, then something like this `http://lost-and-found.localhost/app_dev.php/` and press *Next*
 * Use the newly generated `App ID` and `App Secret` parameters for your application, update parameters
-`facebook_app_id` and `facebook_app_secret` in *parameters.yml* file.
+`facebook_app_id` and `facebook_app_secret` in *parameters.yml* file
 
 ---
 
-> That's all. Enjoy "Lost and Found" and send feedback ^_^
+That's all. Enjoy "Lost and Found" and send feedback ^_^
+
+![Stfalcon.com Logo](./web/images/stfalcon-logo.png)
