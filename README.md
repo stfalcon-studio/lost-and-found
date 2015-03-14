@@ -47,7 +47,7 @@ To do this, execute the following:
 $ php app/check.php
 ```
 
-If you get any warnings or recommendations, fix these now before moving on.
+If you got any warnings or recommendations, fix them before moving on.
 
 #### Setting up permissions for directories `app/cache/` and `app/logs`
 
@@ -59,7 +59,7 @@ $ sudo setfacl -dR -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX app/cache app/logs
 
 #### Change DBAL settings, create DB, update it and load fixtures
 
-Change DBAL setting in `app/config/config.yml`, `app/config/config_dev.yml` or
+Change DBAL setting if your need in `app/config/config.yml`, `app/config/config_dev.yml` or
 `app/config/config_test.yml`. After that execute the following:
 
 ```bash
@@ -68,18 +68,20 @@ $ ./console doctrine:migrations:migrate
 $ ./console doctrine:fixtures:load
 ```
 
-You can set environment `test` for command if you add `--env=test` to it.
+You can set `test` environment for command if you add `--env=test` to it.
 
 #### Create new application on GitHub
  
-* Register as <a href="https://developers.facebook.com" target="_blank">Facebook Developer</a>.
-* Then open <a href="https://developers.facebook.com/quickstarts/?platform=web" target="_blank">https://developers.facebook.com/quickstarts/?platform=web</a>
-* Type the name of your application, e.g. *"Lost and Found. Localhost"*
-* Press "Create New Facebook App ID".
+* Register as <a href="https://developers.facebook.com" target="_blank">Facebook Developer</a>
+* Then open <a target="_blank" href="https://developers.facebook.com/quickstarts/?platform=web">https://developers.facebook.com/quickstarts/?platform=web</a>
+* Type the name of your application, e.g. *Lost and Found. Localhost*
+* Press "Create New Facebook App ID"
 * Choose category "Apps for Pages"
 * Press "Create App ID"
-* Set your site URL. If it is on localhost, then something like this `http://lost-and-found.localhost/app_dev.php/` and press Next
+* Set your site URL. If it is on localhost, then something like this `http://lost-and-found.localhost/app_dev.php/` and press *Next*
 * Use the newly generated `App ID` and `App Secret` parameters for your application, update parameters
 `facebook_app_id` and `facebook_app_secret` in *parameters.yml* file.
+
+---
 
 > That's all. Enjoy "Lost and Found" and send feedback ^_^
