@@ -1,9 +1,8 @@
-Lost and Found
-==============
+# Lost and Found
 
 Web-service for announcements of lost and found things.
 
-*Currently in development. Things may change or break until a solid release has been announced.*
+> *Currently in development. Things may change or break until a solid release has been announced.*
 
 [![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/stfalcon-studio/lost-and-found.svg?style=flat-square)](https://scrutinizer-ci.com/g/stfalcon-studio/lost-and-found/)
 [![Build Status](https://img.shields.io/travis/stfalcon-studio/lost-and-found.svg?style=flat-square)](https://travis-ci.org/stfalcon-studio/lost-and-found)
@@ -19,3 +18,68 @@ Web-service for announcements of lost and found things.
 ## Requirements
 
 * PHP 5.4 *and later*
+* Symfony 2.6 *and later*
+* Doctrine 2.4 *and later*
+* Facebook application
+
+## Installation
+
+#### Install Composer
+
+```bash
+$ curl -s https://getcomposer.org/installer | php
+```
+
+#### Create project via Composer
+
+```bash
+$ composer.phar create-project -s dev stfalcon-studio/lost-and-found lost-and-found
+```
+
+`-s dev` means non-stable version, until we make first stable release.
+
+#### Check your system configuration
+
+Before you begin, make sure that your local system is properly configured for Symfony2.
+To do this, execute the following:
+
+```bash
+$ php app/check.php
+```
+
+If you get any warnings or recommendations, fix these now before moving on.
+
+#### Setting up permissions for directories `app/cache/` and `app/logs`
+
+```bash
+$ HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
+$ sudo setfacl -R -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX app/cache app/logs
+$ sudo setfacl -dR -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX app/cache app/logs
+````
+
+#### Change DBAL settings, create DB, update it and load fixtures
+
+Change DBAL setting in `app/config/config.yml`, `app/config/config_dev.yml` or
+`app/config/config_test.yml`. After that execute the following:
+
+```bash
+$ ./console doctrine:database:create
+$ ./console doctrine:migrations:migrate
+$ ./console doctrine:fixtures:load
+```
+
+You can set environment `test` for command if you add `--env=test` to it.
+
+#### Create new application on GitHub
+ 
+* Register as <a href="https://developers.facebook.com" target="_blank">Facebook Developer</a>.
+* Then open <a href="https://developers.facebook.com/quickstarts/?platform=web" target="_blank">https://developers.facebook.com/quickstarts/?platform=web</a>
+* Type the name of your application, e.g. *"Lost and Found. Localhost"*
+* Press "Create New Facebook App ID".
+* Choose category "Apps for Pages"
+* Press "Create App ID"
+* Set your site URL. If it is on localhost, then something like this `http://lost-and-found.localhost/app_dev.php/` and press Next
+* Use the newly generated `App ID` and `App Secret` parameters for your application, update parameters
+`facebook_app_id` and `facebook_app_secret` in *parameters.yml* file.
+
+> That's all. Enjoy "Lost and Found" and send feedback ^_^

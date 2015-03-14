@@ -5,8 +5,8 @@ hwi_oauth:
     resource_owners:
         facebook:
             type:          facebook
-            client_id:     %facebook_oauth_client_id%
-            client_secret: %facebook_oauth_client_secret%
+            client_id:     %facebook_app_id%
+            client_secret: %facebook_app_secret%
             scope:         email
 
     fosub:

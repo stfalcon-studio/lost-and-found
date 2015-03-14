@@ -22,10 +22,10 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret:            LostAndFoundSecretToken
 
-    host: http://lost-and-found.work
+    host: http://lost-and-found.localhost
 
-    facebook_oauth_client_id:     FacebookClientId
-    facebook_oauth_client_secret: FacebookClientSecret
+    facebook_app_id:     FacebookAppId
+    facebook_app_secret: FacebookAppSecret
 
     admin_emails:
         - your-email1@some-host.com
