@@ -18,7 +18,7 @@ Web-service for announcements of lost and found things.
 ## History
 
 This service started as a training project for students from <a href="http://xpk.km.ua">Khmelnytskyi Polytechnic College</a> during their practice
-at <a href="http://stfalcon.com">Studio Stfalcon.com</a>.
+at <a href="http://stfalcon.com/en/">Studio Stfalcon.com</a>.
 You can also check a <a href="http://www.slideshare.net/stfalconcom/ss-45226961">presentation</a>
 and <a href="https://youtu.be/3EgilE_fpkI">video</a> about that practice.
 
