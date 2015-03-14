@@ -14,9 +14,10 @@ before_install:
   - sudo pip install codecov
 
 before_script:
-  - mysql -e 'create database lost_and_found_testing;'
-  - php app/console doctrine:schema:create -e=test
   - composer install --dev
+  - app/console doctrine:database:create --env=test
+  - app/console doctrine:migrations:migrate --env=test
+  - app/console cache:warmup --env=test
 
 script:
   - phpunit -c app --coverage-clover build/logs/clover.xml
