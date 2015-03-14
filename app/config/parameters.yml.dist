@@ -4,6 +4,7 @@ parameters:
     database_host:           127.0.0.1
     database_port:           ~
     database_name:           lost-and-found
+    database_name_testing:   lost-and-found_testing
     database_user:           root
     database_password:       ~
     database_server_version: 5.6
@@ -27,7 +28,10 @@ parameters:
     facebook_oauth_client_secret: FacebookClientSecret
 
     admin_emails:
-        - 'genvaldartem@gmail.com'  # Artem Genvald
-        - 'logansoleg@gmail.com'    # Oleg Kachinsky
-        - 'svatok13@gmail.com'      # Yuri Svatok
-        - 'prohorovychua@gmail.com' # Andrew Prohorovych
+        - your-email1@some-host.com
+        - your-email2@some-host.com
+
+    # Users with these Facebook IDs automatically become admins after authorization
+    facebook_admin_user_ids:
+        - write-your-facebook-id
+        - write-another-facebook-id

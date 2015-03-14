@@ -34,6 +34,12 @@ class AppExtension extends Extension
         $loader->load('form_types.yml');
         $loader->load('listeners.yml');
         $loader->load('admin.yml');
+
+        $configuration = new Configuration();
+        $config = $this->processConfiguration($configuration, $configs);
+
+        $container->setParameter('app.facebook_admin_user_ids', $config['facebook_admin_user_ids']);
+        $container->setParameter('app.admin_emails', $config['admin_emails']);
     }
 
     /**

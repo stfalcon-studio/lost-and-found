@@ -28,16 +28,6 @@ use Doctrine\ORM\EntityManager;
 class FacebookUserConnectedListener
 {
     /**
-     * @var array $adminFacebookIds Facebook IDs of admin users
-     */
-    private $adminFacebookIds = [
-        910325255664546, // Artem Genvald
-        749493721786885, // Oleg Kachinsky
-        436078019878362, // Andrew Prohorovych
-        802187576526450  // Yura Svatok
-    ];
-
-    /**
      * @var Swift_Mailer $mailer Mailer
      */
     private $mailer;
@@ -48,17 +38,26 @@ class FacebookUserConnectedListener
     private $entityManager;
 
     /**
-     * @param Swift_Mailer  $mailer Mailer
-     * @param EntityManager $em     EntityManager
+     * @var array $adminFacebookIds Facebook IDs of admin users
      */
-    public function __construct(Swift_Mailer $mailer, EntityManager $em)
+    private $adminFacebookIds;
+
+    /**
+     * Constructor
+     *
+     * @param Swift_Mailer  $mailer           Mailer
+     * @param EntityManager $em               EntityManager
+     * @param array         $adminFacebookIds Admin Facebook IDs
+     */
+    public function __construct(Swift_Mailer $mailer, EntityManager $em, array $adminFacebookIds)
     {
-        $this->mailer        = $mailer;
-        $this->entityManager = $em;
+        $this->mailer           = $mailer;
+        $this->entityManager    = $em;
+        $this->adminFacebookIds = $adminFacebookIds;
     }
 
     /**
-     * Event call's when user registered
+     * Event is called when user has been registered
      *
      * @param FacebookUserConnectedEvent $args Arguments
      */
@@ -70,14 +69,12 @@ class FacebookUserConnectedListener
             $user->addRole('ROLE_ADMIN');
         }
 
-        $actionLog = new UserActionLog();
-        $actionLog->setActionType(UserActionType::CONNECT);
-        $actionLog->setUser($user);
-        $actionLog->setCreatedAt(new \DateTime('now'));
+        $actionLog = (new UserActionLog())
+            ->setUser($user)
+            ->setActionType(UserActionType::CONNECT);
 
-        $em = $this->entityManager;
-        $em->persist($actionLog);
-        $em->flush();
+        $this->entityManager->persist($actionLog);
+        $this->entityManager->flush();
 
         $message = $this->mailer
             ->createMessage()

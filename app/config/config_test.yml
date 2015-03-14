@@ -19,4 +19,4 @@ liip_functional_test: ~
 
 doctrine:
     dbal:
-        dbname: lost-and-found_testing
+        dbname: "%database_name_testing%"

@@ -1,4 +1,12 @@
 <?php
+/*
+ * This file is part of the "Lost and Found" project
+ *
+ * (c) Stfalcon.com <info@stfalcon.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Application\Migrations;
 
@@ -6,13 +14,17 @@ use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
- * Auto-generated Migration: Please modify to your needs!
+ * Migration 20150302004444. New features
+ *
+ * @author Artem Genvald <genvaldartem@gmail.com>
  */
 class Version20150302004444 extends AbstractMigration
 {
+    /**
+     * {@inheritdoc}
+     */
     public function up(Schema $schema)
     {
-        // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE user_log_actions CHANGE action action_type ENUM(\'connect\', \'login\', \'deauthorize\') NOT NULL COMMENT \'(DC2Type:UserActionType)\'');
@@ -24,9 +36,11 @@ class Version20150302004444 extends AbstractMigration
         $this->addSql('CREATE INDEX search_idx ON items (latitude, longitude)');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function down(Schema $schema)
     {
-        // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE items DROP FOREIGN KEY FK_E11EE94DB03A8386');
