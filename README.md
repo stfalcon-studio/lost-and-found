@@ -77,7 +77,7 @@ $ ./console doctrine:fixtures:load
 
 You can set `test` environment for command if you add `--env=test` to it.
 
-#### Create new application on GitHub
+#### Create new application on Facebook
  
 * Register as <a href="https://developers.facebook.com">Facebook Developer</a>
 * Then open <a href="https://developers.facebook.com/quickstarts/?platform=web">https://developers.facebook.com/quickstarts/?platform=web</a>
