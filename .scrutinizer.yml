@@ -13,3 +13,10 @@ filter:
 
 before_commands:
   - "composer install --prefer-source"
+
+tools:
+    php_code_sniffer:
+        config:
+            standard: "PSR2"
+    php_cs_fixer: true
+    sensiolabs_security_checker: true
