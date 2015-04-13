@@ -269,6 +269,10 @@ class ItemController extends Controller
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
         $item           = $itemRepository->findModeratedItemById($id);
 
+        if (!($item instanceof Item)) {
+            return $this->createNotFoundException();
+        }
+
         $vichUploader = $this->get('vich_uploader.storage.file_system');
 
         $host = $this->get('service_container')->getParameter('host');
