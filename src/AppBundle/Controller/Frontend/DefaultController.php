@@ -10,6 +10,7 @@
 
 namespace AppBundle\Controller\Frontend;
 
+use Ftrrtf\Rollbar\Notifier;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -36,8 +37,10 @@ class DefaultController extends Controller
     public function indexAction()
     {
         // @todo Remove these lines after testing Rollbar
-        $rollbarNotifier = $this->get('ftrrtf_rollbar.notifier');
-        $rollbarNotifier->reportMessage('Test message');
+        if ($this->has('ftrrtf_rollbar.notifier')) {
+            $rollbarNotifier = $this->get('ftrrtf_rollbar.notifier');
+            $rollbarNotifier->reportMessage('Somebody opened index page', Notifier::LEVEL_INFO);
+        }
 
         return $this->render('frontend/default/index.html.twig');
     }
