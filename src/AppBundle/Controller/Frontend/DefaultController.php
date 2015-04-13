@@ -35,6 +35,10 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
+        // @todo Remove these lines after testing Rollbar
+        $rollbarNotifier = $this->get('ftrrtf_rollbar.notifier');
+        $rollbarNotifier->reportMessage('Test message');
+
         return $this->render('frontend/default/index.html.twig');
     }
 
