@@ -45,7 +45,7 @@ class ItemController extends Controller
      *
      * @return Response
      *
-     * @Method("GET")
+     * @Method({"GET", "POST"})
      * @Route("/lost-items", name="lost_items_list")
      */
     public function lostItemsListAction(Request $request)
@@ -116,7 +116,7 @@ class ItemController extends Controller
      *
      * @return Response
      *
-     * @Method("GET")
+     * @Method({"GET", "POST"})
      * @Route("/found-items", name="found_items_list", options={"expose"=true})
      */
     public function foundItemsListAction(Request $request)
