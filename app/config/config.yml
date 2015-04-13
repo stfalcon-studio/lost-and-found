@@ -67,4 +67,3 @@ nelmio_api_doc: ~
 
 app:
     admin_emails: "%admin_emails%"
-    facebook_admin_user_ids: "%facebook_admin_user_ids%"
