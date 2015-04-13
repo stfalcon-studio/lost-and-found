@@ -35,3 +35,7 @@ parameters:
     facebook_admin_user_ids:
         - write-your-facebook-id
         - write-another-facebook-id
+
+    # Rollbar settings
+    rollbar_server_access_token: RollbarServerAccessToken
+    rollbar_client_access_token: RollbarClientAccessToken

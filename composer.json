@@ -42,7 +42,7 @@
         "ext-gd": "*",
         "ext-mbstring": "*",
         "symfony/symfony": "2.6.*",
-        "doctrine/orm": "~2.4",
+        "doctrine/orm": "~2.5",
         "doctrine/doctrine-bundle": "~1.4",
         "twig/extensions": "~1.0",
         "symfony/assetic-bundle": "~2.6",
@@ -54,8 +54,8 @@
         "doctrine/migrations": "dev-master",
         "doctrine/doctrine-migrations-bundle": "dev-master",
         "stof/doctrine-extensions-bundle": "1.2.*@dev",
-        "fresh/doctrine-enum-bundle": "v3.2",
-        "sonata-project/doctrine-orm-admin-bundle": "2.3.0",
+        "fresh/doctrine-enum-bundle": "dev-master",
+        "sonata-project/doctrine-orm-admin-bundle": "2.3.1",
         "sonata-project/seo-bundle": "1.1.*@dev",
         "sonata-project/media-bundle": "~2.3",
         "sonata-project/intl-bundle": "2.2.x-dev",
@@ -71,7 +71,8 @@
         "friendsofsymfony/jsrouting-bundle": "2.0.*@dev",
         "friendsofsymfony/rest-bundle": "1.6.*@dev",
         "nelmio/api-doc-bundle": "~2.8",
-        "mjaschen/phpgeo": "dev-master"
+        "mjaschen/phpgeo": "dev-master",
+        "ftrrtf/rollbar-bundle": "v0.5"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

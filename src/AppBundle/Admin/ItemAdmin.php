@@ -116,8 +116,7 @@ class ItemAdmin extends Admin
 //                        'required' => false,
 //                    ])
                 ->end()
-            ->end()
-        ;
+            ->end();
     }
 
     /**

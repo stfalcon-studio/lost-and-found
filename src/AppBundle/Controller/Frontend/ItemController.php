@@ -95,7 +95,7 @@ class ItemController extends Controller
             if (null !== $item['categoryImage']) {
                 foreach ($categories as $category) {
                     if ($category->getTitle() == $item['categoryTitle']) {
-                        $item['categoryImage'] = $host . $vichUploader->resolveUri($category, 'imageFile');
+                        $item['categoryImage'] = $host.$vichUploader->resolveUri($category, 'imageFile');
                     }
                 }
             } else {
@@ -167,7 +167,7 @@ class ItemController extends Controller
             if (null !== $item['categoryImage']) {
                 foreach ($categories as $category) {
                     if ($category->getTitle() == $item['categoryTitle']) {
-                        $item['categoryImage'] = $host . $vichUploader->resolveUri($category, 'imageFile');
+                        $item['categoryImage'] = $host.$vichUploader->resolveUri($category, 'imageFile');
                     }
                 }
             } else {
@@ -275,7 +275,7 @@ class ItemController extends Controller
 
         foreach ($item->getPhotos() as $photo) {
             if (null !== $photo->getImageName()) {
-                $photo->setImageName($host . $vichUploader->resolveUri($photo, 'imageFile'));
+                $photo->setImageName($host.$vichUploader->resolveUri($photo, 'imageFile'));
             } else {
                 $photo->setImageName(null);
             }
@@ -441,7 +441,7 @@ class ItemController extends Controller
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
         $items          = $itemRepository->getDeactivatedItems($this->getUser(), false, false);
 
-        $this->get('session')->getFlashBag()->add('notice', 'Item ' . $item->getTitle() . ' was deactivated!');
+        $this->get('session')->getFlashBag()->add('notice', 'Item '.$item->getTitle().' was deactivated!');
 
         return $this->render('frontend/user/show_deactivated_items.html.twig', [
             'items' => $items,
@@ -477,7 +477,7 @@ class ItemController extends Controller
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
         $items          = $itemRepository->getDeactivatedItems($this->getUser(), false, false);
 
-        $this->get('session')->getFlashBag()->add('notice', 'Item ' . $item->getTitle() . ' was deleted!');
+        $this->get('session')->getFlashBag()->add('notice', 'Item '.$item->getTitle().' was deleted!');
 
         return $this->render('frontend/user/show_deactivated_items.html.twig', [
             'items' => $items,
@@ -513,7 +513,7 @@ class ItemController extends Controller
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
         $items          = $itemRepository->getDeactivatedItems($this->getUser(), false, false);
 
-        $this->get('session')->getFlashBag()->add('notice', 'Item ' . $item->getTitle() . ' was activated!');
+        $this->get('session')->getFlashBag()->add('notice', 'Item '.$item->getTitle().' was activated!');
 
         return $this->render('/frontend/user/show_deactivated_items.html.twig', [
             'items' => $items,

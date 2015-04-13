@@ -65,7 +65,7 @@ class CategoryController extends Controller
             $result[$categoryId]['children'] = $categoryRepository->getChildrenQuery($category)->getArrayResult();
 
             if (null !== $category->getImageName()) {
-                $result[$categoryId]['imageName'] = $host . $vichUploader->resolveUri($category, 'imageFile');
+                $result[$categoryId]['imageName'] = $host.$vichUploader->resolveUri($category, 'imageFile');
             }
         }
 

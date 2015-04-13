@@ -74,7 +74,7 @@ class ItemRequest
      */
     public function __toString()
     {
-        return $this->getUser()->__toString() . ' at ' . $this->getCreatedAt()->format('d.m.Y H:i:s');
+        return $this->getUser()->__toString().' at '.$this->getCreatedAt()->format('d.m.Y H:i:s');
     }
 
     /**

@@ -44,7 +44,7 @@ class HerokuEnvironment
 
         $databaseUrl = getenv('HEROKU_POSTGRESQL_IVORY_URL');
         if (!empty($databaseUrl)) {
-            $io->write('HEROKU_POSTGRESQL_IVORY_URL=' . $databaseUrl);
+            $io->write('HEROKU_POSTGRESQL_IVORY_URL='.$databaseUrl);
         }
     }
 }

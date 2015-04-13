@@ -384,7 +384,7 @@ class Item implements UserManageableInterface
     public function setActive($active)
     {
         if ($active) {
-           $this->setActivatedAt(new \DateTime());
+            $this->setActivatedAt(new \DateTime());
         }
         $this->active = $active;
 
@@ -688,7 +688,7 @@ class Item implements UserManageableInterface
     public function setDeleted($delete)
     {
         if ($delete) {
-           $this->setDeletedAt(new \DateTime());
+            $this->setDeletedAt(new \DateTime());
         }
         $this->deleted = $delete;
 

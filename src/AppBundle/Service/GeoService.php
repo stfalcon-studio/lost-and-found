@@ -10,14 +10,17 @@
 
 namespace AppBundle\Service;
 
-use AppBundle\Entity\Item;
 use AppBundle\DBAL\Types\ItemTypeType;
+use AppBundle\Entity\Item;
 use Doctrine\ORM\EntityManager;
+use Location\Coordinate;
+use Location\Distance\Vincenty;
 
 /**
  * GeoService
  *
  * @author Oleg Kachinsky <logansoleg@gmail.com>
+ * @author Artem Genvald  <genvaldartem@gmail.com>
  */
 class GeoService
 {
@@ -67,15 +70,13 @@ class GeoService
 
                     for ($j = 0; $j < count($lostItems); $j++) {
                         if ($foundItems[$i]['categoryId'] == $lostItems[$j]['categoryId']) {
-                            if (
-                                $this->isInPolygon(
-                                    count($area),
-                                    $latitudeArray,
-                                    $longitudeArray,
-                                    $lostItems[$j]['latitude'],
-                                    $lostItems[$j]['longitude']
-                                )
-                            ) {
+                            if ($this->isPointInPolygon(
+                                count($area),
+                                $latitudeArray,
+                                $longitudeArray,
+                                $lostItems[$j]['latitude'],
+                                $lostItems[$j]['longitude']
+                            )) {
                                 $numbersFound[count($numbersFound)] = $lostItems[$j]['id'];
                             }
                         }
@@ -87,14 +88,12 @@ class GeoService
 
                     for ($j = 0; $j < count($lostItems); $j++) {
                         if ($foundItems[$i]['categoryId'] == $lostItems[$j]['categoryId']) {
-                            if (
-                                $this->calculateDistanceBetweenMarkers(
-                                    $area['latlng']['lat'],
-                                    $area['latlng']['lng'],
-                                    $lostItems[$j]['latitude'],
-                                    $lostItems[$j]['longitude']
-                                ) < $area['radius']
-                            ) {
+                            if ($this->getDistance(
+                                $area['latlng']['lat'],
+                                $area['latlng']['lng'],
+                                $lostItems[$j]['latitude'],
+                                $lostItems[$j]['longitude']
+                            ) < $area['radius']) {
                                 $numbersFound[count($numbersFound)] = $lostItems[$j]['id'];
                             }
                         }
@@ -103,14 +102,12 @@ class GeoService
                 case 'marker':
                     for ($j = 0; $j < count($lostItems); $j++) {
                         if ($foundItems[$i]['categoryId'] == $lostItems[$j]['categoryId']) {
-                            if (
-                                $this->calculateDistanceBetweenMarkers(
-                                    $foundItems[$i]['latitude'],
-                                    $foundItems[$i]['longitude'],
-                                    $lostItems[$j]['latitude'],
-                                    $lostItems[$j]['longitude']
-                                ) < 1
-                            ) {
+                            if ($this->getDistance(
+                                $foundItems[$i]['latitude'],
+                                $foundItems[$i]['longitude'],
+                                $lostItems[$j]['latitude'],
+                                $lostItems[$j]['longitude']
+                            ) < 1) {
                                 $numbersFound[count($numbersFound)] = $lostItems[$j]['id'];
                             }
                         }
@@ -150,21 +147,19 @@ class GeoService
                     $longitudeArray = [];
 
                     for ($j = 0; $j < count($area); $j++) {
-                        $latitudeArray[$j] = $area[$j]['latitude'];
+                        $latitudeArray[$j]  = $area[$j]['latitude'];
                         $longitudeArray[$j] = $area[$j]['longitude'];
                     }
 
                     for ($j = 0; $j < count($foundItems); $j++) {
                         if ($lostItems[$i]['categoryId'] == $foundItems[$j]['categoryId']) {
-                            if (
-                                $this->isInPolygon(
-                                    count($area),
-                                    $latitudeArray,
-                                    $longitudeArray,
-                                    $foundItems[$j]['latitude'],
-                                    $foundItems[$j]['longitude']
-                                )
-                            ) {
+                            if ($this->isPointInPolygon(
+                                count($area),
+                                $latitudeArray,
+                                $longitudeArray,
+                                $foundItems[$j]['latitude'],
+                                $foundItems[$j]['longitude']
+                            )) {
                                 $numbersLost[count($numbersLost)] = $foundItems[$j]['id'];
                             }
                         }
@@ -176,14 +171,12 @@ class GeoService
 
                     for ($j = 0; $j < count($foundItems); $j++) {
                         if ($lostItems[$i]['categoryId'] == $foundItems[$j]['categoryId']) {
-                            if (
-                                $this->calculateDistanceBetweenMarkers(
-                                    $area['latlng']['lat'],
-                                    $area['latlng']['lng'],
-                                    $foundItems[$j]['latitude'],
-                                    $foundItems[$j]['longitude']
-                                ) < $area['radius']
-                            ) {
+                            if ($this->getDistance(
+                                $area['latlng']['lat'],
+                                $area['latlng']['lng'],
+                                $foundItems[$j]['latitude'],
+                                $foundItems[$j]['longitude']
+                            ) < $area['radius']) {
                                 $numbersLost[count($numbersLost)] = $foundItems[$j]['id'];
                             }
                         }
@@ -192,14 +185,12 @@ class GeoService
                 case 'marker':
                     for ($j = 0; $j < count($foundItems); $j++) {
                         if ($lostItems[$i]['categoryId'] == $foundItems[$j]['categoryId']) {
-                            if (
-                                $this->calculateDistanceBetweenMarkers(
-                                    $lostItems[$i]['latitude'],
-                                    $lostItems[$i]['longitude'],
-                                    $foundItems[$j]['latitude'],
-                                    $foundItems[$j]['longitude']
-                                ) < 1
-                            ) {
+                            if ($this->getDistance(
+                                $lostItems[$i]['latitude'],
+                                $lostItems[$i]['longitude'],
+                                $foundItems[$j]['latitude'],
+                                $foundItems[$j]['longitude']
+                            ) < 1) {
                                 $numbersLost[count($numbersLost)] = $foundItems[$j]['id'];
                             }
                         }
@@ -225,63 +216,40 @@ class GeoService
      *
      * @return bool
      */
-    private function isInPolygon($countTop, $latitudeArray, $longitudeArray, $latitudeMarker, $longitudeMarker)
+    public function isPointInPolygon($countTop, $latitudeArray, $longitudeArray, $latitudeMarker, $longitudeMarker)
     {
-        $c = false;
+        $result = false;
+
         for ($i = 0, $j = $countTop - 1; $i < $countTop; $j = $i++) {
-            if (
-                (
-                    (
-                        $longitudeArray[$i] > $longitudeMarker
-                    ) != (
-                        $longitudeArray[$j] > $longitudeMarker
-                    )
+            if ((
+                    ($longitudeArray[$i] > $longitudeMarker) != ($longitudeArray[$j] > $longitudeMarker)
                 ) && (
-                    $latitudeMarker < (
-                        $latitudeArray[$j] - $latitudeArray[$i]
-                    ) * (
-                        $longitudeMarker - $longitudeArray[$i]
-                    ) / (
-                        $longitudeArray[$j] - $longitudeArray[$i]
-                    ) + $latitudeArray[$i]
+                    $latitudeMarker < ($latitudeArray[$j] - $latitudeArray[$i]) * ($longitudeMarker - $longitudeArray[$i]) /
+                    ($longitudeArray[$j] - $longitudeArray[$i]) + $latitudeArray[$i]
                 )
             ) {
-                $c = !$c;
+                $result = !$result;
             }
         }
 
-        return $c;
+        return $result;
     }
 
     /**
-     * Calculates the great-circle distance between two points, with
-     * the Haversine formula.
+     * Calculates the great-circle distance between two points, with the Vincenty formula
      *
-     * @param float $latitudeFrom  Latitude of start point in [deg decimal]
-     * @param float $longitudeFrom Longitude of start point in [deg decimal]
-     * @param float $latitudeTo    Latitude of target point in [deg decimal]
-     * @param float $longitudeTo   Longitude of target point in [deg decimal]
-     * @param int   $earthRadius   Mean earth radius in [km]
+     * @param float $latitudeX  Latitude of start point in [deg decimal]
+     * @param float $longitudeX Longitude of start point in [deg decimal]
+     * @param float $latitudeY  Latitude of target point in [deg decimal]
+     * @param float $longitudeY Longitude of target point in [deg decimal]
      *
      * @return float Distance between points in [km] (same as earthRadius)
      */
-    private function calculateDistanceBetweenMarkers(
-        $latitudeFrom,
-        $longitudeFrom,
-        $latitudeTo,
-        $longitudeTo,
-        $earthRadius = 6371)
+    private function getDistance($latitudeX, $longitudeX, $latitudeY, $longitudeY)
     {
-        $latFrom = deg2rad($latitudeFrom);
-        $lonFrom = deg2rad($longitudeFrom);
-        $latTo   = deg2rad($latitudeTo);
-        $lonTo   = deg2rad($longitudeTo);
-
-        $latDelta = $latTo - $latFrom;
-        $lonDelta = $lonTo - $lonFrom;
-
-        $angle = 2 * asin(sqrt(pow(sin($latDelta / 2), 2) + cos($latFrom) * cos($latTo) * pow(sin($lonDelta / 2), 2)));
-
-        return $angle * $earthRadius;
+        return (new Vincenty())->getDistance(
+            new Coordinate($latitudeX, $longitudeX),
+            new Coordinate($latitudeY, $longitudeY)
+        );
     }
 }

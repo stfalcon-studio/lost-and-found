@@ -16,12 +16,12 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * GeoCommand
+ * FindMatchesCommand
  *
  * @author Oleg Kachinsky <logansoleg@gmail.com>
  * @author Artem Genvald  <genvaldartem@gmail.com>
  */
-class GeoCommand extends ContainerAwareCommand
+class FindMatchesCommand extends ContainerAwareCommand
 {
     /**
      * {@inheritdoc}
@@ -29,8 +29,8 @@ class GeoCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('items:compare')
-            ->setDescription('Compare lost and found list of items.');
+            ->setName('app:items:find-matches')
+            ->setDescription('Find matches between lost and found items.');
     }
 
     /**
@@ -45,7 +45,7 @@ class GeoCommand extends ContainerAwareCommand
         $foundItems = $itemRepository->getItemsJoinCategories(ItemTypeType::FOUND);
         $lostItems  = $itemRepository->getItemsJoinCategories(ItemTypeType::LOST);
 
-        $output->writeln('-----------Found Items----------');
+        $output->writeln('<info>Found Items</info>');
 
         $foundMatches = $geoService->searchFoundMatches();
 
@@ -53,31 +53,32 @@ class GeoCommand extends ContainerAwareCommand
         $countLostItems    = count($lostItems);
 
         for ($i = 0; $i < $countFoundMatches; $i++) {
-            $output->writeln($foundItems[$i]['itemTitle'] . " ---- ");
+            $output->writeln($foundItems[$i]['itemTitle']." ---- ");
 
             foreach ($foundMatches[$i] as $itemId) {
                 for ($j = 0; $j < $countLostItems; $j++) {
                     if ($lostItems[$j]['id'] == $itemId) {
-                        $output->writeln("\t ---- " . $lostItems[$j]['itemTitle']);
+                        $output->writeln("\t ---- ".$lostItems[$j]['itemTitle']);
                     }
                 }
             }
         }
 
-        $output->writeln("\n-----------Lost Items-----------");
+        $output->writeln('');
+        $output->writeln('<info>Lost Items</info>');
 
         $lostMatches = $geoService->searchLostMatches();
 
         $countLostMatches = count($lostMatches);
         $countFoundItems  = count($foundItems);
+
         for ($i = 0; $i < $countLostMatches; $i++) {
-            $output->writeln($lostItems[$i]['itemTitle'] . " ---- ");
+            $output->writeln($lostItems[$i]['itemTitle']." ---- ");
 
             foreach ($lostMatches[$i] as $itemId) {
-
                 for ($j = 0; $j < $countFoundItems; $j++) {
                     if ($foundItems[$j]['id'] == $itemId) {
-                        $output->writeln("\t ---- " . $foundItems[$j]['itemTitle']);
+                        $output->writeln("\t ---- ".$foundItems[$j]['itemTitle']);
                     }
                 }
             }

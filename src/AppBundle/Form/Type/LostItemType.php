@@ -56,7 +56,7 @@ class LostItemType extends AbstractType
             ->add('category', 'entity', [
                 'class'         => 'AppBundle\Entity\Category',
                 'property'      => 'title',
-                'query_builder' => function(EntityRepository $er) {
+                'query_builder' => function (EntityRepository $er) {
                     $qb = $er->createQueryBuilder('c');
 
                     return $qb->where($qb->expr()->eq('c.enabled', true));

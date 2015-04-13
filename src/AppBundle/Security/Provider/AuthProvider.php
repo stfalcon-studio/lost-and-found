@@ -55,8 +55,7 @@ class AuthProvider extends BaseProvider
         UserManagerInterface $userManager,
         EventDispatcherInterface $eventDispatcher,
         EntityManager $em
-    )
-    {
+    ) {
         $this->userManager     = $userManager;
         $this->eventDispatcher = $eventDispatcher;
         $this->entityManager   = $em;
