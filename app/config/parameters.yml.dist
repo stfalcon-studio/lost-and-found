@@ -34,6 +34,6 @@ parameters:
         - your-email2@some-host.com
 
     # Rollbar settings
-    rollbar_environment: not_defined
+    rollbar_environment: production
     rollbar_server_access_token: RollbarServerAccessToken
     rollbar_client_access_token: RollbarClientAccessToken
