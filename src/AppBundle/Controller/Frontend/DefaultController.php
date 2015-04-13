@@ -36,11 +36,12 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        // @todo Remove these lines after testing Rollbar
-        if ($this->has('ftrrtf_rollbar.notifier')) {
-            $rollbarNotifier = $this->get('ftrrtf_rollbar.notifier');
-            $rollbarNotifier->reportMessage('Somebody opened index page', Notifier::LEVEL_INFO);
-        }
+        // @todo Uncomment following lines if you want to test Rollbar
+        // Warning! It works only in production environment
+//        if ($this->has('ftrrtf_rollbar.notifier')) {
+//            $rollbarNotifier = $this->get('ftrrtf_rollbar.notifier');
+//            $rollbarNotifier->reportMessage('Somebody opened index page', Notifier::LEVEL_INFO);
+//        }
 
         return $this->render('frontend/default/index.html.twig');
     }
