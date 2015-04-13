@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e41e932b259c2b3468c565032da575c2",
+    "hash": "ec52d59b84676e541f5656f2a0406333",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
@@ -1165,12 +1165,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fre5h/DoctrineEnumBundle.git",
-                "reference": "10a179ae674c1460870cbd794af2a9a97fd77ab7"
+                "reference": "17243347f4d2956964b3ae0bdc877098e0b6a2a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fre5h/DoctrineEnumBundle/zipball/10a179ae674c1460870cbd794af2a9a97fd77ab7",
-                "reference": "10a179ae674c1460870cbd794af2a9a97fd77ab7",
+                "url": "https://api.github.com/repos/fre5h/DoctrineEnumBundle/zipball/17243347f4d2956964b3ae0bdc877098e0b6a2a8",
+                "reference": "17243347f4d2956964b3ae0bdc877098e0b6a2a8",
                 "shasum": ""
             },
             "require": {
@@ -1214,7 +1214,7 @@
                 "symfony",
                 "type"
             ],
-            "time": "2015-03-14 21:47:26"
+            "time": "2015-04-13 09:30:54"
         },
         {
             "name": "friendsofsymfony/jsrouting-bundle",
@@ -3205,16 +3205,16 @@
         },
         {
             "name": "sonata-project/admin-bundle",
-            "version": "2.3.1",
+            "version": "2.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "1f08176f996a325e3bf5ccebeaf7c76be7f3d472"
+                "reference": "03db550ece14b3bf1dddf700f7e0570aaef9c6fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/1f08176f996a325e3bf5ccebeaf7c76be7f3d472",
-                "reference": "1f08176f996a325e3bf5ccebeaf7c76be7f3d472",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/03db550ece14b3bf1dddf700f7e0570aaef9c6fe",
+                "reference": "03db550ece14b3bf1dddf700f7e0570aaef9c6fe",
                 "shasum": ""
             },
             "require": {
@@ -3222,12 +3222,13 @@
                 "knplabs/knp-menu": ">=1.1.0,<3.0.0",
                 "knplabs/knp-menu-bundle": ">=1.1.0,<3.0.0",
                 "sensio/generator-bundle": "~2.3",
-                "sonata-project/block-bundle": "~2.2,>=2.2.7",
+                "sonata-project/block-bundle": "~2.2,>=2.2.7,<2.3",
                 "sonata-project/core-bundle": "~2.2",
                 "sonata-project/exporter": "~1.0",
                 "symfony/class-loader": "~2.3",
                 "symfony/config": "~2.3",
                 "symfony/console": "~2.3",
+                "symfony/expression-language": "~2.4",
                 "symfony/form": "~2.3",
                 "symfony/http-foundation": "~2.3",
                 "symfony/routing": "~2.3",
@@ -3280,26 +3281,26 @@
                 "bootstrap",
                 "sonata"
             ],
-            "time": "2015-01-05 10:15:28"
+            "time": "2015-03-23 08:10:17"
         },
         {
             "name": "sonata-project/block-bundle",
-            "version": "2.3.0",
+            "version": "2.2.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataBlockBundle.git",
-                "reference": "3b0a01e074e7327d07aa03f9e1c2fc7f4a7ce905"
+                "reference": "ec47e5152ea9a2ea98cb284aa873d37edf903cd7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataBlockBundle/zipball/3b0a01e074e7327d07aa03f9e1c2fc7f4a7ce905",
-                "reference": "3b0a01e074e7327d07aa03f9e1c2fc7f4a7ce905",
+                "url": "https://api.github.com/repos/sonata-project/SonataBlockBundle/zipball/ec47e5152ea9a2ea98cb284aa873d37edf903cd7",
+                "reference": "ec47e5152ea9a2ea98cb284aa873d37edf903cd7",
                 "shasum": ""
             },
             "require": {
                 "doctrine/common": "~2.3",
                 "sonata-project/cache": "~1.0",
-                "sonata-project/core-bundle": "~2.3,>=2.3.1",
+                "sonata-project/core-bundle": "~2.2",
                 "symfony/form": "~2.2",
                 "symfony/http-kernel": "~2.2"
             },
@@ -3309,12 +3310,13 @@
             },
             "suggest": {
                 "knplabs/knp-menu-bundle": "~2.0",
+                "sonata-project/admin-bundle": "~2.2",
                 "sonata-project/cache-bundle": "~2.1"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.3.x-dev"
+                    "dev-master": "2.2.x-dev"
                 }
             },
             "autoload": {
@@ -3343,7 +3345,7 @@
                 "block",
                 "sonata"
             ],
-            "time": "2015-03-16 08:44:28"
+            "time": "2014-09-11 10:42:35"
         },
         {
             "name": "sonata-project/cache",
@@ -3928,20 +3930,19 @@
         },
         {
             "name": "sonata-project/seo-bundle",
-            "version": "dev-master",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataSeoBundle.git",
-                "reference": "834c691991161ecf145f34ff902ea54f930655b0"
+                "reference": "2606cdf6ecc0502a965dde25f9203b19dab1d944"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataSeoBundle/zipball/834c691991161ecf145f34ff902ea54f930655b0",
-                "reference": "834c691991161ecf145f34ff902ea54f930655b0",
+                "url": "https://api.github.com/repos/sonata-project/SonataSeoBundle/zipball/2606cdf6ecc0502a965dde25f9203b19dab1d944",
+                "reference": "2606cdf6ecc0502a965dde25f9203b19dab1d944",
                 "shasum": ""
             },
             "require": {
-                "sonata-project/block-bundle": "~2.3",
                 "sonata-project/exporter": "~1.2,>=1.2.2",
                 "symfony/framework-bundle": "~2.3",
                 "symfony/options-resolver": "~2.3",
@@ -3950,17 +3951,19 @@
             "require-dev": {
                 "guzzle/guzzle": "3.*",
                 "sonata-project/admin-bundle": "~2.2",
-                "sonata-project/block-bundle": "~2.2,>=2.2.7"
+                "sonata-project/core-bundle": "~2.3,>=2.3.1",
+                "symfony/console": "~2.3",
+                "symfony/finder": "~2.3"
             },
             "suggest": {
                 "guzzle/guzzle": "3.*",
                 "knplabs/knp-menu-bundle": "Used by the BreadcrumbMenuBuilder",
-                "sonata-project/block-bundle": "Allows you to use SEO friendly blocks"
+                "sonaqqta-project/block-bundle": "Allows you to use SEO friendly blocks"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1.x-dev"
+                    "dev-master": "2.0.x-dev"
                 }
             },
             "autoload": {
@@ -3989,7 +3992,7 @@
                 "seo",
                 "sonata"
             ],
-            "time": "2014-11-19 13:05:26"
+            "time": "2015-03-16 10:50:18"
         },
         {
             "name": "stof/doctrine-extensions-bundle",
@@ -5696,7 +5699,6 @@
         "doctrine/doctrine-migrations-bundle": 20,
         "stof/doctrine-extensions-bundle": 20,
         "fresh/doctrine-enum-bundle": 20,
-        "sonata-project/seo-bundle": 20,
         "sonata-project/intl-bundle": 20,
         "tilleuls/ckeditor-sonata-media-bundle": 20,
         "hwi/oauth-bundle": 20,
