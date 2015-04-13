@@ -6,7 +6,7 @@ services:
         arguments:
             - @swiftmailer.mailer
             - @doctrine.orm.default_entity_manager
-            - "%app.facebook_admin_user_ids%"
+            - "%%mailer_sender%%"
 
     app.new_item_added.listener:
         class: AppBundle\EventListener\NewItemAddedListener

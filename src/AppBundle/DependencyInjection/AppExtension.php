@@ -38,7 +38,6 @@ class AppExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $container->setParameter('app.facebook_admin_user_ids', $config['facebook_admin_user_ids']);
         $container->setParameter('app.admin_emails', $config['admin_emails']);
     }
 

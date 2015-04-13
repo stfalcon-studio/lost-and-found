@@ -24,17 +24,14 @@ parameters:
 
     host: http://lost-and-found.localhost
 
+    mailer_sender: no-reply@lost-and-found
+
     facebook_app_id:     FacebookAppId
     facebook_app_secret: FacebookAppSecret
 
     admin_emails:
         - your-email1@some-host.com
         - your-email2@some-host.com
-
-    # Users with these Facebook IDs automatically become admins after authorization
-    facebook_admin_user_ids:
-        - write-your-facebook-id
-        - write-another-facebook-id
 
     # Rollbar settings
     rollbar_server_access_token: RollbarServerAccessToken

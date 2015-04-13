@@ -34,10 +34,6 @@ class Configuration implements ConfigurationInterface
                     ->prototype('scalar')
                     ->end()
                 ->end()
-                ->arrayNode('facebook_admin_user_ids')
-                    ->prototype('scalar')
-                    ->end()
-                ->end()
             ->end();
 
         return $treeBuilder;

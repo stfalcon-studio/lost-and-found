@@ -38,22 +38,22 @@ class FacebookUserConnectedListener
     private $entityManager;
 
     /**
-     * @var array $adminFacebookIds Facebook IDs of admin users
+     * @var string $mailerSender Mailer sender
      */
-    private $adminFacebookIds;
+    private $mailerSender;
 
     /**
      * Constructor
      *
-     * @param Swift_Mailer  $mailer           Mailer
-     * @param EntityManager $em               EntityManager
-     * @param array         $adminFacebookIds Admin Facebook IDs
+     * @param Swift_Mailer  $mailer       Mailer
+     * @param EntityManager $em           EntityManager
+     * @param string        $mailerSender Mailer sender
      */
-    public function __construct(Swift_Mailer $mailer, EntityManager $em, array $adminFacebookIds)
+    public function __construct(Swift_Mailer $mailer, EntityManager $em, $mailerSender)
     {
-        $this->mailer           = $mailer;
-        $this->entityManager    = $em;
-        $this->adminFacebookIds = $adminFacebookIds;
+        $this->mailer        = $mailer;
+        $this->entityManager = $em;
+        $this->mailerSender  = $mailerSender;
     }
 
     /**
@@ -65,10 +65,6 @@ class FacebookUserConnectedListener
     {
         $user = $args->getUser();
 
-        if (in_array($user->getUsername(), $this->adminFacebookIds)) {
-            $user->addRole('ROLE_ADMIN');
-        }
-
         $actionLog = (new UserActionLog())
             ->setUser($user)
             ->setActionType(UserActionType::CONNECT);
@@ -78,10 +74,10 @@ class FacebookUserConnectedListener
 
         $message = $this->mailer
             ->createMessage()
-            ->setSubject('You have Completed Registration!')
-            ->setFrom('Logansoleg@gmail.com')
+            ->setSubject('You have completed registration on "Lost and Found"')
+            ->setFrom($this->mailerSender)
             ->setTo($user->getEmail())
-            ->setBody('Blabla');
+            ->setBody('Have a nice day! :)');
 
         $this->mailer->send($message);
     }
