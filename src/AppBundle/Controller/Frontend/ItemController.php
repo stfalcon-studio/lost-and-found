@@ -270,7 +270,7 @@ class ItemController extends Controller
         $item           = $itemRepository->findModeratedItemById($id);
 
         if (!($item instanceof Item)) {
-            return $this->createNotFoundException();
+            throw $this->createNotFoundException();
         }
 
         $vichUploader = $this->get('vich_uploader.storage.file_system');
