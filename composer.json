@@ -2,7 +2,7 @@
     "name": "stfalcon-studio/lost-and-found",
     "description": "Web-service for announcements of lost and found things.",
     "keywords": ["lost", "found", "social", "help", "announcements", "service", "geo", "maps"],
-    "homepage": "https://github.com/stfalcon-studio/lost-and-found",
+    "homepage": "http://lost-and-found.dev.stfalcon.com/",
     "type": "project",
     "license": "MIT",
     "authors": [
