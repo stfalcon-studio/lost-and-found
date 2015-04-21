@@ -9,6 +9,8 @@ index:
     profile: "Profile"
     admin: "Admin Dashboard"
     logout: "Logout"
+    blockquote-1: "Sometimes our memory fails us. For example in lost-and-found office big cities such as Barcelona or Madrid come more then 33 thousend lost things. Somethimes among found items you can come up things that you can not imagine! There are washing machine, wheelchair or push-mouth."
+    blockquote-2: "In average owners of lost items ask only for 15% of all items. That means owners of other 85% items don`t remember about them or don`t want to take."
 
 form:
     category: "Category"
