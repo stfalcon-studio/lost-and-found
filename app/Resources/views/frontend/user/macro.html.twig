@@ -139,9 +139,9 @@
         </li>
         <li role="presentation" {% if active_tab == 'messages' %}class="active"{% endif %}>
             {% if active_tab == 'messages' %}
-                <a href="#">{{ 'profile.messages' | trans({}, 'main-page')}}{% if count.lost > 0 %}[{{count.lost}}]{% endif %}</a>
+                <a href="#">{{ 'profile.messages' | trans({}, 'main-page')}}</a>
             {% else %}
-                <a href="{{ path('user_sent_messages') }}">{{ 'profile.messages' | trans({}, 'main-page')}}{% if count.lost > 0 %}[{{count.lost}}]{% endif %}</a>
+                <a href="{{ path('user_sent_messages') }}">{{ 'profile.messages' | trans({}, 'main-page')}}</a>
             {% endif %}
         </li>
     </ul>
