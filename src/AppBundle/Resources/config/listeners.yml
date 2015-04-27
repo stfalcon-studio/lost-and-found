@@ -6,7 +6,7 @@ services:
         arguments:
             - @swiftmailer.mailer
             - @doctrine.orm.default_entity_manager
-            - "%%mailer_sender%%"
+            - "%mailer_sender%"
 
     app.new_item_added.listener:
         class: AppBundle\EventListener\NewItemAddedListener
