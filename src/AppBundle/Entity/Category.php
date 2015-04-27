@@ -144,7 +144,7 @@ class Category implements Translatable
     /**
      * @var Collection|Category[] $children Children categories
      *
-     * @ORM\OneToMany(targetEntity="Category", mappedBy="parent")
+     * @ORM\OneToMany(targetEntity="Category", mappedBy="parent", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $children;
 
