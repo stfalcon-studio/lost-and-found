@@ -8,16 +8,16 @@ $(document).ready(function() {
     var drawnItems = new L.FeatureGroup();
     map.addControl(drawnItems);
 
+
     var latitude = $("input[name*='[latitude]']").val();
     var longitude = $("input[name*='[longitude]']").val();
     var area = $("input[name*='[area]']").val();
     var areaType = $("input[name*='[areaType]']").val();
-
+    var itemType = $("#itemType").data('item-type');
     var options = {color: "#000000", weight: 2};
 
     function toolbarState(status) {
         var options;
-
         switch (status) {
             case 'hide':
                 options = new L.Control.Draw({
@@ -79,7 +79,7 @@ $(document).ready(function() {
                 summLng += parseInt(area[i].longitude);
             }
 
-            layer = L.polygon(polygon, options)
+            layer = L.polygon(polygon, options);
             center = [summLat / area.length, summLng / area.length];
             map.setView(center, 6);
             break;
@@ -116,12 +116,35 @@ $(document).ready(function() {
 
             var yes = $('#yes').on('click', function() {
                 figureLayer.removeLayer(layer);
-
-                drawControl = toolbarState('show');
+                if ('found' === itemType) {
+                    drawControl = toolbarState('show');
+                }
                 map.addControl(drawControl);
                 map.closePopup();
             });
         });
+    }
+
+    var marker = null;
+
+    var onMapClick = function(e) {
+        if (!marker){
+            figureLayer.removeLayer(layer);
+        }
+        $("#item_edit_latitude").val(e.latlng.lat.toString());
+        $("#item_edit_longitude").val(e.latlng.lng.toString());
+
+        if (marker) {
+            map.removeLayer(marker);
+        }
+
+        $("#item_edit_areaType").val('marker');
+        marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map);
+    };
+
+
+    if ('found' === itemType) {
+        map.on('click', onMapClick);
     }
 
     function clearInputs() {

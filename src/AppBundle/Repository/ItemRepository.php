@@ -340,10 +340,12 @@ class ItemRepository extends EntityRepository
            ->addSelect('i.areaType')
            ->addSelect('i.title')
            ->addSelect('i.date')
+           ->addSelect('c.id AS categoryId')
            ->addSelect('c.title AS categoryTitle')
            ->addSelect('c.imageName AS categoryImage')
            ->join('i.category', 'c')
            ->where($qb->expr()->eq('i.type', ':type'))
+           ->andWhere($qb->expr()->eq('i.moderated', true))
            ->orderBy('i.id')
            ->setParameter('type', $type);
 

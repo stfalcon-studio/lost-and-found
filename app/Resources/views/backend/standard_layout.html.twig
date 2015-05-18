@@ -3,28 +3,6 @@
 {% block sonata_top_nav_menu %}
     <div class="navbar-right">
         <ul class="nav navbar-nav">
-            <li class="{{ 'en' == app.request.locale ? 'open' : '' }}">
-                {% if 'en' != app.request.locale %}
-                    <a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'})) }}">EN</a>
-                {% else %}
-                    <a href="#">EN</a>
-                {% endif %}
-            </li>
-            <li class="{{ 'uk' == app.request.locale ? 'open' : '' }}">
-                {% if 'uk' != app.request.locale %}
-                    <a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'uk'})) }}">UK</a>
-                {% else %}
-                    <a href="#">UK</a>
-                {% endif %}
-            </li>
-            <li class="{{ 'ru' == app.request.locale ? 'open' : '' }}">
-                {% if 'ru' != app.request.locale %}
-                    <a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'ru'})) }}">RU</a>
-                {% else %}
-                    <a href="#">RU</a>
-                {% endif %}
-            </li>
-
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     <i class="fa fa-plus-square fa-fw"></i> <i class="fa fa-caret-down"></i>

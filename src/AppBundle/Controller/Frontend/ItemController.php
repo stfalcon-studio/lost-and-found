@@ -78,10 +78,10 @@ class ItemController extends Controller
         }
 
         $router = $this->get('router');
-
         $vichUploader = $this->get('vich_uploader.storage.file_system');
-
         $host = $this->get('service_container')->getParameter('host');
+
+        $categories = $this->getDoctrine()->getRepository('AppBundle:Category')->findAll();
 
         foreach ($lostItems as &$item) {
             $item['link'] = $router->generate(
@@ -94,14 +94,16 @@ class ItemController extends Controller
 
             if (null !== $item['categoryImage']) {
                 foreach ($categories as $category) {
-                    if ($category->getTitle() == $item['categoryTitle']) {
+                    if ($category->getId() == $item['categoryId']) {
                         $item['categoryImage'] = $host.$vichUploader->resolveUri($category, 'imageFile');
+                        $item['categoryTitle'] = $category->getTitle();
                     }
                 }
             } else {
                 $item['categoryImage'] = null;
             }
         }
+        unset($item); // Remove link
 
         return $this->render('frontend/item/lost_items.html.twig', [
             'form'       => $form->createView(),
@@ -150,10 +152,10 @@ class ItemController extends Controller
         }
 
         $router = $this->get('router');
-
         $vichUploader = $this->get('vich_uploader.storage.file_system');
-
         $host = $this->get('service_container')->getParameter('host');
+
+        $categories = $this->getDoctrine()->getRepository('AppBundle:Category')->findAll();
 
         foreach ($foundItems as &$item) {
             $item['link'] = $router->generate(
@@ -163,17 +165,18 @@ class ItemController extends Controller
                 ],
                 $router::ABSOLUTE_URL
             );
-
             if (null !== $item['categoryImage']) {
                 foreach ($categories as $category) {
-                    if ($category->getTitle() == $item['categoryTitle']) {
+                    if ($category->getId() == $item['categoryId']) {
                         $item['categoryImage'] = $host.$vichUploader->resolveUri($category, 'imageFile');
+                        $item['categoryTitle'] = $category->getTitle();
                     }
                 }
             } else {
                 $item['categoryImage'] = null;
             }
         }
+        unset($item); // Remove link
 
         return $this->render('frontend/item/found_items.html.twig', [
             'form'       => $form->createView(),

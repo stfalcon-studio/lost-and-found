@@ -53,9 +53,7 @@ $(document).ready(function () {
             case 'marker':
                 var latitude  = $(this).data('latitude');
                 var longitude = $(this).data('longitude');
-
                 var imageUrl = $(this).data('category-image');
-
                 if (imageUrl !== '') {
                     var icon = L.icon({
                         iconUrl: imageUrl, iconSize: [32, 32]
