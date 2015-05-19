@@ -398,17 +398,14 @@ class ItemRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('i');
 
-        $items = $qb->select('i')
-                    ->getQuery()
-                    ->getResult();
-
-        $result = [];
-        foreach ($items as $item) {
-            if ($item->getCreatedAt() < $date) {
-                array_push($result, $item);
-            }
-        }
-
-        return $result;
+        return $qb->select('i')
+                  ->where($qb->expr()->eq('i.deleted', ':deleted'))
+                  ->andWhere($qb->expr()->lt('i.createdAt', ':date'))
+                  ->setParameters([
+                      'deleted' => false,
+                      'date'    => $date
+                  ])
+                  ->getQuery()
+                  ->getResult();
     }
 }

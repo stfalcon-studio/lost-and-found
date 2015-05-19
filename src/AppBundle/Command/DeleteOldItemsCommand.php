@@ -34,23 +34,27 @@ class DeleteOldItemsCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $days = new \DateInterval('P'.$input->getArgument('days').'D');
-        $limit = (new \DateTime())->sub($days);
+        if (intval($input->getArgument('days'))) {
+            $days  = new \DateInterval('P'.$input->getArgument('days').'D');
+            $output->writeln(intval($input->getArgument('days')));
+            $limit = (new \DateTime())->sub($days);
 
-        $em = $this->getContainer()->get('doctrine.orm.default_entity_manager');
+            $em = $this->getContainer()->get('doctrine.orm.default_entity_manager');
 
-        $items = $em->getRepository('AppBundle:Item')->findYoungerItemsByDate($limit);
-        if (empty($items)) {
-            $output->writeln('<info>Items with such age was not found</info>');
-
-            return;
+            $items = $em->getRepository('AppBundle:Item')->findYoungerItemsByDate($limit);
+            if (!empty($items)) {
+                $output->writeln('<info>'.count($items).' items were removed:</info>');
+                foreach ($items as $item) {
+                    $item->setDeleted(true);
+                    $em->refresh($item);
+                    $output->writeln($item->getTitle().'|'.$item->getType());
+                }
+                $em->flush();
+            } else {
+                $output->writeln('<info>Items with such age was not found</info>');
+            }
+        } else {
+            $output->writeln('<error>Parameter must be integer</error>');
         }
-
-        $output->writeln('<info>'.count($items).' items were removed:</info>');
-        foreach ($items as $item) {
-            $em->remove($item);
-            $output->writeln($item->getTitle().'|'.$item->getType());
-        }
-        $em->flush();
     }
 }
