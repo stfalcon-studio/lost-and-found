@@ -386,4 +386,29 @@ class ItemRepository extends EntityRepository
                   ->getQuery()
                   ->getOneOrNullResult();
     }
+
+    /**
+     * Find younger items by date
+     *
+     * @param \DateTime $date date
+     *
+     * @return array
+     */
+    public function findYoungerItemsByDate(\DateTime $date)
+    {
+        $qb = $this->createQueryBuilder('i');
+
+        $items = $qb->select('i')
+                    ->getQuery()
+                    ->getResult();
+
+        $result = [];
+        foreach ($items as $item) {
+            if ($item->getCreatedAt() < $date) {
+                array_push($result, $item);
+            }
+        }
+
+        return $result;
+    }
 }
