@@ -34,21 +34,24 @@ class DeleteOldItemsCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        if (intval($input->getArgument('days'))) {
-            $days  = new \DateInterval('P'.$input->getArgument('days').'D');
-            $output->writeln(intval($input->getArgument('days')));
+        $days = $input->getArgument('days');
+        if (intval($days)) {
+            $days  = new \DateInterval('P'.$days.'D');
             $limit = (new \DateTime())->sub($days);
 
             $em = $this->getContainer()->get('doctrine.orm.default_entity_manager');
 
-            $items = $em->getRepository('AppBundle:Item')->findYoungerItemsByDate($limit);
+            $items = $em->getRepository('AppBundle:Item')->findAllNotDeletedBeforeDate($limit);
+
             if (!empty($items)) {
                 $output->writeln('<info>'.count($items).' items were removed:</info>');
+
                 foreach ($items as $item) {
                     $item->setDeleted(true);
                     $em->refresh($item);
                     $output->writeln($item->getTitle().'|'.$item->getType());
                 }
+
                 $em->flush();
             } else {
                 $output->writeln('<info>Items with such age was not found</info>');

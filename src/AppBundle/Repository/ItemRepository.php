@@ -394,7 +394,7 @@ class ItemRepository extends EntityRepository
      *
      * @return array
      */
-    public function findYoungerItemsByDate(\DateTime $date)
+    public function findAllNotDeletedBeforeDate(\DateTime $date)
     {
         $qb = $this->createQueryBuilder('i');
 
