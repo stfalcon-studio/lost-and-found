@@ -388,11 +388,11 @@ class ItemRepository extends EntityRepository
     }
 
     /**
-     * Find younger items by date
+     * Find all not deleted items before date
      *
      * @param \DateTime $date date
      *
-     * @return array
+     * @return Item[]
      */
     public function findAllNotDeletedBeforeDate(\DateTime $date)
     {

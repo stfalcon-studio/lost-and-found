@@ -10,7 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * DeleteOldItemsCommand
  *
- * @author Yuri Svatok
+ * @author Yuri Svatok <svatok13@gmail.com>
  */
 class DeleteOldItemsCommand extends ContainerAwareCommand
 {
