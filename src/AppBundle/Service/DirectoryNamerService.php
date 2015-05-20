@@ -12,9 +12,6 @@ use Vich\UploaderBundle\Naming\DirectoryNamerInterface;
  */
 class DirectoryNamerService implements DirectoryNamerInterface
 {
-
-    protected $securityContext;
-
     /**
      * @param object          $object
      * @param PropertyMapping $mapping
