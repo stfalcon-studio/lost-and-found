@@ -13,10 +13,7 @@ use Vich\UploaderBundle\Naming\DirectoryNamerInterface;
 class DirectoryNamerService implements DirectoryNamerInterface
 {
     /**
-     * @param object          $object
-     * @param PropertyMapping $mapping
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function directoryName($object, PropertyMapping $mapping)
     {
