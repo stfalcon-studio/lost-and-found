@@ -28,3 +28,6 @@ services:
             - @templating
         tags:
             - { name: sonata.block }
+
+    app.vich_uploader_directory_namer:
+        class: AppBundle\Service\DirectoryNamerService
