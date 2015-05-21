@@ -36,9 +36,16 @@ security:
 
     access_control:
         - { path: ^/auth/connect, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-#        - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/admin/, roles: ROLE_ADMIN }
-        - { path: ^/%locale%/add-lost-item, roles: ROLE_USER }
-        - { path: ^/%locale%/add-found-item, roles: ROLE_USER }
-        - { path: ^/%locale%/profile/, roles: ROLE_USER }
-        - { path: ^/%locale%/request-user, roles: ROLE_USER }
+        - { path: ^/uk/add-lost-item, roles: ROLE_USER }
+        - { path: ^/en/add-lost-item, roles: ROLE_USER }
+        - { path: ^/ru/add-lost-item, roles: ROLE_USER }
+        - { path: ^/uk/add-found-item, roles: ROLE_USER }
+        - { path: ^/en/add-found-item, roles: ROLE_USER }
+        - { path: ^/ru/add-found-item, roles: ROLE_USER }
+        - { path: ^/uk/profile/, roles: ROLE_USER }
+        - { path: ^/en/profile/, roles: ROLE_USER }
+        - { path: ^/ru/profile/, roles: ROLE_USER }
+        - { path: ^/uk/request-user, roles: ROLE_USER }
+        - { path: ^/en/request-user, roles: ROLE_USER }
+        - { path: ^/ru%/request-user, roles: ROLE_USER }
