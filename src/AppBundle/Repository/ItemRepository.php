@@ -346,6 +346,7 @@ class ItemRepository extends EntityRepository
            ->join('i.category', 'c')
            ->where($qb->expr()->eq('i.type', ':type'))
            ->andWhere($qb->expr()->eq('i.moderated', true))
+           ->andWhere($qb->expr()->eq('c.enabled', true))
            ->orderBy('i.id')
            ->setParameter('type', $type);
 
