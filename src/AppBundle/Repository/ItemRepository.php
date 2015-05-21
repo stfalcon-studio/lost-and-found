@@ -340,10 +340,12 @@ class ItemRepository extends EntityRepository
            ->addSelect('i.areaType')
            ->addSelect('i.title')
            ->addSelect('i.date')
+           ->addSelect('c.id AS categoryId')
            ->addSelect('c.title AS categoryTitle')
            ->addSelect('c.imageName AS categoryImage')
            ->join('i.category', 'c')
            ->where($qb->expr()->eq('i.type', ':type'))
+           ->andWhere($qb->expr()->eq('i.moderated', true))
            ->orderBy('i.id')
            ->setParameter('type', $type);
 
@@ -383,5 +385,27 @@ class ItemRepository extends EntityRepository
                   ])
                   ->getQuery()
                   ->getOneOrNullResult();
+    }
+
+    /**
+     * Find all not deleted items before date
+     *
+     * @param \DateTime $date date
+     *
+     * @return Item[]
+     */
+    public function findAllNotDeletedBeforeDate(\DateTime $date)
+    {
+        $qb = $this->createQueryBuilder('i');
+
+        return $qb->select('i')
+                  ->where($qb->expr()->eq('i.deleted', ':deleted'))
+                  ->andWhere($qb->expr()->lt('i.createdAt', ':date'))
+                  ->setParameters([
+                      'deleted' => false,
+                      'date'    => $date
+                  ])
+                  ->getQuery()
+                  ->getResult();
     }
 }

@@ -10,7 +10,12 @@
 
 namespace AppBundle\Controller\Backend;
 
+use AppBundle\Entity\Category;
+use Sonata\AdminBundle\Exception\ModelManagerException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Backend CategoryAdminController
@@ -70,5 +75,76 @@ class CategoryAdminController extends BaseAdminController
         $this->addFlash('sonata_flash_success', $successfulMessage);
 
         return new RedirectResponse($this->admin->generateUrl('list'));
+    }
+
+    /**
+     * Delete action
+     *
+     * @param int|string|null $id
+     *
+     * @return Response|RedirectResponse
+     *
+     * @throws NotFoundHttpException If the object does not exist
+     * @throws AccessDeniedException If access is not granted
+     */
+    public function deleteAction($id)
+    {
+        $id     = $this->get('request')->get($this->admin->getIdParameter());
+        /** @var Category $category Category*/
+        $object = $this->admin->getObject($id);
+        $items = $object->getItems();
+
+        if (!$object) {
+            throw new NotFoundHttpException(sprintf('unable to find the object with id : %s', $id));
+        }
+
+        if (false === $this->admin->isGranted('DELETE', $object)) {
+            throw new AccessDeniedException();
+        }
+
+        if ($this->getRestMethod() == 'DELETE') {
+            // check the csrf token
+            $this->validateCsrfToken('sonata.delete');
+
+            try {
+                $this->admin->delete($object);
+
+                if ($this->isXmlHttpRequest()) {
+                    return $this->renderJson(array('result' => 'ok'));
+                }
+
+                $this->addFlash(
+                    'sonata_flash_success',
+                    $this->admin->trans(
+                        'flash_delete_success',
+                        array('%name%' => $this->escapeHtml($this->admin->toString($object))),
+                        'SonataAdminBundle'
+                    )
+                );
+
+            } catch (ModelManagerException $e) {
+                if ($this->isXmlHttpRequest()) {
+                    return $this->renderJson(array('result' => 'error'));
+                }
+
+                $this->addFlash(
+                    'sonata_flash_error',
+                    $this->admin->trans(
+                        'flash_delete_error',
+                        array('%name%' => $this->escapeHtml($this->admin->toString($object))),
+                        'SonataAdminBundle'
+                    )
+                );
+            }
+
+            return $this->redirectTo($object);
+        }
+
+        return $this->render(':backend/category:delete.html.twig', array(
+            'object'     => $object,
+            'items'      => $items,
+            'action'     => 'delete',
+            'csrf_token' => $this->getCsrfToken('sonata.delete')
+        ));
     }
 }

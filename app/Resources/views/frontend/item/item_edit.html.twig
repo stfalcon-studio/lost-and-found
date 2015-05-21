@@ -45,9 +45,5 @@
         {{ form_end(form) }}
     </div>
 
-
-    <div id="latitude" data-latitude="{{ item.latitude }}"></div>
-    <div id="longitude" data-longitude="{{ item.longitude }}"></div>
-    <div id="area" data-area="{{ item.area|json_encode }}"></div>
-    <div id="areaType" data-area-type="{{ item.areaType }}"></div>
+    <div id="itemType" data-item-type="{{ item.type }}"></div>
 {% endblock content %}

@@ -5,6 +5,10 @@ vich_uploader:
         category_image:
             uri_prefix:         /images/categories
             upload_destination: %kernel.root_dir%/../web/images/categories
+            namer:              vich_uploader.namer_uniqid
+            directory_namer:    app.vich_uploader_directory_namer
         item_photos:
             uri_prefix:         /images/item-photos
             upload_destination: %kernel.root_dir%/../web/images/item-photos
+            namer:              vich_uploader.namer_uniqid
+            directory_namer:    app.vich_uploader_directory_namer
