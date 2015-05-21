@@ -48,4 +48,4 @@ security:
         - { path: ^/ru/profile/, roles: ROLE_USER }
         - { path: ^/uk/request-user, roles: ROLE_USER }
         - { path: ^/en/request-user, roles: ROLE_USER }
-        - { path: ^/ru%/request-user, roles: ROLE_USER }
+        - { path: ^/ru/request-user, roles: ROLE_USER }
