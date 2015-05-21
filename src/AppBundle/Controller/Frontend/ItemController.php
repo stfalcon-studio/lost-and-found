@@ -192,7 +192,7 @@ class ItemController extends Controller
      * @return Response
      *
      * @Method({"GET", "POST"})
-     * @Route("/add-lost-item", name="add_lost_item", options={"i18n"=false})
+     * @Route("/add-lost-item", name="add_lost_item")
      */
     public function addLostItemAction(Request $request)
     {
@@ -228,7 +228,7 @@ class ItemController extends Controller
      * @return Response
      *
      * @Method({"GET", "POST"})
-     * @Route("/add-found-item", name="add_found_item", options={"i18n"=false})
+     * @Route("/add-found-item", name="add_found_item")
      */
     public function addFoundItemAction(Request $request)
     {
