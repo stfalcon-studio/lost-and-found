@@ -89,10 +89,10 @@ class CategoryAdminController extends BaseAdminController
      */
     public function deleteAction($id)
     {
-        $id     = $this->get('request')->get($this->admin->getIdParameter());
-        /** @var Category $category Category*/
+        $id = $this->get('request')->get($this->admin->getIdParameter());
+        /** @var Category $category Category */
         $object = $this->admin->getObject($id);
-        $items = $object->getItems();
+        $items  = $object->getItems();
 
         if (!$object) {
             throw new NotFoundHttpException(sprintf('unable to find the object with id : %s', $id));
@@ -110,28 +110,28 @@ class CategoryAdminController extends BaseAdminController
                 $this->admin->delete($object);
 
                 if ($this->isXmlHttpRequest()) {
-                    return $this->renderJson(array('result' => 'ok'));
+                    return $this->renderJson(['result' => 'ok']);
                 }
 
                 $this->addFlash(
                     'sonata_flash_success',
                     $this->admin->trans(
                         'flash_delete_success',
-                        array('%name%' => $this->escapeHtml($this->admin->toString($object))),
+                        ['%name%' => $this->escapeHtml($this->admin->toString($object))],
                         'SonataAdminBundle'
                     )
                 );
 
             } catch (ModelManagerException $e) {
                 if ($this->isXmlHttpRequest()) {
-                    return $this->renderJson(array('result' => 'error'));
+                    return $this->renderJson(['result' => 'error']);
                 }
 
                 $this->addFlash(
                     'sonata_flash_error',
                     $this->admin->trans(
                         'flash_delete_error',
-                        array('%name%' => $this->escapeHtml($this->admin->toString($object))),
+                        ['%name%' => $this->escapeHtml($this->admin->toString($object))],
                         'SonataAdminBundle'
                     )
                 );
@@ -140,11 +140,11 @@ class CategoryAdminController extends BaseAdminController
             return $this->redirectTo($object);
         }
 
-        return $this->render(':backend/category:delete.html.twig', array(
+        return $this->render(':backend/category:delete.html.twig', [
             'object'     => $object,
             'items'      => $items,
             'action'     => 'delete',
             'csrf_token' => $this->getCsrfToken('sonata.delete')
-        ));
+        ]);
     }
 }
