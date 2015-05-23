@@ -1,9 +1,11 @@
-$(document).ready(function() {
-    var map = L.map('map').setView([48.76375572, 31.62963867], 6);
+$(function() {
+    var map = L.map('map');
 
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
+
+    map.locate({ setView : true, maxZoom : 12 });
 
     var drawnItems = new L.FeatureGroup();
     map.addControl(drawnItems);
