@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(function() {
     var map = L.map('map').setView([48.76375572, 31.62963867], 6);
 
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -15,7 +15,7 @@ $(document).ready(function () {
 
     var markers = new L.FeatureGroup();
 
-    function formatDate(dateObject) {
+    var formatDate = function(dateObject) {
         var d = new Date(dateObject);
         var day = d.getDate();
         var month = d.getMonth() + 1;
@@ -27,25 +27,23 @@ $(document).ready(function () {
         if (month < 10) {
             month = "0" + month;
         }
-        var date = day + "." + month + "." + year;
 
-        return date;
-    }
+        return day + "." + month + "." + year;
+    };
 
-    function showPoints(type) {
+    var showPoints = function(type) {
         var categories;
-        var popupTextArray = [];
         $.ajax({
-            url: 'http://lost-and-found.work/app_dev.php/get/categories',
-            type: 'get',
+            url:      'http://lost-and-found.work/app_dev.php/get/categories',
+            type:     'get',
             dataType: 'JSON',
-            success: function (data) {
+            success:  function(data) {
                 categories = new Object(data);
                 $.ajax({
-                    url: 'http://lost-and-found.work/app_dev.php/show/' + type + '-points',
-                    type: 'get',
+                    url:      'http://lost-and-found.work/app_dev.php/show/' + type + '-points',
+                    type:     'get',
                     dataType: 'JSON',
-                    success: function (data) {
+                    success:  function(data) {
                         for (var i = 0; i < data.length; i++) {
                             var cat = categories[data[i].categoryId];
                             if (cat['imageName'] !== null) {
@@ -58,16 +56,16 @@ $(document).ready(function () {
                             }
 
                             var popupText = "<div><h6 align='center' style='margin-bottom: 0'><b>"
-                                            + data[i].title
-                                            + "</b></h6></br>"
-                                            + "<h3 style='margin: 0' align='center'><a href='"
-                                            + data[i].link
-                                            + "'>"
-                                            + data[i].itemTitle
-                                            + "</a></h3></br>"
-                                            + "<p style='margin-top: 0' align='right'>Added: "
-                                            + formatDate(data[i].date.date)
-                                            + "</p></div>";
+                                + data[i].title
+                                + "</b></h6></br>"
+                                + "<h3 style='margin: 0' align='center'><a href='"
+                                + data[i].link
+                                + "'>"
+                                + data[i].itemTitle
+                                + "</a></h3></br>"
+                                + "<p style='margin-top: 0' align='right'>Added: "
+                                + formatDate(data[i].date.date)
+                                + "</p></div>";
 
                             marker.bindPopup(popupText);
 
@@ -84,7 +82,7 @@ $(document).ready(function () {
         });
 
         map.addLayer(markers);
-    }
+    };
 
     showPoints('found');
 

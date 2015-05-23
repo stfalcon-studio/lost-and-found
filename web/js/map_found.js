@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(function() {
     var map = L.map('map').setView([48.76375572, 31.62963867], 6);
 
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -7,7 +7,7 @@ $(document).ready(function() {
 
     var marker = null;
 
-    function onMapClick(e) {
+    var onMapClick = function(e) {
         $("#found_item_latitude").val(e.latlng.lat.toString());
         $("#found_item_longitude").val(e.latlng.lng.toString());
 
@@ -17,7 +17,7 @@ $(document).ready(function() {
 
         $("#found_item_areaType").val('marker');
         marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map);
-    }
+    };
 
     map.on('click', onMapClick);
 });

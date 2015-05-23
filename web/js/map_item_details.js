@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(function() {
     var map = L.map('map').setView([48.76375572, 31.62963867], 6);
 
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {

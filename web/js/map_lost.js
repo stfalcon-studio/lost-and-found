@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(function() {
     var map = L.map('map').setView([48.76375572, 31.62963867], 6);
 
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -10,17 +10,18 @@ $(document).ready(function() {
 
     var latitude = $('#lost_item_latitude');
     var longitude = $('#lost_item_longitude');
+
     var area = $('#lost_item_area');
     var areaType = $('#lost_item_areaType');
 
-    function clearFields() {
+    var clearFields = function() {
         latitude.val('');
         longitude.val('');
         area.val('');
         areaType.val('');
-    }
+    };
 
-    function toolbarState(status) {
+    var toolbarState = function(status) {
         var options;
 
         switch (status) {
@@ -29,11 +30,11 @@ $(document).ready(function() {
 
                 options = new L.Control.Draw({
                     draw: {
-                        polyline: false,
-                        polygon: false,
+                        polyline:  false,
+                        polygon:   false,
                         rectangle: false,
-                        circle: false,
-                        marker: false
+                        circle:    false,
+                        marker:    false
                     },
                     edit: {
                         featureGroup: drawnItems
@@ -45,20 +46,20 @@ $(document).ready(function() {
 
                 options = new L.Control.Draw({
                     draw: {
-                        position: 'topleft',
-                        polygon: {
+                        position:  'topleft',
+                        polygon:   {
                             shapeOptions: {
                                 color: '#000000'
                             },
-                            showArea: true
+                            showArea:     true
                         },
                         rectangle: {
                             shapeOptions: {
                                 color: '#000000'
                             }
                         },
-                        polyline: false,
-                        circle: {
+                        polyline:  false,
+                        circle:    {
                             shapeOptions: {
                                 color: '#000000'
                             }
@@ -73,12 +74,12 @@ $(document).ready(function() {
                 console.log('Unknown option \'' + status + '\'');
         }
         return options;
-    }
+    };
 
     var drawControl = toolbarState('show');
     map.addControl(drawControl);
 
-    map.on('draw:created', function (e) {
+    map.on('draw:created', function(e) {
         var type = e.layerType,
             layer = e.layer;
 
@@ -88,17 +89,17 @@ $(document).ready(function() {
 
         drawnItems.addLayer(layer);
 
-        function getLatLngs(input) {
+        var getLatLngs = function(input) {
             var customArray = [];
 
             for (var i = 0; i < layer._latlngs.length; i++) {
                 customArray.push({
-                    latitude: layer._latlngs[i].lat,
+                    latitude:  layer._latlngs[i].lat,
                     longitude: layer._latlngs[i].lng
                 });
             }
             input.val(JSON.stringify(customArray));
-        }
+        };
 
         switch (type) {
             case 'polygon':
@@ -128,7 +129,7 @@ $(document).ready(function() {
 
     /* TODO: Delete figures by click with popup */
 
-    map.on('draw:deleted', function (e) {
+    map.on('draw:deleted', function(e) {
         var layers = e.layers._layers;
 
         if (!jQuery.isEmptyObject(layers)) {
