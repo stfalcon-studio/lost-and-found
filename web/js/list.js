@@ -1,11 +1,13 @@
 var layerGroup = new L.FeatureGroup();
 
 $(function() {
-    var map = L.map('map').setView([48.76375572, 31.62963867], 6);
+    var map = L.map('map');
 
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
+
+    map.locate({ setView : true, maxZoom : 12 });
 
     $('#list a').each(function(index) {
         var layer = null;
@@ -76,19 +78,19 @@ $(function() {
 
         var popupText =
             "<div>" +
-                "<h6 align='center' style='margin-bottom: 0'>" +
-                    "<b>" + $(this).data('category-title') + "</b>" +
-                "</h6>" +
+            "<h6 align='center' style='margin-bottom: 0'>" +
+            "<b>" + $(this).data('category-title') + "</b>" +
+            "</h6>" +
 
-                "<br />" +
+            "<br />" +
 
-                "<h3 style='margin: 0' align='center'>" +
-                    "<a href='" + $(this).attr('href') + "'>" + $(this).text() + "</a>" +
-                "</h3>" +
+            "<h3 style='margin: 0' align='center'>" +
+            "<a href='" + $(this).attr('href') + "'>" + $(this).text() + "</a>" +
+            "</h3>" +
 
-                "<br />" +
+            "<br />" +
 
-                "<p style='margin-top: 0' align='right'>Added: " + $(this).data('date')+ "</p>" +
+            "<p style='margin-top: 0' align='right'>Added: " + $(this).data('date') + "</p>" +
             "</div>";
 
         layer.bindPopup(popupText);
