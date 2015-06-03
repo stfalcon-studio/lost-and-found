@@ -1,14 +1,18 @@
 var layerGroup = new L.FeatureGroup();
 
-$(document).ready(function () {
-    var map = L.map('map').setView([48.76375572, 31.62963867], 6);
+$(function() {
+    var map = L.map('map');
 
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
+    map.locate({ setView : true, maxZoom : 12 });
+
     $('#list a').each(function(index) {
-        var options = { color: "#000000", weight: 2 };
+        var layer = null;
+        var layerOptions = {color: "#000000", weight: 2};
+
         var areaType = $(this).data('area-type');
         var area = null;
         var center = null;
@@ -28,7 +32,7 @@ $(document).ready(function () {
                     summLng += parseInt(area[j].longitude);
                 }
 
-                layer = L.polygon(polygon, options);
+                layer = L.polygon(polygon, layerOptions);
                 center = [summLat / area.length, summLng / area.length];
                 break;
             case 'rectangle':
@@ -41,21 +45,19 @@ $(document).ready(function () {
                     [area[2].latitude, area[2].longitude]
                 ];
 
-                layer = L.rectangle(bounds, options);
+                layer = L.rectangle(bounds, layerOptions);
                 center = [area[0].latitude, area[2].longitude];
                 break;
             case 'circle':
                 area = $(this).data('area')[0];
 
-                layer = L.circle([area.latlng.lat, area.latlng.lng], area.radius, options);
+                layer = L.circle([area.latlng.lat, area.latlng.lng], area.radius, layerOptions);
                 center = [area.latlng.lat, area.latlng.lng];
                 break;
             case 'marker':
-                var latitude  = $(this).data('latitude');
+                var latitude = $(this).data('latitude');
                 var longitude = $(this).data('longitude');
-
                 var imageUrl = $(this).data('category-image');
-
                 if (imageUrl !== '') {
                     var icon = L.icon({
                         iconUrl: imageUrl, iconSize: [32, 32]
@@ -76,15 +78,19 @@ $(document).ready(function () {
 
         var popupText =
             "<div>" +
-                "<h6 align='center' style='margin-bottom: 0'>" +
-                    "<b>" + $(this).data('category-title') + "</b>" +
-                "</h6>" +
-                "<br />" +
-                "<h3 style='margin: 0' align='center'>" +
-                    "<a href='" + $(this).attr('href') + "'>" + $(this).text() + "</a>" +
-                "</h3>" +
-                "<br />" +
-                "<p style='margin-top: 0' align='right'>Added: " + $(this).data('date')+ "</p>" +
+            "<h6 align='center' style='margin-bottom: 0'>" +
+            "<b>" + $(this).data('category-title') + "</b>" +
+            "</h6>" +
+
+            "<br />" +
+
+            "<h3 style='margin: 0' align='center'>" +
+            "<a href='" + $(this).attr('href') + "'>" + $(this).text() + "</a>" +
+            "</h3>" +
+
+            "<br />" +
+
+            "<p style='margin-top: 0' align='right'>Added: " + $(this).data('date') + "</p>" +
             "</div>";
 
         layer.bindPopup(popupText);

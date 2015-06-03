@@ -1,52 +1,55 @@
-$(document).ready(function() {
-    var map = L.map('map').setView([48.76375572, 31.62963867], 6);
+$(function() {
+    var map = L.map('map');
 
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
+
+    map.locate({ setView : true, maxZoom : 12 });
 
     var drawnItems = new L.FeatureGroup();
     map.addControl(drawnItems);
 
     var latitude = $("input[name*='[latitude]']").val();
     var longitude = $("input[name*='[longitude]']").val();
+
     var area = $("input[name*='[area]']").val();
     var areaType = $("input[name*='[areaType]']").val();
 
+    var itemType = $("#itemType").data('item-type');
     var options = {color: "#000000", weight: 2};
 
-    function toolbarState(status) {
+    var toolbarState = function(status) {
         var options;
-
         switch (status) {
             case 'hide':
                 options = new L.Control.Draw({
                     draw: {
-                        polyline: false,
-                        polygon: false,
+                        polyline:  false,
+                        polygon:   false,
                         rectangle: false,
-                        circle: false,
-                        marker: false
+                        circle:    false,
+                        marker:    false
                     }
                 });
                 break;
             case 'show':
                 options = new L.Control.Draw({
                     draw: {
-                        position: 'topleft',
-                        polygon: {
+                        position:  'topleft',
+                        polygon:   {
                             shapeOptions: {
                                 color: '#000000'
                             },
-                            showArea: true
+                            showArea:     true
                         },
                         rectangle: {
                             shapeOptions: {
                                 color: '#000000'
                             }
                         },
-                        polyline: false,
-                        circle: {
+                        polyline:  false,
+                        circle:    {
                             shapeOptions: {
                                 color: '#000000'
                             }
@@ -58,7 +61,7 @@ $(document).ready(function() {
                 console.log('Unknown option \'' + status + '\'');
         }
         return options;
-    }
+    };
 
     var drawControl = toolbarState('hide');
     map.addControl(drawControl);
@@ -79,7 +82,7 @@ $(document).ready(function() {
                 summLng += parseInt(area[i].longitude);
             }
 
-            layer = L.polygon(polygon, options)
+            layer = L.polygon(polygon, options);
             center = [summLat / area.length, summLng / area.length];
             map.setView(center, 6);
             break;
@@ -107,8 +110,8 @@ $(document).ready(function() {
 
     var figureLayer = L.layerGroup().addLayer(layer).addTo(map);
 
-    function layerClick() {
-        layer.on('click', function(e){
+    var layerClick = function() {
+        layer.on('click', function(e) {
             var popup = L.popup()
                 .setContent("Delete that item? <button id=\"yes\">Yes</button><button id=\"no\">No</button>")
                 .setLatLng(e.latlng)
@@ -116,23 +119,45 @@ $(document).ready(function() {
 
             var yes = $('#yes').on('click', function() {
                 figureLayer.removeLayer(layer);
-
-                drawControl = toolbarState('show');
+                if ('found' === itemType) {
+                    drawControl = toolbarState('show');
+                }
                 map.addControl(drawControl);
                 map.closePopup();
             });
         });
+    };
+
+    var marker = null;
+
+    var onMapClick = function(e) {
+        if (!marker) {
+            figureLayer.removeLayer(layer);
+        }
+        $("#item_edit_latitude").val(e.latlng.lat.toString());
+        $("#item_edit_longitude").val(e.latlng.lng.toString());
+
+        if (marker) {
+            map.removeLayer(marker);
+        }
+
+        $("#item_edit_areaType").val('marker');
+        marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map);
+    };
+
+    if ('found' === itemType) {
+        map.on('click', onMapClick);
     }
 
-    function clearInputs() {
+    var clearInputs = function() {
         $("input[name*='[latitude]']").val('');
         $("input[name*='[longitude]']").val('');
         $("input[name*='[area]']").val('');
-    }
+    };
 
     layerClick();
 
-    map.on('draw:created', function (e) {
+    map.on('draw:created', function(e) {
         var type = e.layerType,
             createdLayer = e.layer;
 
@@ -149,7 +174,7 @@ $(document).ready(function() {
 
             for (var i = 0; i < createdLayer._latlngs.length; i++) {
                 customArray.push({
-                    latitude: createdLayer._latlngs[i].lat,
+                    latitude:  createdLayer._latlngs[i].lat,
                     longitude: createdLayer._latlngs[i].lng
                 });
             }

@@ -113,8 +113,8 @@ class User extends BaseUser
     {
         parent::__construct();
 
-        $this->items = new ArrayCollection();
-        $this->actionLogs = new ArrayCollection();
+        $this->items        = new ArrayCollection();
+        $this->actionLogs   = new ArrayCollection();
         $this->itemRequests = new ArrayCollection();
     }
 
