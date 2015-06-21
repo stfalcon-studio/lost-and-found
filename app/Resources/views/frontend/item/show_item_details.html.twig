@@ -37,7 +37,7 @@
             <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
             <time datetime="{{ item.date|date('Y-m-d') }}">{{ item.date|date('d.m.Y') }}</time>
             &nbsp;
-            Category: <span id="category">{{ item.category }}</span>
+           {{ 'Category'|trans({}, 'main-page') }}: <span id="category">{{ item.category }}</span>
         </div>
         <br />
 
@@ -48,7 +48,7 @@
         </div>
 
         {% if item.photos is not empty %}
-            <h3>Photos</h3>
+            <h3>{{ 'Photos'|trans({}, 'main-page') }}</h3>
             <ul class="photos">
                 {% for photo in item.photos %}
                     <li style="list-style-type: none; display: inline; padding: 10px;">
@@ -75,7 +75,7 @@
                     {{ form_end(form) }}
                 </div>
                 <a id="facebook-profile" href="" class="btn btn-primary" style="display:none;" target="_blank">
-                    Author Facebook profile</a>
+                    {{ 'Author Facebook profile'|trans({}, 'main-page') }}</a>
                 <div style="display:none;" id="message">
                     {{ form_start(message_form) }}
                     {{ form_errors(message_form) }}

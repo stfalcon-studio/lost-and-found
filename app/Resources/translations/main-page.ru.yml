@@ -13,6 +13,7 @@ index:
     blockquote-2: "В среднем владельцы пропавших вещей обращаются только за пятнадцатью процентами всех находок. То есть о 85% вещей люди либо не помнят, либо не хотят их забирать."
 
 
+
 form:
     category: "Категория"
     title: "Заголовок"
@@ -58,3 +59,24 @@ faq:
 feedback:
     header: "Обратная связь"
     button: "Отправить"
+
+Powered by: "При поддержке"
+Based on: "За основу взято"
+Developed by studio: "Разработано студией"
+Code released under the: "Код выпущен под лицензией"
+From: "От"
+To: "До"
+Filter: "Фильтровать"
+Title: "Название"
+Category: "Категория"
+Date: "Дата"
+Description: "Описание"
+Photos: "Фотографии"
+Map: "Карта"
+Create: "Создать"
+Add a photo: "Добавить фото"
+Update: "Обновить"
+Contact with author: "Связаться с автором"
+Send message: "Отправить сообщение"
+Author Facebook profile: "Профиль автора в Facebook"
+Content: "Введите ваше сообщение"

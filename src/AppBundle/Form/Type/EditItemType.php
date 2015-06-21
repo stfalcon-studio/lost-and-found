@@ -59,26 +59,34 @@ class EditItemType extends AbstractType
 
                     return $qb->where($qb->expr()->eq('c.enabled', true));
                 },
+                'translation_domain' => 'main-page'
             ])
-            ->add('title', 'text')
+            ->add('title', 'text', [
+                'translation_domain' => 'main-page'
+            ])
             ->add('type', 'hidden')
             ->add('latitude', 'hidden')
             ->add('longitude', 'hidden')
             ->add('areaType', 'hidden')
-            ->add('description', 'textarea')
+            ->add('description', 'textarea', [
+                'translation_domain' => 'main-page'
+            ])
             ->add('date', 'date', [
-                'widget' => 'single_text'
+                'widget' => 'single_text',
+                'translation_domain' => 'main-page'
             ])
             ->add('area', 'hidden', [
                 'required' => false,
             ])
             ->add('areaMap', 'area_map', [
                 'mapped' => false,
+                'translation_domain' => 'main-page'
              ])
             ->add('update', 'submit', [
                 'attr'  => [
                     'class' => 'btn-success'
-                ]
+                ],
+                'translation_domain' => 'main-page'
             ]);
 
         $tokenStorage = $this->tokenStorage;

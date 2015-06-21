@@ -30,7 +30,8 @@ class ItemDetailsType extends AbstractType
                 'label' => 'Contact with author',
                 'attr'  => [
                     'class' => 'btn-success'
-                ]
+                ],
+                'translation_domain' => 'main-page'
             ]);
     }
 
