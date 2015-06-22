@@ -1,7 +1,7 @@
 var $collectionHolder;
 
 // setup an "add a tag" link
-var $addPhotoLink = $('<a href="#" class="add_photo_link">Add a photo</a>');
+var $addPhotoLink = $('<a href="#" class="add_photo_link">+</a>');
 var $newLinkLi = $('<p></p>').append($addPhotoLink);
 
 jQuery(document).ready(function() {

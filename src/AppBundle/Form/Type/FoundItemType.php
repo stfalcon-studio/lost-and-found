@@ -61,10 +61,14 @@ class FoundItemType extends AbstractType
 
                     return $qb->where($qb->expr()->eq('c.enabled', true));
                 },
+                'translation_domain' => 'main-page'
             ])
-            ->add('title', 'text')
+            ->add('title', 'text', [
+                'translation_domain' => 'main-page'
+            ])
             ->add('type', 'hidden', [
                 'data'  => ItemTypeType::FOUND,
+                'translation_domain' => 'main-page'
             ])
             ->add('latitude', 'hidden')
             ->add('active', 'hidden', [
@@ -72,21 +76,26 @@ class FoundItemType extends AbstractType
             ])
             ->add('longitude', 'hidden')
             ->add('areaType', 'hidden')
-            ->add('description', 'textarea')
+            ->add('description', 'textarea', [
+                'translation_domain' => 'main-page'
+            ])
             ->add('date', 'date', [
-                'widget' => 'single_text'
+                'widget' => 'single_text',
+                'translation_domain' => 'main-page'
             ])
             ->add('photos', 'collection', [
                 'type'         => 'photo',
                 'allow_add'    => true,
                 'by_reference' => false,
                 'allow_delete' => true,
+                'translation_domain' => 'main-page'
             ])
             ->add('save', 'submit', [
                 'label' => 'Create',
                 'attr'  => [
                     'class' => 'btn-success'
-                ]
+                ],
+                'translation_domain' => 'main-page'
             ]);
 
         $tokenStorage = $this->tokenStorage;
