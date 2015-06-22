@@ -24,12 +24,15 @@ class SendMessageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('content', 'text')
+            ->add('content', 'text', [
+                'translation_domain' => 'main-page'
+            ])
             ->add('send', 'submit', [
                 'label' => 'Send message',
                 'attr'  => [
                     'class' => 'btn-success',
-                ]
+                ],
+                'translation_domain' => 'main-page'
             ]);
     }
 

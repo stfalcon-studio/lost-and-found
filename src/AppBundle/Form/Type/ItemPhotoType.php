@@ -30,6 +30,7 @@ class ItemPhotoType extends AbstractType
         $builder
             ->add('imageFile', 'file', [
                 'required' => false,
+                'translation_domain' => 'main-page'
             ]);
     }
 

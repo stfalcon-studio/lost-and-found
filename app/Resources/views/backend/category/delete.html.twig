@@ -1,0 +1,46 @@
+{% extends base_template %}
+
+{% block actions %}
+    <li>{% include 'SonataAdminBundle:Button:list_button.html.twig' %}</li>
+    <li>{% include 'SonataAdminBundle:Button:edit_button.html.twig' %}</li>
+    <li>{% include 'SonataAdminBundle:Button:create_button.html.twig' %}</li>
+{% endblock %}
+
+{% block tab_menu %}{{ knp_menu_render(admin.sidemenu(action), {'currentClass' : 'active', 'template': admin_pool.getTemplate('tab_menu_template')}, 'twig') }}{% endblock %}
+
+{% block content %}
+    <div class="sonata-ba-delete">
+
+        <div class="box box-danger">
+            <div class="box-header">
+                <h3 class="box-title">{{ 'title_delete'|trans({}, 'SonataAdminBundle') }}</h3>
+            </div>
+            <div class="box-body">
+                Are you sure you want to delete the selected "{{ admin.toString(object) }}" category?
+                {% if items is not empty %}
+                    <br /> The following items will be deleted: <br />
+                    <ul>
+                        {% for item in items %}
+                            <li><a href="{{ path('admin_item_show', {'id': item.id }) }}" > {{ item.title }} </a></li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+            <div class="box-footer clearfix">
+                <form method="POST" action="{{ admin.generateObjectUrl('delete', object) }}">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" name="_sonata_csrf_token" value="{{ csrf_token }}">
+
+                    <button type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> {{ 'btn_delete'|trans({}, 'SonataAdminBundle') }}</button>
+                    {% if admin.hasRoute('edit') and admin.isGranted('EDIT', object) %}
+                        {{ 'delete_or'|trans({}, 'SonataAdminBundle') }}
+
+                        <a class="btn btn-success" href="{{ admin.generateObjectUrl('edit', object) }}">
+                            <i class="glyphicon glyphicon-edit"></i>
+                            {{ 'link_action_edit'|trans({}, 'SonataAdminBundle') }}</a>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -50,14 +50,17 @@ class ItemsListType extends AbstractType
                 'label'  => 'From',
                 'widget' => 'single_text',
                 'required' => false,
+                'translation_domain' => 'main-page'
             ])
             ->add('to', 'date', [
                 'label'  => 'To',
                 'widget' => 'single_text',
                 'required' => false,
+                'translation_domain' => 'main-page'
             ])
             ->add('filter', 'submit', [
                 'label' => 'Filter',
+                'translation_domain' => 'main-page',
                 'attr'  => [
                     'class' => 'btn-success'
                 ]
