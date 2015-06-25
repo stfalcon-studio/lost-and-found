@@ -39,6 +39,14 @@ class ItemAdmin extends Admin
     /**
      * {@inheritdoc}
      */
+    protected $datagridValues = [
+        '_sort_order' => 'DESC',
+        '_sort_by'    => 'id'
+    ];
+
+    /**
+     * {@inheritdoc}
+     */
     public function getBatchActions()
     {
         $actions = parent::getBatchActions();
@@ -125,6 +133,7 @@ class ItemAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
+            ->addIdentifier('id')
             ->addIdentifier('title')
             ->add('category')
             ->add('type', 'string', [
