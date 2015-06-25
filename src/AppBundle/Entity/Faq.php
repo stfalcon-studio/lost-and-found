@@ -101,7 +101,6 @@ class Faq implements Translatable
      *      cascade={"persist", "remove"},
      *      orphanRemoval=true
      * )
-     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $translations;
 

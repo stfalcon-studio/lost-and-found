@@ -174,7 +174,6 @@ class Item implements UserManageableInterface
      * @var Collection|ItemRequest[] $userRequests userRequest
      *
      * @ORM\OneToMany(targetEntity="ItemRequest", mappedBy="item", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $userRequests;
 
@@ -182,7 +181,6 @@ class Item implements UserManageableInterface
      * @var Collection|ItemPhoto[] $photos Photos
      *
      * @ORM\OneToMany(targetEntity="ItemPhoto", mappedBy="item", cascade={"persist", "remove"}, orphanRemoval=true)
-     * @ORM\JoinColumn(onDelete="CASCADE")
      *
      * @Assert\Valid()
      */

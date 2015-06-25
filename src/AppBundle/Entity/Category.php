@@ -69,7 +69,6 @@ class Category implements Translatable
      * @var Collection|Item[] $items Items
      *
      * @ORM\OneToMany(targetEntity="Item", mappedBy="category", cascade={"persist", "remove"}, orphanRemoval=true)
-     * @ORM\JoinColumn(onDelete="CASCADE")
      *
      * @Assert\Type(type="object")
      */
@@ -166,7 +165,6 @@ class Category implements Translatable
      *      cascade={"persist", "remove"},
      *      orphanRemoval=true
      * )
-     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $translations;
 

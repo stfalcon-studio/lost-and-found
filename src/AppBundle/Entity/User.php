@@ -45,7 +45,6 @@ class User extends BaseUser
      * @var Collection|Item[] $items Items
      *
      * @ORM\OneToMany(targetEntity="Item", mappedBy="createdBy", cascade={"persist", "remove"}, orphanRemoval=true)
-     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $items;
 
@@ -53,7 +52,6 @@ class User extends BaseUser
      * @var Collection|UserActionLog[] $actionLogs Actionlog
      *
      * @ORM\OneToMany(targetEntity="UserActionLog", mappedBy="user", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $actionLogs;
 
@@ -61,7 +59,6 @@ class User extends BaseUser
      * @var Collection|ItemRequest[] $itemRequests Item request
      *
      * @ORM\OneToMany(targetEntity="ItemRequest", mappedBy="user", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $itemRequests;
 
