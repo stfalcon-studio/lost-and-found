@@ -72,7 +72,7 @@ class UserController extends Controller
 
         return $this->render('frontend/item/item_edit.html.twig', [
             'form' => $form->createView(),
-            'item' => $item
+            'item' => $item,
         ]);
     }
 
@@ -97,7 +97,7 @@ class UserController extends Controller
 
         return $this->render('frontend/user/show_actual_lost_items.html.twig', [
             'items' => $items,
-            'count' => $count
+            'count' => $count,
         ]);
     }
 
@@ -122,7 +122,7 @@ class UserController extends Controller
 
         return $this->render('frontend/user/show_actual_found_items.html.twig', [
             'items' => $items,
-            'count' => $count
+            'count' => $count,
         ]);
     }
 
@@ -147,7 +147,7 @@ class UserController extends Controller
 
         return $this->render('frontend/user/show_resolved_lost_items.html.twig', [
             'items' => $items,
-            'count' => $count
+            'count' => $count,
         ]);
     }
 
@@ -171,7 +171,7 @@ class UserController extends Controller
 
         return $this->render('frontend/user/show_resolved_found_items.html.twig', [
             'items' => $items,
-            'count' => $count
+            'count' => $count,
         ]);
     }
 
@@ -195,7 +195,7 @@ class UserController extends Controller
 
         return $this->render('frontend/user/show_deactivated_items.html.twig', [
             'items' => $items,
-            'count' => $count
+            'count' => $count,
         ]);
     }
 
@@ -219,7 +219,7 @@ class UserController extends Controller
 
         return $this->render('frontend/user/show_not_moderated_items.html.twig', [
             'items' => $items,
-            'count' => $count
+            'count' => $count,
         ]);
     }
 
@@ -245,7 +245,7 @@ class UserController extends Controller
 
         return $this->render('frontend/user/show_item_requests.html.twig', [
             'requests' => $requests,
-            'title'    => $item->getTitle()
+            'title'    => $item->getTitle(),
         ]);
     }
 
@@ -289,7 +289,7 @@ class UserController extends Controller
         return $this->render('frontend/user/show_messages.html.twig', [
             'messages' => $messages,
             'count'    => $count,
-            'type'     => 'sent'
+            'type'     => 'sent',
         ]);
     }
 
@@ -314,7 +314,7 @@ class UserController extends Controller
         return $this->render('frontend/user/show_messages.html.twig', [
             'messages' => $messages,
             'count'    => $count,
-            'type'     => 'receive'
+            'type'     => 'receive',
         ]);
     }
 }

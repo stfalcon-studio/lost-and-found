@@ -29,8 +29,8 @@ class ItemDetailsType extends AbstractType
             ->add('save', 'submit', [
                 'label' => 'Contact with author',
                 'attr'  => [
-                    'class' => 'btn-success'
-                ]
+                    'class' => 'btn-success',
+                ],
             ]);
     }
 

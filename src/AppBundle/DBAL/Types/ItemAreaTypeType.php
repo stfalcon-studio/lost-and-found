@@ -32,6 +32,6 @@ class ItemAreaTypeType extends AbstractEnumType
         self::POLYGON   => 'Polygon',
         self::RECTANGLE => 'Rectangle',
         self::CIRCLE    => 'Circle',
-        self::MARKER    => 'Marker'
+        self::MARKER    => 'Marker',
     ];
 }

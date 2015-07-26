@@ -53,11 +53,11 @@ class ItemAdmin extends Admin
 
         $actions['mark_as_moderated_action']   = [
             'label'            => 'Mark as moderated',
-            'ask_confirmation' => true
+            'ask_confirmation' => true,
         ];
         $actions['unmark_as_moderated_action'] = [
             'label'            => 'Unmark as moderated',
-            'ask_confirmation' => true
+            'ask_confirmation' => true,
         ];
 
         return $actions;
@@ -144,30 +144,30 @@ class ItemAdmin extends Admin
                 'template' => 'backend/item/list_status.html.twig',
             ])
             ->add('moderated', null, [
-                'editable' => true
+                'editable' => true,
             ])
             ->add('active', null, [
-                'editable' => true
+                'editable' => true,
             ])
             ->add('deleted', null, [
-                'editable' => true
+                'editable' => true,
             ])
             ->add('date', 'date', [
-                'format' => 'd.m.Y'
+                'format' => 'd.m.Y',
             ])
             ->add('createdAt', 'datetime', [
-                'format' => 'd.m.Y H:i:s'
+                'format' => 'd.m.Y H:i:s',
             ])
             ->add('updatedAt', 'datetime', [
-                'format' => 'd.m.Y H:i:s'
+                'format' => 'd.m.Y H:i:s',
             ])
             ->add('createdBy')
             ->add('_action', 'actions', [
                 'actions' => [
                     'show'   => [],
                     'edit'   => [],
-                    'delete' => []
-                ]
+                    'delete' => [],
+                ],
             ]);
     }
 
@@ -185,27 +185,27 @@ class ItemAdmin extends Admin
             ->add('type')
             ->add('description')
             ->add('photos', 'string', [
-                'template' => 'backend/item/photos_list.html.twig'
+                'template' => 'backend/item/photos_list.html.twig',
             ])
             ->add('area', 'text', [
-                'template' => 'backend/item/show_map.html.twig'
+                'template' => 'backend/item/show_map.html.twig',
             ])
             ->add('areaType')
             ->add('status')
             ->add('activatedAt')
             ->add('moderated', 'boolean')
             ->add('date', 'date', [
-                'format' => 'd.m.Y'
+                'format' => 'd.m.Y',
             ])
             ->add('createdBy')
             ->add('createdAt', 'datetime', [
-                'format' => 'd.m.Y H:i:s'
+                'format' => 'd.m.Y H:i:s',
             ])
             ->add('updatedAt', 'datetime', [
-                'format' => 'd.m.Y H:i:s'
+                'format' => 'd.m.Y H:i:s',
             ])
             ->add('moderatedAt', 'datetime', [
-                'format' => 'd.m.Y H:i:s'
+                'format' => 'd.m.Y H:i:s',
             ])
             ->add('deleted')
             ->add('deletedAt')

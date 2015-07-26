@@ -47,11 +47,11 @@ class UserAdmin extends Admin
                 ->add('roles', 'choice', [
                     'choices' => [
                         'ROLE_USER'  => 'User',
-                        'ROLE_ADMIN' => 'Admin'
+                        'ROLE_ADMIN' => 'Admin',
                     ],
                     'expanded' => false,
                     'multiple' => true,
-                    'required' => false
+                    'required' => false,
                 ])
                 ->add('lastLogin', 'sonata_type_date_picker')
             ->end();
@@ -67,18 +67,18 @@ class UserAdmin extends Admin
             ->add('fullName')
             ->add('email')
             ->add('enabled', null, [
-                'editable' => true
+                'editable' => true,
             ])
             ->add('rolesAsString', 'string', [
-                'label' => 'Roles'
+                'label' => 'Roles',
             ])
             ->add('lastLogin')
             ->add('_action', 'actions', [
                 'actions' => [
                     'show'   => [],
                     'edit'   => [],
-                    'delete' => []
-                ]
+                    'delete' => [],
+                ],
             ]);
     }
 

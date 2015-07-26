@@ -14,45 +14,53 @@ app_api:
     options: { i18n: false }
 
 backend:
-    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
+    resource: "@SonataAdminBundle/Resources/config/routing/sonata_admin.xml"
     prefix:  /admin
     options: { i18n: false }
 
 _sonata_admin:
     resource: .
-    type: sonata_admin
-    prefix: /admin
-    options: { i18n: false }
+    type:     sonata_admin
+    prefix:   /admin
+    options:  { i18n: false }
 
 hwi_oauth_redirect:
     resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
     prefix:   /auth/connect
-    options: { i18n: false }
+    options:  { i18n: false }
 
 hwi_oauth_login:
     resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
     prefix:   /auth/connect
-    options: { i18n: false }
+    options:  { i18n: false }
 
 hwi_oauth_connect:
     resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
     prefix:   /auth/connect
-    options: { i18n: false }
+    options:  { i18n: false }
 
 facebook_login:
     pattern: /auth/check-facebook
     options: { i18n: false }
 
 fos_user_security_logout:
-    path: /logout
+    path:     /logout
     defaults: { _controller: FOSUserBundle:Security:logout }
-    options: { i18n: false }
+    options:  { i18n: false }
 
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
-    options: { i18n: false }
+    options:  { i18n: false }
+
+gallery:
+    resource: "@SonataMediaBundle/Resources/config/routing/gallery.xml"
+    prefix:   /media/gallery
+
+media:
+    resource: "@SonataMediaBundle/Resources/config/routing/media.xml"
+    prefix:   /media
 
 NelmioApiDocBundle:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
     prefix:   /api/doc
-    options: { i18n: false }
+    options:  { i18n: false }

@@ -28,6 +28,6 @@ class ItemTypeType extends AbstractEnumType
      */
     protected static $choices = [
         self::LOST  => 'Lost item',
-        self::FOUND => 'Found item'
+        self::FOUND => 'Found item',
     ];
 }

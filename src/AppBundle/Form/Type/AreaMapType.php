@@ -13,7 +13,7 @@ namespace AppBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 
 /**
- * Class LostItemType
+ * AreaMapType
  *
  * @author Oleg Kachinsky <logansoleg@gmail.com>
  */

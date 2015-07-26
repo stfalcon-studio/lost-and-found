@@ -34,12 +34,12 @@ class FeedbackType extends AbstractType
                 ],
             ])
             ->add('message', 'textarea', [
-                'label' => 'What do you want to tell us?'
+                'label' => 'What do you want to tell us?',
             ])
             ->add('save', 'submit', [
                 'label' => 'Send',
                 'attr'  => [
-                    'class' => 'btn-success'
+                    'class' => 'btn-success',
                 ],
             ]);
     }

@@ -11,8 +11,8 @@
 namespace AppBundle\Tests\Entity;
 
 use AppBundle\Entity\Faq;
-use Doctrine\Common\Collections\ArrayCollection;
 use AppBundle\Entity\Translation\FaqTranslation;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * FAQ Entity Test

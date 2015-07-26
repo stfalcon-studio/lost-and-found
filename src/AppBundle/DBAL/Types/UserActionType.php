@@ -29,6 +29,6 @@ class UserActionType extends AbstractEnumType
     protected static $choices = [
         self::CONNECT     => 'Connect user',
         self::LOGIN       => 'Login user',
-        self::DEAUTHORIZE => 'Deauthorize user'
+        self::DEAUTHORIZE => 'Deauthorize user',
     ];
 }

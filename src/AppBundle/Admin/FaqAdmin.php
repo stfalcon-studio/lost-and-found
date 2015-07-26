@@ -43,11 +43,11 @@ class FaqAdmin extends Admin
 
         $actions['enable_action']  = [
             'label'            => 'Enable',
-            'ask_confirmation' => true
+            'ask_confirmation' => true,
         ];
         $actions['disable_action'] = [
             'label'            => 'Disable',
-            'ask_confirmation' => true
+            'ask_confirmation' => true,
         ];
 
         return $actions;
@@ -72,31 +72,31 @@ class FaqAdmin extends Admin
                             'question' => [
                                 'locale_options' => [
                                     'uk' => [
-                                        'required' => true
+                                        'required' => true,
                                     ],
                                     'en' => [
-                                        'required' => true
+                                        'required' => true,
                                     ],
                                     'ru' => [
-                                        'required' => true
-                                    ]
-                                ]
+                                        'required' => true,
+                                    ],
+                                ],
                             ],
                             'answer' => [
                                 'field_type'     => 'ckeditor',
                                 'locale_options' => [
                                     'uk' => [
-                                        'required' => true
+                                        'required' => true,
                                     ],
                                     'en' => [
-                                        'required' => true
+                                        'required' => true,
                                     ],
                                     'ru' => [
-                                        'required' => true
-                                    ]
-                                ]
-                            ]
-                        ]
+                                        'required' => true,
+                                    ],
+                                ],
+                            ],
+                        ],
                     ])
                 ->end()
             ->end();
@@ -113,17 +113,17 @@ class FaqAdmin extends Admin
                 'editable' => true,
             ])
             ->add('createdAt', 'datetime', [
-                'format' => 'd.m.Y H:i:s'
+                'format' => 'd.m.Y H:i:s',
             ])
             ->add('updatedAt', 'datetime', [
-                'format' => 'd.m.Y H:i:s'
+                'format' => 'd.m.Y H:i:s',
             ])
             ->add('_action', 'actions', [
                 'actions' => [
                     'show'   => [],
                     'edit'   => [],
-                    'delete' => []
-                ]
+                    'delete' => [],
+                ],
             ]);
     }
 
@@ -139,10 +139,10 @@ class FaqAdmin extends Admin
             ->add('translations')
             ->add('enabled')
             ->add('createdAt', 'datetime', [
-                'format' => 'd.m.Y H:i:s'
+                'format' => 'd.m.Y H:i:s',
             ])
             ->add('updatedAt', 'datetime', [
-                'format' => 'd.m.Y H:i:s'
+                'format' => 'd.m.Y H:i:s',
             ]);
     }
 

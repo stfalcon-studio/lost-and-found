@@ -14,7 +14,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Class FaqType
+ * FaqType
  *
  * @author Andrew Prohorovych <prohorovychua@gmail.com>
  */

@@ -10,11 +10,11 @@
 
 namespace AppBundle\EventListener;
 
-use AppBundle\Event\FacebookUserConnectedEvent;
-use Swift_Mailer;
-use AppBundle\Entity\UserActionLog;
 use AppBundle\DBAL\Types\UserActionType;
+use AppBundle\Entity\UserActionLog;
+use AppBundle\Event\FacebookUserConnectedEvent;
 use Doctrine\ORM\EntityManager;
+use Swift_Mailer;
 
 /**
  * FacebookUserConnectedListener

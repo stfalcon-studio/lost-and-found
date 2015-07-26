@@ -13,15 +13,15 @@ namespace AppBundle\Form\Type;
 use AppBundle\DBAL\Types\ItemTypeType;
 use AppBundle\Event\AddUserEditEvent;
 use Doctrine\ORM\EntityRepository;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * Class FoundItemType
+ * FoundItemType
  *
  * @author Artem Genvald      <genvaldartem@gmail.com>
  * @author Yuri Svatok        <svatok13@gmail.com>
@@ -55,7 +55,7 @@ class FoundItemType extends AbstractType
         $builder
             ->add('category', 'entity', [
                 'class'         => 'AppBundle\Entity\Category',
-                'property'      => 'title',
+                'choice_label'  => 'title',
                 'query_builder' => function (EntityRepository $er) {
                     $qb = $er->createQueryBuilder('c');
 
@@ -74,7 +74,7 @@ class FoundItemType extends AbstractType
             ->add('areaType', 'hidden')
             ->add('description', 'textarea')
             ->add('date', 'date', [
-                'widget' => 'single_text'
+                'widget' => 'single_text',
             ])
             ->add('photos', 'collection', [
                 'type'         => 'photo',
@@ -85,11 +85,12 @@ class FoundItemType extends AbstractType
             ->add('save', 'submit', [
                 'label' => 'Create',
                 'attr'  => [
-                    'class' => 'btn-success'
-                ]
+                    'class' => 'btn-success',
+                ],
             ]);
 
         $tokenStorage = $this->tokenStorage;
+
         $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) use ($tokenStorage) {
             $item = $event->getData();
             $this->eventDispatcher->dispatch(FormEvents::SUBMIT, new AddUserEditEvent($tokenStorage, $item));

@@ -28,6 +28,6 @@ class ItemStatusType extends AbstractEnumType
      */
     protected static $choices = [
         self::ACTUAL   => 'Actual',
-        self::RESOLVED => 'Resolved'
+        self::RESOLVED => 'Resolved',
     ];
 }

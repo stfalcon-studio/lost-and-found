@@ -10,9 +10,9 @@
 
 namespace AppBundle\Service;
 
-use Doctrine\ORM\EntityManager;
 use AppBundle\DBAL\Types\ItemTypeType;
 use AppBundle\Entity\User;
+use Doctrine\ORM\EntityManager;
 
 /**
  * Class ItemsCountService
@@ -55,7 +55,7 @@ class ItemsCountService
             'lost'         => $lostCount,
             'found'        => $foundCount,
             'notModerated' => $notModeratedCount,
-            'notActive'    => $notActiveCount
+            'notActive'    => $notActiveCount,
         ];
     }
 }

@@ -28,17 +28,17 @@ class StatisticType extends AbstractType
         $builder
             ->add('from', 'date', [
                 'label'  => 'From',
-                'widget' => 'single_text'
+                'widget' => 'single_text',
             ])
             ->add('to', 'date', [
                 'label'  => 'To',
-                'widget' => 'single_text'
+                'widget' => 'single_text',
             ])
             ->add('save', 'submit', [
                 'label' => 'Filter',
                 'attr'  => [
-                    'class' => 'btn-success'
-                ]
+                    'class' => 'btn-success',
+                ],
             ]);
     }
 

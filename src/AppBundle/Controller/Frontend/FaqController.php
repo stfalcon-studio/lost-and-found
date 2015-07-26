@@ -38,7 +38,7 @@ class FaqController extends Controller
         $faq = $faqRepository->getAllEnabled();
 
         return $this->render('frontend/default/faq.html.twig', [
-            'faq' => $faq
+            'faq' => $faq,
         ]);
     }
 }
