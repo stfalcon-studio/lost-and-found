@@ -14,7 +14,6 @@ use AppBundle\Entity\Category;
 use AppBundle\Entity\Item;
 use AppBundle\Entity\Translation\CategoryTranslation;
 use Doctrine\Common\Collections\ArrayCollection;
-use Gedmo\Translatable\Entity\Translation;
 use Symfony\Component\Validator\Constraints\File;
 
 /**

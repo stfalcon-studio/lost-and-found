@@ -57,12 +57,12 @@ class ItemRequestAdmin extends Admin
             ->add('user')
             ->add('item')
             ->add('createdAt', 'datetime', [
-                'format' => 'd.m.Y H:i:s'
+                'format' => 'd.m.Y H:i:s',
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-                    'delete' => []
-                ]
+                    'delete' => [],
+                ],
             ]);
     }
 
@@ -76,7 +76,7 @@ class ItemRequestAdmin extends Admin
             ->add('user')
             ->add('item')
             ->add('createdAt', 'datetime', [
-                'format' => 'd.m.Y H:i:s'
+                'format' => 'd.m.Y H:i:s',
             ]);
     }
 

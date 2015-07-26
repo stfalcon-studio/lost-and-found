@@ -10,12 +10,12 @@
 
 namespace AppBundle\Tests\Entity;
 
+use AppBundle\Entity\Item;
+use AppBundle\Entity\ItemRequest;
 use AppBundle\Entity\Message;
 use AppBundle\Entity\User;
-use AppBundle\Entity\Item;
 use AppBundle\Entity\UserActionLog;
 use Doctrine\Common\Collections\ArrayCollection;
-use AppBundle\Entity\ItemRequest;
 
 /**
  * User Entity Test
@@ -103,7 +103,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
     {
         $arr = [
             'log1' => new UserActionLog(),
-            'log2' => new UserActionLog()
+            'log2' => new UserActionLog(),
         ];
         $collection = new ArrayCollection($arr);
         $user       = ((new User())->setActionLogs($collection));
@@ -131,7 +131,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
     {
         $arr        = [
             'log1' => new ItemRequest(),
-            'log2' => new ItemRequest()
+            'log2' => new ItemRequest(),
         ];
         $collection = new ArrayCollection($arr);
         $user = (new User())->setUserRequests($collection);

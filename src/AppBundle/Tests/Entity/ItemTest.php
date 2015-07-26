@@ -258,7 +258,7 @@ class ItemTest extends WebTestCase
     {
         $arr        = [
             'log1' => new ItemRequest(),
-            'log2' => new ItemRequest()
+            'log2' => new ItemRequest(),
         ];
         $user = new User();
         $collection = new ArrayCollection($arr);
@@ -321,7 +321,7 @@ class ItemTest extends WebTestCase
 
         $this->loadFixtures([
             'AppBundle\DataFixtures\ORM\LoadCategoryData',
-            'AppBundle\DataFixtures\ORM\LoadUserData'
+            'AppBundle\DataFixtures\ORM\LoadUserData',
         ]);
 
         // Find some category and user

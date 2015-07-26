@@ -35,7 +35,7 @@ class LoadItemData extends AbstractFixture implements DependentFixtureInterface
     {
         return [
             'AppBundle\DataFixtures\ORM\LoadCategoryData',
-            'AppBundle\DataFixtures\ORM\LoadUserData'
+            'AppBundle\DataFixtures\ORM\LoadUserData',
         ];
     }
 

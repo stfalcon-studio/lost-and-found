@@ -62,8 +62,8 @@ class FaqController extends FOSRestController
                 '_metadata'   => [
                     'total'  => count($faqs),
                     'limit'  => $limit > 0 ? $limit : $numberOfFaqs,
-                    'offset' => $offset
-                ]
+                    'offset' => $offset,
+                ],
             ];
 
             $view = $this->view($data, Codes::HTTP_OK);
@@ -90,7 +90,7 @@ class FaqController extends FOSRestController
     public function getAction(Faq $faq)
     {
         $data = [
-            'faq' => $faq
+            'faq' => $faq,
         ];
 
         $view = $this->view($data, Codes::HTTP_OK);

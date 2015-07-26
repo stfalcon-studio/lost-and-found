@@ -10,10 +10,9 @@
 
 namespace AppBundle\Tests\Entity;
 
-use AppBundle\Entity\UserActionLog;
 use AppBundle\DBAL\Types\UserActionType;
 use AppBundle\Entity\User;
-use Symfony\Component\Validator\Constraints\DateTime;
+use AppBundle\Entity\UserActionLog;
 
 /**
  * UserActionLog Entity Test

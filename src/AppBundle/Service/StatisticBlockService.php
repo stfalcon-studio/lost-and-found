@@ -11,8 +11,8 @@
 namespace AppBundle\Service;
 
 use Sonata\BlockBundle\Block\BaseBlockService;
-use Symfony\Component\HttpFoundation\Response;
 use Sonata\BlockBundle\Block\BlockContextInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * StatisticBlockService
@@ -49,7 +49,7 @@ class StatisticBlockService extends BaseBlockService
             'backend/block_admin_list.html.twig',
             [
                 'block'    => $blockContext->getBlock(),
-                'settings' => $settings
+                'settings' => $settings,
             ],
             $response
         );

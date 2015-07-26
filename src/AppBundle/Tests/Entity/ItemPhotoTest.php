@@ -13,7 +13,6 @@ namespace AppBundle\Tests\Entity;
 use AppBundle\Entity\Item;
 use AppBundle\Entity\ItemPhoto;
 use Symfony\Component\Validator\Constraints\File;
-use Uploadable\Fixture\Entity\Image;
 
 /**
  * ItemPhoto entity test

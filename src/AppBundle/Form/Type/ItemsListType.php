@@ -10,10 +10,9 @@
 
 namespace AppBundle\Form\Type;
 
+use AppBundle\Entity\Category;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Doctrine\ORM\EntityRepository;
-use AppBundle\Entity\Category;
 
 /**
  * ItemsListType
@@ -59,8 +58,8 @@ class ItemsListType extends AbstractType
             ->add('filter', 'submit', [
                 'label' => 'Filter',
                 'attr'  => [
-                    'class' => 'btn-success'
-                ]
+                    'class' => 'btn-success',
+                ],
             ]);
     }
 

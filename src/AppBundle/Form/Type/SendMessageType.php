@@ -10,11 +10,11 @@
 
 namespace AppBundle\Form\Type;
 
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Class SendMessageType
+ * SendMessageType
  */
 class SendMessageType extends AbstractType
 {
@@ -29,7 +29,7 @@ class SendMessageType extends AbstractType
                 'label' => 'Send message',
                 'attr'  => [
                     'class' => 'btn-success',
-                ]
+                ],
             ]);
     }
 

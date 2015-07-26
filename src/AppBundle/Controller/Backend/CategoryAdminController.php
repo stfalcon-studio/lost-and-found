@@ -46,38 +46,6 @@ class CategoryAdminController extends BaseAdminController
     }
 
     /**
-     * Common batch work
-     *
-     * @param boolean $enabled           Enabled
-     * @param string  $successfulMessage Successful message
-     *
-     * @return RedirectResponse
-     */
-    private function commonBatchWork($enabled, $successfulMessage)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $categoryIds = $this->get('request')->get('idx', []);
-
-        if (count($categoryIds)) {
-            $categoryRepository = $em->getRepository($this->admin->getClass());
-
-            /** @var \AppBundle\Entity\Category[] $categories */
-            $categories = $categoryRepository->findBy(['id' => $categoryIds]);
-
-            foreach ($categories as $category) {
-                $category->setEnabled($enabled);
-            }
-
-            $em->flush();
-        }
-
-        $this->addFlash('sonata_flash_success', $successfulMessage);
-
-        return new RedirectResponse($this->admin->generateUrl('list'));
-    }
-
-    /**
      * Delete action
      *
      * @param int|string|null $id
@@ -144,7 +112,39 @@ class CategoryAdminController extends BaseAdminController
             'object'     => $object,
             'items'      => $items,
             'action'     => 'delete',
-            'csrf_token' => $this->getCsrfToken('sonata.delete')
+            'csrf_token' => $this->getCsrfToken('sonata.delete'),
         ]);
+    }
+
+    /**
+     * Common batch work
+     *
+     * @param boolean $enabled           Enabled
+     * @param string  $successfulMessage Successful message
+     *
+     * @return RedirectResponse
+     */
+    private function commonBatchWork($enabled, $successfulMessage)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $categoryIds = $this->get('request')->get('idx', []);
+
+        if (count($categoryIds)) {
+            $categoryRepository = $em->getRepository($this->admin->getClass());
+
+            /** @var \AppBundle\Entity\Category[] $categories */
+            $categories = $categoryRepository->findBy(['id' => $categoryIds]);
+
+            foreach ($categories as $category) {
+                $category->setEnabled($enabled);
+            }
+
+            $em->flush();
+        }
+
+        $this->addFlash('sonata_flash_success', $successfulMessage);
+
+        return new RedirectResponse($this->admin->generateUrl('list'));
     }
 }
