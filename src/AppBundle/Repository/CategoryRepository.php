@@ -1,8 +1,8 @@
 <?php
-/*
+/**
  * This file is part of the "Lost and Found" project
  *
- * (c) Stfalcon.com <info@stfalcon.com>
+ * @copyright Stfalcon.com <info@stfalcon.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -34,10 +34,9 @@ class CategoryRepository extends MaterializedPathRepository
     {
         $qb = $this->createQueryBuilder('c');
 
-        $qb
-            ->where($qb->expr()->eq('c.enabled', true))
-            ->andWhere($qb->expr()->isNull('c.parent'))
-            ->setFirstResult($offset);
+        $qb->where($qb->expr()->eq('c.enabled', true))
+           ->andWhere($qb->expr()->isNull('c.parent'))
+           ->setFirstResult($offset);
 
         if (null !== $limit) {
             $qb->setMaxResults($limit);
@@ -56,10 +55,9 @@ class CategoryRepository extends MaterializedPathRepository
     {
         $qb = $this->createQueryBuilder('c');
 
-        $qb
-            ->where($qb->expr()->eq('c.enabled', true))
-            ->andWhere($qb->expr()->isNull('c.parent'))
-            ->setFirstResult($offset);
+        $qb->where($qb->expr()->eq('c.enabled', true))
+           ->andWhere($qb->expr()->isNull('c.parent'))
+           ->setFirstResult($offset);
 
         if (null !== $limit) {
             $qb->setMaxResults($limit);

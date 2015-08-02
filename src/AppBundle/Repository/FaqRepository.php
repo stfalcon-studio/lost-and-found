@@ -1,8 +1,8 @@
 <?php
-/*
+/**
  * This file is part of the "Lost and Found" project
  *
- * (c) Stfalcon.com <info@stfalcon.com>
+ * @copyright Stfalcon.com <info@stfalcon.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -52,9 +52,8 @@ class FaqRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('f');
 
-        $qb
-            ->where($qb->expr()->eq('f.enabled', true))
-            ->setFirstResult($offset);
+        $qb->where($qb->expr()->eq('f.enabled', true))
+           ->setFirstResult($offset);
 
         if (null !== $limit) {
             $qb->setMaxResults($limit);
@@ -75,12 +74,11 @@ class FaqRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('f');
 
-        $qb
-            ->select('f.id')
-            ->addSelect('f.question')
-            ->addSelect('f.answer')
-            ->addSelect('f.enabled')
-            ->setFirstResult($offset);
+        $qb->select('f.id')
+           ->addSelect('f.question')
+           ->addSelect('f.answer')
+           ->addSelect('f.enabled')
+           ->setFirstResult($offset);
 
         if (null !== $limit) {
             $qb->setMaxResults($limit);
@@ -100,14 +98,13 @@ class FaqRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('f');
 
-        $qb
-            ->select('f.id')
-            ->addSelect('f.question')
-            ->addSelect('f.answer')
-            ->addSelect('f.enabled')
-            ->where($qb->expr()->eq('f.id', ':id'))
-            ->setParameter('id', $id)
-            ->setFirstResult($offset);
+        $qb->select('f.id')
+           ->addSelect('f.question')
+           ->addSelect('f.answer')
+           ->addSelect('f.enabled')
+           ->where($qb->expr()->eq('f.id', ':id'))
+           ->setParameter('id', $id)
+           ->setFirstResult($offset);
 
         if (null !== $limit) {
             $qb->setMaxResults($limit);

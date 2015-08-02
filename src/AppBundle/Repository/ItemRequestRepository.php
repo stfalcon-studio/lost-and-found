@@ -1,8 +1,8 @@
 <?php
-/*
+/**
  * This file is part of the "Lost and Found" project
  *
- * (c) Stfalcon.com <info@stfalcon.com>
+ * @copyright Stfalcon.com <info@stfalcon.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -24,8 +24,8 @@ use Doctrine\ORM\EntityRepository;
 class ItemRequestRepository extends EntityRepository
 {
     /**
-     * @param Item $item
-     * @param User $user
+     * @param Item $item Item
+     * @param User $user User
      *
      * @return ItemRequest
      */
@@ -33,13 +33,12 @@ class ItemRequestRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('ir');
 
-        $qb
-            ->where($qb->expr()->eq('ir.item', ':item'))
-            ->andWhere($qb->expr()->eq('ir.user', ':user'))
-            ->setParameters([
-                'item' => $item,
-                'user' => $user,
-            ]);
+        $qb->where($qb->expr()->eq('ir.item', ':item'))
+           ->andWhere($qb->expr()->eq('ir.user', ':user'))
+           ->setParameters([
+               'item' => $item,
+               'user' => $user,
+           ]);
 
         return $qb->getQuery()->getScalarResult();
     }

@@ -1,8 +1,8 @@
 <?php
-/*
+/**
  * This file is part of the "Lost and Found" project
  *
- * (c) Stfalcon.com <info@stfalcon.com>
+ * @copyright Stfalcon.com <info@stfalcon.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -32,20 +32,19 @@ class MessageRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('m');
 
-        $qb
-            ->select('m.content')
-            ->addSelect('m.id')
-            ->addSelect('m.active')
-            ->addSelect('m.createdAt')
-            ->addSelect('u.fullName')
-            ->join('m.receiver', 'u')
-            ->where($qb->expr()->eq('m.sender', ':user'))
-            ->andWhere($qb->expr()->eq('m.deleted', ':delete'))
-            ->setParameters([
-                'user' => $user,
-                'delete' => false,
-            ])
-            ->setFirstResult($offset);
+        $qb->select('m.content')
+           ->addSelect('m.id')
+           ->addSelect('m.active')
+           ->addSelect('m.createdAt')
+           ->addSelect('u.fullName')
+           ->join('m.receiver', 'u')
+           ->where($qb->expr()->eq('m.sender', ':user'))
+           ->andWhere($qb->expr()->eq('m.deleted', ':delete'))
+           ->setParameters([
+               'user'   => $user,
+               'delete' => false,
+           ])
+           ->setFirstResult($offset);
 
         if (null !== $limit) {
             $qb->setMaxResults($limit);
@@ -65,20 +64,19 @@ class MessageRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('m');
 
-        $qb
-            ->select('m.content')
-            ->addSelect('m.id')
-            ->addSelect('u.fullName')
-            ->addSelect('m.active')
-            ->addSelect('m.createdAt')
-            ->join('m.sender', 'u')
-            ->where($qb->expr()->eq('m.receiver', ':user'))
-            ->andWhere($qb->expr()->eq('m.deleted', ':delete'))
-            ->setParameters([
-                'user' => $user,
-                'delete' => false,
-            ])
-            ->setFirstResult($offset);
+        $qb->select('m.content')
+           ->addSelect('m.id')
+           ->addSelect('u.fullName')
+           ->addSelect('m.active')
+           ->addSelect('m.createdAt')
+           ->join('m.sender', 'u')
+           ->where($qb->expr()->eq('m.receiver', ':user'))
+           ->andWhere($qb->expr()->eq('m.deleted', ':delete'))
+           ->setParameters([
+               'user'   => $user,
+               'delete' => false,
+           ])
+           ->setFirstResult($offset);
 
         if (null !== $limit) {
             $qb->setMaxResults($limit);
