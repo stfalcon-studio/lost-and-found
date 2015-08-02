@@ -30,9 +30,10 @@ class LoadUserData extends AbstractFixture
         // Simple user
         $simpleUser = (new User())
             ->setUsername('Simple User')
+            ->setFullName('Simple User')
             ->setEnabled(true)
             ->setEmail('simple_user@facebook')
-            ->setFullName('Simple User')
+            ->setPlainPassword('qwerty')
             ->setFacebookId('FacebookClientId')
             ->setFacebookAccessToken('FacebookClientSecret');
         $this->setReference('user-simple', $simpleUser);
@@ -41,11 +42,11 @@ class LoadUserData extends AbstractFixture
         // Admin user
         $adminUser = (new User())
             ->setUsername('Admin User')
+            ->setFullName('Admin User')
             ->setEnabled(true)
             ->setEmail('admin_user@facebook')
             ->setRoles(['ROLE_ADMIN'])
             ->setPlainPassword('qwerty')
-            ->setFullName('Admin User')
             ->setFacebookId('FacebookClientId')
             ->setFacebookAccessToken('FacebookClientSecret');
         $this->setReference('user-admin', $adminUser);
