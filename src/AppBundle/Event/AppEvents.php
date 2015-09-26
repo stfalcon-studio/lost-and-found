@@ -18,6 +18,17 @@ namespace AppBundle\Event;
  */
 final class AppEvents
 {
+    /**
+     * This event is triggered when a new user has been registered through the Facebook application
+     *
+     * Listeners receive an instance of AppBundle\Event\FacebookUserConnectedEvent
+     */
     const FACEBOOK_USER_CONNECTED = 'app.facebook_user_connected';
-    const NEW_ITEM_ADDED          = 'app.new_item_added';
+
+    /**
+     * This event is triggered when a new item has been added
+     *
+     * Listeners receive an instance of AppBundle\Event\NewItemAddedEvent
+     */
+    const NEW_ITEM_ADDED = 'app.new_item_added';
 }
