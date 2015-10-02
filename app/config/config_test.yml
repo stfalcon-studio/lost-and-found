@@ -20,3 +20,11 @@ liip_functional_test: ~
 doctrine:
     dbal:
         dbname: "%database_name_testing%"
+    orm:
+        mappings:
+            gedmo_loggable: false
+
+stof_doctrine_extensions:
+    orm:
+        default:
+            loggable: false
