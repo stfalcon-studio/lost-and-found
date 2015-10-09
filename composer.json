@@ -87,7 +87,7 @@
         "behat/mink-browserkit-driver": "~1.2",
         "behat/mink-selenium2-driver": "~1.2",
         "behat/mink-goutte-driver": "~1.1",
-        "phpunit/phpunit": "~5.0"
+        "phpunit/phpunit": "4.8.*"
     },
     "autoload": {
         "psr-4": {
