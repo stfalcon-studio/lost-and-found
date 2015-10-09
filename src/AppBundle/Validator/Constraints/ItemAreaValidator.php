@@ -1,8 +1,8 @@
 <?php
-/*
+/**
  * This file is part of the "Lost and Found" project
  *
- * (c) Stfalcon.com <info@stfalcon.com>
+ * @copyright Stfalcon.com <info@stfalcon.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,7 +11,6 @@
 namespace AppBundle\Validator\Constraints;
 
 use AppBundle\DBAL\Types\ItemAreaTypeType;
-use AppBundle\Entity\Item;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
@@ -24,10 +23,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 class ItemAreaValidator extends ConstraintValidator
 {
     /**
-     * Check if item area is valid
-     *
-     * @param Item       $item       Item
-     * @param Constraint $constraint Constraint
+     * {@inheritdoc}
      */
     public function validate($item, Constraint $constraint)
     {
@@ -58,8 +54,8 @@ class ItemAreaValidator extends ConstraintValidator
     private function buildMessage($replacedMessage, Constraint $constraint)
     {
         return $this->context
-            ->buildViolation($constraint->message)
-            ->setParameter('%areaType%', $replacedMessage)
-            ->addViolation();
+                    ->buildViolation($constraint->message)
+                    ->setParameter('%areaType%', $replacedMessage)
+                    ->addViolation();
     }
 }

@@ -1,8 +1,8 @@
 <?php
-/*
+/**
  * This file is part of the "Lost and Found" project
  *
- * (c) Stfalcon.com <info@stfalcon.com>
+ * @copyright Stfalcon.com <info@stfalcon.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -69,7 +69,6 @@ class Category implements Translatable
      * @var Collection|Item[] $items Items
      *
      * @ORM\OneToMany(targetEntity="Item", mappedBy="category", cascade={"persist", "remove"}, orphanRemoval=true)
-     * @ORM\JoinColumn(onDelete="CASCADE")
      *
      * @Assert\Type(type="object")
      */
@@ -166,7 +165,6 @@ class Category implements Translatable
      *      cascade={"persist", "remove"},
      *      orphanRemoval=true
      * )
-     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $translations;
 

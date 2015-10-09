@@ -1,8 +1,8 @@
 <?php
-/*
+/**
  * This file is part of the "Lost and Found" project
  *
- * (c) Stfalcon.com <info@stfalcon.com>
+ * @copyright Stfalcon.com <info@stfalcon.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -30,11 +30,10 @@ class LoadUserData extends AbstractFixture
         // Simple user
         $simpleUser = (new User())
             ->setUsername('Simple User')
+            ->setFullName('Simple User')
             ->setEnabled(true)
             ->setEmail('simple_user@facebook')
-            ->setRoles(['ROLE_USER'])
             ->setPlainPassword('qwerty')
-            ->setFullName('Simple User')
             ->setFacebookId('FacebookClientId')
             ->setFacebookAccessToken('FacebookClientSecret');
         $this->setReference('user-simple', $simpleUser);
@@ -43,11 +42,11 @@ class LoadUserData extends AbstractFixture
         // Admin user
         $adminUser = (new User())
             ->setUsername('Admin User')
+            ->setFullName('Admin User')
             ->setEnabled(true)
             ->setEmail('admin_user@facebook')
             ->setRoles(['ROLE_ADMIN'])
             ->setPlainPassword('qwerty')
-            ->setFullName('Admin User')
             ->setFacebookId('FacebookClientId')
             ->setFacebookAccessToken('FacebookClientSecret');
         $this->setReference('user-admin', $adminUser);

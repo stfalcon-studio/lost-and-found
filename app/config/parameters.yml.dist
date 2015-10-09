@@ -3,14 +3,11 @@ parameters:
     database_driver:         pdo_mysql
     database_host:           127.0.0.1
     database_port:           ~
-    database_name:           lost-and-found
-    database_name_testing:   lost-and-found_testing
+    database_name:           lost_and_found
+    database_name_testing:   test_lost_and_found
     database_user:           root
     database_password:       ~
     database_server_version: 5.6
-
-    # You should uncomment this if you want use pdo_sqlite
-    # database_path: "%kernel.root_dir%/data.db3"
 
     mailer_transport:  smtp
     mailer_host:       127.0.0.1
@@ -19,10 +16,13 @@ parameters:
 
     locale:            en
 
+    router.request_context.scheme: http
+    router.request_context.host: lost-and-found.work
+
     # A secret key that's used to generate certain security-related tokens
     secret:            LostAndFoundSecretToken
 
-    host: http://lost-and-found.localhost
+    host: http://lost-and-found.work
 
     mailer_sender: no-reply@lost-and-found
 
@@ -33,7 +33,6 @@ parameters:
         - your-email1@some-host.com
         - your-email2@some-host.com
 
-    # Rollbar settings
-    rollbar_environment: production
+    rollbar_environment: development
     rollbar_server_access_token: RollbarServerAccessToken
     rollbar_client_access_token: RollbarClientAccessToken

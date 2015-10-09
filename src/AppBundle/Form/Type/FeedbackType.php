@@ -1,8 +1,8 @@
 <?php
-/*
+/**
  * This file is part of the "Lost and Found" project
  *
- * (c) Stfalcon.com <info@stfalcon.com>
+ * @copyright Stfalcon.com <info@stfalcon.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -34,12 +34,12 @@ class FeedbackType extends AbstractType
                 ],
             ])
             ->add('message', 'textarea', [
-                'label' => 'What do you want to tell us?'
+                'label' => 'What do you want to tell us?',
             ])
             ->add('save', 'submit', [
                 'label' => 'Send',
                 'attr'  => [
-                    'class' => 'btn-success'
+                    'class' => 'btn-success',
                 ],
             ]);
     }

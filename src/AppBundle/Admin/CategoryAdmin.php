@@ -1,8 +1,8 @@
 <?php
-/*
+/**
  * This file is part of the "Lost and Found" project
  *
- * (c) Stfalcon.com <info@stfalcon.com>
+ * @copyright Stfalcon.com <info@stfalcon.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -43,11 +43,11 @@ class CategoryAdmin extends Admin
 
         $actions['enable_action']  = [
             'label'            => 'Enable',
-            'ask_confirmation' => true
+            'ask_confirmation' => true,
         ];
         $actions['disable_action'] = [
             'label'            => 'Disable',
-            'ask_confirmation' => true
+            'ask_confirmation' => true,
         ];
 
         return $actions;
@@ -66,7 +66,7 @@ class CategoryAdmin extends Admin
                         'required' => false,
                     ])
                     ->add('imageFile', 'file', [
-                        'required' => false
+                        'required' => false,
                     ])
                 ->end()
             ->end()
@@ -78,17 +78,17 @@ class CategoryAdmin extends Admin
                             'title' => [
                                 'locale_options' => [
                                     'uk' => [
-                                        'required' => true
+                                        'required' => true,
                                     ],
                                     'en' => [
-                                        'required' => true
+                                        'required' => true,
                                     ],
                                     'ru' => [
-                                        'required' => true
-                                    ]
-                                ]
-                            ]
-                        ]
+                                        'required' => true,
+                                    ],
+                                ],
+                            ],
+                        ],
                     ])
                 ->end()
             ->end();
@@ -109,17 +109,17 @@ class CategoryAdmin extends Admin
                 'template' => 'backend/category/list_marker.html.twig',
             ])
             ->add('createdAt', 'datetime', [
-                'format' => 'd.m.Y H:i:s'
+                'format' => 'd.m.Y H:i:s',
             ])
             ->add('updatedAt', 'datetime', [
-                'format' => 'd.m.Y H:i:s'
+                'format' => 'd.m.Y H:i:s',
             ])
             ->add('_action', 'actions', [
                 'actions' => [
                     'show'   => [],
                     'edit'   => [],
-                    'delete' => []
-                ]
+                    'delete' => [],
+                ],
             ]);
     }
 
@@ -133,15 +133,15 @@ class CategoryAdmin extends Admin
             ->add('title')
             ->add('parent')
             ->add('image', 'string', [
-                'template' => 'backend/category/show_marker.html.twig'
+                'template' => 'backend/category/show_marker.html.twig',
             ])
             ->add('enabled', 'boolean')
             ->add('children')
             ->add('createdAt', 'datetime', [
-                'format' => 'd.m.Y H:i:s'
+                'format' => 'd.m.Y H:i:s',
             ])
             ->add('updatedAt', 'datetime', [
-                'format' => 'd.m.Y H:i:s'
+                'format' => 'd.m.Y H:i:s',
             ]);
     }
 

@@ -1,8 +1,8 @@
 <?php
-/*
+/**
  * This file is part of the "Lost and Found" project
  *
- * (c) Stfalcon.com <info@stfalcon.com>
+ * @copyright Stfalcon.com <info@stfalcon.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -12,13 +12,13 @@ namespace AppBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class ItemPhotoType
+ * ItemPhotoTypee
  *
- * @author Artem Genvald      <genvaldartem@gmail.com>
- * @author Yuri Svatok        <svatok13@gmail.com>
+ * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Yuri Svatok   <svatok13@gmail.com>
  */
 class ItemPhotoType extends AbstractType
 {
@@ -37,11 +37,11 @@ class ItemPhotoType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'cascade_validation' => true,
-            'data_class' => 'AppBundle\Entity\ItemPhoto'
+            'data_class'         => 'AppBundle\Entity\ItemPhoto',
         ]);
     }
 

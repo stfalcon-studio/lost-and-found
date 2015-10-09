@@ -1,8 +1,8 @@
 <?php
-/*
+/**
  * This file is part of the "Lost and Found" project
  *
- * (c) Stfalcon.com <info@stfalcon.com>
+ * @copyright Stfalcon.com <info@stfalcon.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -28,6 +28,6 @@ class ItemTypeType extends AbstractEnumType
      */
     protected static $choices = [
         self::LOST  => 'Lost item',
-        self::FOUND => 'Found item'
+        self::FOUND => 'Found item',
     ];
 }

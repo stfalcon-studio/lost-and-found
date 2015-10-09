@@ -1,8 +1,8 @@
 <?php
-/*
+/**
  * This file is part of the "Lost and Found" project
  *
- * (c) Stfalcon.com <info@stfalcon.com>
+ * @copyright Stfalcon.com <info@stfalcon.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -67,7 +67,7 @@ class AuthProvider extends BaseProvider
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
         $user = $this->userManager->findUserBy([
-            'facebookId' => $response->getUsername()
+            'facebookId' => $response->getUsername(),
         ]);
 
         if ($user instanceof User) {

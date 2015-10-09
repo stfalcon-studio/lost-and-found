@@ -1,8 +1,8 @@
 <?php
-/*
+/**
  * This file is part of the "Lost and Found" project
  *
- * (c) Stfalcon.com <info@stfalcon.com>
+ * @copyright Stfalcon.com <info@stfalcon.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -10,11 +10,11 @@
 
 namespace AppBundle\Form\Type;
 
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Class SendMessageType
+ * SendMessageType
  */
 class SendMessageType extends AbstractType
 {
@@ -24,15 +24,12 @@ class SendMessageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('content', 'text', [
-                'translation_domain' => 'main-page'
-            ])
+            ->add('content', 'text')
             ->add('send', 'submit', [
                 'label' => 'Send message',
                 'attr'  => [
                     'class' => 'btn-success',
                 ],
-                'translation_domain' => 'main-page'
             ]);
     }
 

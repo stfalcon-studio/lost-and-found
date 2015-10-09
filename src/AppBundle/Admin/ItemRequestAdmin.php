@@ -1,8 +1,8 @@
 <?php
-/*
+/**
  * This file is part of the "Lost and Found" project
  *
- * (c) Stfalcon.com <info@stfalcon.com>
+ * @copyright Stfalcon.com <info@stfalcon.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -57,12 +57,12 @@ class ItemRequestAdmin extends Admin
             ->add('user')
             ->add('item')
             ->add('createdAt', 'datetime', [
-                'format' => 'd.m.Y H:i:s'
+                'format' => 'd.m.Y H:i:s',
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-                    'delete' => []
-                ]
+                    'delete' => [],
+                ],
             ]);
     }
 
@@ -76,7 +76,7 @@ class ItemRequestAdmin extends Admin
             ->add('user')
             ->add('item')
             ->add('createdAt', 'datetime', [
-                'format' => 'd.m.Y H:i:s'
+                'format' => 'd.m.Y H:i:s',
             ]);
     }
 

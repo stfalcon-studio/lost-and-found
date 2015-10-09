@@ -1,8 +1,8 @@
 <?php
-/*
+/**
  * This file is part of the "Lost and Found" project
  *
- * (c) Stfalcon.com <info@stfalcon.com>
+ * @copyright Stfalcon.com <info@stfalcon.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -87,7 +87,7 @@ class ItemRepository extends EntityRepository
                       'type'      => $itemType,
                       'active'    => $activeStatus,
                       'deleted'   => $deleted,
-                      'moderated' => $moderated
+                      'moderated' => $moderated,
                   ])
                   ->getQuery()
                   ->getResult();
@@ -112,7 +112,7 @@ class ItemRepository extends EntityRepository
                   ->setParameters([
                       'user'    => $user,
                       'active'  => $active,
-                      'deleted' => $deleted
+                      'deleted' => $deleted,
                   ])
                   ->getQuery()
                   ->getResult();
@@ -138,7 +138,7 @@ class ItemRepository extends EntityRepository
                       'user'      => $user,
                       'active'    => true,
                       'deleted'   => false,
-                      'moderated' => $moderated
+                      'moderated' => $moderated,
                   ])
                   ->getQuery()
                   ->getResult();
@@ -201,7 +201,7 @@ class ItemRepository extends EntityRepository
                       'moderated' => true,
                       'deleted'   => false,
                       'type'      => $type,
-                      'active'    => true
+                      'active'    => true,
                   ])
                   ->getQuery()
                   ->getSingleScalarResult();
@@ -226,7 +226,7 @@ class ItemRepository extends EntityRepository
                   ->setParameters([
                       'user'      => $user,
                       'moderated' => $moderated,
-                      'deleted'   => false
+                      'deleted'   => false,
                   ])
                   ->getQuery()
                   ->getSingleScalarResult();
@@ -253,7 +253,7 @@ class ItemRepository extends EntityRepository
                       'user'      => $user,
                       'moderated' => true,
                       'deleted'   => false,
-                      'active'    => $active
+                      'active'    => $active,
                   ])
                   ->getQuery()
                   ->getSingleScalarResult();
@@ -382,7 +382,7 @@ class ItemRepository extends EntityRepository
                   ->andWhere($qb->expr()->eq('i.moderated', ':moderated'))
                   ->setParameters([
                       'id'        => $id,
-                      'moderated' => true
+                      'moderated' => true,
                   ])
                   ->getQuery()
                   ->getOneOrNullResult();
@@ -404,7 +404,7 @@ class ItemRepository extends EntityRepository
                   ->andWhere($qb->expr()->lt('i.createdAt', ':date'))
                   ->setParameters([
                       'deleted' => false,
-                      'date'    => $date
+                      'date'    => $date,
                   ])
                   ->getQuery()
                   ->getResult();

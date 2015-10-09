@@ -1,8 +1,8 @@
 <?php
-/*
+/**
  * This file is part of the "Lost and Found" project
  *
- * (c) Stfalcon.com <info@stfalcon.com>
+ * @copyright Stfalcon.com <info@stfalcon.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -14,7 +14,6 @@ use AppBundle\Entity\Category;
 use AppBundle\Entity\Item;
 use AppBundle\Entity\Translation\CategoryTranslation;
 use Doctrine\Common\Collections\ArrayCollection;
-use Gedmo\Translatable\Entity\Translation;
 use Symfony\Component\Validator\Constraints\File;
 
 /**

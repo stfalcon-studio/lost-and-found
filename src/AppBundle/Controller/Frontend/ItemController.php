@@ -1,8 +1,8 @@
 <?php
-/*
+/**
  * This file is part of the "Lost and Found" project
  *
- * (c) Stfalcon.com <info@stfalcon.com>
+ * @copyright Stfalcon.com <info@stfalcon.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,16 +11,16 @@
 namespace AppBundle\Controller\Frontend;
 
 use AppBundle\DBAL\Types\ItemTypeType;
-use AppBundle\Form\Type\ItemsListType;
 use AppBundle\Entity\Category;
 use AppBundle\Entity\Item;
 use AppBundle\Entity\ItemRequest;
 use AppBundle\Entity\Message;
 use AppBundle\Event\AppEvents;
 use AppBundle\Event\NewItemAddedEvent;
+use AppBundle\Form\Type\ItemsListType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -53,14 +53,14 @@ class ItemController extends Controller
         $categories = $this->listAction();
 
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
-        $lostItems  = $itemRepository->getItemsByDate(ItemTypeType::LOST);
+        $lostItems      = $itemRepository->getItemsByDate(ItemTypeType::LOST);
 
         $form = $this->createForm(new ItemsListType($categories));
 
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $data = $form->getData();
+            $data               = $form->getData();
             $selectedCategories = $form->get('categories')->getData();
 
             $categoriesArr = [];
@@ -69,7 +69,7 @@ class ItemController extends Controller
                 array_push($categoriesArr, $categories[$categoryNumber]->getId());
             }
 
-            $lostItems  = $itemRepository->getItemsByDate(
+            $lostItems = $itemRepository->getItemsByDate(
                 ItemTypeType::LOST,
                 $data['from'],
                 $data['to'],
@@ -77,9 +77,9 @@ class ItemController extends Controller
             );
         }
 
-        $router = $this->get('router');
+        $router       = $this->get('router');
         $vichUploader = $this->get('vich_uploader.storage.file_system');
-        $host = $this->get('service_container')->getParameter('host');
+        $host         = $this->get('service_container')->getParameter('host');
 
         $categories = $this->getDoctrine()->getRepository('AppBundle:Category')->findAll();
 
@@ -87,7 +87,7 @@ class ItemController extends Controller
             $item['link'] = $router->generate(
                 'item_details',
                 [
-                    'id' => $item['id']
+                    'id' => $item['id'],
                 ],
                 $router::ABSOLUTE_URL
             );
@@ -127,14 +127,14 @@ class ItemController extends Controller
         $categories = $this->listAction();
 
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
-        $foundItems  = $itemRepository->getItemsByDate(ItemTypeType::FOUND);
+        $foundItems     = $itemRepository->getItemsByDate(ItemTypeType::FOUND);
 
         $form = $this->createForm(new ItemsListType($categories));
 
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $data = $form->getData();
+            $data               = $form->getData();
             $selectedCategories = $form->get('categories')->getData();
 
             $categoriesArr = [];
@@ -143,7 +143,7 @@ class ItemController extends Controller
                 array_push($categoriesArr, $categories[$categoryNumber]->getId());
             }
 
-            $foundItems  = $itemRepository->getItemsByDate(
+            $foundItems = $itemRepository->getItemsByDate(
                 ItemTypeType::FOUND,
                 $data['from'],
                 $data['to'],
@@ -151,9 +151,9 @@ class ItemController extends Controller
             );
         }
 
-        $router = $this->get('router');
+        $router       = $this->get('router');
         $vichUploader = $this->get('vich_uploader.storage.file_system');
-        $host = $this->get('service_container')->getParameter('host');
+        $host         = $this->get('service_container')->getParameter('host');
 
         $categories = $this->getDoctrine()->getRepository('AppBundle:Category')->findAll();
 
@@ -161,7 +161,7 @@ class ItemController extends Controller
             $item['link'] = $router->generate(
                 'item_details',
                 [
-                    'id' => $item['id']
+                    'id' => $item['id'],
                 ],
                 $router::ABSOLUTE_URL
             );
@@ -179,7 +179,7 @@ class ItemController extends Controller
         unset($item); // Remove link
 
         return $this->render('frontend/item/found_items.html.twig', [
-            'form'       => $form->createView(),
+            'form'        => $form->createView(),
             'found_items' => $foundItems,
         ]);
     }
@@ -215,7 +215,7 @@ class ItemController extends Controller
         }
 
         return $this->render('frontend/item/add_lost_item.html.twig', [
-            'form' => $form->createView(),
+            'form'     => $form->createView(),
             'pageType' => 'lost',
         ]);
     }
@@ -251,7 +251,7 @@ class ItemController extends Controller
         }
 
         return $this->render('frontend/item/add_found_item.html.twig', [
-            'form' => $form->createView(),
+            'form'     => $form->createView(),
             'pageType' => 'found',
         ]);
     }
@@ -300,7 +300,7 @@ class ItemController extends Controller
 
         if ($messageForm->isValid()) {
             $messageData = $messageForm->getData();
-            $receiver = $item->getCreatedBy();
+            $receiver    = $item->getCreatedBy();
 
             $message = (new Message())
                 ->setReceiver($receiver)
@@ -331,7 +331,7 @@ class ItemController extends Controller
                     'request'      => $userItemRequest,
                     'facebook'     => $userFacebookId,
                     'form'         => $form->createView(),
-                    'message_form' => $messageForm->createView()
+                    'message_form' => $messageForm->createView(),
                 ]);
             }
         } else {
@@ -342,7 +342,7 @@ class ItemController extends Controller
             'item'         => $item,
             'request'      => $userItemRequest,
             'form'         => $form->createView(),
-            'message_form' => $messageForm->createView()
+            'message_form' => $messageForm->createView(),
         ]);
     }
 
@@ -374,7 +374,7 @@ class ItemController extends Controller
             $item['link'] = $router->generate(
                 'item_details',
                 [
-                    'id' => $item['itemId']
+                    'id' => $item['itemId'],
                 ],
                 $router::ABSOLUTE_URL
             );
@@ -411,7 +411,7 @@ class ItemController extends Controller
             $item['link'] = $router->generate(
                 'item_details',
                 [
-                    'id' => $item['itemId']
+                    'id' => $item['itemId'],
                 ],
                 $router::ABSOLUTE_URL
             );
@@ -452,7 +452,7 @@ class ItemController extends Controller
 
         return $this->render('frontend/user/show_deactivated_items.html.twig', [
             'items' => $items,
-            'count' => $count
+            'count' => $count,
         ]);
     }
 
@@ -488,7 +488,7 @@ class ItemController extends Controller
 
         return $this->render('frontend/user/show_deactivated_items.html.twig', [
             'items' => $items,
-            'count' => $count
+            'count' => $count,
         ]);
     }
 
@@ -524,7 +524,7 @@ class ItemController extends Controller
 
         return $this->render('/frontend/user/show_deactivated_items.html.twig', [
             'items' => $items,
-            'count' => $count
+            'count' => $count,
         ]);
     }
 
@@ -564,7 +564,6 @@ class ItemController extends Controller
 
                 return new JsonResponse($user->getFacebookId());
             }
-
         }
 
         throw new BadRequestHttpException();

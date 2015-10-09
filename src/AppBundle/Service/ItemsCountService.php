@@ -1,8 +1,8 @@
 <?php
-/*
+/**
  * This file is part of the "Lost and Found" project
  *
- * (c) Stfalcon.com <info@stfalcon.com>
+ * @copyright Stfalcon.com <info@stfalcon.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -10,9 +10,9 @@
 
 namespace AppBundle\Service;
 
-use Doctrine\ORM\EntityManager;
 use AppBundle\DBAL\Types\ItemTypeType;
 use AppBundle\Entity\User;
+use Doctrine\ORM\EntityManager;
 
 /**
  * Class ItemsCountService
@@ -55,7 +55,7 @@ class ItemsCountService
             'lost'         => $lostCount,
             'found'        => $foundCount,
             'notModerated' => $notModeratedCount,
-            'notActive'    => $notActiveCount
+            'notActive'    => $notActiveCount,
         ];
     }
 }

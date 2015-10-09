@@ -1,8 +1,8 @@
 <?php
-/*
+/**
  * This file is part of the "Lost and Found" project
  *
- * (c) Stfalcon.com <info@stfalcon.com>
+ * @copyright Stfalcon.com <info@stfalcon.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,8 +11,8 @@
 namespace AppBundle\Tests\Entity;
 
 use AppBundle\Entity\Faq;
-use Doctrine\Common\Collections\ArrayCollection;
 use AppBundle\Entity\Translation\FaqTranslation;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * FAQ Entity Test

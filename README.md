@@ -26,9 +26,9 @@ and <a href="https://youtu.be/3EgilE_fpkI">video</a> about that practice.
 
 ## Requirements
 
-* PHP 5.4 *and later*
-* Symfony 2.6 *and later*
-* Doctrine 2.4 *and later*
+* PHP 5.6 *and later*
+* Symfony 2.7 *and later*
+* Doctrine 2.5 *and later*
 * Facebook application
 
 ## Installation
