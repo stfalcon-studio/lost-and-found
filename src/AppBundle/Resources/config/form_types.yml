@@ -59,6 +59,8 @@ services:
         class: AppBundle\Form\Type\ItemsListType
         tags:
             - { name: form.type, alias: items_list_type }
+        arguments:
+            - @doctrine.orm.entity_manager
 
     app.form.update.faq:
         class: AppBundle\Form\Type\FaqType

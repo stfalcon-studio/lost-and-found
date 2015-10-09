@@ -50,17 +50,12 @@ class ItemController extends Controller
      */
     public function lostItemsListAction(Request $request)
     {
-        $categories     = $this->listAction();
-        $categoriesList = [];
-        foreach ($categories as $key => $category) {
-            $categoriesList[$key] = $category->getTitle();
-        }
-
+        $categories = $this->listAction();
 
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
         $lostItems      = $itemRepository->getItemsByDate(ItemTypeType::LOST);
 
-        $form = $this->createForm(new ItemsListType($categoriesList));
+        $form = $this->createForm('items_list_type');
 
         $form->handleRequest($request);
 

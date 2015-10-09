@@ -49,7 +49,7 @@ class CategoryRepository extends MaterializedPathRepository
      * @param int  $offset
      * @param null $limit
      *
-     * @return Category[]
+     * @return array
      */
     public function getCategories($offset = 0, $limit = null)
     {
@@ -64,5 +64,29 @@ class CategoryRepository extends MaterializedPathRepository
         }
 
         return $qb->getQuery()->getArrayResult();
+    }
+
+    /**
+     * Find active categories
+     *
+     * @param int|null $limit  Limit
+     * @param int      $offset Offset
+     *
+     * @return Category[]
+     */
+    public function findActiveCategories($limit = null, $offset = 0)
+    {
+        $qb = $this->createQueryBuilder('c');
+
+        $qb->where($qb->expr()->eq('c.enabled', true))
+           ->andWhere($qb->expr()->isNull('c.parent'))
+           ->setFirstResult($offset);
+
+        if (null !== $limit) {
+            $qb->setMaxResults($limit);
+        }
+
+        return $qb->getQuery()
+                  ->getResult();
     }
 }

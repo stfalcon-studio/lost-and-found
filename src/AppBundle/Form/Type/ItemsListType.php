@@ -11,6 +11,7 @@
 namespace AppBundle\Form\Type;
 
 use AppBundle\Entity\Category;
+use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -22,16 +23,16 @@ use Symfony\Component\Form\FormBuilderInterface;
 class ItemsListType extends AbstractType
 {
     /**
-     * @var array $categories
+     * @var EntityManager $em
      */
-    private $categories;
+    private $em;
 
     /**
-     * @param array $categories
+     * @param EntityManager $entityManager
      */
-    public function __construct($categories)
+    public function __construct(EntityManager $entityManager)
     {
-        $this->categories = $categories;
+        $this->em = $entityManager;
     }
 
     /**
@@ -39,9 +40,16 @@ class ItemsListType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $categories = $this->em->getRepository('AppBundle:Category')->findActiveCategories();
+
+        $categoriesList = [];
+        foreach ($categories as $category) {
+            $categoriesList[$category->getId()] = $category->getTitle();
+        }
+
         $builder
             ->add('categories', 'choice', [
-                'choices' => $this->categories,
+                'choices' => $categoriesList,
                 'expanded' => true,
                 'multiple' => true,
             ])
