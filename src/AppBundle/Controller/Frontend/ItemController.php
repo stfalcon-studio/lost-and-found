@@ -55,7 +55,7 @@ class ItemController extends Controller
         $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
         $lostItems      = $itemRepository->getItemsByDate(ItemTypeType::LOST);
 
-        $form = $this->createForm(new ItemsListType($categories));
+        $form = $this->createForm('items_list_type');
 
         $form->handleRequest($request);
 

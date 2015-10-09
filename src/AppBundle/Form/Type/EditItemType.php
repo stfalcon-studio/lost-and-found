@@ -67,7 +67,7 @@ class EditItemType extends AbstractType
             ->add('areaType', 'hidden')
             ->add('description', 'textarea')
             ->add('date', 'date', [
-                'widget' => 'single_text',
+                'widget' => 'single_text'
             ])
             ->add('area', 'hidden', [
                 'required' => false,
