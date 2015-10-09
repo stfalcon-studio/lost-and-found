@@ -29,13 +29,7 @@
         <div class="pull-left">
             {{ form_start(form) }}
             <div id="categories">
-                {% for category in form.categories %}
-                    {{ form_widget(category, {
-                        'attr' : {
-                            'data-category-id' : category.vars['label'].id
-                        }
-                    }) }}
-                {% endfor %}
+                {{ form_row(form.categories) }}
             </div>
             {{ form_row(form.from) }}
             {{ form_row(form.to) }}

@@ -22,12 +22,12 @@ use Symfony\Component\Form\FormBuilderInterface;
 class ItemsListType extends AbstractType
 {
     /**
-     * @var Category $categories
+     * @var array $categories
      */
     private $categories;
 
     /**
-     * @param Category $categories
+     * @param array $categories
      */
     public function __construct($categories)
     {
