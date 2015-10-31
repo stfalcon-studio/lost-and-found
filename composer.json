@@ -37,7 +37,7 @@
         "issues": "https://github.com/stfalcon-studio/lost-and-found/issues"
     },
     "require": {
-        "php": ">=5.5.0",
+        "php": ">=5.4.0",
         "ext-intl": "*",
         "ext-gd": "*",
         "ext-mbstring": "*",
