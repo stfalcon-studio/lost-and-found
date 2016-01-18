@@ -297,6 +297,7 @@ class ItemRepository extends EntityRepository
 
         $qb->select('COUNT(i) AS totalItems')
            ->addSelect('c.title')
+           ->addSelect('c.id AS category_id')
            ->addSelect('i.createdAt')
            ->join('i.category', 'c')
            ->where($qb->expr()->eq('i.type', ':type'))
