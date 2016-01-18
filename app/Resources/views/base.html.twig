@@ -133,11 +133,11 @@
                         </div>
                     </div>
 
-                    {#{% block fork_me_button %}#}
-                        {#<a href="https://github.com/stfalcon-studio/lost-and-found">#}
-                            {#<img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/c6286ade715e9bea433b4705870de482a654f78a/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f77686974655f6666666666662e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_white_ffffff.png">#}
-                        {#</a>#}
-                    {#{% endblock fork_me_button %}#}
+                    {% block fork_me_button %}
+                        <a href="https://github.com/stfalcon-studio/lost-and-found">
+                            <img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/c6286ade715e9bea433b4705870de482a654f78a/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f77686974655f6666666666662e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_white_ffffff.png">
+                        </a>
+                    {% endblock fork_me_button %}
                 {% endblock header %}
             </header>
 
@@ -176,12 +176,6 @@
                     {% block footer %}
                         <div class="row">
                             <div class="col-lg-12">
-                                {#<ul class="list-unstyled">#}
-                                    {#<li><a href="http://news.bootswatch.com" onclick="pageTracker._link(this.href); return false;">Blog</a></li>#}
-                                    {#<li><a href="http://feeds.feedburner.com/bootswatch">RSS</a></li>#}
-                                    {#<li><a href="https://twitter.com/bootswatch">Twitter</a></li>#}
-                                    {#<li><a href="https://github.com/thomaspark/bootswatch/">GitHub</a></li>#}
-                                {#</ul>#}
                                 <p>
                                     {{ 'Developed by studio'|trans({}, 'main-page') }}<a href="http://stfalcon.com"> stfalcon.com</a>.
                                     {{ 'Code released under the'|trans({}, 'main-page') }}<a href="https://github.com/stfalcon-studio/lost-and-found/blob/master/LICENSE"> MIT License</a>.
