@@ -38,6 +38,8 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  */
 class ItemController extends Controller
 {
+    // region Lost Items
+
     /**
      * Lost items list
      *
@@ -110,6 +112,83 @@ class ItemController extends Controller
             'lost_items' => $lostItems,
         ]);
     }
+
+    /**
+     * Add lost item
+     *
+     * @param Request $request Request
+     *
+     * @return Response
+     *
+     * @Method({"GET", "POST"})
+     * @Route("/add-lost-item", name="add_lost_item")
+     */
+    public function addLostItemAction(Request $request)
+    {
+        $form = $this->createForm('lost_item', new Item());
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $item = $form->getData();
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($item);
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add('notice', 'Your item was added!');
+
+            $this->get('event_dispatcher')->dispatch(AppEvents::NEW_ITEM_ADDED, new NewItemAddedEvent($item));
+
+            return $this->redirect($this->generateUrl('homepage'));
+        }
+
+        return $this->render('frontend/item/add_lost_item.html.twig', [
+            'form'     => $form->createView(),
+            'pageType' => 'lost',
+        ]);
+    }
+
+    /**
+     * Get lost points
+     *
+     * @param Request $request Request
+     *
+     * @return Response
+     *
+     * @throws AccessDeniedException
+     *
+     * @Method("GET")
+     * @Route("/show/lost-points", name="show_lost_points", options={"expose"=true})
+     */
+    public function getLostPointsAction(Request $request)
+    {
+        if (!$request->isXmlHttpRequest()) {
+            throw new AccessDeniedException();
+        }
+
+        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+
+        $lostMarkers = $itemRepository->getMarkers(ItemTypeType::LOST);
+
+        $router = $this->get('router');
+
+        foreach ($lostMarkers as &$item) {
+            $item['link'] = $router->generate(
+                'item_details',
+                [
+                    'id' => $item['itemId'],
+                ],
+                $router::ABSOLUTE_URL
+            );
+        }
+
+        return new JsonResponse($lostMarkers);
+    }
+
+    // endregion Lost items
+
+    // region Found Items
 
     /**
      * Found items list
@@ -185,42 +264,6 @@ class ItemController extends Controller
     }
 
     /**
-     * Add lost item
-     *
-     * @param Request $request Request
-     *
-     * @return Response
-     *
-     * @Method({"GET", "POST"})
-     * @Route("/add-lost-item", name="add_lost_item")
-     */
-    public function addLostItemAction(Request $request)
-    {
-        $form = $this->createForm('lost_item', new Item());
-
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $item = $form->getData();
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($item);
-            $em->flush();
-
-            $this->get('session')->getFlashBag()->add('notice', 'Your item was added!');
-
-            $this->get('event_dispatcher')->dispatch(AppEvents::NEW_ITEM_ADDED, new NewItemAddedEvent($item));
-
-            return $this->redirect($this->generateUrl('homepage'));
-        }
-
-        return $this->render('frontend/item/add_lost_item.html.twig', [
-            'form'     => $form->createView(),
-            'pageType' => 'lost',
-        ]);
-    }
-
-    /**
      * Add found item
      *
      * @param Request $request Request
@@ -255,6 +298,47 @@ class ItemController extends Controller
             'pageType' => 'found',
         ]);
     }
+
+    /**
+     * Get found points
+     *
+     * @param Request $request Request
+     *
+     * @return Response
+     *
+     * @throws AccessDeniedException
+     *
+     * @Method("GET")
+     * @Route("/show/found-points", name="show_found_points", options={"expose"=true})
+     */
+    public function getFoundPointsAction(Request $request)
+    {
+        if (!$request->isXmlHttpRequest()) {
+            throw new AccessDeniedException();
+        }
+
+        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+
+        $foundMarkers = $itemRepository->getMarkers(ItemTypeType::FOUND);
+
+        $router = $this->get('router');
+
+        foreach ($foundMarkers as &$item) {
+            $item['link'] = $router->generate(
+                'item_details',
+                [
+                    'id' => $item['itemId'],
+                ],
+                $router::ABSOLUTE_URL
+            );
+        }
+
+        return new JsonResponse($foundMarkers);
+    }
+
+    // endregion Found items
+
+    // region Additional Items Functions
 
     /**
      * Item details
@@ -344,80 +428,6 @@ class ItemController extends Controller
             'form'         => $form->createView(),
             'message_form' => $messageForm->createView(),
         ]);
-    }
-
-    /**
-     * Get found points
-     *
-     * @param Request $request Request
-     *
-     * @return Response
-     *
-     * @throws AccessDeniedException
-     *
-     * @Method("GET")
-     * @Route("/show/found-points", name="show_found_points", options={"expose"=true})
-     */
-    public function getFoundPointsAction(Request $request)
-    {
-        if (!$request->isXmlHttpRequest()) {
-            throw new AccessDeniedException();
-        }
-
-        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
-
-        $foundMarkers = $itemRepository->getMarkers(ItemTypeType::FOUND);
-
-        $router = $this->get('router');
-
-        foreach ($foundMarkers as &$item) {
-            $item['link'] = $router->generate(
-                'item_details',
-                [
-                    'id' => $item['itemId'],
-                ],
-                $router::ABSOLUTE_URL
-            );
-        }
-
-        return new JsonResponse($foundMarkers);
-    }
-
-    /**
-     * Get lost points
-     *
-     * @param Request $request Request
-     *
-     * @return Response
-     *
-     * @throws AccessDeniedException
-     *
-     * @Method("GET")
-     * @Route("/show/lost-points", name="show_lost_points", options={"expose"=true})
-     */
-    public function getLostPointsAction(Request $request)
-    {
-        if (!$request->isXmlHttpRequest()) {
-            throw new AccessDeniedException();
-        }
-
-        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
-
-        $lostMarkers = $itemRepository->getMarkers(ItemTypeType::LOST);
-
-        $router = $this->get('router');
-
-        foreach ($lostMarkers as &$item) {
-            $item['link'] = $router->generate(
-                'item_details',
-                [
-                    'id' => $item['itemId'],
-                ],
-                $router::ABSOLUTE_URL
-            );
-        }
-
-        return new JsonResponse($lostMarkers);
     }
 
     /**
@@ -527,6 +537,8 @@ class ItemController extends Controller
             'count' => $count,
         ]);
     }
+
+    // endregion Additional Items Functions
 
     /**
      * Request user facebook page
