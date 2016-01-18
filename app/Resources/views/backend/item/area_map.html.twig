@@ -1,15 +1,13 @@
-{% form_theme form '@SonataAdmin/CRUD/base_edit.html.twig' %}
+{#{% form_theme form '@SonataAdmin/CRUD/base_edit.html.twig' %}#}
 
 {% block area_map_widget %}
-    <label for="map">Area (click on marker or area to delete it from map)
-    </label>
-    <div id="map" style="height: 500px"></div>
-{% endblock %}
+    {% set item = form.parent.vars.value %}
 
-{% block content %}
-    {#{{ form.longitude }}#}
-    {#<div id="latitude" data-latitude="{{ form.row(form.latitude) }}"></div>#}
-    {#<div id="longitude" data-longitude="{{ object.longitude }}"></div>#}
-    {#<div id="area" data-area="{{ object.area|json_encode }}"></div>#}
-    {#<div id="areaType" data-area-type="{{ object.areaType }}"></div>#}
+    <label for="map">Area (click on marker or area to delete it from map)</label>
+    <div id="map" style="height: 500px"></div>
+
+    <input type="hidden" name="[latitude]" value="{{ item.latitude }}">
+    <input type="hidden" name="[longitude]" value="{{ item.longitude }}">
+    <input type="hidden" name="[area]" value="{{ item.area|json_encode }}">
+    <input type="hidden" name="[areaType]" value="{{ item.areaType }}">
 {% endblock %}

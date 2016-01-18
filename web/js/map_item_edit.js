@@ -17,7 +17,7 @@ $(function() {
     var areaType = $("input[name*='[areaType]']").val();
 
     var itemType = $("#itemType").data('item-type');
-    var options = {color: "#000000", weight: 2};
+    var options = { color: "#000000", weight: 2 };
 
     var toolbarState = function(status) {
         var options;
