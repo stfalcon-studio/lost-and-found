@@ -31,6 +31,115 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class UserController extends Controller
 {
+    // region Lost Items
+
+    /**
+     * Show actual lost items
+     *
+     * @return Response
+     *
+     * @Method("GET")
+     * @Route("/lost-items/actual", name="user_actual_lost_items")
+     */
+    public function showActualLostItemsAction()
+    {
+        /** @var \AppBundle\Repository\ItemRepository $itemRepository */
+        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+
+        $count = $this->get('app.user_items_count');
+
+        $count = $count->getCount($this->getUser());
+
+        $items = $itemRepository->getUserItems($this->getUser(), ItemStatusType::ACTUAL, ItemTypeType::LOST, true, false, true);
+
+        return $this->render('frontend/user/show_actual_lost_items.html.twig', [
+            'items' => $items,
+            'count' => $count,
+        ]);
+    }
+
+    /**
+     * Show resolved lost items
+     *
+     * @return Response
+     *
+     * @Method("GET")
+     * @Route("/lost-items/resolved", name="user_resolved_lost_items")
+     */
+    public function showResolvedLostItemsAction()
+    {
+        /** @var \AppBundle\Repository\ItemRepository $itemRepository */
+        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+
+        $count = $this->get('app.user_items_count');
+
+        $count = $count->getCount($this->getUser());
+
+        $items = $itemRepository->getUserItems($this->getUser(), ItemStatusType::RESOLVED, ItemTypeType::LOST, true, false, true);
+
+        return $this->render('frontend/user/show_resolved_lost_items.html.twig', [
+            'items' => $items,
+            'count' => $count,
+        ]);
+    }
+
+    // endregion Lost Items
+
+    // region Found Items
+
+    /**
+     * Show actual found items
+     *
+     * @return Response
+     *
+     * @Method("GET")
+     * @Route("/found-items/actual", name="user_actual_found_items")
+     */
+    public function showActualFoundItemsAction()
+    {
+        /** @var \AppBundle\Repository\ItemRepository $itemRepository */
+        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+
+        $count = $this->get('app.user_items_count');
+
+        $count = $count->getCount($this->getUser());
+
+        $items = $itemRepository->getUserItems($this->getUser(), ItemStatusType::ACTUAL, ItemTypeType::FOUND, true, false, true);
+
+        return $this->render('frontend/user/show_actual_found_items.html.twig', [
+            'items' => $items,
+            'count' => $count,
+        ]);
+    }
+
+    /**
+     * Show resolved found items
+     *
+     * @return Response
+     *
+     * @Method("GET")
+     * @Route("/found-items/resolved", name="user_resolved_found_items")
+     */
+    public function showResolvedFoundItemsAction()
+    {
+        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
+
+        $count = $this->get('app.user_items_count');
+
+        $count = $count->getCount($this->getUser());
+
+        $items = $itemRepository->getUserItems($this->getUser(), ItemStatusType::RESOLVED, ItemTypeType::FOUND, true, false, true);
+
+        return $this->render('frontend/user/show_resolved_found_items.html.twig', [
+            'items' => $items,
+            'count' => $count,
+        ]);
+    }
+
+    // endregion Found Items
+
+    // region Addtional Items Functions
+
     /**
      * Edit item
      *
@@ -73,105 +182,6 @@ class UserController extends Controller
         return $this->render('frontend/item/item_edit.html.twig', [
             'form' => $form->createView(),
             'item' => $item,
-        ]);
-    }
-
-    /**
-     * Show actual lost items
-     *
-     * @return Response
-     *
-     * @Method("GET")
-     * @Route("/lost-items/actual", name="user_actual_lost_items")
-     */
-    public function showActualLostItemsAction()
-    {
-        /** @var \AppBundle\Repository\ItemRepository $itemRepository */
-        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
-
-        $count = $this->get('app.user_items_count');
-
-        $count = $count->getCount($this->getUser());
-
-        $items = $itemRepository->getUserItems($this->getUser(), ItemStatusType::ACTUAL, ItemTypeType::LOST, true, false, true);
-
-        return $this->render('frontend/user/show_actual_lost_items.html.twig', [
-            'items' => $items,
-            'count' => $count,
-        ]);
-    }
-
-    /**
-     * Show actual found items
-     *
-     * @return Response
-     *
-     * @Method("GET")
-     * @Route("/found-items/actual", name="user_actual_found_items")
-     */
-    public function showActualFoundItemsAction()
-    {
-        /** @var \AppBundle\Repository\ItemRepository $itemRepository */
-        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
-
-        $count = $this->get('app.user_items_count');
-
-        $count = $count->getCount($this->getUser());
-
-        $items = $itemRepository->getUserItems($this->getUser(), ItemStatusType::ACTUAL, ItemTypeType::FOUND, true, false, true);
-
-        return $this->render('frontend/user/show_actual_found_items.html.twig', [
-            'items' => $items,
-            'count' => $count,
-        ]);
-    }
-
-    /**
-     * Show resolved lost items
-     *
-     * @return Response
-     *
-     * @Method("GET")
-     * @Route("/lost-items/resolved", name="user_resolved_lost_items")
-     */
-    public function showResolvedLostItemsAction()
-    {
-        /** @var \AppBundle\Repository\ItemRepository $itemRepository */
-        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
-
-        $count = $this->get('app.user_items_count');
-
-        $count = $count->getCount($this->getUser());
-
-        $items = $itemRepository->getUserItems($this->getUser(), ItemStatusType::RESOLVED, ItemTypeType::LOST, true, false, true);
-
-        return $this->render('frontend/user/show_resolved_lost_items.html.twig', [
-            'items' => $items,
-            'count' => $count,
-        ]);
-    }
-
-    /**
-     * Show resolved found items
-     *
-     * @return Response
-     *
-     * @Method("GET")
-     * @Route("/found-items/resolved", name="user_resolved_found_items")
-     */
-    public function showResolvedFoundItemsAction()
-    {
-        $itemRepository = $this->getDoctrine()->getRepository('AppBundle:Item');
-
-        $count = $this->get('app.user_items_count');
-
-        $count = $count->getCount($this->getUser());
-
-        $items = $itemRepository->getUserItems($this->getUser(), ItemStatusType::RESOLVED, ItemTypeType::FOUND, true, false, true);
-
-        return $this->render('frontend/user/show_resolved_found_items.html.twig', [
-            'items' => $items,
-            'count' => $count,
         ]);
     }
 
@@ -249,6 +259,8 @@ class UserController extends Controller
         ]);
     }
 
+    // endregion Addtional Items Functions
+
 //    /**
 //     * @return Response
 //     *
@@ -267,6 +279,8 @@ class UserController extends Controller
 //
 //        return $this->redirect($this->generateUrl('homepage'));
 //    }
+
+    // region Messages
 
     /**
      * Show send messages
@@ -317,4 +331,6 @@ class UserController extends Controller
             'type'     => 'receive',
         ]);
     }
+
+    // endregion Messages
 }

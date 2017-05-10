@@ -44,7 +44,6 @@ class StatisticAdminController extends Controller
         $categories = $categoryRepository->getParentCategories();
 
         $form = $this->createForm('statistic');
-
         $form->handleRequest($request);
 
         if ($form->isValid()) {

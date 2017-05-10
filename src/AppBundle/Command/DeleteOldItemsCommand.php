@@ -52,7 +52,7 @@ class DeleteOldItemsCommand extends ContainerAwareCommand
             $items = $em->getRepository('AppBundle:Item')->findAllNotDeletedBeforeDate($limit);
 
             if (!empty($items)) {
-                $output->writeln('<info>'.count($items).' items were removed:</info>');
+                $output->writeln(sprintf('<info>%d items were removed:</info>', count($items)));
 
                 foreach ($items as $item) {
                     $item->setDeleted(true);
