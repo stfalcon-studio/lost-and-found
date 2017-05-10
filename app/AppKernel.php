@@ -24,6 +24,17 @@ class AppKernel extends Kernel
     /**
      * {@inheritdoc}
      */
+    public function __construct($environment, $debug)
+    {
+        parent::__construct($environment, $debug);
+
+        // Set UTC timezone for all application dates
+        date_default_timezone_set('UTC');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function registerBundles()
     {
         $bundles = [
